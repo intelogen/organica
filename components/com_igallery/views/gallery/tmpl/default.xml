@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="GALLERY LAYOUT">
+		<message>
+			<![CDATA[GALLERY LAYOUT DESC]]>
+		</message>
+	</layout>
+	<state>
+		<name>GALLERY LAYOUT</name>
+		<description>GALLERY LAYOUT DESC</description>
+		<url addpath="/administrator/components/com_igallery/elements">
+			<param name="id" type="igallery" section="com_igallery" default="0" label="SELECT GALLERY" description="" />
+		</url>
+	</state>
+</metadata>

@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="component" version="1.5.0">
+	<name>igallery</name>
+	<author>Matt Thomson</author>
+	<creationDate>September 2009</creationDate>
+	<copyright>(C) 2009 Matthew Thomson. All rights reserved.</copyright>
+	<license>GPL v2</license>
+	<authorUrl>www.ignitejoomlaextensions.com</authorUrl>
+	<version>2.1</version>
+	<description>Ignite Gallery 2.1</description>
+	
+	<uninstallfile>uninstall.igallery.php</uninstallfile>
+	
+	<install>
+		<sql>
+			<file driver="mysql" charset="utf8">install.mysql.sql</file>
+		</sql>
+	</install>
+	<uninstall>
+		<sql>
+			<file driver="mysql" charset="utf8">uninstall.mysql.sql</file>
+		</sql>
+	</uninstall>
+	
+	<files>
+		<filename>index.html</filename>
+		<filename>igallery.php</filename>
+		<filename>router.php</filename>
+		
+		<filename>controllers/index.html</filename>
+		<filename>controllers/igallery.php</filename>
+		<filename>controllers/manage.php</filename>
+		
+		<filename>css/index.html</filename>
+		<filename>css/admintable.css</filename>
+		<filename>css/category.css</filename>
+		<filename>css/gallery.css</filename>
+		<filename>css/grey-border-shadow.css</filename>
+		<filename>css/plain.css</filename>
+		
+		<filename>images/index.html</filename>
+		<filename>images/close.gif</filename>
+		<filename>images/down_arrow.gif</filename>
+		<filename>images/forward.jpg</filename>
+		<filename>images/left_arrow.gif</filename>
+		<filename>images/loader.gif</filename>
+		<filename>images/magnify.gif</filename>
+		<filename>images/pause.jpg</filename>
+		<filename>images/play.jpg</filename>
+		<filename>images/rewind.jpg</filename>
+		<filename>images/right_arrow.gif</filename>
+		<filename>images/shadow.gif</filename>
+		<filename>images/star-blue.gif</filename>
+		<filename>images/star-half.gif</filename>
+		<filename>images/star-white.gif</filename>
+		<filename>images/up_arrow.gif</filename>
+		
+		<filename>javascript/index.html</filename>
+		<filename>javascript/gallery.js</filename>
+
+		<filename>sef_ext/index.html</filename>		
+		<filename>sef_ext/com_igallery.php</filename>
+			
+		<filename>views/index.html</filename>
+		
+		<filename>views/add/index.html</filename>
+		<filename>views/add/metadata.xml</filename>
+		<filename>views/add/view.html.php</filename>
+		<filename>views/add/tmpl/index.html</filename>
+		<filename>views/add/tmpl/default.php</filename>
+		
+		<filename>views/category/index.html</filename>
+		<filename>views/category/view.html.php</filename>
+		<filename>views/category/tmpl/index.html</filename>
+		<filename>views/category/tmpl/default.php</filename>
+		<filename>views/category/tmpl/default.xml</filename>
+		
+		<filename>views/edit/index.html</filename>
+		<filename>views/edit/metadata.xml</filename>
+		<filename>views/edit/view.html.php</filename>
+		<filename>views/edit/tmpl/index.html</filename>
+		<filename>views/edit/tmpl/default.php</filename>
+		
+		<filename>views/edit_photo/index.html</filename>
+		<filename>views/edit_photo/metadata.xml</filename>
+		<filename>views/edit_photo/view.html.php</filename>
+		<filename>views/edit_photo/tmpl/index.html</filename>
+		<filename>views/edit_photo/tmpl/default.php</filename>
+		
+		<filename>views/gallery/index.html</filename>
+		<filename>views/gallery/view.html.php</filename>
+		<filename>views/gallery/tmpl/index.html</filename>
+		<filename>views/gallery/tmpl/default.php</filename>
+		<filename>views/gallery/tmpl/default.xml</filename>
+		<filename>views/gallery/tmpl/includes/thumbs.php</filename>
+		<filename>views/gallery/tmpl/includes/comments.php</filename>
+		<filename>views/gallery/tmpl/includes/descriptions.php</filename>
+		<filename>views/gallery/tmpl/includes/ratings.php</filename>
+		
+		<filename>views/igallery/index.html</filename>
+		<filename>views/igallery/metadata.xml</filename>
+		<filename>views/igallery/view.html.php</filename>
+		<filename>views/igallery/tmpl/index.html</filename>
+		<filename>views/igallery/tmpl/default.php</filename>
+		<filename>views/igallery/tmpl/default.xml</filename>
+		
+		<filename>views/manage/index.html</filename>
+		<filename>views/manage/metadata.xml</filename>
+		<filename>views/manage/view.html.php</filename>
+		<filename>views/manage/tmpl/index.html</filename>
+		<filename>views/manage/tmpl/default.php</filename>
+		
+	</files>
+	
+	<languages folder="languages">
+		<language tag="en-GB">en-GB.com_igallery.ini</language>
+		<language tag="de-DE">de-DE.com_igallery.ini</language>
+		<language tag="is-IS">is-IS.com_igallery.ini</language>
+		<language tag="el-GR">el-GR.com_igallery.ini</language>
+		<language tag="pt-PT">pt-PT.com_igallery.ini</language>
+		<language tag="es-ES">es-ES.com_igallery.ini</language>
+		<language tag="fr-FR">fr-FR.com_igallery.ini</language>
+		<language tag="pl-PL">pl-PL.com_igallery.ini</language>
+		<language tag="hu-HU">hu-HU.com_igallery.ini</language>
+		<language tag="it-IT">it-IT.com_igallery.ini</language>
+		<language tag="nb-NO">nb-NO.com_igallery.ini</language>
+		<language tag="da-DA">da-DA.com_igallery.ini</language>
+		<language tag="cs-CZ">cs-CZ.com_igallery.ini</language>
+		<language tag="ru-RU">ru-RU.com_igallery.ini</language>
+		<language tag="fi-FI">fi-FI.com_igallery.ini</language>
+	</languages>
+	
+	<administration>
+		<menu>Ignite Gallery 2.1</menu>
+		<files folder="admin">
+			<filename>index.html</filename>
+			<filename>admin.igallery.php</filename>
+			<filename>config.xml</filename>
+			<filename>install.mysql.sql</filename>
+			<filename>uninstall.mysql.sql</filename>
+			
+			<filename>controllers/comments.php</filename>
+			<filename>controllers/igallery.php</filename>
+			<filename>controllers/manage.php</filename>
+			<filename>controllers/rating.php</filename>
+			<filename>controllers/index.html</filename>
+			
+			<filename>elements/icategory.php</filename>
+			<filename>elements/igallery.php</filename>
+			<filename>elements/igalleryhead.php</filename>
+			<filename>elements/index.html</filename>
+			
+			<filename>jimagelib/JImageLib.php</filename>
+			<filename>jimagelib/language/jimagelib.lang-en.php</filename>
+			
+			<filename>models/index.html</filename>
+			<filename>models/add.php</filename>
+			<filename>models/base.php</filename>
+			<filename>models/cat_edit.php</filename>
+			<filename>models/cat_new.php</filename>
+			<filename>models/category.php</filename>
+			<filename>models/comments.php</filename>
+			<filename>models/edit.php</filename>
+			<filename>models/edit_photo.php</filename>
+			<filename>models/gallery.php</filename>
+			<filename>models/igallery.php</filename>
+			<filename>models/manage.php</filename>
+			<filename>models/rating.php</filename>
+			
+			<filename>swfupload/browse-background.gif</filename>
+			<filename>swfupload/default.css</filename>
+			<filename>swfupload/fileprogress.js</filename>
+			<filename>swfupload/handlers.js</filename>
+			<filename>swfupload/swfupload.js</filename>
+			<filename>swfupload/swfupload.queue.js</filename>
+			<filename>swfupload/swfupload.swf</filename>
+			
+			<filename>tables/index.html</filename>
+			<filename>tables/igallery.php</filename>
+			<filename>tables/igallery_comments.php</filename>
+			<filename>tables/igallery_img.php</filename>
+			<filename>tables/igallery_rating.php</filename>
+			
+			<filename>views/index.html</filename>
+			<filename>views/base.php</filename>
+			
+			<filename>views/add/index.html</filename>
+			<filename>views/add/view.html.php</filename>
+			<filename>views/add/tmpl/index.html</filename>
+			<filename>views/add/tmpl/default.php</filename>
+			
+			<filename>views/cat_edit/index.html</filename>
+			<filename>views/cat_edit/view.html.php</filename>
+			<filename>views/cat_edit/tmpl/index.html</filename>
+			<filename>views/cat_edit/tmpl/default.php</filename>
+			
+			<filename>views/cat_new/index.html</filename>
+			<filename>views/cat_new/view.html.php</filename>
+			<filename>views/cat_new/tmpl/index.html</filename>
+			<filename>views/cat_new/tmpl/default.php</filename>
+			
+			<filename>views/comments/index.html</filename>
+			<filename>views/comments/view.html.php</filename>
+			<filename>views/comments/tmpl/index.html</filename>
+			<filename>views/comments/tmpl/default.php</filename>
+			
+			<filename>views/edit/index.html</filename>
+			<filename>views/edit/view.html.php</filename>
+			<filename>views/edit/tmpl/index.html</filename>
+			<filename>views/edit/tmpl/default.php</filename>
+			
+			<filename>views/edit_photo/index.html</filename>
+			<filename>views/edit_photo/view.html.php</filename>
+			<filename>views/edit_photo/tmpl/index.html</filename>
+			<filename>views/edit_photo/tmpl/default.php</filename>
+			
+			<filename>views/igallery/index.html</filename>
+			<filename>views/igallery/view.html.php</filename>
+			<filename>views/igallery/tmpl/index.html</filename>
+			<filename>views/igallery/tmpl/default.php</filename>
+			
+			<filename>views/manage/index.html</filename>
+			<filename>views/manage/view.html.php</filename>
+			<filename>views/manage/tmpl/index.html</filename>
+			<filename>views/manage/tmpl/default.php</filename>
+			
+			<filename>views/rating/index.html</filename>
+			<filename>views/rating/view.html.php</filename>
+			<filename>views/rating/tmpl/index.html</filename>
+			<filename>views/rating/tmpl/default.php</filename>
+		</files>
+		
+		<languages folder="admin/languages">
+			<language tag="en-GB">en-GB.com_igallery.ini</language>
+			<language tag="de-DE">de-DE.com_igallery.ini</language>
+			<language tag="is-IS">is-IS.com_igallery.ini</language>
+			<language tag="el-GR">el-GR.com_igallery.ini</language>
+			<language tag="pt-PT">pt-PT.com_igallery.ini</language>
+			<language tag="es-ES">es-ES.com_igallery.ini</language>
+			<language tag="fr-FR">fr-FR.com_igallery.ini</language>
+			<language tag="pl-PL">pl-PL.com_igallery.ini</language>
+			<language tag="hu-HU">hu-HU.com_igallery.ini</language>
+			<language tag="it-IT">it-IT.com_igallery.ini</language>
+			<language tag="nb-NO">nb-NO.com_igallery.ini</language>
+			<language tag="da-DA">da-DA.com_igallery.ini</language>
+			<language tag="cs-CZ">cs-CZ.com_igallery.ini</language>
+			<language tag="ru-RU">ru-RU.com_igallery.ini</language>
+			<language tag="fi-FI">fi-FI.com_igallery.ini</language>
+		</languages>
+	</administration>
+	
+</install>

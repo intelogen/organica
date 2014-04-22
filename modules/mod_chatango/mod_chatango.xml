@@ -1,0 +1,31 @@
+<?xml version="2.5" encoding="utf-8" ?>
+<install type="module" version="1.5.0">
+    <name>Live Chat</name>
+    <creationDate>11-27-2008</creationDate>
+    <author>Justin Cook</author>
+    <copyright>This module is released under the GNU/GPL License.  </copyright>
+    <authorEmail>justincook@gmail.com</authorEmail>
+    <authorUrl>http://www.justin-cook.com</authorUrl>
+    <version>1.1</version>
+    <description>This module enables a customizable live chat box on your website, provided through Chatango (requires registration at chatango.com)</description>
+    <files>
+       <filename module="mod_chatango">mod_chatango.php</filename>
+    </files>
+    <params>
+      <param name="moduleclass_sfx" type="text" default="" label="Module Class Suffix" description="A suffix to be applied to the css class of the module (table.moduletable), this allows individual module styling" />
+      <param name="module_description" type="text" default="Chat with us live!" label="Module title" description="This text will be displayed above the list with newsletters" />
+      <param name="chat_user" type="text" default="username" label="Your Chatango user name" description="username" />
+      <param name="chat_width" type="text" default="140" label="Chat width" description="Width of chat window in pixels" />
+      <param name="chat_height" type="text" default="150" label="Chat height" description="Height of chat window in pixels" />
+      <param name="chat_font" type="text" default="9" label="Font size" description="Font size" />
+      <param name="chat_bg" type="text" default="666666" label="Background Color - use 'trans' for transparent" description="Background color in hex" />
+      <param name="chat_text_bg" type="text" default="FFFFFF" label="Main text background Color - use 'trans' for transparent" description="Background color in hex" />
+      <param name="chat_input_bg" type="text" default="FFFFFF" label="Input background Color - use 'trans' for transparent" description="Background color in hex" />
+      <param name="chat_text" type="text" default="339900" label="Chatango text color" description="color in hex" />
+      <param name="chat_your_name" type="text" default="000000" label="Your name color" description="color in hex" />
+      <param name="chat_friends_name" type="text" default="000099" label="Friend's name color" description="color in hex" />
+      <param name="chat_msg" type="text" default="000000" label="Message text color" description="color in hex" />
+      <param name="chat_link" type="text" default="0000FF" label="Linked text color" description="color in hex" />
+      <param name="chat_input" type="text" default="000000" label="Input text color" description="color in hex" />
+    </params>
+</install>

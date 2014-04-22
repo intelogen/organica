@@ -1,0 +1,466 @@
+/*MAIN GALLERY WRAPPER */
+
+	/*this wrapps all the main gallery html (not the lightbox html)
+	its alignment is set inline, as there is a left/center/right option in the backend*/ 
+	div.main_gallery_wrapper{
+	}
+	
+/*MAIN GALLERY CATEGORY AT TOP PART */
+
+	/*if the 'show category menu in gallery' is enabled, this wraps the whole menu*/
+	div.parent_cat_menu_wrapper{
+	}
+	
+	/*if the 'show category menu in gallery' is enabled, these divs will hold the thumbs and gallery name.
+	Their width is set inline as it depends on what the menu image width is*/
+	div.gallery_menu_top{
+	padding: 10px;
+	float: left
+	}
+	
+	/*all the headings in the category menu at the top are h3s. If your templates h3 is not what
+	you want, you can style the gallery h3s here*/
+	div.gallery_menu_top h3{
+	/*color: #000000;
+	font-family: arial, helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	padding: 0px;*/
+	}
+	
+	/* inside the h3's are a link (<a> tag) If your templates links are not what you want, 
+	you can style the category menu links here*/
+	div.gallery_menu_top a{
+	/*color: #000000;
+	font-family: arial, helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	padding: 0px;*/
+	}
+
+/* MAIN GALLERY "GALLERY DESCRIPTION" BIT */
+	
+	/*this div holds the gallery description (that can be set to top or bottom position)*/ 
+	div.gallery_description{
+	float: left;
+	width: 100%;
+	margin: 10px 0px;
+	}
+
+/* MAIN GALLERY THUMBS BIT */
+	
+
+	div.main_thumbs_arrow_wrapper{
+	float: left;
+	}
+	/*this div holds the up arrow*/
+	div.main_up_arrow{
+	float: left;
+	}
+	
+	/*the up arrow*/
+	img.main_up_arrow_img{
+	cursor: pointer;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	}
+	
+	/*this div holds the main thumb div. It has overflow hidden/auto inline. 
+	The main thumb div scrolls inside it*/
+	div.main_thumb_container{
+	float: left;
+	position: relative;
+	}
+	
+	/*this table holds all the thumbs.*/
+	table.main_thumb_table{
+	float: left;
+	}
+	
+	/*these table cells hold one thumb div each.*/
+	table.main_thumb_table td{
+	}
+	
+	/*these divs hold one thumbnail each.*/
+	table.main_thumb_table td div.thumbs_div{
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	}
+	
+	/*stop firefox putting a dotted border around the thumb, which gives it an overflow */
+	table.main_thumb_table td div.thumbs_div a{
+	outline: none;
+	}
+	
+	/*the thumbnail image*/
+	table.main_thumb_table td div.thumbs_div img{
+	padding: 4px;
+	}
+	
+	/*this holds the left/right arrows */
+	div.main_left_right_arrows_div{
+	float:left;
+	margin: 4px 0px;
+	}
+	
+	/*the left arrow image*/
+	img.main_left_arrow_img{
+	cursor: pointer;
+	float: left;
+	}
+	
+	/*the right arrow image*/
+	img.main_right_arrow_img{
+	cursor: pointer;
+	float: right;
+	}
+	
+	/*this holds the down arrow*/
+	div.main_down_arrow{
+	float: left;
+	}
+	
+	/*the down arrow*/
+	img.main_down_arrow_img{
+	cursor: pointer;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	}
+	
+
+/* MAIN GALLERY DESCRIPTIONS BIT */	
+
+	/*the div that holds all the descrition divs*/
+	div.main_des_container{
+	float: left;
+	margin: 5px 0px;
+	}
+	
+	/*each description is wrapped in one of these*/
+	div.main_des_container div.des_div{
+	float: left;
+	}
+
+/* MAIN GALLERY LARGE IMAGE BIT */
+	
+	/*this keeps the large image and slideshow buttons together*/
+	div.main_image_slideshow_wrapper{
+	float: left;
+	}
+	
+	/*this is the div that houses the main image, the position relative is nescesssary for the image to
+	be injected properly*/
+	div.main_large_image{
+	float: left;
+	position: relative;
+	padding: 5px;
+	}
+
+/* MAIN GALLERY SLIDESHOW BIT */
+	
+	/*this holds the slideshow buttons*/
+	div.main_slideshow_buttons{
+	float: left;
+	padding: 10px 0px;
+	}
+	
+	/*the three slideshow images*/
+	div.main_slideshow_buttons img{
+	cursor: pointer;
+	}
+
+/* MAIN GALLERY RATINGS BIT */
+	
+	/*this wraps all the ratings content*/
+	div.main_ratings_wrapper{
+	float: left;
+	width: 100%;
+	margin: 10px 0px;
+	}
+	
+	/*the form (which contains of the 5 stars)*/
+	form.main_rating_form{
+	display: inline;
+	}
+	
+	/*this holds all the spans that say 'you have already voted' etc*/
+	div.main_ratings_message_container{
+	margin-top: 5px;
+	}
+
+/* MAIN GALLERY COMMENTS BIT */
+	
+	/*this holds all the comments html*/
+	div.main_comments_wrapper{
+	float: left;
+	width: 100%;
+	}
+
+	/*this holds the message saying the amount of comments*/
+	div.main_comments_message{
+	float: left;
+	width: 100%;
+	}
+	
+	/*this holds all of the comments divs*/
+	div.main_comments_container{
+	float: left;
+	width: 100%;
+	}
+	
+	/*these divs wrap around each comment*/
+	div.main_comments_container div{
+	padding: 8px 0px;
+	border-bottom: 1px solid #cccccc;
+	}
+	
+	/*the author and date are inside this span*/
+	span.italics_text{
+	font-style: italic;
+	}
+	
+	
+	/*the comments form*/
+	.main_img_comment_form{
+	width: 100%;
+	}
+	
+	div.main_comments_message{
+	margin: 5px 0px;
+	}
+
+	
+/* LIGHTBOX GALLERY WRAPPER BIT */
+	
+	/*the dark backround div when the lightbox show, the javascript makes it transparent,
+	if it appears below a drop down menu, put another 0 onto the end of z index*/
+	div.lbox_dark{
+	position: absolute;
+	background-color: #000000;
+	z-index: 10100;
+	}
+	
+	/*the wrapper for all the lightbox stuff, if it appears below a drop down menu, 
+	put another 0 onto the end of z index*/
+	div.lbox_white{
+	position: absolute;
+	background-color: #ffffff;
+	padding: 20px;
+	z-index: 10200;
+	}
+	
+/* LIGHTBOX GALLERY THUMBS BIT */
+	
+	div.lbox_thumbs_arrow_wrapper{
+	float: left;
+	}
+	
+	/*this div holds the up arrow*/
+	div.lbox_up_arrow{
+	float: left;
+	}
+	
+	/*the up arrow*/
+	img.lbox_up_arrow_img{
+	cursor: pointer;
+	
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	}
+	
+	/*this div holds the lbox thumb div. It has overflow hidden/auto inline. 
+	The lbox thumb div scrolls inside it*/
+	div.lbox_thumb_container{
+	float: left;
+	position: relative;
+	}
+	
+	/*this table holds all the thumbs.*/
+	table.lbox_thumb_table{
+	float: left;
+	}
+	
+	/*these table cells hold one thumb div each.*/
+	table.lbox_thumb_table td{
+	
+	}
+	
+	/*these divs hold one thumbnail each.*/
+	table.lbox_thumb_table td div.thumbs_div{
+	text-align: center;
+	}
+	
+	/*stop firefox putting a dotted border around the thumb, which gives it an overflow */
+	table.lbox_thumb_table td div.thumbs_div a{
+	outline: none;
+	}
+	
+	/*the thumbnail image*/
+	table.lbox_thumb_table td div.thumbs_div img{
+	padding: 4px;
+	}
+	
+	/*this holds the left/right arrows */
+	div.lbox_left_right_arrows_div{
+	float:left;
+	margin: 4px 0px;
+	}
+	
+	/*the left arrow image*/
+	img.lbox_left_arrow_img{
+	cursor: pointer;
+	float: left;
+	}
+	
+	/*the right arrow image*/
+	img.lbox_right_arrow_img{
+	cursor: pointer;
+	float: right;
+	}
+	
+	/*this holds the down arrow*/
+	div.lbox_down_arrow{
+	float: left;
+	}
+	
+	/*the down arrow*/
+	img.lbox_down_arrow_img{
+	cursor: pointer;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	}
+	
+/* LIGHTBOX GALLERY DESCRIPTIONS BIT */	
+
+	/*the div that holds all the descrition divs*/
+	div.lbox_des_container{
+	float: left;
+	overflow: auto;
+	margin: 5px 0px;
+	}
+	
+	/*each description is wrapped in one of these*/
+	div.lbox_des_container div.des_div{
+	float: left;
+	}
+
+/* LIGHTBOX LARGE IMAGE BIT */
+	
+	/*this keeps the large image and slideshow buttons together*/
+	div.lbox_image_slideshow_wrapper{
+	float: left;
+	}
+	
+	/*this is the div that houses the big lightbox image, the position relative is nescesssary for the image to
+	be injected properly*/
+	div.lbox_large_image{
+	float: left;
+	position: relative;
+	padding: 5px;
+	}
+	
+	div.lbox_large_image .large_img{
+	z-index: 5000;
+	}
+	
+	
+	
+/* LIGHTBOX GALLERY SLIDESHOW BIT */
+	
+	/*this holds the slideshow buttons*/
+	div.lbox_slideshow_buttons{
+	float: left;
+	padding: 10px 0px;
+	}
+	
+	/*the three slideshow images*/
+	div.lbox_slideshow_buttons img{
+	cursor: pointer;
+	}
+	
+/* LIGHTBOX RATINGS BIT */
+	
+	/*this wraps all the ratings content*/
+	div.lbox_ratings_wrapper{
+	float: left;
+	width: 100%;
+	margin: 10px 0px;
+	}
+	
+	/*the form (which contains of the 5 stars)*/
+	form.lbox_rating_form{
+	display: inline;
+	}
+	
+	/*this holds all the spans that say 'you have already voted' etc*/
+	div.lbox_ratings_message_container{
+	margin-top: 5px;
+	}
+
+/* LIGHTBOX COMMENTS BIT */
+	
+	/*this holds all the comments html*/
+	div.lbox_comments_wrapper{
+	float: left;
+	width: 100%;
+	}
+
+	/*this holds the message saying the amount of comments*/
+	div.lbox_comments_message{
+	float: left;
+	width: 100%;
+	}
+	
+	/*this holds all of the comments divs*/
+	div.lbox_comments_container{
+	float: left;
+	width: 100%;
+	}
+	
+	/*these divs wrap around each comment*/
+	/*these divs wrap around each comment*/
+	div.lbox_comments_container div{
+	padding: 8px 0px;
+	border-bottom: 1px solid #cccccc;
+	}
+	
+	/*the author and date are inside this span*/
+	span.italics_text{
+	font-style: italic;
+	}
+	
+	/*the comments form*/
+	.lbox_img_comment_form{
+	width: 100%;
+	}
+	
+	div.lbox_comments_message{
+	margin: 5px 0px;
+	}
+
+/* LIGHTBOX CLOSE IMAGE */
+
+	img.closeImage{
+	display: block;
+	float: right;
+	margin-top: 8px;
+	}	
+	
+/* CLEARING DIV */
+	
+	div.igallery_clear{
+	clear: both;
+	}
+

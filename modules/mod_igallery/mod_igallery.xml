@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="module" version="1.5">
+<name>Ignite Gallery 2.0 Module</name>
+<author>Matthew Thomson</author>
+<creationDate>March 2009</creationDate>
+<copyright>(C) 2009</copyright>
+<authorEmail>matt@ignitejoomlaextensions.com</authorEmail>
+<authorUrl>www.ignitejoomlaextensions.com</authorUrl>
+<version>2.0</version>
+<description>Places a single gallery in a module position</description>
+<files>
+<filename module="mod_igallery">mod_igallery.php</filename>
+</files>
+<params>
+<param name="gallery_id" type="text" default="1" label="Gallery Id" description="" size="10" />
+</params>
+</install>

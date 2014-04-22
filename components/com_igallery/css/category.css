@@ -1,0 +1,56 @@
+/*wraps all the parent category divs*/
+div.parent_cat_wrapper{
+float: left;
+}
+
+/*if the parent category is shown on the category page, these divs hold each category image/name */
+div.parent_cat_div{
+float: left;
+padding: 10px;
+}
+
+/*wraps all the category divs*/
+div.cat_wrapper{
+float: left;
+}
+
+/*these divs hold each category image/name in the category view */
+div.cat_div{
+float: left;
+padding: 10px;
+}
+
+/*wraps all the gallery menu divs*/
+div.gallery_menu_wrapper{
+float: left;
+}
+
+/*these divs hold each gallery image/name in the category view */
+div.gallery_menu_div{
+float: left;
+padding: 10px;
+}
+
+/*all the headings in the category view are h3s. If your templates h3 is not what
+you want, you can style the gallery h3s here*/
+div.parent_cat_div, div.cat_div, div.gallery_menu_div h3{
+/*color: #000000;
+font-family: arial, helvetica, sans-serif;
+font-size: 16px;
+font-weight: bold;
+padding: 0px;*/
+}
+
+/* inside the h3's are a link (<a> tag) If your templates links are not what you want, 
+you can style the category view links here*/
+div.parent_cat_div, div.cat_div, div.gallery_menu_div a{
+/*color: #000000;
+font-family: arial, helvetica, sans-serif;
+font-size: 16px;
+font-weight: bold;
+padding: 0px;*/
+}
+
+div.igallery_clear{
+clear: both;
+}

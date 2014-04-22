@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="module" version="1.5.0">
+	<name>JForce Places Module</name>
+	<author>Cay</author>
+	<creationDate>November 2011</creationDate>
+	<copyright>Copyright (C) 2011 Cay. All rights reserved.</copyright>
+	<version>1.0</version>
+	<files>
+		<filename module="mod_jforce_places">mod_jforce_places.php</filename>
+		<filename>index.html</filename>
+	</files>
+	<params>
+		<param name="moduleclass_sfx" type="text" default="" label="Module Class Suffix" description="" />
+	</params>
+</install>

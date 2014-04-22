@@ -1,0 +1,143 @@
+<?php 
+
+/************************************************************************************
+*	@package		Joomla															*
+*	@subpackage		jForce, the Joomla! CRM											*
+*	@version		2.0																*
+*	@file			view.html.php													*
+*	@updated		2008-12-15														*
+*	@copyright		Copyright (C) 2008 - 2009 Extreme Joomla. All rights reserved.	*
+*	@license		GNU/GPL, see jforce.license.php									*
+************************************************************************************/
+
+// no direct access
+defined('_JEXEC') or die('Restricted access');
+jimport('joomla.application.component.view'); 
+
+class JforceViewCompany extends JView {
+	
+function display($tpl = null) {
+        global $mainframe;
+		$layout = $this->getLayout();
+
+		if ($layout == 'company') {
+			$this->_displayCompany($tpl);
+			return;	
+		}
+
+		if($layout == 'form') {
+			$this->_displayForm($tpl);
+			return;
+		}
+
+        $model = &$this->getModel();
+		$pagination = JForceHelper::getPagination($model);
+		$companies = $model->listCompanies();
+		
+		$this->assignRef('companies', $companies);
+		$this->assignRef('pagination',$pagination);
+        
+        parent::display($tpl);		
+	}	
+	
+	function _displayCompany($tpl) {
+        global $mainframe, $option;
+
+        $model = &$this->getModel();
+		
+        $company = &$model->getCompany();
+        if(!$company->id){
+            JError::raiseWarning(404, JText::_( 'Coach not found', true ) );
+            $mainframe->redirect(JRoute::_("index.php?option=com_jforce&view=dashboard"));
+        }
+        
+		if($company->homepage):
+			$company->homepage = '<a href='.$company->homepage.' />'.$company->homepage.'</a>';
+		endif;
+        
+        // JTPL HACK 
+        // Default tab menu behavior overridden
+        
+        // check permission to display the edit profile link 
+        $user = JFactory::getUser();
+        $company_id = JRequest::getCmd("id");
+        $tabMenu = array();
+        if($user->person->accessrole == "Coach" && $company_id == $user->person->companyid){
+            $tabMenu[] = array( "Link" => "/index.php?option=com_jforce&c=people&view=company&layout=form&id=".JRequest::getCmd("id"),
+                                "Options" => "",
+                                "Text" => "Edit Profile"
+                        );
+        }
+        
+		//$tabMenu = JForceTabHelper::getTabMenu($company, false, false);
+        //mdie($tabMenu);
+		
+		$this->assignRef('tabMenu',$tabMenu);
+		$this->assignRef('company', $company);
+        $this->assignRef('option', $option);
+
+        // JTPL HACK
+        // by default display the clients
+        $this->assign("showclients",true);
+        if(JFactory::getUser()->person->accessrole == "Client" || ($user->person->accessrole == "Coach" && $company->owner != $user->id)):
+            // if logged in user is a client, then do not display it
+            $this->assign("showclients",false);
+        endif;
+        
+        // JTPL HACK ends
+        
+		parent::display($tpl);		
+	}
+	
+	function _displayForm($tpl) {
+		global $option, $mainframe;
+
+		// Initialize variables
+		$document	=& JFactory::getDocument();
+		$user		=& JFactory::getUser();
+		$uri		=& JFactory::getURI();	
+			
+		// Load the JEditor object
+		$editor =& JFactory::getEditor();
+		
+		$js = "window.addEvent('domready', function() {
+			if ($('removeLink')) {
+				$('removeLink').addEvent('click', function() {
+					removeIcon('company');										   
+				});
+			}
+		});";
+		$document->addScriptDeclaration($js);
+
+		// Initialize variables
+        $model = &$this->getModel();
+		JForceHelper::initValidation($model->_required);
+        $company = &$model->getCompany();
+        if(!$company->id){
+            JError::raiseWarning(404, JText::_( 'Coach not found', true ) );
+            $mainframe->redirect(JRoute::_("index.php?option=com_jforce&view=dashboard"));
+        }
+
+		
+		// Create Modal Link for Profile Picture
+		$company->uploadProfileUrl = JRoute::_('index.php?option=com_jforce&c=people&view=modal&layout=profilepic&id='.$company->id.'&tmpl=component&model=company');
+		
+		$lists = &$model->buildLists();
+		
+		// Build the page title string
+		//$title = $company->id ? JText::_('Edit Company') : JText::_('New Company');            
+        $title = $company->id ? JText::_('Edit Coach') : JText::_('New Coach');
+
+		JHTML::_('behavior.modal', 'a.modal');		
+		
+		$this->assignRef('lists', $lists);
+		$this->assign('action', 	$uri->toString());
+		$this->assignRef('title',   $title);
+		$this->assignRef('company',	$company);
+		$this->assignRef('editor',	$editor);
+		$this->assignRef('user',	$user);
+        
+		parent::display($tpl);			
+	}		
+	
+}

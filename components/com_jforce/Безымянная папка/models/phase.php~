@@ -1,0 +1,1244 @@
+<?php
+
+/************************************************************************************
+*	@package		Joomla															*
+*	@subpackage		jForce, the Joomla! CRM											*
+*	@version		2.0																*
+*	@file			search.php														*
+*	@updated		2008-12-15														*
+*	@copyright		Copyright (C) 2008 - 2009 Extreme Joomla. All rights reserved.	*
+*	@license		GNU/GPL, see jforce.license.php									*
+************************************************************************************/
+
+// no direct access
+defined('_JEXEC') or die('Restricted access');
+jimport('joomla.application.component.model');
+
+define("SIGN_OFF_BY_COACH","Sign off by coach");
+
+
+class JforceModelPhase extends JModel {
+	
+	var $_keyword	= null;
+	var $_matches	= null;
+	var $_phrase 	= null;
+	var $_ordering 	= null;
+    var $_pid = null;
+	
+    function __construct() {    	
+        parent::__construct();		
+	
+		$keyword = JRequest::getVar('keyword','');
+		$this->setKeyword($keyword);
+		
+		$phrase = JRequest::getVar('phrase','');
+		$this->setPhrase($phrase);
+		
+		$ordering = JRequest::getVar('ordering','');
+		$this->setOrdering($ordering);
+		
+		$pid = JRequest::getVar('pid', 0, '', 'int');
+		$this->setPid((int)$pid);        
+	}
+    
+    function get_available_phases(){
+        $project_model =& JModel::getInstance('Project','JForceModel');
+        $lists = $project_model->listProjects();
+        return $lists;
+    }
+    
+    function get_projects($user_id){
+        $query = 
+            "SELECT * FROM #__jf_projects WHERE "
+            .$this->_db->nameQuote("author")." = ".$this->_db->Quote($user_id);
+        
+            /**
+            $query = 'SELECT b.*, u.name as leader, c.name as company, b.company as companyid, p.id as leaderid'.
+                    ' FROM #__jf_projects AS b' .
+                    ' LEFT JOIN #__jf_persons AS p on b.leader = p.id '.
+                    ' LEFT JOIN #__users AS u ON p.uid = u.id' .
+                    ' LEFT JOIN #__jf_companies AS c on b.company = c.id' .
+                    ' LEFT JOIN #__jf_projectroles_cf AS cf ON cf.pid = b.id'.
+                    $where;
+            **/
+        // Get the pagination request variables
+
+        $projects = $this->_getList($query, $limitstart, $limit);
+
+        $this->list = $projects;
+        return $this->list;
+    }
+    
+    function upload_phase_photo($src,$filename,$phase_id,$phasepoint){
+        if(!$filename){
+            return false;
+        }
+        if($src && file_exists($src)){
+            $user = JFactory::getUser();            
+            $destination = $user->id."__".time()."__".$filename;            
+            move_uploaded_file($src,"uploads_jtpl/phase_details/".$destination);                        
+            // TODO
+            // write the uploaded filename to database
+            $this->_db->setQuery(
+                        "insert into #__jf_jtpl_phasedetails ("
+                        .$this->_db->nameQuote("phase_id")
+                        .",".$this->_db->nameQuote($phasepoint."photo")
+                        .")"
+                        ."VALUES ("
+                        .$this->_db->Quote($phase_id)
+                        .",".$this->_db->Quote($destination)
+                        .")");
+            
+            $this->_db->query();
+            if($this->_db->getErrorNum() == 1062){// if exists, update
+                $this->_db->setQuery(
+                        "update #__jf_jtpl_phasedetails SET "
+                        .$this->_db->nameQuote($phasepoint."photo")."=".$this->_db->Quote($destination)
+                        ." WHERE "
+                        .$this->_db->nameQuote("phase_id") ." = ".$this->_db->Quote($phase_id)
+                        ." AND "
+                        .$this->_db->nameQuote($phasepoint."photo") ." = ".$this->_db->Quote("")
+                        );
+             
+             $this->_db->query();           
+             if( $this->_db->getAffectedRows() == 0);
+                return false;
+            }           
+                
+            return true;
+        }
+        return false;
+    }
+
+	// get phase details for a particular phase	
+    // JTPL HACK
+    
+    // has to be modified....
+	function get_phase_details($phase_id = 0){
+		//$this->_db->setQuery("SELECT * FROM #__jf_projects WHERE 1");
+		//return $this->_db->loadObjectList		
+		// current user
+        /**
+        $project_model =& JModel::getInstance('Project','JForceModel');
+        $project_model->setId(JRequest::getCmd($this->_pid));
+        $project_model->getProject();
+        
+        **/
+        
+        $phase_id = ($phase_id)?$phase_id : JRequest::getCmd("pid");
+        
+        $db = JFactory::getDBO( );
+        $query = "SELECT * FROM #__jf_jtpl_phasedetails WHERE ".$db->nameQuote("phase_id")." = ".$db->Quote($phase_id)." LIMIT 1";
+        
+        $db->setQuery($query);
+        $db->query();        
+        
+        return $db->loadObject();
+	}
+    
+    /**
+    * for the particular user currently logged in check all phases have been completed or not
+    *  it is assumed that user is logged in
+    */
+    function count_incomplete_steps(){
+        $user = JFactory::getUser();
+        if($user->id){
+            $query = "SELECT * FROM  #__jf_checklists WHERE "
+            .$this->_db->nameQuote("pid")." = " . $this->_db->Quote(JRequest::getCmd("pid"))
+            ." AND ".$this->_db->nameQuote("summary")." <> ".$this->_db->Quote(SIGN_OFF_BY_COACH)
+            ." AND ".$this->_db->nameQuote("completed")." = ".$this->_db->Quote(0);
+
+            $this->_db->setQuery($query);
+            $this->_db->query();
+            
+            return $this->_db->getNumRows();
+        }
+    }
+    
+    function is_phase_signed_off(){
+        $query = "SELECT * FROM  #__jf_checklists WHERE "
+        .$this->_db->nameQuote("pid")." = " . $this->_db->Quote(JRequest::getCmd("pid"))
+        ." AND ".$this->_db->nameQuote("summary")." = ".$this->_db->Quote(SIGN_OFF_BY_COACH);
+        $this->_db->setQuery($query);
+        $this->_db->query();
+        $result = $this->_db->loadObjectList();
+        if(count($result) != 1){
+            $this->redirect("","No such phase found", "error");
+        }else{
+            return $result[0]->completed;
+        }
+    }
+    
+    /**
+    * The ignore_csv flag is used to check whether to list all fields or track as per the csv filter
+    * 
+    * @param mixed $tablename
+    * @param mixed $csv_filter
+    * @param mixed $field
+    * @param mixed $ignore_csv
+    */
+    private function get_registration_survey_questions($tablename, $csv_filter = "", $field = "id", $ignore_csv = false){
+        $query = "SELECT * FROM  #__jf_jtpl_survey_{$tablename} WHERE ";
+        if($csv_filter && !$ignore_csv){
+            $query.= " FIND_IN_SET({$this->_db->nameQuote($field)}, ({$this->_db->Quote($csv_filter)}))";
+        }else if(!$csv_filter && $ignore_csv){
+            $query.=" 1";
+        }else{
+            return null;
+        }
+        
+        $this->_db->setQuery($query);
+        
+        $this->_db->query();
+        
+        //mdie($this->_db);
+        
+        $questions = $this->_db->loadObjectList();
+
+        return $questions;
+    }
+    
+    /** 
+    * Body Score Survey Questions
+    */
+    function get_body_score_questions($csv_filter = "",$ignore_csv = false){        
+        $questions = $this->get_registration_survey_questions("body_score",$csv_filter,"id",$ignore_csv);
+        return $questions;
+    }
+
+    /** 
+    * Body Looking For Questions
+    */
+    function get_looking_for_questions($csv_filter = "",$ignore_csv = false){        
+        $questions = $this->get_registration_survey_questions("looking_for",$csv_filter,"variable",$ignore_csv);
+        return $questions;
+    }
+    
+    /** 
+    * Body Medtrack Questions
+    */
+    function get_medtrack_questions($csv_filter = "",$ignore_csv = false){        
+        $questions = $this->get_registration_survey_questions("medtrack",$csv_filter,"variable",$ignore_csv);
+        return $questions;
+    }
+    
+    /** 
+    * Symptons Questions
+    */
+    function get_symptoms_questions($csv_filter = "",$ignore_csv = false){        
+        $questions = $this->get_registration_survey_questions("symptoms",$csv_filter,"variable",$ignore_csv);
+        return $questions;
+    }    
+
+    /** 
+    * Body Diseases Questions
+    */
+    function get_diseases_questions($csv_filter = "",$ignore_csv = false){        
+        $questions = $this->get_registration_survey_questions("diseases",$csv_filter,"variable",$ignore_csv);
+        return $questions;
+    }
+    
+    function get_looking_for_answers(){
+        return $this->get_registration_survey_answers(0,"looking_for");
+    }
+    
+    function get_medtrack_answers(){
+        return $this->get_registration_survey_answers(0,"medtrack");
+    }
+    
+    function get_symptoms_answers(){
+        return $this->get_registration_survey_answers(0,"symptoms");    
+    }
+    
+    function get_diseases_answers(){
+        return $this->get_registration_survey_answers(0,"disease");
+    }
+    
+    function get_body_score_answers(){
+        return $this->get_registration_survey_answers(0,"bodyscore");
+    }                       
+    
+    function get_registration_survey_answers($user_id = 0,$survey = ""){
+
+        $obj = $this->get_registration_survey_status($user_id);
+        
+        if($obj){
+            switch($survey){
+                case "bodyscore":
+                    if($obj["registration_survey_4"] == 0)
+                        return null;
+                break;
+                case "disease":
+                    if($obj["registration_survey_3"] == 0)                    
+                        return null;
+                break;
+                case "symptoms":
+                    if($obj["registration_survey_2"] == 0)
+                        return null;
+                break;
+                case "medtrack":
+                    if($obj["registration_survey_1"] == 0)
+                        return null;
+                break;
+                case "looking_for":                    
+                    if($obj["registration_survey_0"] == 0)
+                        return null;
+                break;
+                default:
+                return null;
+                break;
+            }            
+            return $this->get_registration_survey_results($user_id,$survey);       
+        }else{
+            return null;
+        }
+    }           
+
+    
+    /**
+    * Get Registration Survey Results
+    */
+    function get_registration_survey_results($user_id,$filter = ""){
+        if($user_id)
+            $user = JFactory::getUSer($user_id);
+        else
+            $user = JFactory::getUser();
+            
+        $user_id = $user->id;
+
+        $this->_db->setQuery("SELECT * from #__jf_jtpl_survey_details WHERE "
+        .$this->_db->nameQuote("user_id")." = "
+        .$this->_db->Quote($user_id)
+        ." AND "
+        .$this->_db->nameQuote("project_id")." = "
+        .$this->_db->Quote(0)
+        ." AND "
+        .$this->_db->nameQuote("survey_variable")." LIKE "
+        .$this->_db->Quote("reg_%".$filter."%"));
+
+        $this->_db->query();
+        //mdie($this->_db->loadObjectList());
+        
+        return $this->_db->loadObjectList();    
+    }
+    
+    
+    
+    /**
+    * Generic function to save a survey result
+    * 
+    * @param mixed $survey_name - an unique name for the user's survey which will be an identifer for the survey
+    * @param mixed $values_arr - array values for the survey results, stored as CSV
+    */
+    
+    function save_survey_result($survey_name, $values_arr){        
+        if(!$survey_name){
+            return false;
+        }
+        
+        if(is_array($values_arr)){
+            $values_csv = implode(",",$values_arr);
+        } else{
+            $values_csv = $values_arr;
+        }
+        
+        $current_user = JFactory::getUser();
+        $uid = $current_user->id;
+        
+        if(!$uid){            
+            return false;
+        }
+        
+        $query = "insert  into #__jf_jtpl_survey_details ("
+        .$this->_db->nameQuote("user_id").","
+        .$this->_db->nameQuote("survey_variable").","
+        .$this->_db->nameQuote("survey_value")        
+        .") VALUES("
+        .$this->_db->Quote($uid).","
+        .$this->_db->Quote($survey_name).","
+        .$this->_db->Quote($values_csv)
+        .") ";        
+        
+        $this->_db->setQuery($query);        
+        
+        $this->_db->query();
+        
+        if($this->_db->_errorNum == 1062){
+               $query = "UPDATE #__jf_jtpl_survey_details SET "                
+                .$this->_db->nameQuote("survey_value") ." = ". $this->_db->Quote($values_csv).' WHERE '
+                
+                .$this->_db->nameQuote("user_id")."=".$this->_db->Quote($uid)." AND "
+                .$this->_db->nameQuote("survey_variable")."=".$this->_db->Quote($survey_name)
+                ." LIMIT 1 ";
+                
+                $this->_db->setQuery($query);
+                
+                $this->_db->query();
+        }
+    }
+                              
+    function get_all_survey(){
+        $user = JFactory::getUSer();
+        $this->_db->setQuery("SELECT * from #__jf_jtpl_survey_details WHERE "
+        .$this->_db->nameQuote("user_id")." = "
+        .$this->_db->Quote($user->id))
+        ."LIMIT 1";
+        
+        $this->_db->query();
+        return $this->_db->loadObjectList();
+    }   
+    
+    function get_registration_survey_status($user_id = 0){
+        if($user_id)
+            $user = JFactory::getUser($user_id);
+        else
+            $user = JFactory::getUser();
+
+        $this->_db->setQuery("SELECT * from #__jf_jtpl_survey_status WHERE "
+        .$this->_db->nameQuote("user_id")." = "
+        .$this->_db->Quote($user->id))
+        ."LIMIT 1";
+        
+        $this->_db->query();
+        return $this->_db->loadAssoc();
+    }
+    
+    function update_survey_status($survey){
+        $user = JFactory::getUser();
+        
+        if($user->systemrole->name == "Client"){
+            // first make insert attempt and then if duplicate error occurs, then update the record
+            $query = "INSERT INTO #__jf_jtpl_survey_status ("
+                    .$this->_db->nameQuote("user_id").","
+                    .$this->_db->nameQuote($survey).") "
+                    ." Values ("
+                    .$this->_db->Quote($user->id).","
+                    .$this->_db->Quote("1")
+                    .") ";
+            $this->_db->setQuery($query);
+            $this->_db->query();
+            
+            if($this->_db->getErrorNum() == 1062){
+                $query = "UPDATE #__jf_jtpl_survey_status SET "                    
+                    .$this->_db->nameQuote($survey)." =  "
+                    .$this->_db->Quote("1")
+                    ." WHERE "
+                    .$this->_db->nameQuote("user_id")." =  "
+                    .$this->_db->Quote($user->id). " LIMIT 1";
+            
+                $this->_db->setQuery($query);
+                $this->_db->query();                
+            }
+            
+        }else if($user->systemrole->name == "Coach"){
+            
+        }
+        
+        return $alerts;
+    }
+    
+    function get_user_alerts(){
+        // checks current user and finds if anything has to be alerted for the user or not
+        
+        $user = JFactory::getUser();
+        $alerts = array();
+        // count unread messages in the inbox
+        $query = "SELECT count(".$this->_db->nameQuote("id").") as `unreadmessages` FROM #__jf_messages WHERE "
+                .$this->_db->nameQuote("to")." = ".$this->_db->Quote($user->id)." AND ".$this->_db->nameQuote("read")." = ".$this->_db->Quote("0");                
+        $this->_db->setQuery($query);        
+        $this->_db->query();
+        $count = $this->_db->loadObject()->unreadmessages;
+        if($count):
+            $alerts["You have <strong style='color:#800000;' >{$count} Unread</strong> Messaage(s)"] = JRoute::_("index.php?option=com_jforce&c=message&view=message");
+        endif;
+        
+        if($user->systemrole->name == "Client"){                  
+            // populate alerts for client       
+            $survey = $this->get_registration_survey_status();
+            for($i=0;$i<5;$i++){
+                if($survey["registration_survey_$i"] == 0){
+                    $name = $this->get_survey_name($i);                    
+                    $alerts["$name Survey taken during registration is not complete."] = JRoute::_("index.php?option=com_jforce&view=phase&layout=registration_survey_$i");
+                }
+            }
+        }else if($user->systemrole->name == "Coach"){
+            // populate alerts for coach
+        }
+        
+        return $alerts;
+    }
+    
+    
+    function get_survey_name($i){
+        $survey_name = array("What are you looking for?",
+                "Medtrack",
+                "Symptoms",
+                "Diseases",
+                "Body Score"
+                );
+                
+        return $survey_name[$i];
+    }                            
+    
+    function get_progress_tracking($user_id){
+        return $this->get_projects($user_id);
+    }
+    
+    // only coach can access this function
+    function get_coach_client_messages($client_id){
+        $user = JFactory::getUser();
+        if($user->systemrole->name == "Coach"){
+            // burrow messages between coach and the respective client
+            $message_model = JModel::getInstance("Message","JForceModel");
+            $messages = $message_model->get_coach_client_messages($user->id,$client_id);
+            foreach($messages as &$m){
+                if($m->from == $user->id){
+                    $m->direction = "sent";
+                }else
+                    $m->direction = "received";
+            }
+            return $messages;
+        }else{
+            global $mainframe;
+            $mainframe->redirect(JRoute::_("index.php?option=com_jforce&c=message&view=message"),"You  must be coach to access the client messages","error");
+        }
+    }
+
+    function check_phase_access_right_to_coach($coach_id){
+        
+        $project_id = JRequest::getCmd("pid");
+        $query = "SELECT * FROM #__jf_projects WHERE `id` = '$project_id' LIMIT 1";
+        $this->_db->setQuery($query);
+        $this->_db->query();
+        $project = $this->_db->loadObject();
+        
+        $user = JFactory::getUser();
+
+        $user->jtpl->current_project = $project;
+        
+        if($project->leader == $coach_id){
+        		$client_user_id = $project->author;
+        		$query = "SELECT * FROM #__jf_persons WHERE `uid` = '$client_user_id' LIMIT 1";
+        		$this->_db->setQuery($query);
+        		$this->_db->query();
+        		$client_person = $this->_db->loadObject();
+        		$user->jtpl->current_client = $client_person;        		
+            return true;
+        }else
+            return false;
+        
+    }
+    
+    function get_phase_number($project_id){
+        $query = "SELECT phase_number FROM #__jf_jtpl_phase_numbers WHERE ".$this->_db->nameQuote("project_id")." = ".$this->_db->Quote($project_id)." LIMIT 1";
+        $this->_db->setQuery($query);
+        $this->_db->query();
+        $phase_number = $this->_db->loadObject()->phase_number;
+        if($phase_number){
+            return $phase_number;
+        }else
+            return false;
+    }
+    
+    /**
+    * This function will just mark the step completed and store information on who did the completion
+    * 
+    * @param mixed $post_array
+    */
+    function mark_phase_step_completed($post_array){                
+        global $mainframe;
+        
+        $time = time();
+        $user = JFactory::getUser();
+        
+        // check the phase type, if it is survey or evaluation or photo upload proceed accordingly
+        $phase_step_type = $post_array["form_type"];
+        
+        $pid = JRequest::getCmd("pid");
+        
+        if($user->jtpl->current_client){
+        		$user_id = $user->jtpl->current_client->uid;
+        }else{
+        		$user_id = $user->id;
+        }
+
+        switch($phase_step_type){
+            case "evaluation":
+                $eval_var = "end_evaluation";
+                $intake_var = "intake_evaluation";                
+                $bodyscore_var = "bodyscore_evaluation";                
+                
+                
+                $eval_post = $post_array["evaluation"]["end"];
+                $intake_post = $post_array["evaluation"]["intake"];
+                $bodyscore_post = $post_array["evaluation"]["bodyscore"];
+                
+                $eval_arr = array();                
+                if(is_array($eval_post)){
+                    foreach ($eval_post as $key=>$val){
+                        $eval_arr[] = $key.":".$val;
+                    }
+                }
+                
+                $intake_arr = array();
+                if(is_array($intake_post)){
+                    foreach ($intake_post as $key=>$val){
+                        $intake_arr[] = $key.":".$val;                    
+                    }
+                }
+                               
+                $intake_str = implode(",",$intake_arr);
+                $eval_str = implode(",",$eval_arr);
+                $bodyscore_str = implode(",",$bodyscore_post);
+                
+                
+                $this->_db->setQuery("DELETE FROM #__jf_jtpl_survey_details WHERE user_id =".$this->_db->Quote($user_id)." AND project_id = ".$this->_db->Quote($pid)." AND FIND_IN_SET(`survey_variable`,".$this->_db->Quote($eval_var.",".$intake_var.",".$bodyscore_var).")");                
+                $this->_db->query();
+                        
+                $query = "INSERT INTO #__jf_jtpl_survey_details (user_id,project_id,survey_variable,survey_value) 
+                    values(".$this->_db->Quote($user_id).","                    
+                        .$this->_db->Quote($pid).","
+                        .$this->_db->Quote($eval_var).","
+                        .$this->_db->Quote($eval_str).") ,"                        
+                        
+                    ."(".$this->_db->Quote($user_id).","
+                        .$this->_db->Quote($pid).","
+                        .$this->_db->Quote($intake_var).","
+                        .$this->_db->Quote($intake_str).") ,"
+
+                    ."(".$this->_db->Quote($user_id).","
+                        .$this->_db->Quote($pid).","
+                        .$this->_db->Quote($bodyscore_var).","
+                        .$this->_db->Quote($bodyscore_str).") ";
+                        
+                $this->_db->setQuery($query);
+                //mdie($this->_db);                
+                $this->_db->query();
+                
+                $tracking = $post_array["tracking"];
+                $tracking_query = "INSERT INTO #__jf_jtpl_survey_tracking 
+                                        (user_id, 
+                                        project_id, 
+                                        tracking_category,
+                                        tracking_variable,
+                                        status,
+                                        notes) VALUES";
+                
+                $tracking_values_arr = array();
+                
+                if(is_array($tracking)){                
+	                foreach($tracking as $t_category=>$t_results){
+	                    foreach($t_results as $t_variable=>$t_value){
+	                        $tracking_values_arr[] = "(
+	                                            {$this->_db->Quote($user_id)},
+	                                            {$this->_db->Quote($pid)},
+	                                            {$this->_db->Quote($t_category)},
+	                                            {$this->_db->Quote($t_variable)},
+	                                            {$this->_db->Quote($t_value["status"])},
+	                                            {$this->_db->Quote($t_value["notes"])}
+	                                            )";
+	                    }
+	                }
+	                
+	                $tracking_query .= implode(",",$tracking_values_arr);
+	                
+	                
+	                $this->_db->setQuery($tracking_query);
+	                $this->_db->query();
+	             }
+                
+            break;
+            
+            case "survey":
+
+                $intake_var = "intake_survey";
+                $start_var = "initial_survey";
+                
+                $survey_values = "";
+                
+                $intake_post = $post_array["survey"]["intake"];
+                $start_post = $post_array["survey"]["start"];
+                
+                $intake_arr = array();
+                $start_arr = array();
+                
+                if(is_array($intake_post)){
+                    foreach ($intake_post as $key=>$val){
+                        $intake_arr[] = $key.":".$val;
+                    }
+                }
+                
+                if(is_array($start_post)){
+                    foreach ($start_post as $key=>$val){
+                        $start_arr[] = $key.":".$val;
+                    }
+                }
+                
+                $intake_str = implode(",",$intake_arr);
+                $start_str = implode(",",$start_arr);
+
+                $this->_db->setQuery("DELETE FROM #__jf_jtpl_survey_details WHERE user_id =".$this->_db->Quote($user_id)." AND project_id = ".$this->_db->Quote($pid)." AND FIND_IN_SET(`survey_variable`,".$this->_db->Quote($start_var.",".$intake_var).")");                
+                $this->_db->query();
+                
+                $query = "INSERT INTO #__jf_jtpl_survey_details (user_id,project_id,survey_variable,survey_value) 
+                    values(".$this->_db->Quote($user_id).","
+                        .$this->_db->Quote($pid).","
+                        .$this->_db->Quote($intake_var).","
+                        .$this->_db->Quote($intake_str).") ,"
+                        
+                    ."(".$this->_db->Quote($user_id).","
+                        .$this->_db->Quote($pid).","
+                        .$this->_db->Quote($start_var).","
+                        .$this->_db->Quote($start_str).") ";
+                        
+                $this->_db->setQuery($query);
+                $this->_db->query();
+
+            break;
+            
+            case "photo_upload":
+            //...
+            break;
+            
+            default:
+            break;
+        }
+        
+        $user = JFactory::getUser();                
+        $checklist_table = JTable::getInstance("Checklist");                   
+        
+        $checklist_table->load($post_array["phase_id"]);
+        
+        $checklist_table->completed = 1;        
+        $checklist_table->datecompleted = gmdate("Y-m-d h:i:s",$time);
+        $checklist_table->completedby = $user->id;        
+        
+        $checklist_table->store();
+        
+        $mainframe->redirect($post_array["step_redirection_link"]);
+        //mdie($post_array);
+    
+    }
+    
+    function compose_message($from,$to,$subject,$body,$created = ""){
+        // default admin
+        $admin = 62;        
+        
+        $msg = JTable::getInstance("Message");        
+        // FROM
+        $msg->from = $from?$from:$admin;
+        // TO
+        $msg->to = $to;
+        // SUBJECT
+        $msg->subject = $subject;
+        
+        // BODY
+        $msg->body = $body;
+                
+        // CREATED
+        $msg->created = ($created)?($created):gmdate("Y-m-d H:i:s",time()); 
+        // READ
+        $msg->read = 0;        
+        // PUBLISHED
+        $msg->published = 0;        
+        
+        $msg->store();                
+        
+    }
+    
+    
+    function proceed_sign_off($post){
+        global $mainframe;
+        
+        $user = JFactory::getUser();
+        $user_id = $user->id;
+        
+        $usertable = JTable::getInstance("Person"); 
+        $usertable->id = $user->person->id;        
+        $usertable->load();
+        
+        $company = JTable::getInstance("Company"); 
+        
+        $company->id = $usertable->company;
+        $company->load();
+        
+        $coach_id = $company->owner;
+        
+        $coach = "";        
+        $client_url = JRoute::_("index.php?option=com_jforce&c=people&view=person&layout=client&id={$user->person->id}");
+        $phase_url = JRoute::_("index.php?option=com_jforce&view=checklist&pid={$post["pid"]}&client_id={$user->person->id}");
+        
+        // SUBJECT
+        $subject = "[SIGNOFF REQUEST] Received from Client '{$user->name}' having username '{$user->username}'";
+        
+        // BODY        
+        $body = "Dear {$company->name}, <br />A Signoff request has been received from a client with following details. 
+                    <br />
+                    Username : <strong>{$user->username}</strong><br />
+                    Fullname : <strong>{$user->name}</strong><br />
+                    User Id : <strong>{$user->id}</strong><br />
+                    Client URL : <a href={$client_url}>{$client_url}</a><br />
+                    Phase Requested for Signoff : <a href={$phase_url}>{$phase_url}</a><br />
+                    
+                    <br />
+                    To signoff the phase, visit the phase via Phase URL link above, and edit the Sign off step as completed.                     
+                    ";
+        
+
+        $this->compose_message($admin,$coach_id,$subject,$body);
+        
+        $mainframe->redirect($post["step_redirection_link"]);
+    }
+    
+    function get_virtuemart_products($product_id = 0){
+        if($product_id):
+            $query = "SELECT * from #__vm_product WHERE ".$this->_db->nameQuote("product_id")." = ".$this->_db->Quote($product_id)." LIMIT 1";
+            
+            $this->_db->setQuery($query);
+            $this->_db->query();
+            $product = $this->_db->loadObject();
+            return $product;
+        else:
+            $query = "SELECT "
+                .$this->_db->nameQuote("product_id").","
+                .$this->_db->nameQuote("product_name")." from #__vm_product WHERE 1";         
+                
+            $this->_db->setQuery($query);
+            $this->_db->query();
+            $products = $this->_db->loadObjectList();
+            return $products;
+        endif;
+    }
+    
+    function get_recommended_products(){
+        $current_person_id = JFactory::getUser()->person->id;        
+
+        $person_t = JTable::getInstance("Person");
+        
+        $client_id = JRequest::getCmd("client_id");
+        $client_id = ($client_id)?$client_id:$current_person_id;
+        
+        $person_t->id = $client_id;        
+        
+        $person_t->load();
+        
+        $_client_id = $this->_db->Quote($person_t->uid);
+        $project_id = $this->_db->Quote(JRequest::getCmd("pid"));
+        
+        $query = "SELECT "
+                .$this->_db->nameQuote("recommendation_id").","
+                .$this->_db->nameQuote("product_id").","
+                .$this->_db->nameQuote("product_name")."," 
+                .$this->_db->nameQuote("quantity")."," 
+                .$this->_db->nameQuote("recommendation_notes")."," 
+                .$this->_db->nameQuote("recommendation_date")."                 
+                
+                    FROM #__vm_product v 
+                    NATURAL JOIN #__jf_jtpl_product_recommendations r 
+                    WHERE v.product_id = r.product_id 
+                    AND r.client_user_id = {$_client_id}
+                    
+                    AND r.project_id = {$project_id}
+                    
+                    ORDER BY r.recommendation_date DESC
+                    ";
+                    
+                    
+        $this->_db->setQuery($query);                   
+        $this->_db->query();
+        $products = $this->_db->loadObjectList();
+        return $products;
+    }
+    
+    function save_recommendation($post){
+        $coach = JFactory::getUser();
+        $coach_id = $coach->id;
+        
+        $person_t = JTable::getInstance("Person");
+        $person_t->id = JRequest::getCmd("client_id");
+        $person_t->load();        
+        $client_user_id = $person_t->uid;
+        
+        $recommended_date = gmdate("Y-m-d H:i:s",time()); 
+        
+        $product = $this->get_virtuemart_products($post["product"]);
+        $product_url = JRoute::_("index.php?option=com_virtuemart&page=shop.product_details&product_id=".$product->product_id);
+
+
+        $query = "INSERT INTO #__jf_jtpl_product_recommendations (product_id, 
+                                                        project_id, 
+                                                        client_user_id, 
+                                                        coach_user_id,
+                                                        quantity, 
+                                                        recommendation_notes, 
+                                                        recommendation_date) 
+            values(".$this->_db->Quote($post["product"]).","
+                .$this->_db->Quote(JRequest::getCmd("pid")).","
+                .$this->_db->Quote($client_user_id).","
+                .$this->_db->Quote($coach_id).","
+                .$this->_db->Quote($post["quantity"]).","
+                .$this->_db->Quote($post["notes"]).","
+                .$this->_db->Quote($recommended_date)
+                .") ";
+                
+        $this->_db->setQuery($query);
+        $this->_db->query();        
+        
+        // Compose the message for client to notify about the recommendation
+        
+        // SUBJECT
+        $subject = "[PRODUCT RECOMMENDATION] Coach '{$coach->name}' has recommended you a product";
+        
+        // BODY        
+        $body = "Dear {$person_t->firstname} {$person_t->lastname}, <br />Coach {$coach->name} has recommended you a product for your phase currently active. 
+        <br />
+            You are suggested to communicate with your coach regarding the product recommendation. 
+        <br />
+                    <br />
+                    Product Name : <strong>{$product->product_name}</strong><br />
+                    Product URL : <a href='{$product_url}'>{$product_url}</a><br />
+                    Recommended Quantity : <strong>{$post["quantity"]}</strong><br />
+                    Recommendation Note : {$post["notes"]}<br />
+                    Recommendation Date: {$recommended_date}<br />
+                    ";
+        
+
+        $this->compose_message(0,$client_user_id,$subject,$body);
+        return true;
+    }
+    
+    function delete_recommendation($recommendation_id){
+
+        $query = "DELETE FROM #__jf_jtpl_product_recommendations WHERE 
+                    ".$this->_db->nameQuote("recommendation_id")." = "
+                        .$this->_db->Quote($recommendation_id);
+                $this->_db->setQuery($query);
+                $this->_db->query();
+                return true;
+    }
+    
+    function get_client_information($client_id){
+        $model = JModel::getInstance("Person","JForceModel");
+        $model->_id = $client_id;
+        $model->_pid = 0;
+        $person = &$model->getPerson();
+        return $person;;
+    }    
+    
+    function get_registration_survey($user_id){
+        $results = array();
+        return $results;
+    }
+    
+    private function get_phase_survey($user_id, $phase_id, $keyword){
+        $query = "SELECT * FROM #__jf_jtpl_survey_details WHERE 
+                {$this->_db->nameQuote("user_id")} = {$this->_db->Quote($user_id)} 
+                AND 
+                {$this->_db->nameQuote("project_id")} = {$this->_db->Quote($phase_id)} 
+                AND 
+                {$this->_db->nameQuote("survey_variable")} LIKE {$this->_db->Quote($keyword)} 
+                ";
+                
+        $this->_db->setQuery($query);
+        $this->_db->query();        
+        return $this->_db->loadObjectList();
+    }
+    function get_phase_initial_survey($user_id,$phase_id){
+        return $this->get_phase_survey($user_id,$phase_id,"%survey");
+    }
+    
+    function get_phase_end_evaluation($user_id,$phase_id){
+        return $this->get_phase_survey($user_id,$phase_id,"%evaluation");
+    }
+    
+    function split_csv($csv_string,$delimitter = ":"){
+        if(!strlen($csv_string)){
+            return null;
+        }
+        $csv_arr = explode(",",$csv_string);
+        
+
+        foreach($csv_arr as $a){
+            $var = explode($delimitter,$a);
+            $split_arr[$var[0]] = $var[1];
+        }        
+        return $split_arr;
+    }
+    
+    function get_phase_survey_name($phase_number, $step){
+        $query = "SELECT name FROM #__jf_jtpl_surveys WHERE 
+                {$this->_db->nameQuote("phase_number")} = {$this->_db->Quote($phase_number)} 
+                AND 
+                {$this->_db->nameQuote("step")} = {$this->_db->Quote($step)} 
+                LIMIT 1
+                ";
+                
+        $this->_db->setQuery($query);
+        $this->_db->query();        
+        $result = $this->_db->loadObject();
+        return $result->name;
+    }
+    
+    function get_phase_survey_questions($phase_number, $step){
+        $query = "SELECT * FROM #__jf_jtpl_survey_questions WHERE 
+                {$this->_db->nameQuote("phase_number")} = {$this->_db->Quote($phase_number)} 
+                AND 
+                {$this->_db->nameQuote("step")} = {$this->_db->Quote($step)} 
+                ";
+                
+        $this->_db->setQuery($query);
+        $this->_db->query();        
+        return $this->_db->loadObjectList();
+    }
+    
+    function get_tracking($phase_id, $user_id){
+        $query = "SELECT * FROM #__jf_jtpl_survey_tracking WHERE 
+                {$this->_db->nameQuote("project_id")} = {$this->_db->Quote($phase_id)} 
+                AND 
+                {$this->_db->nameQuote("user_id")} = {$this->_db->Quote($user_id)} 
+                ";
+                
+        $this->_db->setQuery($query);
+        $this->_db->query();        
+        return $this->_db->loadObjectList();
+    }
+    
+    function get_all_clients(){
+        $query = "SELECT * FROM #__users as u
+                JOIN #__jf_persons as p
+                WHERE 
+                u.block = {$this->_db->Quote(0)} 
+                AND u.activation = {$this->_db->Quote('')} 
+                AND u.id = p.uid AND p.systemrole = '4' ";
+                
+        $this->_db->setQuery($query);
+        
+        $this->_db->query();     
+
+        return $this->_db->loadObjectList();    
+    }
+    
+    function make_client_a_coach($user_id){
+    		// fetch the user
+       $query = "SELECT * FROM #__users as u
+                WHERE u.id = {$this->_db->Quote($user_id)}
+                ";
+                
+        $this->_db->setQuery($query);
+        
+        $this->_db->query();
+                    
+        $user = $this->_db->loadObject();
+        
+        if(!$user){
+        	return false;
+        }
+        
+        // update the role
+        $query = "UPDATE #__jf_persons SET  
+                systemrole = '2' WHERE 
+                uid = '{$user_id}'  
+                LIMIT 1";
+        
+        $this->_db->setQuery($query);
+        $this->_db->query();
+        
+        // create a company
+        $query = "INSERT INTO #__jf_companies (name, owner, author, created, modified, published)
+        			VALUES ('{$user->name}','$user_id','$user_id',NOW(), NOW(), '1') ";                
+                
+        $this->_db->setQuery($query);        
+        $this->_db->query();
+    }
+    
+    function assign_coach_to_client($coach_company_id, $client_user_id){    
+    	  $query = "SELECT * FROM #__jf_companies WHERE id = '$coach_company_id' LIMIT 1 ";
+        $this->_db->setQuery($query);
+        $this->_db->query();
+        $company = $this->_db->loadObject();
+        if($company){
+        	$coach_id = $company->owner;
+        }        
+        
+        // update the projects
+        $query = "UPDATE #__jf_projects SET leader='$coach_id', company='$coach_company_id' WHERE author = '$client_user_id' ";
+        $this->_db->setQuery($query);
+        $this->_db->query();
+        
+        //mdie($this->_db);
+        
+        // UPDATE PROJECT ROLES
+		  $query = "UPDATE #__jf_projectroles_cf SET uid = '$coach_id' WHERE uid = '0' AND pid IN (SELECT id FROM #__jf_projects WHERE author='$client_user_id' )";        
+        $this->_db->setQuery($query);
+        $this->_db->query();
+        
+        //mdie($this->_db);
+        
+        // update the checklists
+		  $query = "UPDATE #__jf_checklists SET author = '$coach_id' WHERE pid IN (SELECT id FROM #__jf_projects WHERE author='$client_user_id' )";
+        $this->_db->setQuery($query);
+        $this->_db->query();
+        
+        //mdie($this->_db);        
+                
+        // add company id for the client as the coach's company
+        $query = "UPDATE #__jf_persons SET company = '$coach_company_id' WHERE uid = '$client_user_id' LIMIT 1";
+        $this->_db->setQuery($query);
+        $this->_db->query();
+        
+        //mdie($this->_db);
+        
+    }
+    
+    function get_all_coaches(){
+        $query = "SELECT * FROM #__jf_companies WHERE published = '1' ";
+        $this->_db->setQuery($query);
+        $this->_db->query();
+        return $this->_db->loadObjectList();    
+    	
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+	function setKeyword($keyword = null)
+	{
+		$this->_keyword = $keyword;	
+	}
+	
+	function setPhrase($phrase)
+	{
+		$this->_phrase = $phrase;	
+	}
+
+	function setOrdering($ordering) 
+	{	
+		$this->_ordering = $ordering;	
+	}
+    
+	
+	function setPid($pid){
+		$this->_pid		= $pid;
+	}
+	
+	function getSearchResults() {	
+		
+		$types = array('checklist',
+					   'comment',
+					   'company',
+					   'discussion',
+					   'document',
+					   'invoice',
+					   'quote',
+					   'message',
+					   'milestone',
+					   'service',
+					   'task',
+					   'ticket'
+					   );
+		
+		$matches = array();
+		
+		foreach($types as $type):
+
+			switch($type) :
+					case 'milestone':
+						$title = 'summary';
+						$text = 'notes';
+					break;
+					
+					case 'task':
+						$title = 'summary';
+						$text = null;
+					break;
+					
+					case 'comment':
+						$title = 'message';
+						$text = null;
+					break;
+						
+					case 'discussion':
+						$title = 'summary';
+						$text = 'message';
+					break;
+					
+					case 'ticket':
+					case 'checklist':
+						$title = 'summary';
+						$text = 'description';
+					break;
+						
+					case 'quote':
+					case 'invoice':
+					case 'document':
+						$title = 'name';
+						$text = 'description';
+					break;
+						
+				endswitch;
+												
+			  $wheres = array();
+			
+				if($this->_keyword!='') { 
+				
+				  switch ($this->_phrase) {
+					
+				  }
+				}
+				  $morder = '';
+				  switch ($this->_ordering) {
+					case 'newest':
+					default: 
+					$order = 't.created DESC';
+				  break;
+					case 'oldest':
+					$order = 't.created ASC';
+					break;
+					case 'alpha':
+					$order = 't.'.$title.' ASC';
+					break;
+				  }
+	
+		
+		endforeach;
+		if($matches):	
+			$matches = JForceHelper::sortArray($matches,'created');
+		else:
+			$matches = null;
+		endif;
+		
+		
+	$this->_matches = $matches;
+	
+	return $this->_matches;
+
+    }
+	
+	function buildLists()
+	{
+		$lists['projects'] = JForceListsHelper::getProjectList();	
+
+		return $lists;
+	}
+
+}

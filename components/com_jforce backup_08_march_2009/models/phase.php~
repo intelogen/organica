@@ -1,0 +1,219 @@
+<?php
+
+/************************************************************************************
+*	@package		Joomla															*
+*	@subpackage		jForce, the Joomla! CRM											*
+*	@version		2.0																*
+*	@file			search.php														*
+*	@updated		2008-12-15														*
+*	@copyright		Copyright (C) 2008 - 2009 Extreme Joomla. All rights reserved.	*
+*	@license		GNU/GPL, see jforce.license.php									*
+************************************************************************************/
+
+// no direct access
+defined('_JEXEC') or die('Restricted access');
+jimport('joomla.application.component.model');
+
+
+class JforceModelPhase extends JModel {
+	
+	var $_keyword	= null;
+	var $_matches	= null;
+	var $_phrase 	= null;
+	var $_ordering 	= null;
+	
+    function __construct() {    	
+        parent::__construct();		
+	
+		$keyword = JRequest::getVar('keyword','');
+		$this->setKeyword($keyword);
+		
+		$phrase = JRequest::getVar('phrase','');
+		$this->setPhrase($phrase);
+		
+		$ordering = JRequest::getVar('ordering','');
+		$this->setOrdering($ordering);
+		
+		$pid = JRequest::getVar('pid', 0, '', 'int');
+		$this->setPid((int)$pid);	
+
+	}
+
+	// get phase details for a particular phase	
+	function get_phase_details($phase_id = ""){
+		//$this->_db->setQuery("SELECT * FROM #__jf_projects WHERE 1");
+		//return $this->_db->loadObjectList
+		$lists['projects'] = JForceListsHelper::getProjectList();
+		print_r($lists);
+	}
+	
+	
+	
+	function setKeyword($keyword = null)
+	{
+		$this->_keyword = $keyword;	
+	}
+	
+	function setPhrase($phrase)
+	{
+		$this->_phrase = $phrase;	
+	}
+
+	function setOrdering($ordering) 
+	{	
+		$this->_ordering = $ordering;	
+	}
+	
+	function setPid($pid)
+	{
+		$this->_pid		= $pid;
+	}
+	
+	function getSearchResults() {	
+		
+		$types = array('checklist',
+					   'comment',
+					   'company',
+					   'discussion',
+					   'document',
+					   'invoice',
+					   'quote',
+					   'message',
+					   'milestone',
+					   'service',
+					   'task',
+					   'ticket'
+					   );
+		
+		$matches = array();
+		
+		foreach($types as $type):
+
+			switch($type) :
+					case 'milestone':
+						$title = 'summary';
+						$text = 'notes';
+					break;
+					
+					case 'task':
+						$title = 'summary';
+						$text = null;
+					break;
+					
+					case 'comment':
+						$title = 'message';
+						$text = null;
+					break;
+						
+					case 'discussion':
+						$title = 'summary';
+						$text = 'message';
+					break;
+					
+					case 'ticket':
+					case 'checklist':
+						$title = 'summary';
+						$text = 'description';
+					break;
+						
+					case 'quote':
+					case 'invoice':
+					case 'document':
+						$title = 'name';
+						$text = 'description';
+					break;
+						
+				endswitch;
+												
+			  $wheres = array();
+			
+				if($this->_keyword!='') { 
+				
+				  switch ($this->_phrase) {
+					case 'exact':
+					$wheres2 = array();
+					$wheres2[] = "LOWER(t.".$title.") LIKE '%$this->_keyword%'";
+					$wheres2[] = "LOWER(t.".$text.") LIKE '%$this->_keyword%'";
+					$wheres2[] = "LOWER(t.tags) LIKE '%$this->_keyword%'";
+					$where = '(' . implode( ') OR (', $wheres2 ) . ')';
+					break;
+					
+					case 'all':
+					case 'any':
+					default: 
+				
+					$words = explode( ' ', $this->_keyword );
+					$wheres = array();
+					foreach ($words as $word) {
+					  $wheres2 = array();
+					  $wheres2[] = "LOWER(t.".$title.") LIKE '%$word%'";
+					  $wheres2[] = "LOWER(t.".$text.") LIKE '%$word%'";
+					  $wheres2[] = "LOWER(t.tags) LIKE '%$word%'";
+					  $wheres[] = implode( ' OR ', $wheres2 );
+					}
+					$where = '(' . implode( ($this->_phrase == 'all' ? ') AND (' : ') OR ('), $wheres ) . ')';
+					break;
+				  }
+				}
+				  $morder = '';
+				  switch ($this->_ordering) {
+					case 'newest':
+					default: 
+					$order = 't.created DESC';
+				  break;
+					case 'oldest':
+					$order = 't.created ASC';
+					break;
+					case 'alpha':
+					$order = 't.'.$title.' ASC';
+					break;
+				  }
+	
+		
+			$query = "SELECT t.*, u.name as author, t.author as authorid FROM #__jf_".$type."s AS t".
+					 " LEFT JOIN #__users AS u on u.id = t.author".
+					 " WHERE (  $where )".
+					 " AND t.pid = ". (int) $this->_pid.
+					 " AND t.published = 1".
+					 " ORDER BY $order"
+					 ;
+			$this->_db->setQuery($query);
+			$results = $this->_db->loadObjectList();
+			
+		
+			  if ($this->_phrase == 'exact') {
+				$searchwords = array($this->_keyword);
+				$needle = $this->_keyword;
+			  } else { 
+				$searchwords = explode(' ', $this->_keyword);
+				$needle = $searchwords[0];
+			  }
+			
+			if($results):
+				for($i=0;$i<count($results);$i++):
+					
+				endfor;
+				$matches[$type] = $results;
+			endif;
+		endforeach;
+		if($matches):	
+			$matches = JForceHelper::sortArray($matches,'created');
+		else:
+			$matches = null;
+		endif;
+		
+		
+	$this->_matches = $matches;
+	
+	return $this->_matches;
+
+    }
+	
+	function buildLists()
+	{
+		$lists['projects'] = JForceListsHelper::getProjectList();	
+
+		return $lists;
+	}
+
+}

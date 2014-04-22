@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="module" version="1.5.0">
+	<name>RokFeature News</name>
+	<author>RocketTheme</author>
+	<creationDate>December 2007</creationDate>
+	<copyright>(C) 2007 RocketTheme. All rights reserved.</copyright>
+	<license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
+	<authorEmail>support@rockettheme.com</authorEmail>
+	<authorUrl>www.rockettheme.com</authorUrl>
+	<version>1.1</version>
+	<description><![CDATA[
+	<h2>RokFeature Module</h2>
+	<p>New RokFeature module for mixxmag</p>
+	]]></description>
+	<files>
+		<filename module="mod_rokfeature">mod_rokfeature.php</filename>
+		<filename>index.html</filename>
+		<filename>helper.php</filename>
+		<filename>thumbnail.inc.php</filename>
+		<filename>rokfeature.js</filename>
+		<filename>rokfeature-packed.js</filename>
+		<folder>tmpl/</folder>
+	</files>
+	<params>
+		<param name="@spacer" type="spacer" default="" label="" description="" />
+		<param name="showtitle" type="radio" default="1" label="Show Title" description="Show the title in the top-right corner" >
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</param>
+		<param name="linktitle" type="radio" default="1" label="Link Title" description="Use the Title to link to the main article" >
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</param>
+		<param name="showreadmore" type="radio" default="1" label="Show Readmore" description="Show the read more link in the bottom right corner" >
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</param>
+		<param name="readmore" type="text" default="Click Here to View Article" label="Read More Label" description="Text to display for readmore if titles are NOT linked" />
+		<param name="showthumbs" type="radio" default="1" label="Show Thumbnails" description="Show the thumbnail image on the flyout tabs" >
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</param>
+		<param name="linkthumbs" type="radio" default="1" label="Link Thumbs" description="Use the thumbnail to link to the main article" >
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</param>
+		<param name="count" type="text" default="3" label="Article Count" description="Number of articles to show" />
+		<param name="show_front" type="radio" default="1" label="Frontpage Items" description="Show/Hide items designated for the Frontpage - only works when in Content Items only mode">
+			<option value="1">Show</option>
+			<option value="0">Hide</option>
+			<option value="2">Only Frontpage Items</option>
+		</param>
+		<param name="ordering" type="list" default="o_asc" label="Ordering" description="Ordering options">
+			<option value="o_asc">Order in Article Manager</option>
+			<option value="m_dsc">Modified Descending</option>
+			<option value="c_dsc">Create Date Descending</option>
+		</param>
+		<param name="catid" type="mos_category" default="" label="Category" description="Selects items from a specific Category." />
+		<param name="secid" type="mos_section" default="" label="Section" description="Selects items from a specific Secion." />
+		<param name="@spacer" type="spacer" default="" label="" description="" />
+		
+        <param name="duration" type="text" default="600" label="Transition Duration" description="Duration in ms of cross-blend transition" />
+        <param name="delay" type="text" default="7000" label="Delay Length" description="Time in ms of time between featurees" />
+		<param name="autoplay" type="radio" default="1" label="AutoPlay Rotator" description="Start playing onload" >
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</param>
+		<param name="preview_count" type="text" default="120" label="Preview Length" description="Length of characters to show in MooTools preview" />
+		<param name="opacity" type="text" default="0.8" label="Tab Opacity" description="Opacity to use for the flyout tabs" />
+	</params>
+	<params group="advanced">
+		<param name="cache" type="list" default="1" label="Caching" description="Select whether to cache the content of this module">
+			<option value="1">Use global</option>
+			<option value="0">No caching</option>
+		</param>
+		<param name="cache_time" type="text" default="900" label="Cache Time" description="The time before the module is recached" />
+		<param name="moduleclass_sfx" type="text" default="" label="Module Class Suffix" description="" />
+	</params>
+</install>

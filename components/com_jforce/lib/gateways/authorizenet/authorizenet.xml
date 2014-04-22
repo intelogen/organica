@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<config>
+		<params>
+			<param name="api_login" type="text" default="" label="API Login" description="Authorize.net Login ID" />
+			<param name="transaction_key" type="text" default="" label="API Transaction Key" description="Authorize.net Transaction Key" />
+			<param name="name" type="radio" default="1" label="Show Name Fields" description="Display Name Fields on Payment Form">
+				<option value="0">No</option>
+				<option value="1">Yes</option>
+			</param>
+			<param name="address" type="radio" default="1" label="Show Address Fields" description="Display Address Fields on Payment Form">
+				<option value="0">No</option>
+				<option value="1">Yes</option>
+			</param>
+			<param name="email" type="radio" default="1" label="Show Email Field" description="Display Email Field on Payment Form">
+				<option value="0">No</option>
+				<option value="1">Yes</option>
+			</param>
+			<param name="phone" type="radio" default="1" label="Show Phone Field" description="Display Phone Field on Payment Form">
+				<option value="0">No</option>
+				<option value="1">Yes</option>
+			</param>
+		</params>
+	</config>

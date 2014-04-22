@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (c) 2010 Alexey Gordeyev IK.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the GPL License v2.0
+    which accompanies this distribution, and is available at
+    http://www.gordejev.lv
+ -->
+ <!-- $Id: ag_google_analytics_free.xml 32 2010-08-08 20:31:26Z alex $ -->
+<install type="component" version="1.5.0" method="upgrade">
+	<name>AG_Google_Analytics2</name>
+	<creationDate>2010-03-18</creationDate>
+	<author>Alexey Gordeyev IK</author>
+	<authorEmail>aleksej@gordejev.lv</authorEmail>
+	<authorUrl>http://www.gordejev.lv</authorUrl>
+	<copyright>Copyright © 2010 - All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<version>1.1.0</version>
+	<description>COM_AG_GOOGLE_ANALYTICS_XML_DESCRIPTION</description>
+	<files folder="frontend">
+		<filename>index.php</filename>
+	</files>
+	<administration>
+		
+	</administration>
+</install>

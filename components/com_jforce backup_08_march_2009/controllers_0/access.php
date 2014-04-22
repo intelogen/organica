@@ -1,0 +1,407 @@
+<?php
+
+/************************************************************************************
+*	@package		Joomla															*
+*	@subpackage		jForce, the Joomla! CRM											*
+*	@version		2.0																*
+*	@file			access.php														*
+*	@updated		2008-12-15														*
+*	@copyright		Copyright (C) 2008 - 2009 Extreme Joomla. All rights reserved.	*
+*	@license		GNU/GPL, see jforce.license.php									*
+************************************************************************************/
+
+// no direct access
+defined('_JEXEC') or die('Restricted access');
+jimport('joomla.application.component.controller');
+class JForceControllerAccess extends JController {
+
+	function checkAccess() {
+	 
+		$view 	= JRequest::getVar('view', 'project');
+		$layout = JRequest::getVar('layout', 'default');
+		$task 	= JRequest::getVar('task', '');
+		$c		= JRequest::getVar('c','');
+		
+		if ($c == '') :
+			$c = $this->getController($view);
+		endif;
+	
+		$user = $this->_loadUser();
+
+		## CHECK PUBLIC ACCESS ##
+		if ($this->_isPublic($task,$c,$view,$layout)) :
+			return true;
+		endif;
+
+		$this->_checkGeneralAccess($user,$c,$task,$view,$layout);
+		
+		switch($c) :
+			
+			case 'accounting':
+			$this->_checkAccountingAccess($user,$task,$view,$layout);
+			break;
+				
+			case 'sales':
+			$this->_checkSalesAccess($user,$task,$view,$layout);
+			break;
+			
+			case 'people':
+			$this->_checkPeopleAccess($user,$task,$view,$layout);
+			break;
+			
+			case 'ajax':
+			$this->_checkAjaxAccess($user,$task,$view,$layout);
+			break;
+			
+			case 'reports':
+			$this->_checkReportsAccess($user,$task,$view,$layout);
+			break;
+			
+			case 'message':
+			$this->_checkMessageAccess($user,$task,$view,$layout);
+			break;
+			
+			case 'project':
+			$this->_checkProjectAccess($user,$task,$view,$layout);
+			break;
+			
+			case 'search':
+			$this->_checkSearchAccess($user,$task,$view,$layout);
+			break;
+	
+			default:
+			break;
+	
+		endswitch;
+		
+	}
+
+	function _loadUser() {
+		$user = &JFactory::getUser();
+		$pid = JRequest::getVar('pid', '');
+		if (!$user->get('role')) :
+			$accessRoleModel = JModel::getInstance('Accessrole', 'JforceModel');
+			$role = $accessRoleModel->loadUserAccessRole($user->id);
+			$role->quote = $role->global_quote;
+			$role->invoice = $role->global_invoice;
+			$role->ticket = $role->global_ticket;
+			$user->set('systemrole',$role);
+		endif;
+		
+		if(!$user->get('person')) :
+			$personModel = &JModel::getInstance('Person', 'JForceModel');
+			$personModel->setId(null);
+			$personModel->setPid(null);
+			$personModel->setUserid($user->id);
+			$person = $personModel->getPerson();
+			$user->set('person',$person);
+		endif;
+		
+		if($pid) :
+			$projectaccess = $user->get('projectaccess') ? $user->get('projectaccess') : array();
+			if (!isset($projectaccess[$pid])) :
+				$personModel = &JModel::getInstance('Person', 'JForceModel');
+				$personModel->setUserid($user->id);
+				$permissions = $personModel->loadProjectPermissions($pid);
+				$projectaccess[$pid] = $permissions;
+				$user->set('projectaccess',$projectaccess);
+			endif;
+		endif;
+		
+		return $user;
+	}
+
+	function _checkPeopleAccess($user,$task,$view,$layout) {
+		$systemrole = $user->get('systemrole');
+		
+		$possibleViews = array('person');
+		$specials = array('company', 'modal');
+		$level = $this->determineAccessLevel($task,$layout);
+		$continue = false;
+
+		## VERY TEMPORARY WORK AROUND ## IF YOU HAVE ANY SUGGESTIONS, PLEASE LET US KNOW
+		if($task) :
+			$continue = true;
+		endif;
+		
+		if ($systemrole && in_array($view, $possibleViews)) :
+			if ($level <= $systemrole->$view) :
+				$continue = true;
+			endif;
+		elseif(in_array($view,$specials)) :
+			$continue = true;
+		endif;
+
+		if (!$continue) :
+			JForceHelper::lockOut();
+		endif;
+		
+	}
+	
+	function _checkSalesAccess($user,$task,$view,$layout) {
+		
+			$systemrole = $user->get('systemrole');
+			
+			$possibleViews = array('lead', 'potential', 'campaign');
+			$specials = array('modal');
+			$level = $this->determineAccessLevel($task,$layout);
+			$continue = false;
+	
+			## VERY TEMPORARY WORK AROUND ## IF YOU HAVE ANY SUGGESTIONS, PLEASE LET US KNOW
+			if($task) :
+				$continue = true;
+			endif;
+	
+			if ($systemrole && in_array($view, $possibleViews)) :
+				if ($level <= $systemrole->$view) :
+					$continue = true;
+				endif;
+			elseif(in_array($view,$specials)) :
+				$continue = true;
+			endif;
+	
+			if (!$continue) :
+				JForceHelper::lockOut();
+			endif;
+		}
+
+	function _checkAccountingAccess($user,$task,$view,$layout) {
+		$systemrole = $user->get('systemrole');
+		
+		$possibleViews = array('invoice', 'quote');
+		$specials = array('modal');
+		$level = $this->determineAccessLevel($task,$layout);
+		$continue = false;
+
+		## VERY TEMPORARY WORK AROUND ## IF YOU HAVE ANY SUGGESTIONS, PLEASE LET US KNOW
+		if($task) :
+			$continue = true;
+		endif;
+
+		if ($systemrole && in_array($view, $possibleViews)) :
+			if ($level <= $systemrole->$view) :
+				$continue = true;
+			endif;
+		elseif(in_array($view,$specials)) :
+			$continue = true;
+		endif;
+
+		if (!$continue) :
+			JForceHelper::lockOut();
+		endif;
+		
+	}
+	
+	function _checkSupportAccess($user,$task,$view,$layout) {
+		$systemrole = $user->get('systemrole');
+		
+		$possibleViews = array('ticket');
+		$specials = array('modal');
+		$level = $this->determineAccessLevel($task,$layout);
+		$continue = false;
+
+		## VERY TEMPORARY WORK AROUND ## IF YOU HAVE ANY SUGGESTIONS, PLEASE LET US KNOW
+		if($task) :
+			$continue = true;
+		endif;
+
+		if ($systemrole && in_array($view, $possibleViews)) :
+			if ($level <= $systemrole->$view) :
+				$continue = true;
+			endif;
+		elseif(in_array($view,$specials)) :
+			$continue = true;
+		endif;
+
+		if (!$continue) :
+			JForceHelper::lockOut();
+		endif;
+		
+	}
+	
+	function _checkAjaxAccess($user,$task,$view,$layout) {
+		
+		
+	}
+	
+	function _checkReportsAccess($user,$task,$view,$layout) {
+		$systemrole = $user->get('systemrole');
+		if (!$systemrole->can_view_reports) :
+			JForceHelper::notAuth();
+			return false;
+		endif;
+		
+	}
+	
+	function _checkMessageAccess($user,$task,$view,$layout) {
+		$systemrole = $user->get('systemrole');
+		if (!$systemrole->can_access_messages) :
+			JForceHelper::notAuth();
+			return false;
+		endif;
+	}
+
+	function _checkSearchAccess($user,$task,$view,$layout) {
+		return true;	
+	}
+
+	function _checkProjectAccess($user,$task,$view,$layout) {
+		global $mainframe;
+		$pid = JRequest::getVar('pid', '');
+		$systemrole = $user->get('systemrole');
+		$projectaccess = $user->get('projectaccess');
+		$permissions = array();
+		$level = $this->determineAccessLevel($task,$layout);
+		
+		$continue = false;
+		
+		if (!$systemrole->project) :
+			JForceHelper::lockOut();
+			return false;
+		endif;
+	
+		if (isset($projectaccess[$pid])) :
+			$permissions = $projectaccess[$pid];
+		endif;
+		
+		## VERY TEMPORARY WORK AROUND ## IF YOU HAVE ANY SUGGESTIONS, PLEASE LET US KNOW
+		if($task == 'downloadFile') :
+			$view = 'document';
+			$layout = 'document';
+		endif;
+		
+		if ($view == 'project') :
+			$this->_checkProjectView($systemrole,$permissions,$layout,$level);
+			return;
+		endif;
+		
+		if ($task) :
+			$continue = true;
+		endif;
+		
+		## TASK PERMISSIONS HANDLED BY CHECKLIST ##
+		$view = $view == 'task' ? 'checklist' : $view;
+		$view = $view == 'file' ? 'document' : $view;
+			
+		$possibleViews = array('milestone', 'checklist', 'timetracker', 'ticket', 'discussion', 'document', 'invoice', 'quote', 'task');
+		$specials = array('calendar','modal','dashboard','person');
+		
+		
+		
+		if (!empty($permissions) && in_array($view, $possibleViews)) :
+			if ($level <= $permissions->$view) :
+				$continue = true;
+			endif;
+		elseif(in_array($view,$specials)) :
+			$continue = true;
+		endif;
+
+		if (!$continue) :
+			JForceHelper::lockOut();
+			return false;
+		endif;
+		
+	}
+
+	function _checkProjectView($systemrole,$permissions,$layout,$level) {
+		$continue = false;
+		
+		if($layout == 'default' && $systemrole->project) :
+			$continue = true;
+		elseif($level <= $systemrole->project) :
+			$continue = true;
+		endif;
+		
+		if (!$continue) :
+			JForceHelper::lockOut();
+			return false;
+		endif;
+	}
+
+	function _checkGeneralAccess($user,$c,$task,$view,$layout) {
+		$systemrole = $user->get('systemrole');
+		
+				
+		/* REVISIT BECAUSE OF FORM ACTIONS */
+		## LOCK OUT TASK OVERRIDE HACK ##
+		if ($view != '' && $task != '') :
+			#JForceHelper::lockOut();
+			#return false;
+		endif;
+		/**********************************/
+		
+		## FORCE USER LOGIN ##
+		if (!$user->id) :
+			JForceHelper::loginRedirect();
+			return false;
+		endif;
+		
+		if(!$systemrole->system_access) :
+			JForceHelper::lockOut();
+			return false;
+		endif;
+		
+		return true;
+	}
+	
+	function _isPublic($task,$c,$view,$layout) {
+		$public = false;	
+		
+		if ($view == 'lead' && $layout == 'new') :
+			$public = true;
+		endif;
+		
+		if ($c == 'sales' && $task == 'save') :
+			$public = true;
+		endif;
+		
+		return $public;
+		
+	}
+	
+	function determineAccessLevel($task, $layout) {
+		$id = JRequest::getVar('id', '');
+	
+		if ($layout == 'form' && !$id) :
+			$level = 3;
+		elseif ($layout == 'form' && $id) :
+			$level = 4;
+		elseif ($task == 'trash') :
+			$level = 4;
+		else :
+			$level = 1;
+		endif;
+		
+		return $level;
+	
+	}
+	
+	function getController($view) {
+		
+		$map = array(
+				'lead' 		=> 'sales',
+				'potential'	=> 'sales',
+				'campaign'	=> 'sales',
+				'quote'		=> 'accounting',
+				'invoice'	=> 'accounting',
+				'ticket'	=> 'support',
+				'report'	=> 'reports',
+				'person'	=> 'people',
+				'company'	=> 'people',
+				'message'	=> 'message',
+				'search'	=> 'search'
+				);
+		
+		if (isset($map[$view])) :
+			$c = $map[$view];
+		else:
+			$c = 'project';
+		endif;
+		
+		JRequest::setVar('c',$c, 'get');
+		
+		return $c;
+	}
+	
+	
+}

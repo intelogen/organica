@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install version="1.5" type="plugin" group="system">
+	<name>System - Core Design Scriptegrator plugin</name>
+  	<author>Daniel Rataj</author>
+  	<creationDate>March 22th, 2009</creationDate>
+  	<copyright>(C) 2007 - 2009 GreatJoomla.com</copyright>
+  	<license>http://www.gnu.org/licenses/gpl.html GNU/GPL</license>
+  	<authorEmail>info@greatjoomla.com</authorEmail>
+  	<authorUrl>www.greatjoomla.com</authorUrl>
+	<version>1.3.6</version>
+	<description>DESC_CDSCRIPTEGRATOR</description>
+	<files>
+		<filename plugin="cdscriptegrator">cdscriptegrator.php</filename>
+		<filename>cdscriptegrator/libraries/highslide/css/cssloader.php</filename>
+		<filename>cdscriptegrator/libraries/highslide/css/highslide.css</filename>
+		<filename>cdscriptegrator/libraries/highslide/css/index.html</filename>
+		<filename>cdscriptegrator/libraries/highslide/graphics/close.png</filename>
+		<filename>cdscriptegrator/libraries/highslide/graphics/closeX.png</filename>
+		<filename>cdscriptegrator/libraries/highslide/graphics/controlbar2.gif</filename>
+		<filename>cdscriptegrator/libraries/highslide/graphics/controlbar3.gif</filename>
+		<filename>cdscriptegrator/libraries/highslide/graphics/controlbar4.gif</filename>
+		<filename>cdscriptegrator/libraries/highslide/graphics/controlbar4-hover.gif</filename>
+		<filename>cdscriptegrator/libraries/highslide/graphics/controlbar-black-border.gif</filename>
+		<filename>cdscriptegrator/libraries/highslide/graphics/controlbar-white.gif</filename>
+		<filename>cdscriptegrator/libraries/highslide/graphics/controlbar-white-small.gif</filename>
+		<filename>cdscriptegrator/libraries/highslide/graphics/fullexpand.gif</filename>
+		<filename>cdscriptegrator/libraries/highslide/graphics/geckodimmer.png</filename>
+		<filename>cdscriptegrator/libraries/highslide/graphics/icon.gif</filename>
+		<filename>cdscriptegrator/libraries/highslide/graphics/index.html</filename>
+		<filename>cdscriptegrator/libraries/highslide/graphics/loader.gif</filename>
+		<filename>cdscriptegrator/libraries/highslide/graphics/loader.white.gif</filename>
+		<filename>cdscriptegrator/libraries/highslide/graphics/resize.gif</filename>
+		<filename>cdscriptegrator/libraries/highslide/graphics/zoomin.cur</filename>
+		<filename>cdscriptegrator/libraries/highslide/graphics/zoomout.cur</filename>
+		<filename>cdscriptegrator/libraries/highslide/graphics/outlines/beveled.png</filename>
+		<filename>cdscriptegrator/libraries/highslide/graphics/outlines/glossy-dark.png</filename>
+		<filename>cdscriptegrator/libraries/highslide/graphics/outlines/drop-shadow.png</filename>
+		<filename>cdscriptegrator/libraries/highslide/graphics/outlines/index.html</filename>
+		<filename>cdscriptegrator/libraries/highslide/graphics/outlines/outer-glow.png</filename>
+		<filename>cdscriptegrator/libraries/highslide/graphics/outlines/Outlines.psd</filename>
+		<filename>cdscriptegrator/libraries/highslide/graphics/outlines/rounded-black.png</filename>
+		<filename>cdscriptegrator/libraries/highslide/graphics/outlines/rounded-white.png</filename>
+		<filename>cdscriptegrator/libraries/highslide/js/highslide.packed.js</filename>
+		<filename>cdscriptegrator/libraries/highslide/js/index.html</filename>
+		<filename>cdscriptegrator/libraries/highslide/js/jsloader.php</filename>
+    <filename>cdscriptegrator/libraries/highslide/class.php</filename>
+		<filename>cdscriptegrator/libraries/highslide/index.html</filename>
+		<filename>cdscriptegrator/libraries/jquery/js/ui/effects.blind.js</filename>
+		<filename>cdscriptegrator/libraries/jquery/js/ui/effects.bounce.js</filename>
+		<filename>cdscriptegrator/libraries/jquery/js/ui/effects.clip.js</filename>
+		<filename>cdscriptegrator/libraries/jquery/js/ui/effects.core.js</filename>
+		<filename>cdscriptegrator/libraries/jquery/js/ui/effects.drop.js</filename>
+		<filename>cdscriptegrator/libraries/jquery/js/ui/effects.explode.js</filename>
+		<filename>cdscriptegrator/libraries/jquery/js/ui/effects.fold.js</filename>
+		<filename>cdscriptegrator/libraries/jquery/js/ui/effects.highlight.js</filename>
+		<filename>cdscriptegrator/libraries/jquery/js/ui/effects.pulsate.js</filename>
+		<filename>cdscriptegrator/libraries/jquery/js/ui/effects.scale.js</filename>
+		<filename>cdscriptegrator/libraries/jquery/js/ui/effects.shake.js</filename>
+		<filename>cdscriptegrator/libraries/jquery/js/ui/effects.slide.js</filename>
+		<filename>cdscriptegrator/libraries/jquery/js/ui/effects.transfer.js</filename>
+		<filename>cdscriptegrator/libraries/jquery/js/ui/index.html</filename>
+		<filename>cdscriptegrator/libraries/jquery/js/ui/jsloader.php</filename>
+		<filename>cdscriptegrator/libraries/jquery/js/ui/ui.accordion.js</filename>
+		<filename>cdscriptegrator/libraries/jquery/js/ui/ui.core.js</filename>
+		<filename>cdscriptegrator/libraries/jquery/js/ui/ui.datepicker.js</filename>
+		<filename>cdscriptegrator/libraries/jquery/js/ui/ui.dialog.js</filename>
+		<filename>cdscriptegrator/libraries/jquery/js/ui/ui.draggable.js</filename>
+		<filename>cdscriptegrator/libraries/jquery/js/ui/ui.droppable.js</filename>
+		<filename>cdscriptegrator/libraries/jquery/js/ui/ui.progressbar.js</filename>
+		<filename>cdscriptegrator/libraries/jquery/js/ui/ui.resizable.js</filename>
+		<filename>cdscriptegrator/libraries/jquery/js/ui/ui.selectable.js</filename>
+		<filename>cdscriptegrator/libraries/jquery/js/ui/ui.slider.js</filename>
+		<filename>cdscriptegrator/libraries/jquery/js/ui/ui.sortable.js</filename>
+		<filename>cdscriptegrator/libraries/jquery/js/ui/ui.tabs.js</filename>
+		<filename>cdscriptegrator/libraries/jquery/js/jquery-latest.packed.js</filename>
+		<filename>cdscriptegrator/libraries/jquery/js/jquery-noconflict.js</filename>
+		<filename>cdscriptegrator/libraries/jquery/js/index.html</filename>
+		<filename>cdscriptegrator/libraries/jquery/js/jsloader.php</filename>
+		<filename>cdscriptegrator/libraries/jquery/theme/blitzer/images/index.html</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/blitzer/images/ui-bg_diagonals-thick_55_eee7e7_40x40.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/blitzer/images/ui-bg_dots-small_65_a6a6a6_2x2.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/blitzer/images/ui-bg_flat_0_333333_40x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/blitzer/images/ui-bg_flat_65_ffffff_40x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/blitzer/images/ui-bg_flat_75_ffffff_40x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/blitzer/images/ui-bg_glass_55_fbf8ee_1x400.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/blitzer/images/ui-bg_highlight-hard_100_eeeeee_1x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/blitzer/images/ui-bg_highlight-hard_100_f6f6f6_1x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/blitzer/images/ui-bg_highlight-soft_15_cc0000_1x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/blitzer/images/ui-icons_004276_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/blitzer/images/ui-icons_cc0000_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/blitzer/images/ui-icons_ffffff_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/blitzer/cssloader.php</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/blitzer/index.html</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/blitzer/ui.accordion.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/blitzer/ui.all.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/blitzer/ui.base.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/blitzer/ui.core.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/blitzer/ui.datepicker.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/blitzer/ui.dialog.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/blitzer/ui.progressbar.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/blitzer/ui.resizable.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/blitzer/ui.slider.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/blitzer/ui.tabs.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/blitzer/ui.theme.css</filename>
+		<filename>cdscriptegrator/libraries/jquery/theme/ui-darkness/images/index.html</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-darkness/images/ui-bg_flat_30_cccccc_40x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-darkness/images/ui-bg_flat_50_5c5c5c_40x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-darkness/images/ui-bg_glass_20_555555_1x400.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-darkness/images/ui-bg_glass_40_0078a3_1x400.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-darkness/images/ui-bg_glass_40_ffc73d_1x400.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-darkness/images/ui-bg_gloss-wave_25_333333_500x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-darkness/images/ui-bg_highlight-soft_80_eeeeee_1x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-darkness/images/ui-bg_inset-soft_25_000000_1x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-darkness/images/ui-bg_inset-soft_30_f58400_1x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-darkness/images/ui-icons_222222_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-darkness/images/ui-icons_4b8e0b_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-darkness/images/ui-icons_a83300_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-darkness/images/ui-icons_cccccc_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-darkness/images/ui-icons_ffffff_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-darkness/cssloader.php</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-darkness/index.html</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-darkness/ui.accordion.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-darkness/ui.all.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-darkness/ui.base.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-darkness/ui.core.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-darkness/ui.datepicker.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-darkness/ui.dialog.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-darkness/ui.progressbar.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-darkness/ui.resizable.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-darkness/ui.slider.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-darkness/ui.tabs.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-darkness/ui.theme.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/humanity/images/index.html</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/humanity/images/ui-bg_flat_75_aaaaaa_40x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/humanity/images/ui-bg_glass_25_cb842e_1x400.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/humanity/images/ui-bg_glass_70_ede4d4_1x400.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/humanity/images/ui-bg_glass_100_f5f0e5_1x400.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/humanity/images/ui-bg_highlight-hard_65_fee4bd_1x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/humanity/images/ui-bg_highlight-hard_75_f5f5b5_1x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/humanity/images/ui-bg_highlight-hard_100_f4f0ec_1x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/humanity/images/ui-bg_inset-soft_100_f4f0ec_1x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/humanity/images/ui-icons_c47a23_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/humanity/images/ui-icons_cb672b_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/humanity/images/ui-icons_f35f07_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/humanity/images/ui-icons_f08000_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/humanity/images/ui-icons_ff7519_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/humanity/images/ui-icons_ffffff_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/humanity/cssloader.php</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/humanity/index.html</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/humanity/ui.accordion.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/humanity/ui.all.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/humanity/ui.base.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/humanity/ui.core.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/humanity/ui.datepicker.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/humanity/ui.dialog.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/humanity/ui.progressbar.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/humanity/ui.resizable.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/humanity/ui.slider.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/humanity/ui.tabs.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/humanity/ui.theme.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-lightness/images/ui-bg_diagonals-thick_18_b81900_40x40.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-lightness/images/ui-bg_diagonals-thick_20_666666_40x40.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-lightness/images/ui-bg_flat_10_000000_40x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-lightness/images/ui-bg_glass_100_f6f6f6_1x400.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-lightness/images/ui-bg_glass_100_fdf5ce_1x400.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-lightness/images/ui-bg_glass_65_ffffff_1x400.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-lightness/images/ui-bg_gloss-wave_35_f6a828_500x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-lightness/images/ui-bg_highlight-soft_100_eeeeee_1x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-lightness/images/ui-bg_highlight-soft_75_ffe45c_1x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-lightness/images/ui-icons_222222_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-lightness/images/ui-icons_228ef1_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-lightness/images/ui-icons_ef8c08_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-lightness/images/ui-icons_ffd27a_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-lightness/images/ui-icons_ffffff_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-lightness/images/index.html</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-lightness/cssloader.php</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-lightness/index.html</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-lightness/ui.accordion.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-lightness/ui.all.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-lightness/ui.base.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-lightness/ui.core.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-lightness/ui.datepicker.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-lightness/ui.dialog.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-lightness/ui.progressbar.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-lightness/ui.resizable.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-lightness/ui.slider.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-lightness/ui.tabs.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/ui-lightness/ui.theme.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/redmond/images/index.html</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/redmond/images/ui-bg_flat_0_aaaaaa_40x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/redmond/images/ui-bg_flat_55_fbec88_40x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/redmond/images/ui-bg_glass_75_d0e5f5_1x400.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/redmond/images/ui-bg_glass_85_dfeffc_1x400.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/redmond/images/ui-bg_glass_95_fef1ec_1x400.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/redmond/images/ui-bg_gloss-wave_55_5c9ccc_500x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/redmond/images/ui-bg_inset-hard_100_f5f8f9_1x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/redmond/images/ui-bg_inset-hard_100_fcfdfd_1x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/redmond/images/ui-icons_217bc0_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/redmond/images/ui-icons_2e83ff_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/redmond/images/ui-icons_469bdd_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/redmond/images/ui-icons_6da8d5_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/redmond/images/ui-icons_cd0a0a_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/redmond/images/ui-icons_d8e7f3_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/redmond/images/ui-icons_f9bd01_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/redmond/cssloader.php</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/redmond/index.html</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/redmond/ui.accordion.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/redmond/ui.all.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/redmond/ui.base.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/redmond/ui.core.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/redmond/ui.datepicker.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/redmond/ui.dialog.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/redmond/ui.progressbar.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/redmond/ui.resizable.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/redmond/ui.slider.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/redmond/ui.tabs.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/redmond/ui.theme.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/smoothness/images/index.html</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/smoothness/images/ui-bg_flat_0_aaaaaa_40x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/smoothness/images/ui-bg_flat_75_ffffff_40x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/smoothness/images/ui-bg_glass_55_fbf9ee_1x400.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/smoothness/images/ui-bg_glass_65_ffffff_1x400.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/smoothness/images/ui-bg_glass_75_dadada_1x400.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/smoothness/images/ui-bg_glass_75_e6e6e6_1x400.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/smoothness/images/ui-bg_glass_95_fef1ec_1x400.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/smoothness/images/ui-bg_highlight-soft_75_cccccc_1x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/smoothness/images/ui-icons_222222_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/smoothness/images/ui-icons_2e83ff_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/smoothness/images/ui-icons_454545_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/smoothness/images/ui-icons_888888_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/smoothness/images/ui-icons_cd0a0a_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/smoothness/cssloader.php</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/smoothness/index.html</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/smoothness/ui.accordion.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/smoothness/ui.all.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/smoothness/ui.base.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/smoothness/ui.core.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/smoothness/ui.datepicker.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/smoothness/ui.dialog.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/smoothness/ui.progressbar.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/smoothness/ui.resizable.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/smoothness/ui.slider.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/smoothness/ui.tabs.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/smoothness/ui.theme.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/south-street/images/index.html</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/south-street/images/ui-bg_diagonals-small_100_f0efea_40x40.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/south-street/images/ui-bg_flat_35_f0f0f0_40x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/south-street/images/ui-bg_glass_55_fcf0ba_1x400.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/south-street/images/ui-bg_glow-ball_25_2e2e28_600x600.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/south-street/images/ui-bg_highlight-soft_100_f0efea_1x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/south-street/images/ui-bg_highlight-soft_25_327E04_1x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/south-street/images/ui-bg_highlight-soft_25_5A9D1A_1x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/south-street/images/ui-bg_highlight-soft_95_ffedad_1x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/south-street/images/ui-bg_inset-soft_22_3b3b35_1x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/south-street/images/ui-icons_808080_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/south-street/images/ui-icons_8DC262_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/south-street/images/ui-icons_cd0a0a_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/south-street/images/ui-icons_e7e6e4_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/south-street/images/ui-icons_eeeeee_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/south-street/images/ui-icons_ffffff_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/south-street/cssloader.php</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/south-street/index.html</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/south-street/ui.accordion.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/south-street/ui.all.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/south-street/ui.base.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/south-street/ui.core.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/south-street/ui.datepicker.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/south-street/ui.dialog.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/south-street/ui.progressbar.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/south-street/ui.resizable.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/south-street/ui.slider.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/south-street/ui.tabs.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/south-street/ui.theme.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/vader/images/index.html</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/vader/images/ui-bg_flat_0_aaaaaa_40x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/vader/images/ui-bg_glass_95_fef1ec_1x400.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/vader/images/ui-bg_gloss-wave_16_121212_500x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/vader/images/ui-bg_highlight-hard_15_888888_1x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/vader/images/ui-bg_highlight-hard_55_555555_1x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/vader/images/ui-bg_highlight-soft_35_adadad_1x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/vader/images/ui-bg_highlight-soft_60_dddddd_1x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/vader/images/ui-bg_inset-soft_15_121212_1x100.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/vader/images/ui-icons_666666_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/vader/images/ui-icons_aaaaaa_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/vader/images/ui-icons_bbbbbb_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/vader/images/ui-icons_c98000_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/vader/images/ui-icons_cccccc_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/vader/images/ui-icons_cd0a0a_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/vader/images/ui-icons_f29a00_256x240.png</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/vader/cssloader.php</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/vader/index.html</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/vader/ui.accordion.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/vader/ui.all.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/vader/ui.base.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/vader/ui.core.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/vader/ui.datepicker.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/vader/ui.dialog.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/vader/ui.progressbar.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/vader/ui.resizable.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/vader/ui.slider.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/vader/ui.tabs.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/vader/ui.theme.css</filename>
+    <filename>cdscriptegrator/libraries/jquery/theme/index.html</filename>
+		<filename>cdscriptegrator/libraries/jquery/class.php</filename>
+		<filename>cdscriptegrator/libraries/jquery/index.html</filename>
+		<filename>cdscriptegrator/libraries/index.html</filename>
+		<filename>cdscriptegrator/utils/php/elements/helplink.php</filename>
+		<filename>cdscriptegrator/utils/php/elements/index.html</filename>
+		<filename>cdscriptegrator/utils/php/framework.php</filename>
+		<filename>cdscriptegrator/utils/php/index.html</filename>
+		<filename>cdscriptegrator/utils/index.html</filename>
+		<filename>cdscriptegrator/index.html</filename>
+		<filename>cdscriptegrator/license-gpl.txt</filename>
+	</files>
+	<languages>
+    <language tag="en-GB">en-GB.plg_system_cdscriptegrator.ini</language>
+	</languages>
+	<params addpath="/plugins/system/cdscriptegrator/utils/php/elements">
+	<param name="@helplink" type="helplink" label="LABEL_HELP" help_text="HELP_TEXT" help_title="HELP_TITLE" help_title_link="HELP_TITLE_LINK" url="http://www.greatjoomla.com" />
+	<param name="@spacer" type="spacer" default="" label="" description="" />
+	<param name="@spacer" type="spacer" default="jQuery JS" label="" description="" />
+	<param name="jquery" type="list" default="0" label="LABEL_JQUERY" description="DESC_JQUERY">
+  		<option value="0">PARAM_JQUERY_NOWHERE</option>
+  		<option value="1">PARAM_JQUERY_SITE</option>
+  		<option value="2">PARAM_JQUERY_ADMIN</option>
+  		<option value="3">PARAM_JQUERY_BOTH</option>
+  	</param>
+	<param name="jquery_compressed" type="list" default="1" label="LABEL_JQUERY_COMPRESSED" description="DESC_JQUERY_COMPRESSED">
+  		<option value="0">PARAM_JQUERY_COMPRESSED_NO</option>
+  		<option value="1">PARAM_JQUERY_COMPRESSED_YES</option>
+  </param>
+	<param name="@spacer" type="spacer" default="Highslide JS" label="" description="" />
+	<param name="highslide" type="list" default="0" label="LABEL_HIGHSLIDE" description="DESC_HIGHSLIDE">
+  		<option value="0">PARAM_HIGHSLIDE_NOWHERE</option>
+  		<option value="1">PARAM_HIGHSLIDE_SITE</option>
+  		<option value="2">PARAM_HIGHSLIDE_ADMIN</option>
+  		<option value="3">PARAM_HIGHSLIDE_BOTH</option>
+  	</param>
+	<param name="highslide_compressed" type="list" default="1" label="LABEL_HIGHSLIDE_COMPRESSED" description="DESC_HIGHSLIDE_COMPRESSED">
+  <option value="0">PARAM_HIGHSLIDE_COMPRESSED_NO</option>
+  <option value="1">PARAM_HIGHSLIDE_COMPRESSED_YES</option>
+  </param>
+  <param name="outlineType" type="list" default="rounded-white" label="LABEL_OUTLINE_TYPE" description="DESC_OUTLINE_TYPE">
+  	<option value="rounded-white">PARAM_OUTLINE_TYPE_ROUNDEDWHITE</option>
+  	<option value="rounded-black">PARAM_OUTLINE_TYPE_ROUNDEDBLACK</option>
+  	<option value="glossy-dark">PARAM_OUTLINE_TYPE_GLOSSYDARK</option>
+  	<option value="beveled">PARAM_OUTLINE_TYPE_BEVELED</option>
+  	<option value="drop-shadow">PARAM_OUTLINE_TYPE_DROPSHADOW</option>
+  	<option value="outer-glow">PARAM_OUTLINE_TYPE_OUTERGLOW</option>
+  </param>
+  <param name="outlineWhileAnimating" type="list" default="1" label="LABEL_OUTLINE_WHILE_ANIMATING" description="DESC_OUTLINE_WHILE_ANIMATING">
+  <option value="1">PARAM_OUTLINE_WHILE_ANIMATING_YES</option>
+  <option value="0">PARAM_OUTLINE_WHILE_ANIMATING_NO</option>
+  </param>
+  <param name="showCredits" type="list" default="1" label="LABEL_SHOW_CREDITS" description="DESC_SHOW_CREDITS">
+  <option value="0">PARAM_SHOW_CREDITS_NO</option>
+  <option value="1">PARAM_SHOW_CREDITS_YES</option>
+  </param>
+  <param name="expandDuration" type="text" default="250" label="LABEL_EXPAND_DURATION" description="DESC_EXPAND_DURATION" />
+  <param name="anchor" type="list" default="auto" label="LABEL_ANCHOR" description="DESC_ANCHOR">
+  	<option value="auto">PARAM_ANCHOR_AUTO</option>
+  	<option value="top">PARAM_ANCHOR_TOP</option>
+  	<option value="top-right">PARAM_ANCHOR_TOPRIGHT</option>
+  	<option value="right">PARAM_ANCHOR_RIGHT</option>
+  	<option value="bottom-right">PARAM_ANCHOR_BOTTOMRIGHT</option>
+  	<option value="bottom">PARAM_ANCHOR_BOTTOM</option>
+  	<option value="bottom-left">PARAM_ANCHOR_BOTTOMLEFT</option>
+  	<option value="left">PARAM_ANCHOR_LEFT</option>
+  	<option value="top-left">PARAM_ANCHOR_TOPLEFT</option>
+  </param>
+  <param name="align" type="list" default="auto" label="LABEL_ALIGN" description="DESC_ALIGN">
+  	<option value="auto">PARAM_ALIGN_AUTO</option>
+  	<option value="center">PARAM_ALIGN_CENTER</option>
+  </param>
+  <param name="transitions" type="list" default="auto" label="LABEL_TRANSITION" description="DESC_TRANSITION">
+  	<option value="expand">PARAM_TRANSITION_EXPAND</option>
+  	<option value="fade">PARAM_TRANSITION_FADE</option>
+  	<option value="expand+fade">PARAM_TRANSITION_EXPANDFADE</option>
+  	<option value="fade+expand">PARAM_TRANSITION_FADEEXPAND</option>
+  </param>
+  <param name="dimmingOpacity" type="text" default="0" label="LABEL_DIMMING_OPACITY" description="DESC_DIMMING_OPACITY" />
+  </params>
+</install>

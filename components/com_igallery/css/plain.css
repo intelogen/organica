@@ -1,0 +1,8 @@
+	/*make the first thumb as far left as possible, as we have no borders*/
+	table.main_thumb_table td:first-child div.thumbs_div img{
+	padding-left: 0px;
+	}
+
+	table.lbox_thumb_table td:first-child div.thumbs_div img{
+	padding-left: 0px;
+	}

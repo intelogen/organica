@@ -1,0 +1,104 @@
+Expose Scroller Mambot Update log.
+
+27/09/2008 ************************ V 0.0.1
+- First version. No Updates.
+
+27/09/2008 ************************ V 0.0.2
+- Updated the inclusion tag, now support for per-instance mambot width and speed. 
+	New syntax:		{expose}GalleryID,Width,Speed{/expose} 
+	example:		{expose}6,600px,25{/expose}
+
+Please note, the following updates refer to the module "Expose Scroller" on which the hack mambot is created.
+
+Expose Scroller Update Log
+
+04/05/2008 ************************ RELEASE 3.0 BETA3
+- Fixed PHP4 issues
+- Fixed AlbumId selection
+
+19/04/2008 ************************ RELEASE 3.0 BETA2
+- Changed vars usage to make scroller usable on php4
+- Added translationfunctionality on errormessages
+- Added few missing index.html pages
+
+12/04/2008 ************************ RELEASE 3.0 BETA
+- Added scroll speed setting
+- Changed Lytebox to Shadowbox
+- Removed showpicture.html page + images
+- Added translation files for J!1.5.x
+- Rewritten xml reading proc
+
+17/02/2008 ************************ 2v0v1 Beta
+- Installation xml typo in description fixed (changed & by &amp;) and cleanup
+- Removed double 'type=' in javascript calls
+- added changelog.txt to package
+- Added Linked Image: Lytebox feature (now also when using the scroller in Thumbnailpath mode), script by Markus F. Hay http://www.dolem.com/lytebox/
+- Same package installable on Joomla 1.0.x and 1.5.x
+
+15/10/2007 ************************ RELEASE ALPHA 2v0
+- <Marquee> -tag replaced by scroller javascript by Vic Phillips http://www.vicsjavascripts.org.uk
+- Split of xml and folder functions into separated files
+- Removed '&' in exposescroller.xml causing XML error in param description (fix by Bedo)
+
+10/10/2007 ************************ RELEASE BETA 1v0
+- fixed php notice on foreach() when albums.xml not found
+- cleanup code
+
+17/06/2007 ************************ RELEASE ALPHA 0v99c
+- Width and height can now be set to % and fixed px (changed default width to 100% in xml)
+- Marking of module in html page
+
+10/06/2007 ************************ RELEASE ALPHA 0v99b
+- Typo fixed
+- Scrolling pics from folders caused many warnings of undefigned variables
+
+06/07/2007 ************************ RELEASE ALPHA 0v99
+- Display notice when albumID doesn't exist (instead of error-message)
+- Added missing string declarations
+- Rewrite html code generator
+- XML validation errors fixed
+    &amp; instead of & fixed in links to Expose component
+    added img closetag / in picture links
+    fixed CSS/type defenition style <!-- -->
+    only <marquee> tag isn't validated yet
+
+12/05/2007 ************************ RELEASE ALPHA 0v98
+- Bug: when using Albumid, an error occured (aravot)
+
+06/05/2007 ************************ 0v97
+- Bug: Itemid search fixed (aravot)
+- Links and version text changed
+
+05/05/2007 ************************ RELEASE ALPHA 0v96
+- Bug relative links of array
+- Bug load dirs: Path needs also trailing slash (aravot)
+- ->Node->getText removed
+- Removed relative vars in sortingfunc
+- Bug recursive path: add slash between directories
+- Bug arrayconstruction in subdirs
+
+30/04/2007 ************************ RELEASE ALPHA 0v95
+- Bug counting collections and album items
+- Bug retrieving video thumbs (other tagnames are used in the xml)
+- Bug opening xml files
+
+11/04/2007 ************************ 0v95
+- Changed XML descriptiontext
+- Added read XML album files
+- Cleanup code
+- Added Latest picture feature
+- testserver: ok
+- online exposeserver: nok, no error :-(
+
+31/02/2007 ************************ 0v93
+- Reading XML files into array
+
+22/03/2007 ************************ 0v92
+- New function: No scrolling horizontal & No scrolling vertical
+
+20/03/2007 ************************
+- Added !If(functionexists) to functions for allow more than one instance of the scroller on a page
+
+17/03/2007 ************************ 0v91
+- Changed Dirlisting from *_sm to *_sm* (small pic naming with windows manager)
+- New recursive search for subdirectories

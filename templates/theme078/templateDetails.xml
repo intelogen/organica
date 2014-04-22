@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install PUBLIC "-//Joomla! 1.5//DTD template 1.0//EN" "http://dev.joomla.org/xml/1.5/template-install.dtd">
+<install version="1.5" type="template">
+	<name>theme078</name>
+	<creationDate>06 March 2008</creationDate>
+	<author>Elfin</author>
+	<authorEmail>info@template-help.com</authorEmail>
+	<authorUrl>http://www.template-help.com</authorUrl>
+	<copyright>Copyright  2003-2007 template-help.com. All Rights Reserved.</copyright>
+	<license>GNU/GPL</license>
+	<version>1.0.0</version>
+	<description>this template for Joomla 1.5 is made by template-help.com</description>
+	<files>
+		<filename>images/bottom.gif</filename>
+		<filename>images/box2_bot.gif</filename>
+		<filename>images/box2_top.gif</filename>
+		<filename>images/box_bot.gif</filename>
+		<filename>images/box_h3_bg.jpg</filename>
+		<filename>images/box_top.gif</filename>
+		<filename>images/breadcrumb_bg.gif</filename>
+		<filename>images/breadcrumb_left.gif</filename>
+		<filename>images/breadcrumb_right.gif</filename>
+		<filename>images/bullet.gif</filename>
+		<filename>images/button.gif</filename>
+		<filename>images/c_b.gif</filename>
+		<filename>images/c_bl.gif</filename>
+		<filename>images/c_br.gif</filename>
+		<filename>images/c_l.gif</filename>
+		<filename>images/c_r.gif</filename>
+		<filename>images/c_t.gif</filename>
+		<filename>images/c_tl.gif</filename>
+		<filename>images/c_tr.gif</filename>
+		<filename>images/createdate.jpg</filename>
+		<filename>images/header_bg.jpg</filename>
+		<filename>images/loginform_button.gif</filename>
+		<filename>images/loginform_h3_bg.gif</filename>
+		<filename>images/loginform_input.gif</filename>
+		<filename>images/logo.jpg</filename>
+		<filename>images/mainmenu_bg.gif</filename>
+		<filename>images/mainmenu_bottom.gif</filename>
+		<filename>images/mainmenu_h3_bg.jpg</filename>
+		<filename>images/mainmenu_item.gif</filename>
+		<filename>images/mainmenu_top.gif</filename>
+		<filename>images/poll_h3_bg.jpg</filename>
+		<filename>images/popular_h3_bg.gif</filename>
+		<filename>images/search_bg.gif</filename>
+		<filename>images/tail.jpg</filename>
+		<filename>images/title_bg.gif</filename>
+		<filename>images/topmenu_bg.gif</filename>
+		<filename>images/topmenu_left.gif</filename>
+		<filename>images/topmenu_right.gif</filename>
+		<filename>images/vote.gif</filename>
+		<filename>images/whosonline_h3_bg.gif</filename>
+		<filename>images/writeen.jpg</filename>
+		<filename>css/template.css</filename>
+		<filename>params.ini</filename>
+		<filename>favicon.ico</filename>
+		<filename>index.php</filename>
+		<filename>template_thumbnail.png</filename>		
+		<filename>html/modules.php</filename>
+		<filename>html/com_content/category/default_items.php</filename>
+		<filename>html/com_content/frontpage/default_item.php</filename>
+		<filename>html/com_content/frontpage/default.php</filename>
+		<filename>html/com_content/section/blog_item.php</filename>
+		<filename>html/mod_login/default.php</filename>
+		<filename>html/mod_mainmenu/default.php</filename>
+	</files>
+	<positions>
+		<position>left</position>
+		<position>right</position>
+		<position>top</position>
+		<position>breadcrumb</position>
+		<position>user1</position>
+		<position>user2</position>
+		<position>user3</position>
+		<position>user4</position>
+		<position>user5</position>
+		<position>user6</position>
+		<position>user7</position>
+		<position>debug</position>
+		<position>syndicate</position>
+	</positions>
+	<params>
+	</params>
+</install>

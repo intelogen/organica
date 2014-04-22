@@ -1,0 +1,179 @@
+<?xml version="1.0" ?>
+<mosinstall type="module">
+	<name>Expose Prive Thumbnail Scroller</name>
+	<creationDate>04/05/2008</creationDate>
+	<author>Bruno Marchant</author>
+	<copyright>This module is released under the GNU/ GPL license</copyright>
+	<authorEmail>bruno@gotgtek.net</authorEmail>
+	<authorUrl>www.gotgtek.net</authorUrl>
+	<version>3.0 Beta3</version>
+
+	<description><![CDATA[
+<style type="text/css" media="all">
+<!--
+.extension_container {padding:0px 0px 4px 0px;}
+ul {margin:4px 8px;}
+ul li {margin:2px 8px 2px 0px;padding:0px;}
+h1 {clear:both;margin:10px 0px 12px 0px;padding:0px 0px 1px 0px;color:#C64934;font-size:17px;border-bottom:1px dotted #505050;}
+.title {margin:4px 0px;font-size:12px;font-weight:bold;}
+.red {color:#C64934;}
+-->
+</style>
+<div class="extension_container">
+	<h1><a target="_blank" title="Check Gotgtek for more!" href="http://www.gotgtek.com">Expose Scroller - 3.0 beta3</a></h1>
+		The <b>Expose scroller</b> module for Joomla 1.0.x and 1.5.x, moves a specified quantity of Expose gallery photos from one or all albums in horizontal or vertical direction over your website.<br /><br />
+		You can check out a demo of the scroller can be found on our site <a target="_blank" href="http://www.gotgtek.net/">http://www.gotgtek.net/</a>
+	<h1>HOW TO USE ?</h1>
+		There are two ways to point the scroller to its pictures:
+			<ul>
+				<li>You can defign a thumbnailpath (directory located from Joomlaroot), even search for pictures in subdirectories.</li>
+				<li>Or if you have Expose RC3+ component installed (but we advise to update to the latest version), install this module and set the parameters below like you want. Don't forget to publish it! This will disable the search in subalbums, but enable the possibility to link to the picture.</li>
+			</ul>
+		Without changing anything on the default settings, the scroller will loop horizontal from right to the left with 10 random photos from your Expose gallery.
+	<h1>FEATURES</h1>
+		<ul>
+			<li>Use the Expose photos by defining its album-id (leave empty or use 0 to pick from all), or type the path to an other picture directory located from joomlaroot</li>
+			<li>You can define your own seperate CSS styling included inside the module's code.</li>
+			<li>Have <b>multiple instances</b> of the module running on the same page!</li>
+			<li>One module can scroll in horizontal or vertical direction, or even stay fixed at position.</li>
+			<li>Pause the scrollig on mouse-over.</li>
+			<li>Link the photos to the Expose component collecion, album, picture or slideshow.</li>
+			<li>NEW Link pictures to popup window by ShadowBox (Expose and thumbnailpath pictures).</li>
+			<li>Random or newest image pick.</li>
+			<li>Random photo-pick checked to prevent a picture showing twice.</li>
+			<li>Photo descriptions are shown as tooltip (IE only).</li>
+			<li>NEW Uses (DOM)XML lib (module must be installed on webserver).</li>
+		</ul>
+	<h1>FOR INFO, UPDATES, REQUESTS &amp; CONTACT</h1>
+		There are multiple locations to find something about Expose. The project is registered at <a target="_blank" title="JoomlaCode" href="http://joomlacode.org/gf/project/expose/">JoomlaCode.org</a>, where you can download the latest updates. The official website with latest news and demo of this Joomla extension, can be found at <a target="_blank" title="Gotgtek" href="http://www.gotgtek.net">GTEK</a>.<br />
+		For problemsolving, first try to read the manual of Expose (at JoomlaCode), or search our <a target="_blank" title="Gotgtek" href="http://www.gotgtek.net/forum">forum</a>. If you're really desperate or want to post comments, requests or even discuss the extension, open a new topic on these pages.<br />
+		<br />
+		<div class="star">Please show your support by rating or commenting the Expose component at the official Joomla! Extensions website <a target="_blank" href="http://extensions.joomla.org/component/option,com_mtree/task,recommend/link_id,254/Itemid,35/">HERE</a>. <b>Thank you for your support!</b></div><br />
+			<strong style="color:#C64934;">This extension is released under the GNU/GPL license.</strong><br />
+			<br />
+			<i>(Last update: may 4th, 2008 - version 3.0 beta3)</i><br />
+			<br />
+		</div>]]>
+	</description>
+
+	<files>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller.php</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller.xml</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/changelog.txt</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/continiousscroll.js</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/domxml-php4-to-php5.php</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/index.html</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/folder.php</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/scrollinit.js</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/xml.php</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/en-GB/en-GB.mod_exposeprivescroller.ini</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/en-GB/index.html</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/images/blank.gif</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/images/close_blue.png</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/images/close_gold.png</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/images/close_green.png</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/images/close_grey.png</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/images/close_red.png</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/images/index.html</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/images/loading.gif</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/images/next_blue.gif</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/images/next_gold.gif</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/images/next_green.gif</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/images/next_grey.gif</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/images/next_red.gif</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/images/pause_blue.png</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/images/pause_gold.png</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/images/pause_green.png</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/images/pause_grey.png</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/images/pause_red.png</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/images/play_blue.png</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/images/play_gold.png</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/images/play_green.png</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/images/play_grey.png</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/images/play_red.png</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/images/prev_blue.gif</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/images/prev_gold.gif</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/images/prev_green.gif</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/images/prev_grey.gif</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/images/prev_red.gif</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/nl-NL/index.html</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/nl-NL/nl-NL.mod_exposeprivescroller.ini</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/shadowbox/index.html</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/shadowbox/build/index.html</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/shadowbox/build/css/index.html</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/shadowbox/build/css/shadowbox.css</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/shadowbox/build/css/shadowbox-light.css</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/shadowbox/build/js/index.html</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/shadowbox/build/js/shadowbox.js</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/shadowbox/build/js/adapter/index.html</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/shadowbox/build/js/adapter/shadowbox-dojo.js</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/shadowbox/build/js/adapter/shadowbox-ext.js</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/shadowbox/build/js/adapter/shadowbox-jquery.js</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/shadowbox/build/js/adapter/shadowbox-mootools.js</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/shadowbox/build/js/adapter/shadowbox-prototype.js</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/shadowbox/build/js/adapter/shadowbox-yui.js</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/shadowbox/build/js/lib/index.html</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/shadowbox/build/js/lib/yui-utilities.js</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/shadowbox/images/index.html</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/shadowbox/images/loading.gif</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/shadowbox/images/loading-light.gif</filename>
+		<filename module="mod_exposeprivescroller">mod_exposeprivescroller/shadowbox/images/overlay-85.png</filename>
+	</files>
+
+	<params>
+		<param name="ModuleId_sfx" type="text" default="expose_scroller2" label="Module Id Suffix" description="A unique suffix to be applied to the css class of the module (table.moduletable), this allows individual module styling" />
+		<param name="ImagePath" type="text" default="" label="AlbumId or ThumbnailPath" description="Set the albumid to show the thumbnails from; leave empty or use '0' to search in all albums, or type the relative folder path to a THUMBNAIL picture folder eg: images/stories" />
+		<param name="Subdirs" type="radio" default="1" label="Include Subfolders" description="Should there be searched for pictures in subdirectories (only if thumbnailpath entered above) ?">
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</param>
+		<param name="type" type="text" default="\.(jpg|gif|png)$" label="Image Search Type" description="Define the filename criteria as extra filter. It's advisable to use thumbnail pics. Use 'sm\.(jpg|gif|png)$' for Expose pics" />
+
+		<param name="@spacer" type="spacer" default="" label="" description="" />
+		<param name="Linking" type="list" default="album" label="Images linked" description="How should the pictures be linked to the Expose component on click (when using a Thumbnailpath, only Shadowbox is available) ?">
+			<option value="off">No linking</option>
+			<option value="collection">Collection</option>
+			<option value="album">Albumstrip</option>
+			<option value="photo">Photo</option>
+			<option value="slideshow">Run slideshow from photo</option>
+			<option value="slideshowfirst">Run slideshow from first</option>
+			<option value="shadowbox">Shadowbox single</option>
+			<option value="shadowboxnav">Shadowbox with navigation</option>
+		</param>
+		<param name="Pause" type="radio" default="1" label="Pause OnMouseOver?" description="Should the slideshow pause on MouseOver?">
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</param>
+
+		<param name="@spacer" type="spacer" default="" label="" description="" />
+		<param name="Width" type="text" size="20" default="100%" label="Scroll Width" description="Set the Width of the scroller area. On vertical scrolling, the pics are equally (X and Y) resized to the width setting. Use fixed size (eg 450px) or procentual (eg 100%) values."/>
+		<param name="Height" type="text" size="20" default="150px" label="Scroll Height" description="Set the Height of the scroller area. On horizontal scrolling, the pics are equally (X and Y) resized to the height setting. Use fixed size (eg 450px) or procentual (eg 100%) values."/>
+
+		<param name="@spacer" type="spacer" default="" label="" description=""/>	
+		<param name="PicsNum" type="text" size="20" default="10" label="Number of pics" description="Number of pictures to display. Use 0 to show ALL the pictures found in the album, but pageload can drasticly increase!"/>
+		<param name="PickMethod" type="list" default="random" label="Display Method" description="Sorting of the images on the strip">
+			<option value="filename">Filename</option>
+			<option value="random">Random</option>
+			<option value="latest">Latest</option>
+		</param>
+
+		<param name="@spacer" type="spacer" default="" label="" description=""/> 
+		<param name="Direction" type="list" default="left" label="Scroll Direction" description="Direction to scroll to.">
+			<option value="up">Up</option>
+			<option value="down">Down</option>
+			<option value="left">Left</option>
+			<option value="right">Right</option>
+			<option value="horizontal">No scrolling - Horizontal</option>
+			<option value="vertical">No scrolling - Vertical</option>
+		</param>
+		<param name="Speed" type="text" size="20" default="50" label="Scroll Speed" description="Adjust the scrolling speed (1 = fast, 500 = slow)."/>
+		<param name="Space" type="text" size="20" default="3px" label="Scroll Space" description="Amount of space between each image. Default is 3px."/>
+
+		<param name="@spacer" type="spacer" default="" label="" description=""/> 
+		<param name="UseCss" type="radio" default="1" label="Use CSS entered below?" description="Do you want the module to use the CSS entered below?">
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</param>
+		<param name="Css" type="textarea" rows="10" cols="20" default="a img{border:0;}" label="CSS" description="Edit CSS to be included in the script here. Note: don't use return, simply type everything on the same line."/>	
+	</params>
+</mosinstall>

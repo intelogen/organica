@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="CATEGORY LAYOUT">
+		<message>
+			<![CDATA[CATEGORY LAYOUT DESC]]>
+		</message>
+	</layout>
+	<state>
+		<name>CATEGORY LAYOUT</name>
+		<description>CATEGORY LAYOUT DESC</description>
+		<url addpath="/administrator/components/com_igallery/elements">
+			<param name="id" type="icategory" section="com_igallery" default="0" label="SELECT CATEGORY" description="" />
+		</url>
+	</state>
+</metadata>

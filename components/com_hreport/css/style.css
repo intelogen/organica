@@ -1,0 +1,130 @@
+.hreport_search_table {
+    width: 500px;
+}
+
+.hreport_search_table #hreport_disease {
+    width: 430px;
+}
+
+.hreport_search_table #hreport_symptom {
+    width: 430px;
+}
+
+.hreport_search_table #hreport_medtrack {
+    width: 430px;
+}
+
+.hreport_righttext {
+    text-align: right;
+    padding: 10px;
+}
+
+.plate {
+    padding: 10px;
+    margin: 10px;
+    background: #dedede;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.whiteplate {
+    width: 100%;
+    background: #FFF;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.plate h1 {
+    margin-top: 10px;
+}
+
+.plate p {
+    text-align: center;
+    margin: 10px;
+}
+
+.plate p img {
+    width: 150px;
+    height: 200px;
+}
+
+.photos {
+    width: 420px;
+    float: left;
+}
+/* TABS */
+#tabMenu {
+	border-bottom : 1px solid #ccc;
+	margin : 0;
+	padding-bottom : 23px;
+}
+#tabMenu ul, #tabMenu li	{
+	display : inline;
+	list-style-type : none;
+	margin : 0;
+	padding : 0;
+	float: right;
+}
+#tabMenu a:link, #tabMenu a:visited, button.inlineTab	{
+	background : #f5f4f4;
+	border : 1px solid #d5d4d4;
+	text-transform: uppercase;
+	color : #666;
+	float : left;
+	font-size : 9px;
+	font-weight : normal;
+	line-height : 14px;
+	margin-left : 4px;
+	padding : 4px;
+	text-decoration : none;
+	cursor: pointer;
+}
+button.inlineTab  {
+	border-bottom: 0px;
+}
+div.itemButtons button.inlineTab {
+	background: url(../images/remove.png) no-repeat;
+	border: 0px;
+	padding: 0px;
+	float: none;
+	width: 16px;
+	height: 16px;
+	float: right;
+	display: block;
+}
+div.itemButtons button.inlineTab span {
+	display: none;
+}
+div.itemButtons img {
+	float: right;
+	margin: 0 3px;
+}
+#tabMenu a:link.active, #tabMenu a:visited.active	{
+	background : #FFFFFF;
+	border-bottom : 1px solid #FFFFFF;
+	color : #000;
+}
+
+#tabMenu a:hover, input.inlineTab:hover	{
+	color : #000000;
+}
+ #tabMenu ul a:hover {
+	color : #000000 !important;
+}
+.tabContainer {
+	background: #FFFFFF;
+	border: 1px solid #d5d4d4;
+	border-top: none;
+	clear: both;
+	margin: 0px;
+	padding: 10px;
+	overflow: hidden;
+}
+
+img.bordered{
+   border:3px solid #0096D6;
+   width:200px;
+   height:250px;
+}

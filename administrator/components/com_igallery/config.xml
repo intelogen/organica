@@ -1,0 +1,746 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<params addpath="/administrator/components/com_igallery/elements">
+	
+		<!--General -->
+		<param name="@igalleryhead" type="igalleryhead" default="GENERAL" />
+		
+		<param name="allow_frontend_creation" type="list" default="0" label="ALLOW FRONTEND GALLERY CREATION" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="default_category" type="icategory" default="0" label="DEFAULT CATEGORY" description="" />
+		
+		<param name="frontend_edit_all" type="list" default="0" label="FRONTEND USERS EDIT ALL" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="register_link" type="list" default="joomla" label="REGISTER LINK" description="">
+			<option value="index.php?option=com_user&amp;task=register">JOOMLA</option>
+			<option value="index.php?option=com_comprofiler&amp;task=registers">COMMUNITY BUILDER</option>
+		</param>
+
+		<param name="max_upload_img" type="text" default="1500" label="MAX IMAGE UPLOAD" description="" size="10" />
+		
+		
+		<!-- new gallery default paramaters -->
+		<param name="@igalleryhead" type="igalleryhead" default="NEW GALLERY DEFAULT PARAMATERS MAIN" />
+		
+		<!--general tab -->
+		<param name="img_quality" type="text" default="80" label="IMAGE QUALITY" description="" size="10" />
+		
+		<param name="published" type="list" default="0" label="PUBLISHED" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<!--category tab-->
+		<param name="menu_max_width" type="text" default="200" label="MENU IMAGE MAXIMUM IMAGE WIDTH" description="" size="10" />
+		
+		<param name="menu_max_height" type="text" default="150" label="MENU IMAGE MAXIMUM IMAGE HEIGHT" description="" size="10" />
+		
+		<!-- main image tab -->
+		<param name="show_large_image" type="list" default="1" label="SHOW LARGE IMAGE" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="max_width" type="text" default="600" label="MAXIMUM IMAGE WIDTH" description="" size="10" />
+		
+		<param name="max_height" type="text" default="400" label="MAXIMUM IMAGE HEIGHT" description="" size="10" />
+		
+		<param name="img_container_width" type="text" default="0" label="IMG CONTAINER WIDTH ZERO EQUALS AUTO" description="" size="10" />
+		
+		<param name="img_container_height" type="text" default="0" label="IMG CONTAINER HEIGHT ZERO EQUALS AUTO" description="" size="10" />
+		
+		<param name="fade" type="list" default="1" label="FADE BETWEEN IMAGES" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="preload" type="list" default="1" label="PRELOAD LARGE IMAGES" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="magnify" type="list" default="1" label="SHOW ENLARGE GIF" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<!-- thumbnails tab -->
+		<param name="show_thumbs" type="list" default="1" label="SHOW THUMBNAILS" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="thumb_width" type="text" default="90" label="THUMBNAIL MAXIMUM WIDTH" description="" size="10" />
+		
+		<param name="thumb_height" type="text" default="90" label="THUMBNAIL MAXIMUM HEIGHT" description="" size="10" />
+		
+		<param name="crop_thumbs" type="list" default="1" label="CROP THUMBNAILS" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="thumb_position" type="list" default="below" label="THUMBNAIL POSITION" description="">
+			<option value="below">BELOW</option>
+			<option value="left">LEFT</option>
+			<option value="right">RIGHT</option>
+			<option value="above">ABOVE</option>
+		</param>
+		
+		<param name="thumb_container_width" type="text" default="200" label="THUMBNAIL CONTAINER WIDTH" description="" size="10" />
+		
+		<param name="thumb_container_height" type="text" default="0" label="THUMBNAIL CONTAINER HEIGHT" description="" size="10" />
+		
+		<param name="images_per_row" type="text" default="0" label="IMAGES PER ROW" description="" size="10" />
+		
+		<param name="thumb_scrollbar" type="list" default="0" label="SHOW THUMBNAIL SCROLLBAR" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="arrows_up_down" type="list" default="0" label="SHOW UP DOWN ARROWS" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		<param name="arrows_left_right" type="list" default="1" label="SHOW LEFT RIGHT ARROWS" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="scroll_speed" type="text" default=".07" label="MOUSEOVER SCROLLER SPEED" description="" size="10" />
+		
+		<param name="scroll_boundary" type="text" default="150" label="MOUSEOVER SCROLLER BOUNDARY" description="" size="10" />
+		
+		
+		<!-- other tab -->
+		<param name="show_cat_menu" type="list" default="0" label="SHOW CATEGORY MENU IN GALLERY" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="cat_menu_columns" type="text" default="2" label="CATEGORY MENU COLUMNS GALLERY PAGE" description="" size="10" />
+		
+		<param name="gallery_des_position" type="list" default="above" label="MENU DESCRIPTION POSITION" description="">
+			<option value="above">ABOVE</option>
+			<option value="below">BELOW</option>
+		</param>
+		
+		<param name="allow_comments" type="list" default="0" label="ALLOW COMMENTS" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_rating" type="list" default="0" label="ALLOW RATING" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="align" type="list" default="left" label="ALIGN" description="">
+			<option value="left">LEFT</option>
+			<option value="right">RIGHT</option>
+			<option value="center">CENTER</option>
+		</param>
+		
+		<param name="style" type="list" default="plain" label="STYLE" description="">
+			<option value="plain">PLAIN</option>
+			<option value="grey-border-shadow">GREY BORDER SHADOW</option>
+		</param>
+		
+		<param name="enable_slideshow" type="list" default="0" label="ENABLE SLIDESHOW" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="show_slideshow_controls" type="list" default="0" label="SHOW SLIDESHOW CONTROLS" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="slideshow_autostart" type="list" default="0" label="SLIDESHOW AUTOSTART" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="slideshow_pause" type="text" default="3000" label="SLIDESHOW PAUSE" description="" size="10" />
+		
+		<param name="show_descriptions" type="list" default="1" label="SHOW DESCRIPTIONS" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="photo_des_position" type="list" default="below" label="PHOTO DESCRIPTION POSITION" description="">
+			<option value="below">BELOW</option>
+			<option value="left">LEFT</option>
+			<option value="right">RIGHT</option>
+			<option value="above">ABOVE</option>
+		</param>
+		
+		<param name="photo_des_width" type="text" default="150" label="PHOTO DESCRIPTION WIDTH" description="" size="10" />
+		
+		<param name="photo_des_height" type="text" default="40" label="DESCRIPTION BOX HEIGHT" description="" size="10" />
+		
+		<!-- new gallery default paramaters -->
+		<param name="@igalleryhead" type="igalleryhead" default="NEW GALLERY DEFAULT PARAMATERS LIGHTBOX" />
+		
+		<!--lightbox tab -->
+		<param name="lightbox" type="list" default="1" label="LIGHTBOX EFFECT" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="lbox_max_width" type="text" default="900" label="LIGHTBOX MAXIMUM IMAGE WIDTH" description="" size="10" />
+		
+		<param name="lbox_max_height" type="text" default="600" label="LIGHTBOX MAXIMUM IMAGE HEIGHT" description="" size="10" />
+		
+		<param name="lbox_img_container_width" type="text" default="0" label="LIGHTBOX IMG CONTAINER WIDTH ZERO EQUALS AUTO" description="" size="10" />
+		
+		<param name="lbox_img_container_height" type="text" default="0" label="LIGHTBOX IMG CONTAINER HEIGHT ZERO EQUALS AUTO" description="" size="10" />
+		
+		<param name="lbox_fade" type="list" default="1" label="LIGHTBOX FADE BETWEEN IMAGES" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="lbox_preload" type="list" default="1" label="LIGHTBOX PRELOAD LARGE IMAGES" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		
+		<!-- lightbox thumbs tab -->
+		<param name="lbox_show_thumbs" type="list" default="1" label="LIGHTBOX SHOW THUMBNAILS" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="lbox_thumb_width" type="text" default="90" label="LIGHTBOX THUMBNAIL FORCED WIDTH" description="" size="10" />
+		
+		<param name="lbox_thumb_height" type="text" default="90" label="LIGHTBOX THUMBNAIL FORCED HEIGHT" description="" size="10" />
+
+		<param name="lbox_crop_thumbs" type="list" default="1" label="LIGHTBOX CROP THUMBNAILS" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="lbox_thumb_position" type="list" default="below" label="LIGHTBOX THUMBNAIL POSITION" description="">
+			<option value="below">BELOW</option>
+			<option value="left">LEFT</option>
+			<option value="right">RIGHT</option>
+			<option value="above">ABOVE</option>
+		</param>
+		
+		<param name="lbox_thumb_container_width" type="text" default="200" label="LIGHTBOX THUMBNAIL CONTAINER WIDTH" description="" size="10" />
+		
+		<param name="lbox_thumb_container_height" type="text" default="0" label="LIGHTBOX THUMBNAIL CONTAINER HEIGHT" description="" size="10" />
+		
+		<param name="lbox_images_per_row" type="text" default="0" label="LIGHTBOX IMAGES PER ROW" description="" size="10" />
+		
+		<param name="lbox_thumb_scrollbar" type="list" default="0" label="LIGHTBOX SHOW THUMBNAIL SCROLLBAR" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="lbox_arrows_up_down" type="list" default="0" label="LIGHTBOX SHOW UP DOWN ARROWS" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		<param name="lbox_arrows_left_right" type="list" default="1" label="LIGHTBOX SHOW LEFT RIGHT ARROWS" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="lbox_scroll_speed" type="text" default=".07" label="LIGHTBOX MOUSEOVER SCROLLER SPEED" description="" size="10" />
+		
+		<param name="lbox_scroll_boundary" type="text" default="200" label="LIGHTBOX MOUSEOVER SCROLLER BOUNDARY" description="" size="10" />
+		
+		
+		<!--lightbox other tab -->
+		<param name="lbox_allow_comments" type="list" default="0" label="LIGHTBOX ALLOW COMMENTS" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="lbox_allow_rating" type="list" default="0" label="LIGHTBOX ALLOW RATING" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="lbox_enable_slideshow" type="list" default="0" label="LIGHTBOX ENABLE SLIDESHOW" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="lbox_show_slideshow_controls" type="list" default="0" label="LIGHTBOX SHOW SLIDESHOW CONTROLS" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="lbox_slideshow_autostart" type="list" default="0" label="LIGHTBOX SLIDESHOW AUTOSTART" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="lbox_slideshow_pause" type="text" default="3000" label="LIGHTBOX SLIDESHOW PAUSE" description="" size="10" />
+		
+		<param name="lbox_show_descriptions" type="list" default="1" label="SHOW DESCRIPTIONS" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="lbox_photo_des_position" type="list" default="below" label="LIGHTBOX PHOTO DESCRIPTION POSITION" description="">
+			<option value="below">BELOW</option>
+			<option value="left">LEFT</option>
+			<option value="right">RIGHT</option>
+			<option value="above">ABOVE</option>
+		</param>
+		
+		<param name="lbox_photo_des_width" type="text" default="150" label="LIGHTBOX PHOTO DESCRIPTION WIDTH" description="" size="10" />
+		
+		<param name="lbox_photo_des_height" type="text" default="40" label="LIGHTBOX DESCRIPTION BOX HEIGHT" description="" size="10" />
+		
+		
+		<!-- params not on gallery menu -->
+		<param name="@igalleryhead" type="igalleryhead" default="OTHER DEFAULTS" />
+		
+		<param name="cat_max_width" type="text" default="200" label="NEW CATEGORY MAXIMUM IMAGE WIDTH" description="" size="10" />
+		
+		<param name="cat_max_height" type="text" default="150" label="NEW CATEGORY MAXIMUM IMAGE HEIGHT" description="" size="10" />
+		
+		<param name="cat_show_parent" type="list" default="0" label="NEW CATEGORY SHOW PARENT" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="cat_menu_columns" type="list" default="2" label="CATEGORY COLUMNS" description="">
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+			<option value="8">8</option>
+		</param>
+		
+		<param name="cat_published" type="list" default="0" label="NEW CATEGORY PUBLISHED" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="new_image_published" type="list" default="1" label="NEW IMAGE IS PUBLISHED" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="new_image_access" type="list" default="0" label="NEW IMAGE ACCESS" description="">
+			<option value="0">PUBLIC</option>
+			<option value="1">REGISTERED</option>
+			<option value="2">SPECIAL</option>
+		</param>
+		
+		<param name="target_blank" type="list" default="1" label="NEW WINDOW" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<!-- Allowed Options For Frontend Gallery Creation -->
+		<param name="@igalleryhead" type="igalleryhead" default="OPTIONS FOR FRONTEND GALLERY CRETION" />
+		
+		<!-- frontend allow - general tab -->
+		<param name="allow_alias" type="list" default="0" label="ALIAS" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_gallery_access" type="list" default="0" label="GALLERY ACCESS" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_img_quality" type="list" default="0" label="IMAGE QUALITY" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_published" type="list" default="1" label="PUBLISHED" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<!-- frontend allow - category tab -->
+		<param name="allow_category" type="list" default="0" label="CATEGORY" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_menu_max_width" type="list" default="0" label="MENU IMAGE MAXIMUM IMAGE WIDTH" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_menu_max_height" type="list" default="0" label="MENU IMAGE MAXIMUM IMAGE HEIGHT" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_menu_description" type="list" default="1" label="MENU DESCRIPTION" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_menu_access" type="list" default="0" label="MENU ACCESS" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<!-- frontend allow - main image tab -->
+		<param name="allow_show_large_image" type="list" default="0" label="SHOW LARGE IMAGE" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_max_width" type="list" default="0" label="MAXIMUM IMAGE WIDTH" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_max_height" type="list" default="0" label="MAXIMUM IMAGE HEIGHT" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_img_container_width" type="list" default="0" label="IMG CONTAINER WIDTH ZERO EQUALS AUTO" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_img_container_height" type="list" default="0" label="IMG CONTAINER HEIGHT ZERO EQUALS AUTO" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_fade" type="list" default="0" label="FADE BETWEEN IMAGES" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_preload" type="list" default="0" label="PRELOAD LARGE IMAGES" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_magnify" type="list" default="0" label="SHOW ENLARGE GIF" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<!-- frontend allow - thumbs image tab -->
+		<param name="allow_show_thumbs" type="list" default="0" label="SHOW THUMBNAILS" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_thumb_width" type="list" default="0" label="THUMBNAIL MAXIMUM WIDTH" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_thumb_height" type="list" default="0" label="THUMBNAIL MAXIMUM HEIGHT" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_crop_thumbs" type="list" default="0" label="CROP THUMBNAILS" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_thumb_position" type="list" default="0" label="THUMBNAIL POSITION" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_thumb_container_width" type="list" default="0" label="THUMBNAIL CONTAINER WIDTH" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+
+		<param name="allow_thumb_container_height" type="list" default="0" label="THUMBNAIL CONTAINER HEIGHT" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_images_per_row" type="list" default="0" label="IMAGES PER ROW" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_thumb_scrollbar" type="list" default="0" label="SHOW THUMBNAIL SCROLLBAR" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_arrows_up_down" type="list" default="0" label="SHOW UP DOWN ARROWS" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_arrows_left_right" type="list" default="0" label="SHOW LEFT RIGHT ARROWS" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_scroll_speed" type="list" default="0" label="MOUSEOVER SCROLLER SPEED" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_scroll_boundary" type="list" default="0" label="MOUSEOVER SCROLLER BOUNDARY" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<!-- frontend allow - other tab -->
+		
+		<param name="allow_show_cat_menu" type="list" default="0" label="SHOW CATEGORY MENU IN GALLERY" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_cat_menu_columns" type="list" default="0" label="CATEGORY MENU COLUMNS GALLERY PAGE" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+
+		<param name="allow_gallery_description" type="list" default="1" label="GALLERY DESCRIPTION" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_gallery_des_position" type="list" default="0" label="GALLERY DESCRIPTION POSITION" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_style" type="list" default="0" label="STYLE" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_allow_comments" type="list" default="0" label="ALLOW COMMENTS" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_allow_rating" type="list" default="0" label="ALLOW RATING" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_align" type="list" default="0" label="ALIGN" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_enable_slideshow" type="list" default="0" label="ENABLE SLIDESHOW" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_show_slideshow_controls" type="list" default="0" label="SHOW SLIDESHOW CONTROLS" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_slideshow_autostart" type="list" default="0" label="SLIDESHOW AUTOSTART" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_slideshow_pause" type="list" default="0" label="SLIDESHOW PAUSE" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+
+		<param name="allow_photo_des_position" type="list" default="0" label="PHOTO DESCRIPTION POSITION" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_des_position" type="list" default="0" label="DESCRIPTION POSITION" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_photo_des_width" type="list" default="0" label="PHOTO DESCRIPTION WIDTH" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+	
+		<param name="allow_photo_des_height" type="list" default="0" label="DESCRIPTION BOX HEIGHT" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+
+		
+		<!-- frontend allow - lightbox tab -->
+		<param name="allow_lightbox" type="list" default="0" label="LIGHTBOX EFFECT" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_lbox_max_width" type="list" default="0" label="LIGHTBOX MAXIMUM IMAGE WIDTH" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_lbox_max_height" type="list" default="0" label="LIGHTBOX MAXIMUM IMAGE HEIGHT" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_lbox_img_container_width" type="list" default="0" label="LIGHTBOX IMG CONTAINER WIDTH ZERO EQUALS AUTO" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_lbox_img_container_height" type="list" default="0" label="LIGHTBOX IMG CONTAINER HEIGHT ZERO EQUALS AUTO" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_lbox_fade" type="list" default="0" label="LIGHTBOX FADE BETWEEN IMAGES" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_lbox_preload" type="list" default="0" label="LIGHTBOX PRELOAD LARGE IMAGES" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<!-- frontend allow - lightbox thumbs tab -->
+		<param name="allow_lbox_show_thumbs" type="list" default="0" label="LIGHTBOX SHOW THUMBNAILS" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_lbox_thumb_width" type="list" default="0" label="LIGHTBOX THUMBNAIL FORCED WIDTH" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_lbox_thumb_height" type="list" default="0" label="LIGHTBOX THUMBNAIL FORCED HEIGHT" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_lbox_crop_thumbs" type="list" default="0" label="LIGHTBOX CROP THUMBNAILS" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_lbox_thumb_position" type="list" default="0" label="LIGHTBOX THUMBNAIL POSITION" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_lbox_thumb_container_width" type="list" default="0" label="LIGHTBOX THUMBNAIL CONTAINER WIDTH" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+
+		<param name="allow_lbox_thumb_container_height" type="list" default="0" label="LIGHTBOX THUMBNAIL CONTAINER HEIGHT" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_lbox_images_per_row" type="list" default="0" label="LIGHTBOX IMAGES PER ROW" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_lbox_thumb_scrollbar" type="list" default="0" label="LIGHTBOX SHOW THUMBNAIL SCROLLBAR" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_lbox_arrows_up_down" type="list" default="0" label="LIGHTBOX SHOW UP DOWN ARROWS" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_lbox_arrows_left_right" type="list" default="0" label="LIGHTBOX SHOW LEFT RIGHT ARROWS" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_lbox_scroll_speed" type="list" default="0" label="LIGHTBOX MOUSEOVER SCROLLER SPEED" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_lbox_scroll_boundary" type="list" default="0" label="LIGHTBOX MOUSEOVER SCROLLER BOUNDARY" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<!-- frontend allow - lightbox other tab -->
+		<param name="allow_lbox_allow_comments" type="list" default="0" label="LIGHTBOX ALLOW COMMENTS" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_lbox_allow_rating" type="list" default="0" label="LIGHTBOX ALLOW RATING" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_lbox_enable_slideshow" type="list" default="0" label="LIGHTBOX ENABLE SLIDESHOW" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_lbox_show_slideshow_controls" type="list" default="0" label="LIGHTBOX SHOW SLIDESHOW CONTROLS" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_lbox_slideshow_autostart" type="list" default="0" label="LIGHTBOX SLIDESHOW AUTOSTART" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_lbox_slideshow_pause" type="list" default="0" label="LIGHTBOX SLIDESHOW PAUSE" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_lbox_photo_des_position" type="list" default="0" label="LIGHTBOX PHOTO DESCRIPTION POSITION" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_lbox_des_position" type="list" default="0" label="LIGHTBOX DESCRIPTION POSITION" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+		<param name="allow_lbox_photo_des_width" type="list" default="0" label="LIGHTBOX PHOTO DESCRIPTION WIDTH" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+	
+		<param name="allow_lbox_photo_des_height" type="list" default="0" label="LIGHTBOX DESCRIPTION BOX HEIGHT" description="">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		
+	</params>
+</config>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="module" version="1.5.0">
+	<name>Carousel Banner J1.5</name>
+	<author>Rony Sandra Yofa Zebua - Andy Sikumbang</author>
+	<creationDate>March 2008</creationDate>
+	<copyright>2008, TemplatePlazza.com - Camp26.Com</copyright>
+	<license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
+	<authorEmail>ronysyz@gmail.com - sikumbang@gmail.com</authorEmail>
+	<authorUrl>www.camp26.com - www.templateplazza.com</authorUrl>
+	<version>1.0</version>
+	<description><![CDATA[Carousel Banner For Joomla 1.5 is work properly for Joomla 1.5 Natively. 
+	<br>This Module will rotate all Joomla banner with a carousel animation
+	<br><br>This Module based from Carousel Banner For Joomla 1.0 - Andy Sikumbang and Developted become to Carousel Banner For Joomla 1.5 by Rony Sandra Yofa Zebua (Support Of TemplatePlazza.Com and Member Of Camp26.Com)
+	<br>Please visit: <a href="http://www.camp26.com">www.camp26.com</a> and <a href="http://www.templateplazza.com">TemplatePlazza.Com</a>]]>
+	</description>
+	<files>
+	<filename module="mod_carousel_banner">mod_carousel_banner.php</filename>
+	<filename>carousel_banner/credits.txt</filename>
+	<filename>carousel_banner/jquery-1.1.2.pack.js</filename>
+	<filename>carousel_banner/jquery.jcarousel.css</filename>
+	<filename>carousel_banner/jquery.jcarousel.pack.js</filename>
+	<filename>carousel_banner/next-horizontal.png</filename>
+	<filename>carousel_banner/prev-horizontal.png</filename>
+	<filename>carousel_banner/skin.css</filename>
+	<filename>index.html</filename>
+    <filename>helper.php</filename>
+	<filename>legacy.php</filename>
+    <filename>tmpl/default.php</filename>
+    <filename>tmpl/index.html</filename>
+	</files>
+		<params>
+		<param name="moduleclass_sfx" type="text" default="" label="Module Class Suffix" description="A suffix to be applied to the css class of the module (table.moduletable), this allows individual module styling" />
+		<param name="banner_cids" type="text" default="" label="Banner client" description="Reference to banner client id. Enter separated by ','!" />
+		<param name="banner_limit" type="text" default="" label="Banner limit" description="Limits how many banners will be shown." />
+	</params>
+</install>

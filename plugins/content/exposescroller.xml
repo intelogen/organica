@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<mosinstall version="0.0.2" type="mambot" group="content">
+	<name>Expose Scroller</name>
+	<author>Joomla! Project</author>
+	<creationDate>September 2008</creationDate>
+	<copyright>(C) 2005 Open Source Matters. All rights reserved.</copyright>
+	<license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
+	<authorUrl>http://www.jamesguthrie.ch</authorUrl>
+	<version>0.0.2</version>
+	<description><![CDATA[This mambot provides the same functionality as the scrolling images mambot from the expose guys, as a mambot. <br />
+The syntax is {expose}GalleryId,GalleryWidth,Speed{/expose} where GalleryId is the ID of the gallery you want to use, GalleryWidth is the 
+width in pixels, and Speed is the speed. For speed, smaller is faster with 1 being the fastest<br />
+<br />
+Demonstration of the expose scroller mambot tag: {expose}6,600px,25{/expose}<br />
+<br />
+<b>note:</b> If you don't follow this rigorous structure, the mambot will not work. Anyone wanting to help with the regex 
+for this application is welcome to e-mail me to make it a little more flexible!<br />
+<br />
+This mambot was developed by <a href="http://www.jamesguthrie.ch">James Guthrie</a> for his useage <br />
+Please send feedback to scroller[at]jamesguthrie[dot]ch <br />
+<br />
+<b>Please note!</b> As this creation is a "hack" of the existing module for a specific purpose it is
+more than likely that you will have to mess around in the expose.php file to change parameters, or that large
+areas of how it is done are really dodgy. But it works for me!<br />
+If you'd like to suggest changes then send me an e-mail, I'd be more than willing to check it out.<br />
+<br />
+Also, I realise that there is the possibility to include paramers in the module settings in the backend but
+as I don't need that functionality it's not present. If you're reading this you can probably figure it out on
+your own, otherwise if you send me an e-mail I might be able to check it out.<br />
+<br />
+James.]]></description>
+	<files>
+		<filename mambot="exposescroller">exposescroller.php</filename>
+		<filename mambot="exposescroller">exposescroller.xml</filename>
+		<filename mambot="exposescroller">exposescroller/changelog.txt</filename>
+		<filename mambot="exposescroller">exposescroller/continiousscroll.js</filename>
+		<filename mambot="exposescroller">exposescroller/domxml-php4-to-php5.php</filename>
+		<filename mambot="exposescroller">exposescroller/index.html</filename>
+		<filename mambot="exposescroller">exposescroller/folder.php</filename>
+		<filename mambot="exposescroller">exposescroller/scrollinit.js</filename>
+		<filename mambot="exposescroller">exposescroller/xml.php</filename>
+		<filename mambot="exposescroller">exposescroller/en-GB/en-GB.exposescroller.ini</filename>
+		<filename mambot="exposescroller">exposescroller/en-GB/index.html</filename>
+		<filename mambot="exposescroller">exposescroller/images/blank.gif</filename>
+		<filename mambot="exposescroller">exposescroller/images/close_blue.png</filename>
+		<filename mambot="exposescroller">exposescroller/images/close_gold.png</filename>
+		<filename mambot="exposescroller">exposescroller/images/close_green.png</filename>
+		<filename mambot="exposescroller">exposescroller/images/close_grey.png</filename>
+		<filename mambot="exposescroller">exposescroller/images/close_red.png</filename>
+		<filename mambot="exposescroller">exposescroller/images/index.html</filename>
+		<filename mambot="exposescroller">exposescroller/images/loading.gif</filename>
+		<filename mambot="exposescroller">exposescroller/images/next_blue.gif</filename>
+		<filename mambot="exposescroller">exposescroller/images/next_gold.gif</filename>
+		<filename mambot="exposescroller">exposescroller/images/next_green.gif</filename>
+		<filename mambot="exposescroller">exposescroller/images/next_grey.gif</filename>
+		<filename mambot="exposescroller">exposescroller/images/next_red.gif</filename>
+		<filename mambot="exposescroller">exposescroller/images/pause_blue.png</filename>
+		<filename mambot="exposescroller">exposescroller/images/pause_gold.png</filename>
+		<filename mambot="exposescroller">exposescroller/images/pause_green.png</filename>
+		<filename mambot="exposescroller">exposescroller/images/pause_grey.png</filename>
+		<filename mambot="exposescroller">exposescroller/images/pause_red.png</filename>
+		<filename mambot="exposescroller">exposescroller/images/play_blue.png</filename>
+		<filename mambot="exposescroller">exposescroller/images/play_gold.png</filename>
+		<filename mambot="exposescroller">exposescroller/images/play_green.png</filename>
+		<filename mambot="exposescroller">exposescroller/images/play_grey.png</filename>
+		<filename mambot="exposescroller">exposescroller/images/play_red.png</filename>
+		<filename mambot="exposescroller">exposescroller/images/prev_blue.gif</filename>
+		<filename mambot="exposescroller">exposescroller/images/prev_gold.gif</filename>
+		<filename mambot="exposescroller">exposescroller/images/prev_green.gif</filename>
+		<filename mambot="exposescroller">exposescroller/images/prev_grey.gif</filename>
+		<filename mambot="exposescroller">exposescroller/images/prev_red.gif</filename>
+		<filename mambot="exposescroller">exposescroller/nl-NL/index.html</filename>
+		<filename mambot="exposescroller">exposescroller/nl-NL/nl-NL.exposescroller.ini</filename>
+		<filename mambot="exposescroller">exposescroller/shadowbox/index.html</filename>
+		<filename mambot="exposescroller">exposescroller/shadowbox/build/index.html</filename>
+		<filename mambot="exposescroller">exposescroller/shadowbox/build/css/index.html</filename>
+		<filename mambot="exposescroller">exposescroller/shadowbox/build/css/shadowbox.css</filename>
+		<filename mambot="exposescroller">exposescroller/shadowbox/build/css/shadowbox-light.css</filename>
+		<filename mambot="exposescroller">exposescroller/shadowbox/build/js/index.html</filename>
+		<filename mambot="exposescroller">exposescroller/shadowbox/build/js/shadowbox.js</filename>
+		<filename mambot="exposescroller">exposescroller/shadowbox/build/js/adapter/index.html</filename>
+		<filename mambot="exposescroller">exposescroller/shadowbox/build/js/adapter/shadowbox-dojo.js</filename>
+		<filename mambot="exposescroller">exposescroller/shadowbox/build/js/adapter/shadowbox-ext.js</filename>
+		<filename mambot="exposescroller">exposescroller/shadowbox/build/js/adapter/shadowbox-jquery.js</filename>
+		<filename mambot="exposescroller">exposescroller/shadowbox/build/js/adapter/shadowbox-mootools.js</filename>
+		<filename mambot="exposescroller">exposescroller/shadowbox/build/js/adapter/shadowbox-prototype.js</filename>
+		<filename mambot="exposescroller">exposescroller/shadowbox/build/js/adapter/shadowbox-yui.js</filename>
+		<filename mambot="exposescroller">exposescroller/shadowbox/build/js/lib/index.html</filename>
+		<filename mambot="exposescroller">exposescroller/shadowbox/build/js/lib/yui-utilities.js</filename>
+		<filename mambot="exposescroller">exposescroller/shadowbox/images/index.html</filename>
+		<filename mambot="exposescroller">exposescroller/shadowbox/images/loading.gif</filename>
+		<filename mambot="exposescroller">exposescroller/shadowbox/images/loading-light.gif</filename>
+		<filename mambot="exposescroller">exposescroller/shadowbox/images/overlay-85.png</filename>
+	</files>
+	<params/>
+</mosinstall>

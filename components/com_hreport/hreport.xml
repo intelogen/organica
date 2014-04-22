@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<install type='component' version='1.5.0'>
+	<name>HReport</name>
+	<creationDate>June 24, 2010</creationDate>
+	<author>Alex Barannikov</author>
+	<copyright>©2010 Seanetix company</copyright>
+	<version>0.2.1a</version>
+
+	<files>
+		<filename>hreport.php</filename>
+		<filename>hreport.xml</filename>
+		<filename>controller.php</filename>
+		<filename>index.html</filename>
+		<filename>controllers/index.html</filename>
+		<filename>images/index.html</filename>
+		<filename>js/index.html</filename>
+		<filename>models/index.html</filename>
+		<filename>views/index.html</filename>
+	</files>
+	
+	<administration>
+		<menu>Health Report</menu>
+		<files folder='admin'>
+			<filename>index.html</filename>
+			<filename>admin.hreport.php</filename>
+		</files>
+	</administration>
+</install>

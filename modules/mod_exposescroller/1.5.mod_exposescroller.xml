@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="module" version="1.5.0">
+	<name>Expose Thumbnail Scroller</name>
+	<creationDate>04/05/2008</creationDate>
+	<author>Bruno Marchant</author>
+	<copyright>This module is released under the GNU/ GPL license</copyright>
+	<authorEmail>bruno@gotgtek.net</authorEmail>
+	<authorUrl>www.gotgtek.net</authorUrl>
+	<version>3.0 Beta3</version>
+
+	<description>This module shows a scrolling bar of images</description>
+
+	<files>
+		<filename module="mod_exposescroller">1.5.mod_exposescroller.xml</filename>
+		<filename module="mod_exposescroller">mod_exposescroller.php</filename>
+		<filename module="mod_exposescroller">mod_exposescroller.xml</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/changelog.txt</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/continiousscroll.js</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/domxml-php4-to-php5.php</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/index.html</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/folder.php</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/scrollinit.js</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/xml.php</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/en-GB/en-GB.mod_exposescroller.ini</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/en-GB/index.html</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/images/blank.gif</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/images/close_blue.png</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/images/close_gold.png</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/images/close_green.png</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/images/close_grey.png</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/images/close_red.png</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/images/index.html</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/images/loading.gif</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/images/next_blue.gif</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/images/next_gold.gif</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/images/next_green.gif</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/images/next_grey.gif</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/images/next_red.gif</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/images/pause_blue.png</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/images/pause_gold.png</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/images/pause_green.png</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/images/pause_grey.png</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/images/pause_red.png</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/images/play_blue.png</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/images/play_gold.png</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/images/play_green.png</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/images/play_grey.png</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/images/play_red.png</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/images/prev_blue.gif</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/images/prev_gold.gif</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/images/prev_green.gif</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/images/prev_grey.gif</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/images/prev_red.gif</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/nl-NL/index.html</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/nl-NL/nl-NL.mod_exposescroller.ini</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/shadowbox/index.html</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/shadowbox/build/index.html</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/shadowbox/build/css/index.html</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/shadowbox/build/css/shadowbox.css</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/shadowbox/build/css/shadowbox-light.css</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/shadowbox/build/js/index.html</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/shadowbox/build/js/shadowbox.js</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/shadowbox/build/js/adapter/index.html</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/shadowbox/build/js/adapter/shadowbox-dojo.js</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/shadowbox/build/js/adapter/shadowbox-ext.js</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/shadowbox/build/js/adapter/shadowbox-jquery.js</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/shadowbox/build/js/adapter/shadowbox-mootools.js</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/shadowbox/build/js/adapter/shadowbox-prototype.js</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/shadowbox/build/js/adapter/shadowbox-yui.js</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/shadowbox/build/js/lib/index.html</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/shadowbox/build/js/lib/yui-utilities.js</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/shadowbox/images/index.html</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/shadowbox/images/loading.gif</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/shadowbox/images/loading-light.gif</filename>
+		<filename module="mod_exposescroller">mod_exposescroller/shadowbox/images/overlay-85.png</filename>
+	</files>
+
+	<languages>
+		en-GB/en-GB.mod_exposescroller.ini
+		nl-NL/nl-NL.mod_exposescroller.ini
+	</languages>
+
+	<params>
+		<param name="ModuleId_sfx" type="text" default="expose_scroller1" label="Module Id Suffix" description="DESC_MODULE ID SUFFIX" />
+		<param name="ImagePath" type="text" default="" label="AlbumId or ThumbnailPath" description="DESC_ALBUMID OR THUMBNAILPATH" />
+		<param name="Subdirs" type="radio" default="1" label="Include Subfolders" description="DESC_INCLUDE SUBFOLDERS">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		<param name="type" type="text" default="\.(jpg|gif|png)$" label="Image Search Type" description="DESC_IMAGE SEARCH TYPE" />
+
+		<param name="@spacer" type="spacer" default="" label="" description="" />
+		<param name="Linking" type="list" default="album" label="Images linked" description="DESC_IMAGES LINKED">
+			<option value="off">NO LINKING</option>
+			<option value="collection">COLLECTION</option>
+			<option value="album">ALBUMSTRIP</option>
+			<option value="photo">PHOTO</option>
+			<option value="slideshow">RUN SLIDESHOW FROM PHOTO</option>
+			<option value="slideshowfirst">RUN SLIDESHOW FROM FIRST</option>
+			<option value="shadowbox">SHADOWBOX SINGLE</option>
+			<option value="shadowboxnav">SHADOWBOX WITH NAVIGATION</option>
+		</param>
+		<param name="Pause" type="radio" default="1" label="Pause OnMouseOver" description="DESC_PAUSE ONMOUSEOVER">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+
+		<param name="@spacer" type="spacer" default="" label="" description="" />
+		<param name="Width" type="text" size="20" default="100%" label="Scroll Width" description="DESC_SCROLL WIDTH"/>
+		<param name="Height" type="text" size="20" default="150px" label="Scroll Height" description="DESC_SCROLL HEIGHT"/>
+
+		<param name="@spacer" type="spacer" default="" label="" description=""/>	
+		<param name="PicsNum" type="text" size="20" default="10" label="Quantity of pics" description="DESC_QUANTITY OF PICS"/>
+		<param name="PickMethod" type="list" default="random" label="Display Method" description="DESC_DISPLAY METHOD">
+			<option value="filename">FILENAME</option>
+			<option value="random">RANDOM</option>
+			<option value="latest">LATEST</option>
+		</param>
+
+		<param name="@spacer" type="spacer" default="" label="" description=""/> 
+		<param name="Direction" type="list" default="left" label="Scroll Direction" description="DESC_SCROLL DIRECTION">
+			<option value="up">UP</option>
+			<option value="down">DOWN</option>
+			<option value="left">LEFT</option>
+			<option value="right">RIGHT</option>
+			<option value="horizontal">NO SCROLLING - HORIZONTAL</option>
+			<option value="vertical">NO SCROLLING - VERTICAL</option>
+		</param>
+		<param name="Speed" type="text" size="20" default="50" label="Scroll Speed" description="DESC_SCROLL SPEED"/>
+		<param name="Space" type="text" size="20" default="3px" label="Scroll Space" description="DESC_SCROLL SPACE"/>
+
+		<param name="@spacer" type="spacer" default="" label="" description=""/> 
+		<param name="UseCss" type="radio" default="1" label="Use CSS Formatting below" description="DESC_USE CSS FORMATTING BELOW">
+			<option value="0">NO</option>
+			<option value="1">YES</option>
+		</param>
+		<param name="Css" type="textarea" rows="10" cols="20" default="a img{border:0;}" label="CSS" description="DESC_CSS"/>
+	</params>
+</install>

@@ -1,0 +1,371 @@
+<?php
+/**
+ * @version		$Id: example.php 10381 2008-06-01 03:35:53Z pasamio $
+ * @package		Joomla
+ * @subpackage	JFramework
+ * @copyright	Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.
+ * @license		GNU/GPL, see LICENSE.php
+ * Joomla! is free software. This version may have been modified pursuant
+ * to the GNU General Public License, and as distributed it includes or
+ * is derivative of works licensed under the GNU General Public License or
+ * other free or open source software licenses.
+ * See COPYRIGHT.php for copyright notices and details.
+ */
+
+// Check to ensure this file is included in Joomla!
+defined('_JEXEC') or die( 'Restricted access' );
+
+jimport('joomla.plugin.plugin');
+define("DEFAULT_CLIENT",4);
+
+/**
+ * Example User Plugin
+ *
+ * @package		Joomla
+ * @subpackage	JFramework
+ * @since 		1.5
+ */
+class plgUserJforceuser extends JPlugin {
+
+	/**
+	 * Constructor
+	 *
+	 * For php4 compatability we must not use the __constructor as a constructor for plugins
+	 * because func_get_args ( void ) returns a copy of all passed arguments NOT references.
+	 * This causes problems with cross-referencing necessary for the observer design pattern.
+	 *
+	 * @param object $subject The object to observe
+	 * @param 	array  $config  An array that holds the plugin configuration
+	 * @since 1.5
+	 */
+	function plgUserJforceuser(& $subject, $config)
+	{
+		parent::__construct($subject, $config);
+	}
+
+	/**
+	 * Example store user method
+	 *
+	 * Method is called before user data is stored in the database
+	 *
+	 * @param 	array		holds the old user data
+	 * @param 	boolean		true if a new user is stored
+	 */
+	function onBeforeStoreUser($user, $isnew)
+	{
+		global $mainframe;
+        //echo '<pre>';
+        //print_r($user);
+        //die();
+	}
+
+	/**
+	 * Example store user method
+	 *
+	 * Method is called after user data is stored in the database
+	 *
+	 * @param 	array		holds the new user data
+	 * @param 	boolean		true if a new user is stored
+	 * @param	boolean		true if user was succesfully stored in the database
+	 * @param	string		message
+	 */
+	function onAfterStoreUser($user, $isnew, $success, $msg)
+	{
+		global $mainframe;
+        
+        /**
+		$args = array();
+		$args['username']	= $user['username'];
+		$args['email'] 		= $user['email'];
+		$args['fullname']	= $user['name'];
+		$args['password']	= $user['password'];
+        **/
+        
+        $splitname = explode(" ",$user["name"],2);
+        // take the first word as firstname and remaining as lastname
+        
+        $fname = $splitname[0];
+        $lname = $splitname[1];
+
+        if ($isnew && $success)
+        {   
+            // just after the user is created, it is added to jforce
+            $created = gmdate("Y-m-d H:i:s");
+            $db = JFactory::getDBO();
+            $query = 'INSERT INTO '.$db->nameQuote('#__jf_persons')
+            .' ('.$db->nameQuote('firstname')
+            .' , '.$db->nameQuote('lastname') 
+            .' , '.$db->nameQuote('company') 
+            .' , '.$db->nameQuote('uid')
+            .' , '.$db->nameQuote('systemrole')
+            .' , '.$db->nameQuote('created')
+            .' , '.$db->nameQuote('published').')'
+            .'VALUES('.$db->Quote($fname)
+            .','.$db->Quote($lname)
+            .','.$db->Quote(intval($user["referredby"])) // this will assign the person to a particular coach
+            .','.$db->Quote($user["id"])
+            .','.$db->Quote(DEFAULT_CLIENT) // 4 is the default id for client type in jforce configuration
+            .','.$db->Quote($created)
+            .','.$db->Quote('1')
+            . ') ';
+            $db->setQuery($query);
+            //echo $query;
+            $db->query();
+            
+            // create default project as first phase for the user 
+            // so when creating a project, these parameters should be assigned
+            // a) author of the project is this user being registered
+            // b) company is the coach company assigned to /referred by 
+            // c) status is Active by default
+            // d) image and imagethumb represent status at the beginning of the project
+            // e) created is now time and starts on will be selected by the coach
+            // f) published, i do not know about this crap. 
+            
+            // so build an array of phases (projects) for any particular user whenever being registered
+            
+            /** Default phases as found right now at the referring website 
+            
+            Phase No    Phase Title                             Start Date    Completed Date    Status    Activate
+                1    Phase 1 Intestinal / Digestive Cleanse     6/4/2007                         Open    NA
+                2    Phase 2 Yeast / Candida Cleanse            7/11/2007                        Open    NA
+                3    Phase 3 Parasite Cleanse                   4/15/2009                        Open    NA
+                4    Phase 4 Liver Cleanse                                                  Not Started  Start Phase
+                5    Phase 5 Heavy Metal / Chemical Cleanse                                 Not Started  Start Phase
+                6    Phase 6 Adrenal Testing & Balancing                                    Not Started  Start Phase
+                7    Phase 7 Hormone Testing & Balancing                                    Not Started  Start Phase
+                8    Phase 8 Maintenance Protocols                                          Not Started  Start Phase
+                9    Phase 9 Rebuilding & Support                                           Not Started  Start Phase
+                10   Phase 10 Exercise Program                                              Not Started  Start Phase
+            
+            **/ 
+            
+            $startdate = $created;
+            
+            $phases = array();
+            $phases[] = "Phase 1 Intestinal / Digestive Cleanse";
+            $phases[] = "Phase 2 Yeast / Candida Cleanse";
+            $phases[] = "Phase 3 Parasite Cleanse";
+            $phases[] = "Phase 4 Liver Cleanse";
+            $phases[] = "Phase 5 Heavy Metal / Chemical Cleanse";
+            $phases[] = "Phase 6 Adrenal Testing & Balancing";
+            $phases[] = "Phase 7 Hormone Testing & Balancing";
+            $phases[] = "Phase 8 Maintenance Protocols";
+            $phases[] = "Phase 9 Rebuilding & Support";
+            $phases[] = "Phase 10 Exercise Program";
+            
+            foreach($phases as $p){
+                $db = JFactory::getDBO();
+                $pname = $p;
+                $pdesc = "Description not available";
+                
+                $query = 'INSERT INTO '.$db->nameQuote('#__jf_projects')
+                .' ('.$db->nameQuote('name')
+                .' , '.$db->nameQuote('description') 
+                .' , '.$db->nameQuote('author') 
+                .' , '.$db->nameQuote('company')
+                .' , '.$db->nameQuote('status')
+                .' , '.$db->nameQuote('created')
+                .' , '.$db->nameQuote('published').')'
+                .'VALUES('.$db->Quote($pname)
+                .','.$db->Quote($pdesc)
+                .','.$db->Quote($user["id"]) // this will assign the person to a particular coach
+                .','.$db->Quote(intval($user["referredby"]))
+                .','.$db->Quote("Not Started") // 4 is the default id for client type in jforce configuration
+                .','.$db->Quote($created)
+                .','.$db->Quote('1')
+                . ') ';
+                $db->setQuery($query);
+                //echo $query;
+                $db->query();
+                
+                // also add the permissions to the users above.
+                // a) to the coach
+                // b) to the client
+                
+                // this should be done to the #__jf_projectroles_cf table
+            }
+            
+            $uid = $user["id"];
+            $coachid = $user["person"]->uid;
+            
+            $query = "SELECT id from #__jf_projects WHERE ".$db->nameQuote("author")." = ".$db->Quote("$uid");            
+            $db->setQuery($query);
+            $db->query();
+            
+            $objects = $db->loadObjectList();
+            
+            $db = JFactory::getDBO();
+            foreach($objects as $p){
+                // id     uid     pid     role     milestone     checklist     timetracker     document     ticket     discussion     quote     invoice
+                $query = 'INSERT INTO '.$db->nameQuote('#__jf_projectroles_cf')
+                .' ('.$db->nameQuote('uid')
+                .' , '.$db->nameQuote('pid') 
+                .' , '.$db->nameQuote('role') 
+                .' , '.$db->nameQuote('milestone')
+                .' , '.$db->nameQuote('checklist')
+                .' , '.$db->nameQuote('timetracker')
+                .' , '.$db->nameQuote('document')
+                .' , '.$db->nameQuote('ticket')
+                .' , '.$db->nameQuote('discussion')
+                .' , '.$db->nameQuote('quote')
+                .' , '.$db->nameQuote('invoice').')'
+                .'VALUES('.$db->Quote($uid)
+                .','.$db->Quote($p->id)
+                .','.$db->Quote('1') // this will assign the person to a particular coach
+                .','.$db->Quote('4')
+                .','.$db->Quote('4')
+                .','.$db->Quote('4')
+                .','.$db->Quote('4')
+                .','.$db->Quote('4')
+                .','.$db->Quote('4')
+                .','.$db->Quote('4')
+                .','.$db->Quote('4')
+                . ') ';
+                
+                $db->setQuery($query);
+                $db->query();
+                
+                $query = 'INSERT INTO '.$db->nameQuote('#__jf_projectroles_cf')
+                .' ('.$db->nameQuote('uid')
+                .' , '.$db->nameQuote('pid') 
+                .' , '.$db->nameQuote('role') 
+                .' , '.$db->nameQuote('milestone')
+                .' , '.$db->nameQuote('checklist')
+                .' , '.$db->nameQuote('timetracker')
+                .' , '.$db->nameQuote('document')
+                .' , '.$db->nameQuote('ticket')
+                .' , '.$db->nameQuote('discussion')
+                .' , '.$db->nameQuote('quote')
+                .' , '.$db->nameQuote('invoice').')'
+                .'VALUES('.$db->Quote($coachid)
+                .','.$db->Quote($p->id)
+                .','.$db->Quote('1') // this will assign the person to a particular coach
+                .','.$db->Quote('4')
+                .','.$db->Quote('4')
+                .','.$db->Quote('4')
+                .','.$db->Quote('4')
+                .','.$db->Quote('4')
+                .','.$db->Quote('4')
+                .','.$db->Quote('4')
+                .','.$db->Quote('4')
+                . ') ';
+                
+                $db->setQuery($query);
+                $db->query();
+                
+            }
+            
+        }else if(!$new && $success){
+            $db = JFactory::getDBO();
+            $query = 'UPDATE '.$db->nameQuote('#__jf_persons')
+            .' SET '.$db->nameQuote('firstname').' = '.$db->Quote($fname)
+            .', '.$db->nameQuote('lastname').' = '.$db->Quote($lname)
+            .' WHERE '.$db->nameQuote('uid').' = '.$db->Quote($user['id']);
+            $db->setQuery($query);
+            $db->query();   
+        }
+            
+		if ($isnew)
+		{
+			// Call a function in the external app to create the user
+			// ThirdPartyApp::createUser($user['id'], $args);
+            
+		}
+		else
+		{
+			// Call a function in the external app to update the user
+			// ThirdPartyApp::updateUser($user['id'], $args);
+		}
+	}
+
+	/**
+	 * Example store user method
+	 *
+	 * Method is called before user data is deleted from the database
+	 *
+	 * @param 	array		holds the user data
+	 */
+	function onBeforeDeleteUser($user)
+	{
+		global $mainframe;
+	}
+
+	/**
+	 * Example store user method
+	 *
+	 * Method is called after user data is deleted from the database
+	 *
+	 * @param 	array		holds the user data
+	 * @param	boolean		true if user was succesfully stored in the database
+	 * @param	string		message
+	 */
+	function onAfterDeleteUser($user, $succes, $msg)
+	{
+		global $mainframe;
+
+	 	// only the $user['id'] exists and carries valid information
+
+		// Call a function in the external app to delete the user
+		// ThirdPartyApp::deleteUser($user['id']);
+	}
+
+	/**
+	 * This method should handle any login logic and report back to the subject
+	 *
+	 * @access	public
+	 * @param 	array 	holds the user data
+	 * @param 	array    extra options
+	 * @return	boolean	True on success
+	 * @since	1.5
+	 */
+	function onLoginUser($user, $options)
+	{
+		// Initialize variables
+		$success = false;        
+        
+		// Here you would do whatever you need for a login routine with the credentials
+		//
+		// Remember, this is not the authentication routine as that is done separately.
+		// The most common use of this routine would be logging the user into a third party
+		// application.
+		//
+		// In this example the boolean variable $success would be set to true
+		// if the login routine succeeds
+
+		// ThirdPartyApp::loginUser($user['username'], $user['password']);
+        
+        
+        // ok everything is done so redirect user to the dashboard
+        $location = JRoute::_('index.php?option=com_jforce&view=dashboard');
+        header("Location: $location");
+        die();
+		return $success;
+	}
+
+	/**
+	 * This method should handle any logout logic and report back to the subject
+	 *
+	 * @access public
+	 * @param array holds the user data
+	 * @return boolean True on success
+	 * @since 1.5
+	 */
+	function onLogoutUser($user)
+	{
+		// Initialize variables
+		$success = false;
+
+		// Here you would do whatever you need for a logout routine with the credentials
+		//
+		// In this example the boolean variable $success would be set to true
+		// if the logout routine succeeds
+
+		// ThirdPartyApp::loginUser($user['username'], $user['password']);
+
+        $location = JRoute::_('index.php?option=com_jforce&view=dashboard');
+        header("Location: $location");
+        die();
+
+		return $success;
+	}
+}

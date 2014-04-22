@@ -1,0 +1,49 @@
+/*MAIN GALLERY BORDER SHADOW BIT*/
+	
+	table.main_thumb_table td:first-child div.thumbs_div{
+	padding-left: 2px;
+	}
+	
+	table.main_thumb_table td div.thumbs_div{
+	background:url('../images/shadow.gif') no-repeat bottom right;
+	margin: 2px;
+	}
+	
+	table.main_thumb_table td div.thumbs_div img{
+	border: 1px solid #cccccc;
+	position: relative;
+	left: -4px;
+	}
+	
+	div.main_large_image .large_img{
+	display: block;
+	padding: 4px;
+	margin: 2px;
+	border: 1px solid #cccccc;
+	}
+
+	
+/*LIGHTBOX GALLERY BORDER SHADOW BIT*/
+	
+	table.lbox_thumb_table td:first-child div.thumbs_div{
+	padding-left: 2px;
+	}
+	
+	table.lbox_thumb_table td div.thumbs_div{
+	background:url('../images/shadow.gif') no-repeat bottom right;
+	margin: 2px;
+	/*float: left;*/
+	}
+	
+	table.lbox_thumb_table td div.thumbs_div img{
+	border: 1px solid #cccccc;
+	position: relative;
+	left: -4px;
+	}
+	
+	div.lbox_large_image .large_img{
+	display: block;
+	padding: 4px;
+	margin: 2px;
+	border: 1px solid #cccccc;
+	}

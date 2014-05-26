@@ -31,8 +31,7 @@ class PhaseViewClient extends JView
         $userPhases = $model->getUserPhases($userId);
         $userPhases2 = $model->getUserPhases($userId);
         
-        //echo '<pre>';
-        //var_dump($userPhases2);
+
         $i = 0;
         foreach ($userPhases2 as $userPhases2)
         {   
@@ -57,6 +56,11 @@ class PhaseViewClient extends JView
         $model = $this->getModel();
         $phasesTasks = $model->getPhasesTasks($phaseId);
         $this->assignRef('phasesTasks', $phasesTasks);
+        
+        $phaseDesc = $model->getPhasesDesc($phaseId);
+        $this->assignRef('phaseDesc', $phaseDesc);
+        
+        
         parent::display($tpl);
     }
     

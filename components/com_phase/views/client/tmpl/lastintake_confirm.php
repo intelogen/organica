@@ -12,8 +12,8 @@ $loockingfor = $this->loockingfor;
 <?php
 if($this->evalution)
 {
-    
-    
+  $evalution = $this->evalution;  
+  
 }
     
 ?>

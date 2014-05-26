@@ -1574,7 +1574,14 @@ class PhaseModelClient extends JModel
         return  $db->loadAssocList();
     }
     
-    
+    function getPhasesDesc($phaseId)
+    {
+        $db =& $this->_db;
+        $query = "SELECT * FROM  #__jf_projects WHERE id = $phaseId";
+        $ids = $this->_getList($query);
+        $db->setQuery($query);
+        return  $db->loadAssocList();
+    }
     
     
     

@@ -10,12 +10,25 @@ foreach ($this->phasesTasks as $value)
 {
 $pid = $value->pid;    
 }
-
 $user =& JFactory::getUser();
 $userId = $user->id;
 ?>
-
-
+<?php
+if($this->phaseDesc)
+{
+    $phaseDesc = $this->phaseDesc[0];
+    
+?>    
+    <div class='contentheading'>
+    <?= $phaseDesc[name]."<br>"?>
+    </div>
+<div class='tabContainer2' style="background-color:#E1FFE3">
+    Short description of phase: <?="<br>"?>
+<?php
+    echo $phaseDesc[description];
+}
+?>
+</div>
 
 
 

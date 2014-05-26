@@ -53,8 +53,8 @@ $editor = & JFactory::getEditor();?>
        echo "Status: Phase in progress" ;    
     }
     
-    echo '<br>Description : ';
-    echo $userPhases->description;
+    //echo '<br>Description : ';
+    //echo $userPhases->description;
     ?>
     
     </div>

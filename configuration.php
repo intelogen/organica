@@ -1,4 +1,4 @@
-`<?php
+<?php
 class JConfig {
 	var $offline = '0';
 	var $editor = 'tinymce';
@@ -15,14 +15,14 @@ class JConfig {
 	var $gzip = '0';
 	var $error_reporting = '-1';
 	var $xmlrpc_server = '0';
-	var $log_path = '/var/';
-	var $tmp_path = '/var/www/maximlife/tmp';
+	var $log_path = '/var/www/maximlife/logs';
+	var $tmp_path = '/var/www/maximlife/temp';
 	var $live_site = '';
 	var $force_ssl = '0';
 	var $offset = '0';
 	var $caching = '0';
 	var $cachetime = '15';
-	var $cache_handler = 'file';
+	var $cache_handler = 'apc';
 	var $memcache_settings = array();
 	var $ftp_enable = '0';
 	var $ftp_host = '127.0.0.1';

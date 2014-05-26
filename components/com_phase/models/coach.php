@@ -236,5 +236,14 @@ return true;
     return true;
       
     }
+    
+    function getClienPhasesData($cid)
+    {
+        $db =& $this->_db;
+        $query = "SELECT val, date FROM  #__jf_my_lastintake WHERE uid = $cid AND name = 'body' ";
+        $ids = $this->_getList($query);
+        $db->setQuery($query);
+        return  $db->loadAssocList();
+    }
 }
 ?>

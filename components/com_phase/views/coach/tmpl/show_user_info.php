@@ -21,11 +21,14 @@ foreach ($this->clientInfo as $value)
 <?="birthday: ".$value->birthday."<br>"?>
 <?="sex: ".$value->sex."<br>"?>   
         
-            <div class='objectTitle'>
+<div class='objectTitle'>
 <p>
 <a href="index.php?option=com_phase&controller=client&action=show_repo&c=<?=$value->id?>">User Progress</a>
 </p>
-            </div>    
+<p>
+<a href="index.php?option=com_phase&controller=coach&action=show_detail_repo&c=<?=$value->id?>">Detail Progress</a>
+</p>
+</div>    
     
 
 <?php

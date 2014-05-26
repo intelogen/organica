@@ -1,4 +1,4 @@
 .idea
-/nbproject/private/
-/components/com_phase/nbproject/private/
+/nbproject/
+/uploads_jtpl/phase_details/
 /tmp

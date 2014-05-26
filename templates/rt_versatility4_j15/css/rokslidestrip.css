@@ -7,3 +7,329 @@ div#frame {clear: both;position: relative;overflow: hidden;z-index: 1;}
 div#frame div.button {display: none;}
 #scroller {margin: 0 auto;overflow: hidden;}
 #moduleslide .tab-pane {overflow: hidden;float: left;}
+
+
+
+/*custom styles*/
+
+input[type="text"], input[type="password"]{
+    border-radius: 3px;
+    padding: 3px 10px;
+    border: 1px solid #ccc
+}
+#form-login div input[type="submit"]:active,
+s#form-login div input.button:active,
+.input .button:active,
+.button:active{
+    background: #3F85ee !important;
+}
+#form-login div input[type="submit"]:hover,
+s#form-login div input.button:hover,
+.input .button:hover,
+.button{
+    color: #fff !important;
+}
+s#form-login div input[type="submit"],
+s#form-login div input.button,
+.input .button,
+.button{
+    border: none !important;
+    background-color: #3F85CC !important;
+    color: #fff;
+    border-radius: 30px;
+    height: 24px !important;
+    outline: none !important;
+    cursor: pointer;
+    padding: 0 5px;
+    font-family: Helvetica, ​Arial, ​FreeSans, ​sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.button{
+    padding: 2px 5px 0 5px !important;
+    width: auto !important;
+}
+.div-spacer{
+    display: none;
+}
+.browseProductDescription{
+    width:  98%;
+    margin: 15px 0 !important;
+    padding: 0 1%;
+    height: auto !important;
+}
+#vmMainPage > h3 + div{
+    box-shadow: none !important;
+}
+#vmMainPage table tbody tr td{
+    border: 10px solid transparent !important;
+}
+#product_list{
+    width: 100% !important;
+    margin: 20px 0 0 5px !important;
+}
+.addtocart_button{
+    background-position: left bottom;
+    border: medium none;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+    height: 30px;
+    overflow: hidden;
+    text-align: center;
+    vertical-align: middle;
+    width: 160px;
+}
+#product_list > div .line .details{
+    display: none;
+}
+#product_list > div .line{
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+}
+#product_list > .clr{
+    display: none;
+}
+.browseProductTitle{
+    height: 40px;
+}
+.browseProductImage{
+    width: 30%;
+    height: auto;
+}
+#product_list > div{
+    border: none !important;
+    border-collapse: collapse;
+    box-shadow: none !important;
+    padding: 10px 0;
+    height: 420px !important;
+}
+#product_list > div:hover {
+   /* box-shadow: 0 0 2px 2px rgba(0,0,0,0.05), 0 0 0 0 rgba(0,0,0,0) inset !important;*/
+    background: #f6f6f6;
+}
+.inputboxquantity{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border: 1px solid #ccc;
+    height: 28px;
+    padding-left: 10px;
+    font-size: 16px;
+    color: #666;
+    margin-right: 18px;
+}
+.quantity_box{
+    color: #888;
+    margin: 0 !important;
+}
+.quantity_box_button{
+    position: relative;
+    padding: 1px 10px !important;
+    cursor: pointer;
+    height: 18px !important;
+    border-color: #ccc;
+}
+.quantity_box_button_up:hover{
+    background-color: #ccc;
+}
+.quantity_box_button_up{
+    border-top-right-radius: 5px;
+    display: inline-block !important;
+    right: 50px !important;
+    position: absolute;
+    top: 3px;
+}
+.quantity_box_button_down:hover{
+    background-color: #ccc;
+}
+.quantity_box_button_down{
+    border-bottom-right-radius: 5px;
+    bottom: 40px;
+    position: absolute;
+    right: 50px;
+}
+.inner{
+    position: relative;
+    height: 150px;
+}
+.browseProductDescription{
+    position: relative;
+}
+.browseAddToCartContainer{
+    position: absolute;
+    width: auto;
+    right: 0;
+    left: 0;
+    bottom: -50px;
+}
+.quantity_box{
+    margin-left: 22px;
+}
+.browseRatingContainer{
+    display: none;
+}
+.addtocart_button, .notify_button{
+    background-image: none !important;
+    color: #fff;
+    background-color: #009900 !important;
+    margin: 10px 0 0 0;
+}
+.notify_button{
+    margin-top: 28px !important;
+    background-color: #CC8500 !important;
+}
+.pagenav{
+    color: #000;
+    background: #eee;
+    display: inline-block;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+.pagination li:first-child{
+    margin-right: 10px;
+}
+.pagination li:last-child{
+    margin-left: 10px;
+}
+.pagination li:nth-child(3) span{
+    padding: 5px 10px;
+    cursor: auto;
+    border: none;
+    background: none;
+}
+form .order{
+    text-align: right;
+}
+.vmCartContainer{
+    background: none;
+    border: none;
+    padding-right: 10px;
+    width: 410px;
+    margin: 10px 0;
+}
+.vmCartContainer .addtocart_button{
+    margin: 0;
+}
+.productViewsCart{
+    width: 430px;
+}
+.productViewsCart > img{
+    float: right;
+    margin-right: 30px;
+    margin-top: -40px;
+}
+.productViewsContainer{
+    box-shadow: none;
+}
+.productViewsDesc{
+    padding: 10px 20px 0 20px;
+    width: auto;
+}
+#header-bar .wrapper .nounder #logo{
+    border-bottom-left-radius: 60px !important;
+}
+.menutop li{
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+}
+.menustyle3 #horiz-menu li.sfHover,
+.menustyle3 #horiz-menu li.active a,
+.separator,
+.menustyle3 #horiz-menu li.active,
+.menutop li a:hover span,
+.menutop li:hover a span,
+.menutop li:hover a span,
+.menutop li:hover a
+{
+    background: none !important;
+}
+.menustyle3 #sub-menu li a{
+    padding-right: 3px;
+    margin-right: 5px;
+}
+.menustyle3 #sub-menu li.active a span{
+    border: 1px solid rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.1);
+}
+.menustyle3 #sub-menu li.active a,
+.menustyle3 #sub-menu li.active .separator,
+.menustyle3 #sub-menu li.active{
+    background: none !important;
+}
+.menustyle3 #sub-menu li:hover{
+    background: none !important;
+}
+.menustyle3 #sub-menu li a span{
+    border: 1px solid transparent;
+    padding: 5px 10px;
+    border-radius: 30px;
+}
+.menustyle3 #sub-menu li:hover a span{
+    border: 1px solid rgba(255,255,255,0.2);
+}
+.menutop li:hover{
+    background: -moz-linear-gradient(top, #24A5CE 0%, #0094D6 100%) !important;
+    background: -webkit-linear-gradient(top, #24A5CE 0%, #0094D6 100%) !important;
+}
+.menustyle3 #horiz-menu li.active{
+    background:  -moz-linear-gradient(top, #24A5CE 0%, #0094D6 100%) !important;
+    background:  -webkit-linear-gradient(top, #24A5CE 0%, #0094D6 100%) !important;
+}
+#main-body{
+    margin-bottom: 0 !important;
+    border-top: none !important;
+    border-bottom: none !important;
+    background: none;
+}
+#maincol{
+    /*padding: 20px 20px 0 20px !important;
+    position: relative;
+    left: -30px;box-shadow: 0 0 17px 17px rgba(0,0,0,0.15);*/
+    width: 806px;
+}
+.maincontent-surround{
+    border-top: none !important;
+}
+.moduletable,
+.moduletable_menu{
+    min-width: 190px;
+}
+#form-login div:first-child{
+    padding: 10px 20px;
+}
+.moduletable h3:first-child{
+    margin-bottom: -11px;
+}
+#modlgn_remember{
+    position: relative;
+    top: 3px;
+}
+.contentpane{
+    padding: 10px 0 10px 10px;
+    width: 747px !important;
+}
+.contentpane tbody tr td input[type="text"],
+.contentpane tbody tr td input[type="password"]{
+    width: 640px !important;
+}
+.contentpane tbody tr td select{
+    width: 672px !important;
+}
+.contentpaneopen{
+    width: 750px !important;
+}
+.contentpaneopen tbody tr td span table tbody tr td:nth-child(1){
+    width: 200px !important;
+}
+.contentpaneopen tbody tr td span table tbody tr td:nth-child(2){
+    width: 200px !important;
+}
+.contentpaneopen tbody tr td span table tbody tr td:nth-child(3){
+    width: 300px !important;
+}
+#phocagallery-categories-detail div fieldset

@@ -33,6 +33,7 @@ class UserViewLogin extends JView
 		// Initialize variables
 		$document	=& JFactory::getDocument();
 		$user		=& JFactory::getUser();
+                
 		$pathway	=& $mainframe->getPathway();
 		$image		= '';
 

@@ -224,6 +224,8 @@ No team goes to the Super Bowl with a great coach. <br />
      </tr>
  </table>
 	<input type="hidden" name="task" value="register_save" />
+        
+        
 	<input type="hidden" name="id" value="0" />
 	<input type="hidden" name="gid" value="0" />
 	<?php echo JHTML::_( 'form.token' ); ?>

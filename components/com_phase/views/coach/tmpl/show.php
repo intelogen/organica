@@ -1,12 +1,20 @@
 <?php defined( '_JEXEC' ) or die( 'Restricted access' ); 
 $editor = & JFactory::getEditor();?>
 
+
+
+
+
+
+<div class='contentheading'>  
+<?="<br>Task list:"?>
+</div>
 <?php
-//echo '<pre>';
-//var_dump($this->taskList);
+if(count($this->taskList) == 0)
+:
+    echo 'No task yet';
+else:
 ?>
-
-
 
 
 
@@ -18,15 +26,16 @@ $editor = & JFactory::getEditor();?>
     foreach ($this->taskList as $taskList)
     :
     ?>
+    <div class='tabContainer2' style="background-color:#E1FFE3">
     <div class='contentheading'>
     <input type="radio" name="taskId" value="<?= $taskList->id;?> "><?=$taskList->summary;?> 
     </div>
-    <?php echo '<br>'; ?>
+    </div>
     
     
     
     <?php
-    echo '<br>';
+
     endforeach;
     }
     ?>
@@ -44,11 +53,18 @@ echo '<br>';
 <input type="submit" value="Edit" name="action"/>
 <input type="submit" value="Delete" name="action"/>
 </form>
+<?php
+endif;
+?>
 
 
 
+<div class='contentheading'>  
+<?="<br>Create newt task"?>
+</div>
+<div class='tabContainer2' style="background-color:#E1FFE3">
 <form action="index.php?option=com_phase&controller=coach&task=1" method="post" name="adminForm" \>
-   <?='<br><br>Name:<br>'?>
+ <?='Name:<br>'?>
 <input type="text" size="83%" name="newSummary" value="New task name" />
   
 <?='<br>Description:<br>'?>
@@ -62,7 +78,7 @@ echo '<br>';
 <input type="submit" value="Create" name="action"/>
 
 </form>
-
+</div>
 
 
 

@@ -12,6 +12,8 @@ class PhaseModelPhase extends JModel
      
      function isAdmin($userId)
      {
+         echo $userId;
+         /*
         $query = "SELECT usertype FROM #__users WHERE id = $userId";
         $result =  $this->_getList($query);
         
@@ -24,6 +26,7 @@ class PhaseModelPhase extends JModel
         {
             return 0;
         }
+        */
      }
      
      function isCoach($userId)

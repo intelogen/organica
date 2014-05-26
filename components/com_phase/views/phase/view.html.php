@@ -8,6 +8,19 @@ class PhaseViewPhase extends JView
 {
     function display($tpl = null)
     {
+        $user =& JFactory:: getUser();
+        $userId = $user->id;
+        global $mainframe;
+        
+        $model = $this->getModel();
+        $admin = $model->isAdmin($userId);
+        
+        
+        
+        
+        
+        
+        
         /*
         $model = $this->getModel();
         $admin = 0;

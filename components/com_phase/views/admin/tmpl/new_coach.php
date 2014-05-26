@@ -12,7 +12,7 @@ echo '<br>Choose new coach from the list:<br><br>';
         <?php
         foreach ($this->userList as $value):
         ?>
-            <option value="<?=$value->id;?>"><?=$value->name." ".$value->username?></option>
+            <option value="<?=$value->id;?>"><?=$value->name?></option>
         <?php
         endforeach;
         ?>

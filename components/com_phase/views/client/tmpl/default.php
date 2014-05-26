@@ -26,14 +26,26 @@ Furhter, you will be responsible for signing off the phases and assigning new ph
     <div class='objectTitle'>
 <a href="index.php?option=com_phase&controller=client&action=show_my_coach">My Coach</a>
     </div>
+    <?='<br>'?>
+<div class='objectTitle'>
+<a href="index.php?option=com_phase&controller=client&action=show_my_profile">My Profile</a>
+</div>
+    <?='<br>'?>
+    <div class='objectTitle'>
+<a href="index.php?option=com_phase&controller=message">My Massage</a>
+    </div>
 <?='<br>'?>
     <div class='objectTitle'>
 <a href="index.php?option=com_phase&controller=client&action=deshbord">My Phases</a>
     </div>
 <?='<br>'?>
     <div class='objectTitle'>
-<a href="index.php?option=com_jforce&view=phase&layout=evaluation&pid=1">Progress report</a>
+<a href="index.php?option=com_phase&controller=client&action=show_repo">Progress report</a>
     </div>
+<?='<br>'?>
+      
+
+
 </div>
 
 
@@ -43,3 +55,7 @@ Furhter, you will be responsible for signing off the phases and assigning new ph
 <div class='tabContainer2' style="background-color:#E1FFE3">
 <?="<br>There are no alerts for you this time."?>
 </div>
+
+
+
+

@@ -12,6 +12,15 @@
 
 // no direct access
 defined('_JEXEC') or die('Restricted access');	
+
+
+
+
+
+
+
+
+
 ?>
 
 
@@ -59,13 +68,12 @@ $user =& JFactory::getUser();
 $uid = $user->id;
 
 $cnt = $model->getUserCountPhase($uid);
-//var_dump($cnt);
+
 foreach ($cnt as $cnt)
 {
 $cant = $cnt->cnt;    
 }
 
-//echo $cnt;
 ?> 
       
 <div class="tabs">
@@ -124,10 +132,17 @@ $cant = $cnt->cnt;
             */
         ?>
         <tr>
+            
         <?php
             $cnt = 1;
+            
+ echo '<pre>';
+var_dump($this->tracking);
+            
             foreach($this->body_score_questions as $q):
             $answers = $this->tracking->bodyscore->answers;
+
+            
            ?>
                 <td style='border:1px solid #EEE;padding:3px;' align="center"><input type="checkbox" name="evaluation[bodyscore][]" value="<?=$q->id;?>" <?php if(in_array($q->id,$answers)) {echo "checked";} ?>/></td>
                 <td style='border:1px solid #EEE;padding:3px;'><?=$q->question;?></td>
@@ -144,7 +159,12 @@ $cant = $cnt->cnt;
     
 
     
-    <?php if($this->tracking->bodyscore->chart) { ?>
+    
+  
+    <?php if($this->tracking->bodyscore->chart){ 
+
+       
+        ?>
     <!-- Body score chart initialization -->
     <script type="text/javascript">
         var bodyscore_chart;
@@ -191,6 +211,16 @@ $cant = $cnt->cnt;
     </script>
     <div id="bs_container" style="width: 100%; height: 300px"></div>
     <?php } ?>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 </div>
 
 
@@ -198,6 +228,12 @@ $cant = $cnt->cnt;
     &nbsp;
 </div>
 
+
+<?php
+
+
+
+?>
 <!-- Step 3 -->
 <div class="tabContainer2">
     <div>
@@ -242,6 +278,10 @@ $cant = $cnt->cnt;
     &nbsp;
 </div>
 
+
+
+
+
 <!-- Step 4 -->
 <div class="tabContainer2">
     <h3>Current Photo</h3>
@@ -268,6 +308,10 @@ $cant = $cnt->cnt;
     &nbsp;
 </div>
 
+
+
+
+
 <!-- Step 5 -->
 <div class="tabContainer2">
     <h3>Update Tracking</h3>
@@ -285,6 +329,20 @@ $cant = $cnt->cnt;
         ";
     ?>
     <br />
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class='subtitle'>
         Symptoms Tracking
     </div>
@@ -294,23 +352,47 @@ $cant = $cnt->cnt;
                 <th width="150">Symptoms</th><th>Status</th><th>Notes</th>
             </tr>
         <?php
+        
+
+
+        
+
         if($this->tracking->symptoms || $this->tracking->extra_symptoms):
             if($this->tracking->symptoms) {
+                
+                
+                
+                
                 foreach($this->tracking->symptoms as $s){
                     $options = '';
+
                     foreach($this->opts as $v) {
+                        
                         $options .= '<option value="'.$v.'" '.($s->status == $v ? $selected : '').'>'.ucfirst($v).'</option>';
                     }
+                    
                     $options_html = "<select name=\"tracking[symptoms][$s->variable][status]\">
                                     {$options}
                                 </select>
                                 ";
+                                    
+                    
                     ?>
                         <tr>
                             <td><?=$s->question;?></td><td><?=$options_html;?></td><td><input type='text' value="<?php echo $s->notes; ?>" name="tracking[symptoms][<?=$s->variable?>][notes]"></td>
+                            
+                            
+                            
+                            
+                            <td><?=$s->question;?></td><td><?=$options_html;?></td><td><input type='text' value="<?php echo $s->notes; ?>" name="tracking[symptoms][<?=$s->variable?>][notes]"></td>
+                            
                         </tr>
                     <?php
                 }
+                
+                
+                
+                
             }
 
             if($this->tracking->extra_symptoms):
@@ -341,6 +423,25 @@ $cant = $cnt->cnt;
     </div>
     <br/>
   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class='subtitle'>
         Medical Tracking
     </div>
@@ -352,6 +453,9 @@ $cant = $cnt->cnt;
                 <th width="150">Medtrack</th><th>Status</th><th>Notes</th>
             </tr>
         <?php
+        
+
+        
             if($this->tracking->medtrack || $this->tracking->extra_medtrack):
                 if($this->tracking->medtrack) {
                     foreach($this->tracking->medtrack as $s){

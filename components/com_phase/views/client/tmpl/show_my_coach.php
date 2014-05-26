@@ -14,12 +14,19 @@ foreach ($this->coachInfo as $coachInfo)
             <div class='contentheading'>
 <?= $coachInfo->name."<br>";?>
             </div>
-<?= $coachInfo->address."<br>";?>
-<?= $coachInfo->phone."<br>";?>
-<?= $coachInfo->fax."<br>";?>
-<?= $coachInfo->homepage."<br>";?>
-<?= $coachInfo->image."<br>";?>
+<?= "Phone - ".$coachInfo->phone."<br>";?>
+<?= "Fax - ".$coachInfo->fax."<br>";?>
+<?= "Homepage - ".$coachInfo->homepage."<br>";?>
+<?= "IMG - ".$coachInfo->image."<br>";?>
 
+    <?php
+    if($coachInfo->image):
+    echo "  <div style='font-size:15px;color:#008;'>
+        <img src=\"".JURI::root().'uploads_jtpl/coaches/'.$coachInfo->image."\" width=\"250\" height=\"250\">
+        </div>";
+    endif;
+    ?> 
+    
 <?php
 endforeach;
 

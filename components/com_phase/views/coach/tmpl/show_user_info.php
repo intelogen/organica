@@ -1,27 +1,38 @@
 <?php defined( '_JEXEC' ) or die( 'Restricted access' ); 
 $editor = & JFactory::getEditor();?>
 
-
-
+<div class='tabContainer2' style="background-color:#E1FFE3">
+<div class='contentheading'>  
 <?="Client information:<br>"?>
+</div>
 <?php
 if($this->clientInfo)
 {
-//echo '<pre>';
-//var_dump($this->clientInfo);
 foreach ($this->clientInfo as $value)
 :
 ?>
-<div class='contentheading'>    
-<?="Client name: ".$value->name?>
-</div>
-<?=" Client email: ".$value->email?>
+<?="name: ".$value->name."<br>"?>
+<?="email: ".$value->email."<br>"?>
+<?="address: ".$value->address."<br>"?>
+<?="city: ".$value->city."<br>"?>
+<?="state: ".$value->state."<br>"?>
+<?="zip: ".$value->zip."<br>"?>   
+<?="phone: ".$value->phone."<br>"?>
+<?="birthday: ".$value->birthday."<br>"?>
+<?="sex: ".$value->sex."<br>"?>   
+        
+            <div class='objectTitle'>
+<p>
+<a href="index.php?option=com_phase&controller=client&action=show_repo&c=<?=$value->id?>">User Progress</a>
+</p>
+            </div>    
+    
 
 <?php
 endforeach;
 }
 ?>
-
+</div>
 
 
 
@@ -29,14 +40,17 @@ endforeach;
 
 
 <div class='contentheading'>  
-<?="<br>Phases list:"?>
+<?="Phases list:"?>
 </div>
 <?php
-if($this->phases)
+
+if(count($this->phases) == 0)
 {
-//echo '<pre>';
-//var_dump($this->phases);
-foreach ($this->phases as $phases)
+    echo 'No phases yet';
+}
+{
+    
+    foreach ($this->phases as $phases)
 :
 ?>
     
@@ -73,7 +87,7 @@ endforeach;
             
           
             
-
+<div class='tabContainer2' style="background-color:#E1FFE3">
 <form action="index.php?option=com_phase&controller=coach&phase=1" method="post" name="adminForm" \>
 <?php 
 JHTML::_('form.token'); 
@@ -94,3 +108,4 @@ $coachId = $user->id;
 <?="<br>"?><?="<br>"?>
 <input type="submit" value="Create" name="action"/>
 </form>
+</div>

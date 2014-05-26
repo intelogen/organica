@@ -117,7 +117,7 @@ class UserController extends JController
 
 		// store data
 		$model = $this->getModel('user');
-
+                
 		if ($model->store($post)) {
 			$msg	= JText::_( 'Your settings have been saved.' );
 		} else {
@@ -136,9 +136,20 @@ class UserController extends JController
 		$this->setRedirect( 'index.php' );
 	}
 
+        
+        
+        
+        
+        
+        
+        
+        
 	function login()
 	{
-		// Check for request forgeries
+	
+            
+
+                // Check for request forgeries
 		JRequest::checkToken('request') or jexit( 'Invalid Token' );
 
 		global $mainframe;
@@ -157,10 +168,18 @@ class UserController extends JController
 		$credentials = array();
 		$credentials['username'] = JRequest::getVar('username', '', 'method', 'username');
 		$credentials['password'] = JRequest::getString('passwd', '', 'post', JREQUEST_ALLOWRAW);
+                
+                
+                
 
 		//preform the login action
-		$error = $mainframe->login($credentials, $options);
-
+		
+                $error = $mainframe->login($credentials, $options);
+                
+                
+                
+                
+                
 		if(!JError::isError($error))
 		{
 			// Redirect if the return url is not registration or login
@@ -176,12 +195,34 @@ class UserController extends JController
 			if ( ! $return ) {
 				$return	= 'index.php?option=com_user&view=login';
 			}
-
+                        
+                        
+                        
 			// Redirect to a login form
-			$mainframe->redirect( $return );
+			
+                        $mainframe->redirect( $return );
+                        
 		}
+  
+           
 	}
 
+        
+  
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 	function logout()
 	{
 		global $mainframe;

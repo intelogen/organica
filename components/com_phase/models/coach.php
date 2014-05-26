@@ -12,8 +12,7 @@ class PhaseModelCoach extends JModel
      
      function getClients($coachId)
      {
-         
-         $query = "SELECT uid, firstname, lastname FROM #__jf_persons WHERE company = (SELECT id FROM #__jf_companies WHERE owner = $coachId) AND uid NOT IN ($coachId)";
+         $query = "SELECT uid, firstname, lastname FROM #__jf_persons WHERE company = (SELECT id FROM #__jf_companies WHERE owner = $coachId) AND uid NOT IN ($coachId) ORDER BY firstname";
          return $this->_getList($query);
      }
      
@@ -162,9 +161,6 @@ class PhaseModelCoach extends JModel
     
     function addTask()
     {
-        echo '<pre>';
-        var_dump(JRequest::get('post'));
-        
         $row = & JTable::getInstance('Checklist');
         $row->load();
         
@@ -172,7 +168,6 @@ class PhaseModelCoach extends JModel
        $row->pid = JRequest::getVar('phaseId');
        $row->summary = JRequest::getVar('newSummary');
        $row->description = JRequest::getVar('newDescription');
-       var_dump($row);
        
 
 
@@ -207,7 +202,16 @@ return true;
         $row->load(JRequest::getVar('id'));
         
         $data = JRequest::get('post');
+        //echo '<pre>';
+        //var_dump($data);
         
+        $file  = JRequest::get("files");
+        $file_1_name =$file["filename"]["name"];
+        
+        $file_1_name = time()."_".$file_1_name;
+        $file_1_tmp_path =$file["filename"]["tmp_name"];
+        
+        $result_1 = move_uploaded_file($file_1_tmp_path,"uploads_jtpl".DS."coaches".DS.$file_1_name);
         
         if (!$row->bind($data))
         {
@@ -215,7 +219,9 @@ return true;
         return false;
         }
         
-         if (!$row->check())
+        $row->Image = $file_1_name;
+        
+        if (!$row->check())
         {
         $this->setError($this->_db->getErrorMsg());
         return false;
@@ -228,7 +234,7 @@ return true;
         }
     
     return true;
-        
+      
     }
 }
 ?>

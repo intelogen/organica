@@ -53,8 +53,9 @@ class PhaseViewAdmin extends JView
         foreach ($userInfo as $value)
         {
         $userId = $value->id;
-        $userName = $value->name.' '.$value->username;
+        $userName = $value->name;
         }
+        
         
         
         $addCoachResult = $model->addCoach($userId, $userName);

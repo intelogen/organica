@@ -76,8 +76,12 @@ class JforceModelPhase extends JModel {
             
             return false;
         }
+        
         if($src && file_exists($src)){
 
+            
+            
+            
             $user = JFactory::getUser();            
             $destination = $user->id."__".time()."__".$filename;            
             $result = move_uploaded_file($src,"uploads_jtpl".DS."phase_details".DS.$destination);
@@ -604,7 +608,10 @@ class JforceModelPhase extends JModel {
     function save_progress_tracking($post_array)
     {
         global $mainframe;
-
+        
+        
+        
+        
         //$time = time();
         $user = JFactory::getUser();
 
@@ -679,6 +686,7 @@ class JforceModelPhase extends JModel {
 
         $tracking_values_arr = array();
 
+       
         if(is_array($tracking)){
             foreach($tracking as $t_category=>$t_results){
                 foreach($t_results as $t_variable=>$t_value){
@@ -700,17 +708,30 @@ class JforceModelPhase extends JModel {
             $this->_db->query();
         }
 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         // saving uploaded photo
-
+        
         $file  = JRequest::get("files");
+        
+        
+        
         if(!empty($file)) {
             $srcfile = $file["filename"]["tmp_name"];
             $this->upload_phase_photo($srcfile,$file["filename"]["name"],$pid);
         }
-
+        
         //$mainframe->redirect($post_array["step_redirection_link"]);
         //mdie($post_array);
-        return array('msgtype'=>'message', 'message'=>'Data is saved successfully', 'cur_phase'=>$pid);
+        //return array('msgtype'=>'message', 'message'=>'Data is saved successfully', 'cur_phase'=>$pid);
 
     }
 
@@ -719,6 +740,22 @@ class JforceModelPhase extends JModel {
     * 
     * @param mixed $post_array
     */
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     function mark_phase_step_completed($post_array){                
         global $mainframe;
         
@@ -1608,6 +1645,7 @@ class JforceModelPhase extends JModel {
 
     function _getBodyScorePercents($answers_str)
     {
+        
         $db =& $this->_db;
         // get categories rankings based on obtained answers
         $cat_query = "SELECT category_id AS catid, COUNT(*) AS amount FROM #__jf_jtpl_survey_bs_xref
@@ -1615,7 +1653,9 @@ class JforceModelPhase extends JModel {
                   GROUP BY category_id";
         $db->setQuery($cat_query);
         $cats_q_ranks = $db->loadAssocList();
-
+        
+        
+        
         // get categories max rankings
         $max_query = "SELECT category_id AS catid, bs_c.category_name AS catname,
                           bs_c.vm_category_id AS vm_catid, COUNT(*) AS amount
@@ -1624,6 +1664,9 @@ class JforceModelPhase extends JModel {
                       GROUP BY category_id";
         $db->setQuery($max_query);
         $cats_max_ranks = $db->loadAssocList();
+        
+        
+        
 
         // calculating percentage for each category
         $percents = array();
@@ -1637,8 +1680,12 @@ class JforceModelPhase extends JModel {
                 'percent' => round(($q_amount / $cats_max_ranks[$i]['amount']) * 100)
             );
         }
-
+        
+        
+       
+        
         return $percents;
+       
     }
 
     function getBodyScoreChartData($percents) {
@@ -1697,14 +1744,20 @@ class JforceModelPhase extends JModel {
         $sql = "SELECT survey_value FROM #__jf_jtpl_survey_details WHERE survey_variable = 'bodyscore_evaluation' AND user_id = $user_id AND project_id = $phase_id";
         $db->setQuery($sql);
         $ids = $db->loadResult();
-
+        
         $phase->bodyscore = new stdClass();
         $phase->bodyscore->answers = explode(',', $ids);
-        // get data for chart
+        
+        
+
+
+// get data for chart
         if($ids) {
             $percents = $this->_getBodyScorePercents($ids);
-            $chartdata = $this->getBodyScoreChartData($percents);
 
+            
+            $chartdata = $this->getBodyScoreChartData($percents);
+            
             $bs_chart = new stdClass();
             $bs_chart->cats = json_encode($chartdata['cats']);
             $bs_chart->vals = json_encode($chartdata['vals']);
@@ -1714,6 +1767,12 @@ class JforceModelPhase extends JModel {
             $phase->bodyscore->chart = false;
         }
 
+
+        
+        
+        
+        
+        
         // get intake evaluation
         // intake
         $phase->intake = new stdClass();

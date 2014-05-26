@@ -1,5 +1,6 @@
 <?php
-
+global $mainframe;
+$mainframe->redirect("index.php?option=com_phase");
 /**********************************************************************************
 *	@package		Joomla														  *
 *	@subpackage		jForce, the Joomla! CRM										  *

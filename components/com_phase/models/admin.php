@@ -24,7 +24,7 @@ class PhaseModelAdmin extends JModel
      //1 вывод кандидатов на пост тренера
      function userList()
      {
-         $query = "SELECT * FROM #__users WHERE id NOT IN(SELECT owner FROM jos_jf_companies) AND usertype = 'Registered'";
+         $query = "SELECT * FROM #__users WHERE id NOT IN(SELECT owner FROM jos_jf_companies)";
          return $this->_getList($query);
      }
      

@@ -271,7 +271,6 @@ class PhaseViewCoach extends JView
         }
         $model = $this->getModel();
         $result = $model->edit_coach();
-        
         if ($result)
         {
             $msg = JText::_('Information edit');
@@ -285,6 +284,9 @@ class PhaseViewCoach extends JView
         
         
         parent::display($tpl);
+    
     }
+    
+    
 }
 ?>

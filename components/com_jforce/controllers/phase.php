@@ -331,15 +331,18 @@ class JforceControllerPhase extends JController {
     function save_progress_tracking(){
         JRequest::checkToken() or die( 'Invalid Token' );
         $post = JRequest::get("post");
-
+        
+        
         global $mainframe;
 
         $phase_model = JModel::getInstance("phase","JForceModel");
-
+        
         $result = $phase_model->save_progress_tracking($post);
+        /*
         $uri = JURI::root()."index.php?option=com_jforce&view=phase&layout=evaluation&pid=".$result['cur_phase'];
         $mainframe->redirect($uri,$result['message'], $result['msgtype']);
         return true;
+        */
     }
     
     /**

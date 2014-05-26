@@ -16,7 +16,7 @@ jimport('joomla.application.component.view');
 
 class JforceViewPhase extends JView {
 	
-	function display($tpl = null) {
+    function display($tpl = null) {
         global $mainframe;
 
         $document =& JFactory::getDocument();
@@ -97,6 +97,7 @@ class JforceViewPhase extends JView {
             
             //$this->assign("survey_name",$survey_name);
             //$this->assignRef("survey_questions",$survey_questions);
+            
             
             $this->assignRef("body_score_questions",$model->get_body_score_questions("",true));
             //$this->assignRef("body_score_answers",$model->get_body_score_answers());
@@ -268,7 +269,7 @@ class JforceViewPhase extends JView {
         $this->assignRef("body_score_answers",$model->get_body_score_answers());
     }
 
-	function _displayResults($tpl)
+    function _displayResults($tpl)
 	{
         $model = &$this->getModel();
 		
@@ -309,6 +310,10 @@ class JforceViewPhase extends JView {
     function _display_purchase($tpl){
         parent::display($tpl);
     }
+    
+    
+    
+    
     function _display_evaluation($tpl){
         $model = &$this->getModel();                         
 
@@ -325,7 +330,8 @@ class JforceViewPhase extends JView {
         $phase_id = $this->pid;
 
         $tracking = $model->getProgressTrackingDetails($user_id, $phase_id);
-
+        
+        
         //mdie($tracking);
         $options = array('same', 'eliminated', 'better', 'new');
 
@@ -333,12 +339,21 @@ class JforceViewPhase extends JView {
             'evaluation[submission]', 'submission_date', '%d-%m-%Y');
 
         $this->assignRef("calendar", $calendar);
+
         $this->assignRef("tracking", $tracking);
         //$this->assignRef('tvals', $model->getProgressTrackingDetails());
         $this->assignRef('opts', $options);
         
         parent::display($tpl);
     }
+    
+    
+    
+    
+    
+    
+    
+    
     function _display_signoff($tpl){
         $model = &$this->getModel();
         

@@ -1,15 +1,16 @@
 <?php defined( '_JEXEC' ) or die( 'Restricted access' ); 
 $editor = & JFactory::getEditor();?>
 
-<?php
-//echo '<pre>';
-//var_dump($this->userPhases);
-?>
 
-<?php
-//echo '<pre>';
-//var_dump($this->count[3177]);
-?>
+
+<div class='tabContainer2' style="background-color:#E1FFE3">
+<div class='contentheading'>
+<a href="index.php?option=com_phase&controller=client&action=lastintake">First survey</a>    
+</div>
+</div>
+<?="<br>"?>
+
+
 
 <form action="index.php?option=com_phase&controller=client&phase=1" method="post" name="adminForm" \>
 
@@ -52,8 +53,8 @@ $editor = & JFactory::getEditor();?>
        echo "Status: Phase in progress" ;    
     }
     
-    echo '<br>';
-    echo '<br>';
+    echo '<br>Description : ';
+    echo $userPhases->description;
     ?>
     
     </div>

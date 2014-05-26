@@ -92,7 +92,7 @@ class UserModelUser extends JModel
 	{
 		$user		= JFactory::getUser();
 		$username	= $user->get('username');
-
+                
 		// Bind the form fields to the user table
 		if (!$user->bind($data)) {
 			$this->setError($this->_db->getErrorMsg());
@@ -119,6 +119,7 @@ class UserModelUser extends JModel
 		}
 
 		return true;
+                
 	}
 
 	/**

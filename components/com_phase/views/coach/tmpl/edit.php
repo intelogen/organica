@@ -5,8 +5,7 @@
 
 if($this->phaseData)
 {
-    //echo '<pre>';
-    //var_dump($this->phaseData);
+
     $editor = & JFactory::getEditor();
 ?>    
 <form action="index.php?option=com_phase&controller=coach&action=edit_phase" method="post" name="adminForm" \>
@@ -23,7 +22,7 @@ if($this->phaseData)
     <?='<br>'?>
     
     <?='<br>Description:<br>'?>
-    <?php echo $editor->display('description', $this->phaseData->description, '90%', '300', '60', '20');   ?>
+    <?php echo $editor->display('description', $this->phaseData->description, '90%', '500', '60', '20');   ?>
     
     
     
@@ -40,13 +39,8 @@ if($this->phaseData)
 }
 ?>
 
-<?php
-//echo '<pre>';
-//var_dump($this->taskContent);
-?>
-<?php
 
-
+<?php
 if($this->taskContent)
 {
     $editor = & JFactory::getEditor();
@@ -54,12 +48,14 @@ if($this->taskContent)
 <form action="index.php?option=com_phase&controller=coach&action=edit_task" method="post" name="adminForm" \>
     
     <input type="hidden" name="id" value="<?=$this->taskContent->id?>" />
+    <input type="hidden" name="pid" value="<?=$this->taskContent->pid?>" />
+    
     
         <?='Name:<br>'?>
     <input type="text" size="83%" name="name" value="<?=$this->taskContent->summary?>" />
     
         <?='<br>Description:<br>'?>
-    <?php echo $editor->display('description', $this->taskContent->description, '90%', '300', '60', '20');   ?>
+    <?php echo $editor->display('description', $this->taskContent->description, '90%', '500', '60', '20');   ?>
     
 
     

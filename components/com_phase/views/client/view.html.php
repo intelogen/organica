@@ -3122,7 +3122,47 @@ class PhaseViewClient extends JView
         $phases_id = $model->getPhasesId($uid);
         $this->assignRef('phases', $phases_id);
         
+        parent::display($tpl);
+    }
+    
+    
+    function show_repo_total($tpl = null)
+    {
+        $model = $this->getModel();
         
+        if(JRequest::getVar('c'))
+        {
+            $uid = JRequest::getVar('c');
+        }
+        else
+        {
+            $user =& JFactory::getUser();
+            $uid = $user->id;
+        }
+        
+        
+        $target = $model->getTargets($uid);
+        $target = $this->parseTargets($target);
+        $this->assignRef('target', $target);
+        
+        $current = $model->getIntakeData($uid);
+        
+        
+        $result[body] = explode(",", $current[1][val]);
+        $this->assignRef('current', $result);
+        
+        
+        
+        
+        
+        //
+        $bmi[weight] = $target[target_body][0]*1;
+        $bmi[height] = ($target[target_height][0].".".$target[target_height][1]);
+        $bmi[height] = (float)$bmi[height]*12;
+        $bmi[height] = $bmi[height]*$bmi[height];
+        $bmi = ($bmi[weight]/$bmi[height])*703;
+        $bmi = (int)$bmi;
+        // взял не те данные нужно $current
         
         
         
@@ -3132,6 +3172,14 @@ class PhaseViewClient extends JView
         parent::display($tpl);
     }
     
+    function parseTargets($target)
+    {
+        $result[target_height] = explode(",", $target[3][val]);
+        $result[target_body] = explode(",", $target[0][val]);
+        $result[blood_type] = $target[6][val];
+        $result[target_bmi] = "18,5 - 25";
+        return $result;
+    }
     
     
 }

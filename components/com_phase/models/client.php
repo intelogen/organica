@@ -1584,10 +1584,16 @@ class PhaseModelClient extends JModel
     }
     
     
+    function getTargets($uid)
+    {
+        $db =& $this->_db;
+        $query = "SELECT name, val FROM  #__jf_my_lastintake WHERE uid = $uid AND pid = 0";
+        $ids = $this->_getList($query);
+        $db->setQuery($query);
+        return  $db->loadAssocList(); 
+    }
     
-    
-    
-    
+  
     
     
     

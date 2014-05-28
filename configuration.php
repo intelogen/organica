@@ -13,7 +13,7 @@ class JConfig {
 	var $feed_email = 'author';
 	var $secret = 'TrBMieG7F6Bgeu0c';
 	var $gzip = '0';
-	var $error_reporting = '7';
+	var $error_reporting = '-1';
 	var $xmlrpc_server = '0';
 	var $log_path = '/var/www/maximlife/logs';
 	var $tmp_path = '/var/www/maximlife/temp';

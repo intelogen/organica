@@ -229,6 +229,8 @@ endif;
 
 
 
+    
+    
 <?php
 if($this->trackingStart){  ?>
     <!-- Body score chart initialization -->

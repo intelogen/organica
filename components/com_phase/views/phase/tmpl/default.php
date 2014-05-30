@@ -15,3 +15,11 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 </p>
 
 
+<p>
+<a href="index.php?option=com_phase&controller=meal">MEAL COMPONENT(in progress)</a>
+</p>
+
+
+<p>
+<a href="index.php?option=com_phase&controller=workout">WORKOUT COMPONENT(in progress)</a>
+</p>

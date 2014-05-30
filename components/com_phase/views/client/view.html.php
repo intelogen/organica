@@ -2995,10 +2995,7 @@ class PhaseViewClient extends JView
         $numbers = implode(",", $content[life_style]);
         $trackingStart = $model->getProgressTrackingDetails($uid, $pid, $numbers);
         $this->assignRef('trackingStart', $trackingStart);
-        
-        
-        
-        
+           
         
         
         parent::display($tpl);
@@ -3130,6 +3127,10 @@ class PhaseViewClient extends JView
     {
         $model = $this->getModel();
         
+        
+
+        
+        
         if(JRequest::getVar('c'))
         {
             $uid = JRequest::getVar('c');
@@ -3153,16 +3154,14 @@ class PhaseViewClient extends JView
         
         
         
+        $bodyHistory = $model->getBodyHistory($uid, "body");
+        $this->assignRef('bodyHistory', $bodyHistory);
         
         
-        //
-        $bmi[weight] = $target[target_body][0]*1;
-        $bmi[height] = ($target[target_height][0].".".$target[target_height][1]);
-        $bmi[height] = (float)$bmi[height]*12;
-        $bmi[height] = $bmi[height]*$bmi[height];
-        $bmi = ($bmi[weight]/$bmi[height])*703;
-        $bmi = (int)$bmi;
-        // взял не те данные нужно $current
+        
+        
+        
+        
         
         
         

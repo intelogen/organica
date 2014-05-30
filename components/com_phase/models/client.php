@@ -1593,7 +1593,15 @@ class PhaseModelClient extends JModel
         return  $db->loadAssocList(); 
     }
     
-  
+    
+    function getBodyHistory($uid, $name)
+    {
+        $db =& $this->_db;
+        $query = "SELECT val, date, pid FROM  #__jf_my_lastintake WHERE uid = $uid AND name = '$name' ";
+        $ids = $this->_getList($query);
+        $db->setQuery($query);
+        return $db->loadAssocList(); 
+    }
     
     
     

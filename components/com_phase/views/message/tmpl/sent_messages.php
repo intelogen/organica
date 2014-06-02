@@ -28,7 +28,8 @@ if($this->sent and $this->sent > 0)
         {
         $value->subject = "Read massege";
         }
-    ?>    
+    ?>   
+    <div class='message-content'>
         <div class='message-user'>
         <?= $this->usersIdName[$value->mto] ?>
         </div>
@@ -38,6 +39,7 @@ if($this->sent and $this->sent > 0)
         <div class='message-date'>
         <?= $value->created ?>
         </div>
+    </div>
     <?php    
     }
 }

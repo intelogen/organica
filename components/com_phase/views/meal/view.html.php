@@ -20,6 +20,16 @@ class PhaseViewMeal extends JView
     }
     
     
+    function mealplan($tpl = null)
+    {
+        parent::display($tpl);
+    }
+    
+    function mealplancreate($tpl = null)
+    {
+        parent::display($tpl);
+    }
+    
     
     
 }

@@ -29,6 +29,7 @@ if($this->newMessage and $this->newMessage > 0)
         $value->subject = "Read massege";
         }
         ?>
+    <div class='message-content'>
         <div class='message-user'>
         <?=$this->usersIdName[$value->mfrom]?>
         </div>
@@ -38,6 +39,7 @@ if($this->newMessage and $this->newMessage > 0)
         <div class='message-date'>
         <?= $value->created ?>
         </div>
+    </div>
 <?php
     }
 }

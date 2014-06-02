@@ -1,9 +1,5 @@
 <?php defined( '_JEXEC' ) or die( 'Restricted access' );?>
 
-<?php
-//echo '<pre>';
-//var_dump($this->coachInfo);
-?>
 <div class='tabContainer2' style="background-color:#E1FFE3">
 
 <?php
@@ -11,14 +7,24 @@
 foreach ($this->coachInfo as $coachInfo)
 :
 ?>
-            <div class='contentheading'>
-<?= $coachInfo->name."<br>";?>
-            </div>
-<?= "Phone - ".$coachInfo->phone."<br>";?>
-<?= "Fax - ".$coachInfo->fax."<br>";?>
-<?= "Homepage - ".$coachInfo->homepage."<br>";?>
-<?= "IMG - ".$coachInfo->image."<br>";?>
 
+    <div class='user-name'>
+<?= $coachInfo->name."<br>";?>
+    </div>
+
+    <div class='user-data'>
+<?= "Phone - ".$coachInfo->phone."<br>";?>
+    </div>
+    <div class='user-data'>
+<?= "Fax - ".$coachInfo->fax."<br>";?>
+    </div>
+    <div class='user-data'>
+<?= "Homepage - ".$coachInfo->homepage."<br>";?>
+    </div>
+    <div class='user-data'>
+<?= "IMG - ".$coachInfo->image."<br>";?>
+    </div>
+    <div class='user-img'>
     <?php
     if($coachInfo->image):
     echo "  <div style='font-size:15px;color:#008;'>
@@ -31,4 +37,5 @@ foreach ($this->coachInfo as $coachInfo)
 endforeach;
 
 ?>
+        </div>
 </div>

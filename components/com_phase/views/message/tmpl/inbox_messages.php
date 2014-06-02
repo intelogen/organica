@@ -1,51 +1,69 @@
 <?php defined( '_JEXEC' ) or die( 'Restricted access' ); ?>
 
 
-
-
-<img src="/images/icons/inbox_message.jpg">
 <div class='contentheading'>
-<?="My Message<br>"?>
+My Message
 </div>
 
-<a href="index.php?option=com_phase&controller=message&action=create_message">Create message -</a>
-<a href="index.php?option=com_phase&controller=message&action=inbox_messages">Inbox messages -</a>
+<div class='message-menu-conteiner'>
+<div class='message-menu'>
+<a href="index.php?option=com_phase&controller=message&action=create_message">Create message</a>
+</div>
+<div class='message-menu'>
+<a href="index.php?option=com_phase&controller=message&action=inbox_messages">Inbox messages</a>
+</div>
+<div class='message-menu'>
 <a href="index.php?option=com_phase&controller=message&action=sent_messages">Sent messages</a>  
+</div>
+</div>
 
 
 
-
-<div class='tabContainer2' style="background-color:#E1FFE3">
-<div class='tabContainer2' style="background-color:#E1FFE3">
-new message
+<div class='message-conteiner'>
+    
+<div class='new-message-conteiner' style="background-color:#E1FFE3">
+<div class='message-title'>
+    new message
+</div>
 <?php
-echo '<br>';
 if($this->newMessage and $this->newMessage > 0)
 {
     foreach ($this->newMessage as $value)
     {
-        echo $this->usersIdName[$value->mfrom];
         if(empty($value->subject))
         {
         $value->subject = "Read massege";
         }
-        echo "<a href='index.php?option=com_phase&controller=message&action=read_messages&id=$value->id'>$value->subject</a>";
-        echo $value->created."<br>";
+    ?>
+        <div class='message-user'>
+        <?= $this->usersIdName[$value->mfrom] ?>
+        </div>
+        <div class='message-subject'>
+        <?= "<a href='index.php?option=com_phase&controller=message&action=read_messages&id=$value->id'>$value->subject</a>" ?>
+        </div>
+        <div class='message-date'>
+        <?= $value->created ?>
+        </div>
+    <?php
     }
 }
 else
 {
-    echo "you don't have any new message now";
+?>
+    <div class='message-title'>
+    <?="you don't have any new message now"?>
+    </div>
+<?php
 }
 ?> 
 </div>
-<div class='tabContainer2' style="background-color:#E1FFE3">   
-All message
+    
+<div class='all-message-conteiner' style="background-color:#E1FFE3">
+    <div class='message-title'>
+        All message
+    </div>
 <?php
 
-
-
-echo '<br>';
 if($this->inbox and $this->inbox > 0)
 {
     foreach ($this->inbox as $value)
@@ -55,16 +73,28 @@ if($this->inbox and $this->inbox > 0)
         {
         $value->subject = "Read massege";
         }
-    
-        echo $this->usersIdName[$value->mfrom];
-        echo "<a href='index.php?option=com_phase&controller=message&action=read_messages&id=$value->id'>$value->subject</a>";
-        echo $value->created."<br>";
+    ?>
+        <div class='message-user'>
+        <?= $this->usersIdName[$value->mfrom]?>
+        </div>
+        <div class='message-subject'>
+        <?= "<a href='index.php?option=com_phase&controller=message&action=read_messages&id=$value->id'>$value->subject</a>"?>
+        </div>
+        <div class='message-date'>
+        <?= $value->created."<br>"?>
+        </div>
+    <?php    
     }
 }
 else
 {
-    echo "you do not have read messages";
+?>    
+    <div class='message-title'>
+    <?= "you do not have read messages"?>
+    </div>
+<?php    
 }
 ?>   
 </div>
+    
 </div>

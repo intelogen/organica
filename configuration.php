@@ -1,7 +1,7 @@
 <?php
 class JConfig {
 	var $offline = '0';
-	var $editor = 'tinymce';
+	var $editor = 'jce';
 	var $list_limit = '20';
 	var $helpurl = 'http://help.joomla.org';
 	var $debug = '0';
@@ -15,14 +15,14 @@ class JConfig {
 	var $gzip = '0';
 	var $error_reporting = '-1';
 	var $xmlrpc_server = '0';
-	var $log_path = '/var/www/maximlife/logs';
-	var $tmp_path = '/var/www/maximlife/temp';
+	var $log_path = '/var/';
+	var $tmp_path = '/var/www/maximlife/tmp';
 	var $live_site = '';
 	var $force_ssl = '0';
 	var $offset = '0';
 	var $caching = '0';
 	var $cachetime = '15';
-	var $cache_handler = 'apc';
+	var $cache_handler = 'file';
 	var $memcache_settings = array();
 	var $ftp_enable = '0';
 	var $ftp_host = '127.0.0.1';
@@ -32,8 +32,8 @@ class JConfig {
 	var $ftp_root = '';
 	var $dbtype = 'mysql';
 	var $host = 'localhost';
-	var $user = 'maximlife2';
-	var $db = 'maximlife2';
+	var $user = 'root';
+	var $db = 'localhost';
 	var $dbprefix = 'jos_';
 	var $mailer = 'mail';
 	var $mailfrom = 'frost_artem@yahoo.com';
@@ -49,7 +49,7 @@ class JConfig {
 	var $MetaTitle = '1';
 	var $lifetime = '100';
 	var $session_handler = 'none';
-	var $password = 'EhbMyW7YFuccjv3Y';
+	var $password = '';
 	var $sitename = 'Maxim Health System';
 	var $MetaDesc = 'Maxim Health System';
 	var $MetaKeys = 'Maxim Health System';

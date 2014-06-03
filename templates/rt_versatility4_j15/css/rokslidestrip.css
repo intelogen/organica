@@ -332,4 +332,14 @@ form .order{
 .contentpaneopen tbody tr td span table tbody tr td:nth-child(3){
     width: 300px !important;
 }
-#phocagallery-categories-detail div fieldset
+.tabContainer2{
+    position: relative;
+}
+.tabContainer2 a {
+    display: inline-block;
+    margin: 0 20px 0 0;
+    text-align: right;
+    width: 300px;
+    position: absolute;
+    right: 210px;
+}

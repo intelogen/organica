@@ -2,14 +2,23 @@
 
 
 <div class='contentheading'>
-<?="My Message<br>"?>
+My Message
 </div>
 
-<a href="index.php?option=com_phase&controller=message&action=create_message">Create message -</a>
-<a href="index.php?option=com_phase&controller=message&action=inbox_messages">Inbox messages -</a>
+<div class='message-menu-conteiner'>
+<div class='message-menu'>
+<a href="index.php?option=com_phase&controller=message&action=create_message">Create message</a>
+</div>
+<div class='message-menu'>
+<a href="index.php?option=com_phase&controller=message&action=inbox_messages">Inbox messages</a>
+</div>
+<div class='message-menu'>
 <a href="index.php?option=com_phase&controller=message&action=sent_messages">Sent messages</a>  
+</div>
+</div>
 
-<div class='tabContainer2' style="background-color:#E1FFE3">
+
+<div class='message-conteiner'>
 <?php
 if($this->sent and $this->sent > 0)
 {
@@ -19,15 +28,28 @@ if($this->sent and $this->sent > 0)
         {
         $value->subject = "Read massege";
         }
-        
-        echo $this->usersIdName[$value->mto];
-        echo "<a href='index.php?option=com_phase&controller=message&action=read_messages&id=$value->id&sent=1'>$value->subject</a>";
-        echo $value->created."<br>";
+    ?>   
+    <div class='message-content'>
+        <div class='message-user'>
+        <?= $this->usersIdName[$value->mto] ?>
+        </div>
+        <div class='message-subject'>
+        <?= "<a href='index.php?option=com_phase&controller=message&action=read_messages&id=$value->id&sent=1'>$value->subject</a>" ?>
+        </div>
+        <div class='message-date'>
+        <?= $value->created ?>
+        </div>
+    </div>
+    <?php    
     }
 }
 else
 {
-    echo "you don't have any sent message now";
+?>
+    <div class='message-title'>
+    <?= "you don't have any sent message now" ?>
+    </div>
+<?php
 }
 ?>   
 </div>

@@ -7,9 +7,17 @@ $editor = & JFactory::getEditor();?>
 <?="My Message<br>"?>
 </div>
 
-<a href="index.php?option=com_phase&controller=message&action=create_message">Create message -</a>
-<a href="index.php?option=com_phase&controller=message&action=inbox_messages">Inbox messages -</a>
+<div class='message-menu-conteiner'>
+<div class='message-menu'>
+<a href="index.php?option=com_phase&controller=message&action=create_message">Create message</a>
+</div>
+<div class='message-menu'>
+<a href="index.php?option=com_phase&controller=message&action=inbox_messages">Inbox messages</a>
+</div>
+<div class='message-menu'>
 <a href="index.php?option=com_phase&controller=message&action=sent_messages">Sent messages</a>  
+</div>
+</div>
 
 
 
@@ -20,21 +28,34 @@ $editor = & JFactory::getEditor();?>
 
 
     
-<div class='tabContainer2' style="background-color:#E1FFE3">    
+<div class='message-conteiner'>
 <?php
 if($this->result and $this->result > 0)
 {
     if(empty($this->result->subject))
     {
-        echo "Subject: no subject";
+    ?>    
+    <div class='message-subject'>
+        <?= "Subject: no subject" ?>
+    </div>
+    <?php    
     }
     else
     {
-        echo "Subject: ".$this->result->subject;        
+    ?>    
+    <div class='message-subject'>
+        <?= "Subject: ".$this->result->subject ?>
+    </div>
+    <?php
     }
-    
-    echo "<br>Created: ".$this->result->created;
-    echo "<br>Body: ".$this->result->body;
+?>
+    <div class='message-date'>
+    <?= "Created: ".$this->result->created ?>
+    </div>
+    <div class='message-body'>
+    <?= "Body: ".$this->result->body ?>
+    </div>
+<?php
 }
 ?> 
 </div>
@@ -56,7 +77,6 @@ if(!JRequest::getVar('sent'))
          
     <?='<br>Subject:'?>
     <input type="text" name="subject" size=73 value="<?="[Answer]-".$this->result->subject?>"/>
-    <?='<br>Body:'?>
     <?php echo $editor->display('body', "<br><br><br>Original msg:".$this->result->body." <br>From : ".$this->sendUserInfo, '90%', '300', '60', '20');   ?>
     <?="<br>"?>
     

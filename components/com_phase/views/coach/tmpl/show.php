@@ -1,58 +1,40 @@
-<?php defined( '_JEXEC' ) or die( 'Restricted access' ); 
-$editor = & JFactory::getEditor();?>
+<?php
+defined( '_JEXEC' ) or die( 'Restricted access' ); 
+$editor = & JFactory::getEditor();
+?>
 
-
-
-
-
-
-<div class='contentheading'>  
-<?="<br>Task list:"?>
-</div>
+<div class='contentheading'>  <?="<br>Task list:"?> </div>
 <?php
 if(count($this->taskList) == 0)
 :
     echo 'No task yet';
 else:
-?>
-
-
-
-<form action="index.php?option=com_phase&controller=coach&task=1" method="post" name="adminForm" \>
-
-    <?php
     if($this->taskList)
     {
-    foreach ($this->taskList as $taskList)
-    :
-    ?>
-    <div class='tabContainer2' style="background-color:#E1FFE3">
-    <div class='contentheading'>
-    <input type="radio" name="taskId" value="<?= $taskList->id;?> "><?=$taskList->summary;?> 
-    </div>
-    </div>
-    
-    
-    
-    <?php
-
-    endforeach;
+        foreach ($this->taskList as $taskList)
+        :
+        ?>
+            <form action="index.php?option=com_phase&controller=coach&task=1" method="post" name="adminForm" \>
+                <div class='tabContainer2' style="background-color:#E1FFE3">
+                <div class='contentheading'>
+                <input type="hidden" name="taskId" value="<?= $taskList->id;?>">
+                <input type="hidden" name="pid" value="<?= $taskList->pid;?>">
+                
+                <?=$taskList->summary;?>
+                </div>
+                <?=$taskList->description?>
+                <?="<br>"?>
+                <input type="submit" value="Edit" name="action"/>
+                <input type="submit" value="Delete" name="action"/>
+                </div>
+                <?phpJHTML::_('form.token');?>
+            </form>
+        <?php
+        endforeach;
     }
     ?>
 
-
-
-<?php 
-JHTML::_('form.token'); 
-echo '<br>';
-?>
-
-
     
-    
-<input type="submit" value="Edit" name="action"/>
-<input type="submit" value="Delete" name="action"/>
-</form>
 <?php
 endif;
 ?>

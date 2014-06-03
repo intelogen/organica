@@ -5,12 +5,17 @@ $editor = & JFactory::getEditor();?>
 <div class='contentheading'>
 <?="My Message<br>"?>
 </div>
-
-<a href="index.php?option=com_phase&controller=message&action=create_message">Create message -</a>
-<a href="index.php?option=com_phase&controller=message&action=inbox_messages">Inbox messages -</a>
+<div class='message-menu-conteiner'>
+<div class='message-menu'>
+<a href="index.php?option=com_phase&controller=message&action=create_message">Create message</a>
+</div>
+<div class='message-menu'>
+<a href="index.php?option=com_phase&controller=message&action=inbox_messages">Inbox messages</a>
+</div>
+<div class='message-menu'>
 <a href="index.php?option=com_phase&controller=message&action=sent_messages">Sent messages</a>  
-
-
+</div>
+</div>
 
 <div class='contentheading'>
 <?="New Message<br>"?>

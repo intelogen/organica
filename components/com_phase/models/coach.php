@@ -43,7 +43,7 @@ class PhaseModelCoach extends JModel
         $row = & JTable::getInstance('Projects');
         $row->load(JRequest::getVar('id'));
         $name = JRequest::getVar('name');
-        $description = JRequest::getVar('description');
+        $description = JRequest::getVar('description', 'no text', post, string, 5);
         $published = JRequest::getVar('published');
         
         
@@ -88,10 +88,10 @@ class PhaseModelCoach extends JModel
      {
         $row = & JTable::getInstance('Projects');
         $row->load();
-        $data = JRequest::get('post');
+        
         
         $row->name = JRequest::getVar('newName');
-        $row->description = JRequest::getVar('newDescription');
+        $row->description = JRequest::getVar('newDescription', 'no text', post, string, 5);
         $row->author = JRequest::getVar('coachId');
         $row->leader= JRequest::getVar('userId');
         $row->company= $coachCompanyId;
@@ -133,11 +133,11 @@ class PhaseModelCoach extends JModel
         $row->load(JRequest::getVar('id'));
         
         $row->set('summary', JRequest::getVar('name'));
-        $row->set('description', JRequest::getVar('description'));
-        echo'<pre>';
-
+        $row->set('description', JRequest::getVar('description', 'no text', post, string, 5));
         
 
+        
+        
         if(!$row->store())
         {
             $this->setError($this->_db->getErrorMsg());
@@ -145,7 +145,7 @@ class PhaseModelCoach extends JModel
         }
   
         return true;
-
+        
     }
     
     function deleteTask($taskId)
@@ -165,25 +165,23 @@ class PhaseModelCoach extends JModel
         $row->load();
         
         
-       $row->pid = JRequest::getVar('phaseId');
-       $row->summary = JRequest::getVar('newSummary');
-       $row->description = JRequest::getVar('newDescription');
+        $row->pid = JRequest::getVar('phaseId');
+        $row->summary = JRequest::getVar('newSummary');
+        $row->description = JRequest::getVar('newDescription', 'no text', post, string, 5);
        
-
-
         if (!$row->check())
         {
-        $this->setError($this->_db->getErrorMsg());
-        return false;
+            $this->setError($this->_db->getErrorMsg());
+            return false;
         }
 
         if (!$row->store()) 
         {
-        $this->setError($this->_db->getErrorMsg());
-        return false;
+            $this->setError($this->_db->getErrorMsg());
+            return false;
         }
 
-return true;
+        return true;
     }
     
     function edit_information($userId)
@@ -235,6 +233,15 @@ return true;
     
     return true;
       
+    }
+    
+    function getClienPhasesData($cid)
+    {
+        $db =& $this->_db;
+        $query = "SELECT val, date FROM  #__jf_my_lastintake WHERE uid = $cid AND name = 'body' ";
+        $ids = $this->_getList($query);
+        $db->setQuery($query);
+        return  $db->loadAssocList();
     }
 }
 ?>

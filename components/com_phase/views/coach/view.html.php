@@ -45,10 +45,8 @@ class PhaseViewCoach extends JView
         $user =& JFactory::getUser();
         $coachId = $user->id;
         
-        $phases = $model->getUserPhasees($userId, $coachId);
-        $this->assignRef('phases', $phases);
-        
-        
+        //$phases = $model->getUserPhasees($userId, $coachId);
+        //$this->assignRef('phases', $phases);
         
         parent::display($tpl);
     }
@@ -79,7 +77,7 @@ class PhaseViewCoach extends JView
                 echo 'Написать редирект';
             }
             
-            //var_dump( JRequest::get('post'));
+
             $taskContent = $model->getTaskContent(JRequest::getVar('taskId'));
             $this->assignRef('taskContent', $taskContent);
             
@@ -91,13 +89,11 @@ class PhaseViewCoach extends JView
     function edit_phase($tpl =null)
     {
         global $mainframe;
+        $userId = JRequest::getVar('userId');
         if(JRequest::getvar('cancel'))
             {
-            echo '<pre>';
-            var_dump(JRequest::get('post'));
-            
             $userId = JRequest::getVar('userId');
-            $mainframe->redirect("index.php?option=com_phase&controller=coach&action=show_user_info&userId=$userId");
+            $mainframe->redirect("index.php?option=com_phase&controller=coach&action=show_user_phases&userId=$userId");
             }
             
         $model = $this->getModel();
@@ -111,8 +107,8 @@ class PhaseViewCoach extends JView
         {
             $msg = JText::_('Phase not edit');
         }
-        $userId = JRequest::getVar('userId');
-        $mainframe->redirect("index.php?option=com_phase&controller=coach&action=show_user_info&userId=$userId", $msg);
+        
+        $mainframe->redirect("index.php?option=com_phase&controller=coach&action=show_user_phases&userId=$userId", $msg);
             
         parent::display($tpl);
     }
@@ -127,9 +123,10 @@ class PhaseViewCoach extends JView
              
             if(!$phaseId = JRequest::getVar('phaseId'))
             {
-                $mainframe->redirect("index.php?option=com_phase&controller=coach&action=show_user_info&userId=$userId", 'Phase not select');
+                $mainframe->redirect("index.php?option=com_phase&controller=coach&action=show_user_phases&userId=$userId", 'Phase not select');
             }
             
+           
             $model= $this->getModel();
             $result = $model->deletePhase($phaseId);
             
@@ -141,26 +138,29 @@ class PhaseViewCoach extends JView
         {
             $msg = JText::_('Phase not delete');
         }
-        $mainframe->redirect("index.php?option=com_phase&controller=coach&action=show_user_info&userId=$userId", $msg);
+        $mainframe->redirect("index.php?option=com_phase&controller=coach&action=show_user_phases&userId=$userId", $msg);
             
         }
         
         if(JRequest::getVar('task'))
         {
-            
+           $post = JRequest::get('post');
+           $pid = $post[pid];
+           
+        
             $taskId = JRequest::getVar('taskId');
             $model= $this->getModel();
             $result = $model->deleteTask($taskId);
             
             if ($result)
-        {
-            $msg = JText::_('Task delete');
-        }
-        else
-        {
-            $msg = JText::_('Task not delete');
-        }
-        $mainframe->redirect("index.php?option=com_phase&controller=coach&action=show_all_users", $msg);
+            {
+                $msg = JText::_('Task delete');
+            }
+            else
+            {
+                $msg = JText::_('Task not delete');
+            }
+            $mainframe->redirect("index.php?option=com_phase&controller=coach&action=show&phase=1&phaseId=$pid", $msg);
             
         }
         
@@ -171,15 +171,20 @@ class PhaseViewCoach extends JView
     function create($tpl = null)
     {
         global $mainframe;
+        
         if(JRequest::getVar('phase'))
         {
+              
             $model = $this->getModel();
             $coachCompanyId = $model->getCoachCompanyId(JRequest::getVar('coachId'));
             
             foreach ($coachCompanyId as $coachCompanyId) {$coachCompanyId = $coachCompanyId->id; }
             $result = $model->addPhase($coachCompanyId);
             
-            if ($result)
+            $clientId = JRequest::getVar('userId');
+            
+            
+        if ($result)
         {
             $msg = JText::_('Phase create');
         }
@@ -188,26 +193,29 @@ class PhaseViewCoach extends JView
             $msg = JText::_('Phase not create');
         }
         $userId = JRequest::getVar('userId');
-        $mainframe->redirect("index.php?option=com_phase&controller=coach&action=show_user_info&userId=$userId", $msg);
-           
+        $mainframe->redirect("index.php?option=com_phase&controller=coach&action=show_user_phases&userId=$clientId", $msg);
+        
         }
         
         if(JRequest::getVar('task'))
         {
             $model = $this->getModel();
+            
+            
+            $pid = JRequest::getVar('phaseId');
+            
             $result = $model->addTask();
             
             if ($result)
-        {
-            $msg = JText::_('Task save');
-        }
-        else
-        {
-            $msg = JText::_('Task not save');
-        }
-        $mainframe->redirect("index.php?option=com_phase&controller=coach&action=show_all_users", $msg);
-        
-        
+            {
+                $msg = JText::_('Task save');
+            }
+            else
+            {
+                $msg = JText::_('Task not save');
+            }
+            $mainframe->redirect("index.php?option=com_phase&controller=coach&action=show&phase=1&phaseId=$pid", $msg);
+            
         }
         
         
@@ -221,6 +229,8 @@ class PhaseViewCoach extends JView
             $phaseId = JRequest::getVar('phaseId');
             $model = $this->getModel();
             $taskList = $model->getTaskList(JRequest::getVar('phaseId'));
+            
+            
             $this->assignRef('taskList', $taskList);
             $this->assignRef('phaseId', $phaseId);   
         }
@@ -230,10 +240,15 @@ class PhaseViewCoach extends JView
     function edit_task($tpl = null)
     {
         global $mainframe;
+        
+        $post = JRequest::get('post');
+        $pid = $post[pid];
+        
         if(JRequest::getVar('cancel'))
         {
-            $mainframe->redirect("index.php?option=com_phase&controller=coach&action=show_all_users");
+            $mainframe->redirect("index.php?option=com_phase&controller=coach&action=show&phase=1&phaseId=$pid");
         }
+        
         $model = $this->getModel();
         $result = $model->editTask();
         
@@ -245,8 +260,8 @@ class PhaseViewCoach extends JView
         {
             $msg = JText::_('Task not save');
         }
-        $mainframe->redirect("index.php?option=com_phase&controller=coach&action=show_all_users", $msg);
-           
+        $mainframe->redirect("index.php?option=com_phase&controller=coach&action=show&phase=1&phaseId=$pid", $msg);
+          
         
         parent::display($tpl);
     }
@@ -287,6 +302,49 @@ class PhaseViewCoach extends JView
     
     }
     
+    function show_detail_repo($tpl = null)
+    {
+        $model = $this->getModel();
+        
+        if(JRequest::getVar('c'))
+        {
+            $cid = JRequest::getVar('c');
+        }
+        
+        $content = $model->getClienPhasesData($cid);
+        
+        foreach ($content as $value)
+        {
+            $c[] = $value[date].",".$value[val] ;
+        }
+        
+        foreach ($c as $value)
+        {
+            $data[] = explode(",", $value); 
+        }
+
+        
+        $this->assignRef('data', $data);
+        
+        parent::display($tpl);
+    }
+    
+    function show_user_phases($tpl = null)
+    {
+        $model = $this->getModel();
+        
+        $clientId = JRequest::getVar('userId');
+        $this->assignRef('clientId', $clientId);
+        
+        $user =& JFactory::getUser();
+        $coachId = $user->id;
+        $this->assignRef('coachId', $coachId);
+        
+        $phases = $model->getUserPhasees($clientId, $coachId);
+        $this->assignRef('phases', $phases);
+        
+        parent::display($tpl);
+    }
     
 }
 ?>

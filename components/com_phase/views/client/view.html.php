@@ -2995,10 +2995,7 @@ class PhaseViewClient extends JView
         $numbers = implode(",", $content[life_style]);
         $trackingStart = $model->getProgressTrackingDetails($uid, $pid, $numbers);
         $this->assignRef('trackingStart', $trackingStart);
-        
-        
-        
-        
+           
         
         
         parent::display($tpl);
@@ -3122,6 +3119,48 @@ class PhaseViewClient extends JView
         $phases_id = $model->getPhasesId($uid);
         $this->assignRef('phases', $phases_id);
         
+        parent::display($tpl);
+    }
+    
+    
+    function show_repo_total($tpl = null)
+    {
+        $model = $this->getModel();
+        
+        
+
+        
+        
+        if(JRequest::getVar('c'))
+        {
+            $uid = JRequest::getVar('c');
+        }
+        else
+        {
+            $user =& JFactory::getUser();
+            $uid = $user->id;
+        }
+        
+        
+        $target = $model->getTargets($uid);
+        $target = $this->parseTargets($target);
+        $this->assignRef('target', $target);
+        
+        $current = $model->getIntakeData($uid);
+        
+        
+        $result[body] = explode(",", $current[1][val]);
+        $this->assignRef('current', $result);
+        
+        
+        
+        $bodyHistory = $model->getBodyHistory($uid, "body");
+        $this->assignRef('bodyHistory', $bodyHistory);
+        
+        
+        
+        
+        
         
         
         
@@ -3132,6 +3171,14 @@ class PhaseViewClient extends JView
         parent::display($tpl);
     }
     
+    function parseTargets($target)
+    {
+        $result[target_height] = explode(",", $target[3][val]);
+        $result[target_body] = explode(",", $target[0][val]);
+        $result[blood_type] = $target[6][val];
+        $result[target_bmi] = "18,5 - 25";
+        return $result;
+    }
     
     
 }

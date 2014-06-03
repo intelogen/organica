@@ -31,7 +31,7 @@ for ($i = 0; $i < count($phases); $i++)
 $numb ++;
 }
 ?>
-<a href="index.php?option=com_phase&controller=client&action=show_repo&c=<?=$uid?>">Total Progress</a>
+<a href="index.php?option=com_phase&controller=client&action=show_repo_total&c=<?=$uid?>">Total Progress</a>
 </div>
     
 <div class='contentheading'>Intake Survey</div>   
@@ -229,6 +229,8 @@ endif;
 
 
 
+    
+    
 <?php
 if($this->trackingStart){  ?>
     <!-- Body score chart initialization -->

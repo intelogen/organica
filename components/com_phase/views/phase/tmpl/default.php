@@ -2,7 +2,15 @@
 defined( '_JEXEC' ) or die( 'Restricted access' );
 ?>
 
+<?php
 
+
+
+
+
+
+
+?>
 <p>
 <a href="index.php?option=com_phase&controller=admin">ADMIN</a>
 </p>

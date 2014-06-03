@@ -7,6 +7,7 @@
 foreach ($this->coachInfo as $coachInfo)
 :
 ?>
+    <div class='user-info-holder'>
 
     <div class='user-name'>
 <?= $coachInfo->name."<br>";?>
@@ -23,6 +24,7 @@ foreach ($this->coachInfo as $coachInfo)
     </div>
     <div class='user-data'>
 <?= "IMG - ".$coachInfo->image."<br>";?>
+    </div>
     </div>
     <div class='user-img'>
     <?php

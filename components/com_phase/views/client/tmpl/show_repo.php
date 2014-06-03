@@ -19,7 +19,7 @@ $count = count($phases);
 
 ?>
 <div class='contentheading'>Phases Navigation</div>
-<div class='tabContainer2' style="background-color:#E1FFE3">
+<div class='tabContainer2 phase-navigation' style="background-color:#E1FFE3">
 <a href="index.php?option=com_phase&controller=client&action=show_repo&c=<?=$uid?>">Intake Survey</a>
 <?php
 $numb = 1;

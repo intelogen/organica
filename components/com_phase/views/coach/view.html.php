@@ -346,5 +346,23 @@ class PhaseViewCoach extends JView
         parent::display($tpl);
     }
     
+    function edit_client_info($tpl = null)
+    {
+        $model = $this->getModel();
+        if(JRequest::getVar('c'))
+        {
+            $cid = JRequest::getVar('c');
+        }
+        
+        $content = $model->getAllPhasesData($cid);
+        
+        echo '<pre>';
+        var_dump($content);
+        echo '</pre>';
+        
+        parent::display($tpl);
+    }
+    
+    
 }
 ?>

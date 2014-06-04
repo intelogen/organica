@@ -1,7 +1,6 @@
 <?php defined( '_JEXEC' ) or die( 'Restricted access' );?>
 
 <div class='tabContainer2' style="background-color:#E1FFE3">
-
 <?php
 
 foreach ($this->coachInfo as $coachInfo)

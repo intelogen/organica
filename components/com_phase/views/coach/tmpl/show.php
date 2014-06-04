@@ -3,7 +3,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 $editor = & JFactory::getEditor();
 ?>
 
-<div class='contentheading'>  <?="<br>Task list:"?> </div>
+<div class='contentheading'>  <?="Task list:"?> </div>
 <?php
 if(count($this->taskList) == 0)
 :
@@ -24,8 +24,8 @@ else:
                 </div>
                 <?=$taskList->description?>
                 <?="<br>"?>
-                <input type="submit" value="Edit" name="action"/>
-                <input type="submit" value="Delete" name="action"/>
+                    <button class="button validate" type="submit" value="Edit" name="action"><?= "Edit tasks" ?></button>
+                    <button class="button validate" type="submit" value="Delete" name="action"><?= "Delete tasks" ?></button>
                 </div>
                 <?phpJHTML::_('form.token');?>
             </form>
@@ -42,7 +42,7 @@ endif;
 
 
 <div class='contentheading'>  
-<?="<br>Create newt task"?>
+<?="Create new task"?>
 </div>
 <div class='tabContainer2' style="background-color:#E1FFE3">
 <form action="index.php?option=com_phase&controller=coach&task=1" method="post" name="adminForm" \>
@@ -56,8 +56,8 @@ endif;
 
 <?="<br>"?><?="<br>"?>
     
-    
-<input type="submit" value="Create" name="action"/>
+<button class="button validate" type="submit" value="Create" name="action"><?= "Create new tasks" ?></button>    
+
 
 </form>
 </div>

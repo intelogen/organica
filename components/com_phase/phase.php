@@ -14,7 +14,7 @@ $document->addStyleSheet('components/com_phase/library/style.css');
 
 
 
-//var_dump( JRequest::get('post'));
+
 $controller = JRequest::getVar('controller');
 
 if($controller)

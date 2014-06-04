@@ -40,6 +40,10 @@ class PhaseViewPhase extends JView
         {
         $url = "index.php?option=com_phase&controller=client";
         }
+        elseif ($userId == 435)
+        {
+        $url = "index.php?option=com_phase&controller=client";
+        }
         elseif ($userId == 62)
         {
         $url = "index.php?option=com_phase&controller=admin";

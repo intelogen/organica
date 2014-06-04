@@ -40,10 +40,13 @@ if(count($this->phases) == 0)
     ?>
     <input type="hidden" name="userId" value="<?= $clientId ?>"/> 
     <input type="hidden" name="coachId" value="<?= $coachId ?>"/>
-    <input type="submit" value="Edit" name="action"/>
-    <input type="submit" value="Delete" name="action"/>
-    <input type="submit" value="Show" name="action"/>
-
+    
+    
+    <button class="button validate" type="submit" value="Edit" name="action"><?= "Edit phase" ?></button>
+    <button class="button validate" type="submit" value="Delete" name="action"><?= "Delete phase" ?></button>
+    <button class="button validate" type="submit" value="Show" name="action"><?= "Show tasks" ?></button>
+    
+    
         </div>
     </form>
     <?php

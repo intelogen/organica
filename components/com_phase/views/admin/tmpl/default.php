@@ -24,16 +24,13 @@ Furhter, you will be responsible for signing off the phases and assigning new ph
 <?="My Places<br>"?>
 </div>
     <div class='tabContainer2' style="background-color:#E1FFE3">
-    <div class='objectTitle'>
-<p>
+<div class='objectTitle'>
 <a href="index.php?option=com_phase&controller=admin&action=show_all_coaches">Show all coaches</a>
-</p>
-    </div>
-            <div class='objectTitle'>
-<p>
+</div>
+
+<div class='objectTitle'>
 <a href="index.php?option=com_phase&controller=admin&action=coach_users">Assign client to the coach</a>
-</p>
-            </div>
+</div>
     </div>
 
 

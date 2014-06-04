@@ -64,6 +64,10 @@ s#form-login div input.button,
 }
 #vmMainPage table tbody tr td{
     border: 10px solid transparent !important;
+    box-shadow: 0 0 2px rgba(0,0,0,0.3) inset !important;
+}
+#vmMainPage table tbody tr td:hover{
+    box-shadow: 0 0 5px rgba(0,0,0,0.3) !important;
 }
 #product_list{
     width: 100% !important;
@@ -436,6 +440,16 @@ form .order{
 .user-info-holder{
     float: left;
 }
+form .user-data{
+    display: block;
+    width: 210px;
+    text-align: right;
+    margin: 2.5px 0;
+}
+.user-info-holder .user-name{
+    font-size: 20px;
+    margin: 10px 20px 15px;
+}
 .tabContainer2 > form[enctype="multipart/form-data"] > .tabContainer2{
     background: #fff !important;
 }
@@ -449,36 +463,43 @@ form .order{
     width: calc(100% - 2px) !important;
     height: calc(100% - 1px) !important;
     left: 1px !important;
-    top: 0px !important;
+    top: 0 !important;
 }
 .phase-navigation a:hover{
     text-decoration: none;
 }
+.phase-navigation {
+    position: absolute;
+    top: 237px;
+    left: 281px;
+    width: 192px;
+    border: none;
+}
 .phase-navigation a{
-    display: inline-block;
-    background: #3F85CC;
-    padding: 0 10px;
-    height: 30px;
+    display: block;
+    background: #0094D6;
+    padding: 0px 10px;
     position: relative;
     color: #fff;
-    width: auto;
-    max-width: 200px;
+    width: 150px;
     position: relative;
     line-height: 30px;
     vertical-align: middle;
     z-index: 2;
-    margin-right: 20px;
+    margin: 2px 0px 2px 2px;
+    font-size: 14px;
+    left: 20px;
 }
 .phase-navigation a:after, .phase-navigation a:before{
     content: "";
     display: block;
     position: absolute;
-    right: -20px;
+    left: -19px;
     top: 1px;
     width: 0;
     height: 0;
     border-top: 14px solid transparent;
-    border-left: 20px solid #3F85CC;
+    border-right: 20px solid #0094D6;
     border-bottom: 14px solid transparent;
     z-index: 99999;
 }
@@ -486,22 +507,36 @@ form .order{
     background: #326AA3;
 }
 .phase-navigation a:after, .phase-navigation a:hover:before{
-    border-left-color: #326AA3;
+    border-right-color: #326AA3;
 }
 .phase-navigation{
-    background: #3F85CC !important;
+    background: #fff !important;
     padding: 0 !important;
 }
 .phase-navigation a:after, .phase-navigation a:after{
     content: "";
     display: block;
     position: absolute;
-    right: -21px;
+    left: -20px;
     top: 0;
     width: 0;
     height: 0;
     border-top: 15px solid transparent;
-    border-left: 21px solid #fff;
+    border-right: 21px solid #204469;
     border-bottom: 15px solid transparent;
     z-index: -1;
+}
+#maincontent-block > .contentheading:first-child{
+    position: absolute;
+    left: 304px;
+}
+.response-data{
+    display: inline-block;
+    min-width: 100px;
+}
+.response-name{
+    display: inline-block;
+    min-width: 80px;
+    text-align: right;
+    margin-right: 5px;
 }

@@ -14,16 +14,16 @@ foreach ($this->coachInfo as $coachInfo)
     </div>
 
     <div class='user-data'>
-<?= "Phone - ".$coachInfo->phone."<br>";?>
+<?= "<span class='response-name'>Phone - </span>"."<span class='response-data'>".$coachInfo->phone."</span>";?>
     </div>
     <div class='user-data'>
-<?= "Fax - ".$coachInfo->fax."<br>";?>
+<?= "<span class='response-name'>Fax - </span>"."<span class='response-data'>".$coachInfo->fax."</span>";?>
     </div>
     <div class='user-data'>
-<?= "Homepage - ".$coachInfo->homepage."<br>";?>
+<?= "<span class='response-name'>Homepage - </span>"."<span class='response-data'>"."<a href='$coachInfo->homepage'>".$coachInfo->homepage."</a></span>";?>
     </div>
     <div class='user-data'>
-<?= "IMG - ".$coachInfo->image."<br>";?>
+<?= "<span class='response-name'>IMG - </span>"."<span class='response-data'>".$coachInfo->image."</span>";?>
     </div>
     </div>
     <div class='user-img'>

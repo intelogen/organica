@@ -17,12 +17,18 @@ $phases = $this-> phases;
 $count = count($phases);
 
 ?>
+<<<<<<< HEAD
 
 <div class='contentheading'> Phases Navigation </div>
 <div class='menu-conteiner'>
     <div class='menu-pad'>
         <a href="index.php?option=com_phase&controller=client&action=show_repo&c=<?=$uid?>">Intake Survey</a>
     </div>
+=======
+<div class='contentheading'>Phases Navigation</div>
+<div class='tabContainer2 phase-navigation' style="background-color:#E1FFE3">
+<a href="index.php?option=com_phase&controller=client&action=show_repo&c=<?=$uid?>">Intake Survey</a>
+>>>>>>> 318859a6c9524a4893a1cf06f55041f11d1d02b4
 <?php
 $numb = 1;
 for ($i = 0; $i < count($phases); $i++)

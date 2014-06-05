@@ -243,5 +243,15 @@ class PhaseModelCoach extends JModel
         $db->setQuery($query);
         return  $db->loadAssocList();
     }
+    
+    
+    function getAllPhasesData($cid)
+    {
+        $db =& $this->_db;
+        $query = "SELECT id, pid, date FROM  #__jf_my_lastintake ";
+        $ids = $this->_getList($query);
+        $db->setQuery($query);
+        return  $db->loadAssocList();
+    }
 }
 ?>

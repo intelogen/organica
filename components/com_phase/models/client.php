@@ -38,6 +38,7 @@ class PhaseModelClient extends JModel
      {
          $query = "SELECT * FROM #__jf_companies WHERE id = $companyId";
          return $this->_getList($query);
+         
      }
      
     function finishTask($taskId)

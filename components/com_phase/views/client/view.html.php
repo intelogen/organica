@@ -2816,6 +2816,9 @@ class PhaseViewClient extends JView
         $questionList = $model->questionList();
         $this->assignRef('questionList', $questionList);
         
+        
+        
+        
         parent::display($tpl);
     }
     

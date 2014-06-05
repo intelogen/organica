@@ -362,6 +362,7 @@ echo "  <div style='font-size:15px;color:#008;'>
 
     
 <div class='contentheading'>Allergies Tracking</div>    
+
 <?php
 if(isset($evalution[madtrack][allergies]))
 {
@@ -401,6 +402,7 @@ echo '<br>';
 
 <?='Note'?>
 <input type="text" name="evalution[madtrack][new_allergies][note]" value="<?="No info"?>" />
+
 <input type="submit" id="test" value="add" name="action"/>
 
 

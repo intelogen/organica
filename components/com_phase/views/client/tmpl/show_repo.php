@@ -403,6 +403,8 @@ echo "  <div style='font-size:15px;color:#008;'>
     
 <div class='contentheading'>Allergies Tracking</div>    
 <?php
+
+
 if(isset($evalution[madtrack][allergies]))
 {
 ?>

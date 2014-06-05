@@ -18,7 +18,7 @@ $phases = $this-> phases;
 $count = count($phases);
 
 ?>
-<div class='contentheading'>Phases Navigation</div>
+<div class='contentheading phase-navigation-header'>Phases Navigation</div>
 <div class='tabContainer2 phase-navigation' style="background-color:#E1FFE3">
 <a href="index.php?option=com_phase&controller=client&action=show_repo&c=<?=$uid?>">Intake Survey</a>
 <?php
@@ -27,17 +27,17 @@ for ($i = 0; $i < count($phases); $i++)
 {
 ?>
     <a href="index.php?option=com_phase&controller=client&action=show_repoz&c=<?=$uid?>&pid=<?=$phases[$i][id]?>"><?=" Phase-".$numb." "?></a>
-<?php    
+<?php
 $numb ++;
 }
 ?>
 <a href="index.php?option=com_phase&controller=client&action=show_repo_total&c=<?=$uid?>">Total Progress</a>
 </div>
-    
-<div class='contentheading'>Intake Survey</div>   
+
+<div class='contentheading'>Intake Survey</div>
 <div class='tabContainer2' style="background-color:#E1FFE3">
-<form action="index.php?option=com_phase&controller=client&inc=1"  method="post" enctype="multipart/form-data">    
- 
+<form action="index.php?option=com_phase&controller=client&inc=1"  method="post" enctype="multipart/form-data">
+
 <input type="hidden" name="evalution[pid]" value="<?=$pid?>" />
 <input type="hidden" name="evalution[uid]" value="<?=$uid?>" />
 

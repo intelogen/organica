@@ -1,6 +1,6 @@
-<?php defined( '_JEXEC' ) or die( 'Restricted access' ); ?>
-
-    
+<?php
+defined( '_JEXEC' ) or die( 'Restricted access' );
+?>
 <?php
 $uid = $this->uid;
 $pid = 0;
@@ -13,44 +13,31 @@ if($this->evalution)
     $evalution = $this->evalution; 
 }
 
+
 $phases = $this-> phases;
 $count = count($phases);
 
 ?>
-<<<<<<< HEAD
-
-<div class='contentheading'> Phases Navigation </div>
-<div class='menu-conteiner'>
-    <div class='menu-pad'>
-        <a href="index.php?option=com_phase&controller=client&action=show_repo&c=<?=$uid?>">Intake Survey</a>
-    </div>
-=======
-<div class='contentheading'>Phases Navigation</div>
+<div class='contentheading phase-navigation-header'>Phases Navigation</div>
 <div class='tabContainer2 phase-navigation' style="background-color:#E1FFE3">
 <a href="index.php?option=com_phase&controller=client&action=show_repo&c=<?=$uid?>">Intake Survey</a>
->>>>>>> 318859a6c9524a4893a1cf06f55041f11d1d02b4
 <?php
 $numb = 1;
 for ($i = 0; $i < count($phases); $i++)
 {
 ?>
-    <div class='menu-pad'>
     <a href="index.php?option=com_phase&controller=client&action=show_repoz&c=<?=$uid?>&pid=<?=$phases[$i][id]?>"><?=" Phase-".$numb." "?></a>
-    </div>
-<?php    
+<?php
 $numb ++;
 }
 ?>
-<div class='menu-pad'>
 <a href="index.php?option=com_phase&controller=client&action=show_repo_total&c=<?=$uid?>">Total Progress</a>
 </div>
-</div>
 
-
-<div class='contentheading'> Intake Survey </div>   
+<div class='contentheading'>Intake Survey</div>
 <div class='tabContainer2' style="background-color:#E1FFE3">
-<form action="index.php?option=com_phase&controller=client&inc=1"  method="post" enctype="multipart/form-data">    
- 
+<form action="index.php?option=com_phase&controller=client&inc=1"  method="post" enctype="multipart/form-data">
+
 <input type="hidden" name="evalution[pid]" value="<?=$pid?>" />
 <input type="hidden" name="evalution[uid]" value="<?=$uid?>" />
 

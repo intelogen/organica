@@ -3520,6 +3520,8 @@ class PhaseViewClient extends JView
         
         
         
+        
+        
         //графики
         $document =& JFactory::getDocument();
         $document->addStyleSheet(JURI::root().'components/com_hreport/css/autocompleter.css');
@@ -3531,8 +3533,6 @@ class PhaseViewClient extends JView
         JHTML::script('jquery-1.7.1.min.js',JURI::root().'components/com_jforce/js/charts/');
         JHTML::script('highcharts.js',JURI::root().'components/com_jforce/js/charts/');
         //графики
-        
-
         
         $numbers = implode(",", $content[life_style]);
         $trackingStart = $model->getProgressTrackingDetails($uid, $pid, $numbers);
@@ -3570,6 +3570,83 @@ class PhaseViewClient extends JView
         
         parent::display($tpl);
     }
+    
+    function show_repoz($tpl = null)
+    {
+        $pid = JRequest::getVar('pid');
+        $model = $this->getModel();
+        $user =& JFactory::getUser();
+        $uid = $user->id;
+        if(JRequest::getVar('c') && JRequest::getVar('c') != "")
+        {
+            $uid = JRequest::getVar('c');
+        }
+        
+        
+        $questionList = $model->questionList();
+        $this->assignRef('questionList', $questionList);
+        
+        $content = $model->testPhaseData($uid, $pid);
+        
+        $evalution[life_style] = explode(",", $content[0][val]);
+        $evalution[body] = explode(",", $content[1][val]);
+        $evalution[photo] = explode(",", $content[2][val]);
+        $evalution[symptoms][val] = explode(",", $content[3][val]);
+        $evalution[symptoms][status] = explode(",", $content[3][status]);
+        $evalution[symptoms][note] = explode(",", $content[3][note]);
+        $evalution[drug][val] = explode(",", $content[4][val]);
+        $evalution[drug][status] = explode(",", $content[4][status]);
+        $evalution[drug][note] = explode(",", $content[4][note]);
+        $evalution[diseases][val] = explode(",", $content[5][val]);
+        $evalution[diseases][status] = explode(",", $content[5][status]);
+        $evalution[diseases][note] = explode(",", $content[5][note]);
+        
+        $this->assignRef('evalution', $evalution);
+        
+        
+        
+        
+        //графики
+        $document =& JFactory::getDocument();
+        $document->addStyleSheet(JURI::root().'components/com_hreport/css/autocompleter.css');
+        JHTML::script('autocompleter.js',JURI::root().'components/com_hreport/js/', true);
+        JHTML::script('observer.js',JURI::root().'components/com_hreport/js/', true);
+        JHTML::script('progress_tracking.js',JURI::root().'components/com_jforce/js/phase/', true);
+
+        // adding chart
+        JHTML::script('jquery-1.7.1.min.js',JURI::root().'components/com_jforce/js/charts/');
+        JHTML::script('highcharts.js',JURI::root().'components/com_jforce/js/charts/');
+        //графики
+        
+
+        $numbers = $content[0][val];
+        $trackingStart = $model->getProgressTrackingDetails($uid, $pid, $numbers);
+        $this->assignRef('trackingStart', $trackingStart);
+        
+        
+        
+        
+        $phases_id = $model->getPhasesId($uid);
+        $this->assignRef('phases', $phases_id);
+        
+        //Взять список симпомов
+        $list[symptomList] = $model->getSymptomList();
+
+        
+        //Взять список препараты
+        $list[medtrackList] = $model->getMedtrackList();
+        
+        //Взять список заболеваний
+        $list[diseasesList] = $model->getDiseasesList();
+
+        $this->assignRef('list', $list);
+
+        
+        parent::display($tpl);
+    }
+    
+    
+    
     
     function prepoContent($content)
     {
@@ -3688,80 +3765,7 @@ class PhaseViewClient extends JView
     
 	
 	
-    function show_repoz($tpl = null)
-    {
-        $pid = JRequest::getVar('pid');
-        $model = $this->getModel();
-        $user =& JFactory::getUser();
-        $uid = $user->id;
-        if(JRequest::getVar('c') && JRequest::getVar('c') != "")
-        {
-            $uid = JRequest::getVar('c');
-        }
-        
-        
-        $questionList = $model->questionList();
-        $this->assignRef('questionList', $questionList);
-        
-        $content = $model->testPhaseData($uid, $pid);
-        
-        $evalution[life_style] = explode(",", $content[0][val]);
-        $evalution[body] = explode(",", $content[1][val]);
-        $evalution[photo] = explode(",", $content[2][val]);
-        $evalution[symptoms][val] = explode(",", $content[3][val]);
-        $evalution[symptoms][status] = explode(",", $content[3][status]);
-        $evalution[symptoms][note] = explode(",", $content[3][note]);
-        $evalution[drug][val] = explode(",", $content[4][val]);
-        $evalution[drug][status] = explode(",", $content[4][status]);
-        $evalution[drug][note] = explode(",", $content[4][note]);
-        $evalution[diseases][val] = explode(",", $content[5][val]);
-        $evalution[diseases][status] = explode(",", $content[5][status]);
-        $evalution[diseases][note] = explode(",", $content[5][note]);
-        
-        $this->assignRef('evalution', $evalution);
-        
-        
-        
-        
-        //графики
-        $document =& JFactory::getDocument();
-        $document->addStyleSheet(JURI::root().'components/com_hreport/css/autocompleter.css');
-        JHTML::script('autocompleter.js',JURI::root().'components/com_hreport/js/', true);
-        JHTML::script('observer.js',JURI::root().'components/com_hreport/js/', true);
-        JHTML::script('progress_tracking.js',JURI::root().'components/com_jforce/js/phase/', true);
-
-        // adding chart
-        JHTML::script('jquery-1.7.1.min.js',JURI::root().'components/com_jforce/js/charts/');
-        JHTML::script('highcharts.js',JURI::root().'components/com_jforce/js/charts/');
-        //графики
-        
-        
-        
-
-        $numbers = $content[0][val];
-        $trackingStart = $model->getProgressTrackingDetails($uid, $pid, $numbers);
-        $this->assignRef('trackingStart', $trackingStart);
-        
-        
-        
-        $phases_id = $model->getPhasesId($uid);
-        $this->assignRef('phases', $phases_id);
-        
-        //Взять список симпомов
-        $list[symptomList] = $model->getSymptomList();
-
-        
-        //Взять список препараты
-        $list[medtrackList] = $model->getMedtrackList();
-        
-        //Взять список заболеваний
-        $list[diseasesList] = $model->getDiseasesList();
-
-        $this->assignRef('list', $list);
-
-        
-        parent::display($tpl);
-    }
+    
     
     
     function show_repo_total($tpl = null)

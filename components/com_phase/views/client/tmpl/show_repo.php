@@ -34,35 +34,29 @@ if($this->diseasesList)
 {
     $diseasesList = $this->diseasesList;
 }
-
-
 ?>
+
 
 <div class='contentheading phase-navigation-header'>Phases Navigation</div>
 <div class='tabContainer2 phase-navigation' style="background-color:#E1FFE3">
+
+
 <a href="index.php?option=com_phase&controller=client&action=show_repo&c=<?=$uid?>">Intake Survey</a>
 
 <?php
-/*
-echo "<pre>";
-var_dump($phases);
-echo "</pre>";
-*/
-$numb = 1;
-for ($i = 0; $i < count($phases); $i++)
+if ($phases && $phases[0][id] !== null && $phases[0][name] !== null )
+{
+foreach ($phases as $value)
 {
 ?>
-
-    <div class='menu-pad'>
-    <a href="index.php?option=com_phase&controller=client&action=show_repoz&c=<?=$uid?>&pid=<?=$phases[$i][id]?>"><?=$phases[$i][name]?></a>
-    </div>
-<?php    
-
-$numb ++;
+    <a href="index.php?option=com_phase&controller=client&action=show_repoz&c=<?=$uid?>&pid=<?=$value[id]?>"><?=$value[name]?></a> 
+<?php
+}
 }
 ?>
-<a href="index.php?option=com_phase&controller=client&action=show_repo_total&c=<?=$uid?>">Total Progress</a>
+    <a href="index.php?option=com_phase&controller=client&action=show_total_repo&c=<?=$uid?>">Total Progress</a>
 </div>
+
 
 <div class='contentheading'>Intake Survey</div>
 <div class='tabContainer2' style="background-color:#E1FFE3">
@@ -112,6 +106,9 @@ if($loockingfor):
 endif;
 ?>
 </div>
+
+
+
 
 <div class='contentheading'>Body stats</div>    
 <div class='tabContainer2' style="background-color:#E1FFE3">
@@ -258,9 +255,6 @@ endif;
 </div>
 
 
-
-    
-    
 <?php
 if($this->trackingStart){  ?>
     <!-- Body score chart initialization -->
@@ -309,6 +303,11 @@ if($this->trackingStart){  ?>
     </script>
     <div id="bs_container" style="width: 100%; height: 300px"></div>
 <?php }?>
+
+
+    
+    
+
 
 
 

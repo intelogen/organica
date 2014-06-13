@@ -25,25 +25,25 @@ if($this->list)
 
 ?>
 
+
+
+
 <?="<br>"?>
-<div class='contentheading'>Phases Navigation</div>
-<div class='tabContainer2' style="background-color:#E1FFE3">
+<div class='contentheading phase-navigation-header'>Phases Navigation</div>
+<div class='tabContainer2 phase-navigation' style="background-color:#E1FFE3">
+
 
 <a href="index.php?option=com_phase&controller=client&action=show_repo&c=<?=$uid?>">Intake Survey</a>
 
 <?php
 if ($phases && $phases[0][id] !== null && $phases[0][name] !== null )
 {
-echo "<br>";
 foreach ($phases as $value)
 {
 ?>
-    <?=" | "?>
     <a href="index.php?option=com_phase&controller=client&action=show_repoz&c=<?=$uid?>&pid=<?=$value[id]?>"><?=$value[name]?></a> 
-    <?=" | "?>
 <?php
 }
-echo "<br>";
 }
 ?>
     <a href="index.php?option=com_phase&controller=client&action=show_total_repo&c=<?=$uid?>">Total Progress</a>
@@ -175,9 +175,8 @@ if($this->questionList):
 endif;
 ?>
     
-    
 <?php
-if($this->trackingStart){  ?>
+if($this->trackingStart){?>
     <!-- Body score chart initialization -->
     <script type="text/javascript">
         var bodyscore_chart;
@@ -223,7 +222,8 @@ if($this->trackingStart){  ?>
         });
     </script>
     <div id="bs_container" style="width: 100%; height: 300px"></div>
-<?php }?>
+<?php }?>    
+
 </div>
 
 

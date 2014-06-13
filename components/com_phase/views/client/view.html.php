@@ -3271,6 +3271,7 @@ class PhaseViewClient extends JView
         $questionList = $model->questionList();
         $this->assignRef('questionList', $questionList);
         
+
 		//Взять список алергий
 		$allergiesList = $model->getAllergiesList();
         $this->assignRef('allergiesList', $allergiesList);
@@ -3291,6 +3292,7 @@ class PhaseViewClient extends JView
         
         
         
+
         
         
         
@@ -3735,9 +3737,12 @@ class PhaseViewClient extends JView
         
         
         
+
         $numbers = $content[0][val];
         $trackingStart = $model->getProgressTrackingDetails($uid, $pid, $numbers);
         $this->assignRef('trackingStart', $trackingStart);
+        
+        
         
         $phases_id = $model->getPhasesId($uid);
         $this->assignRef('phases', $phases_id);

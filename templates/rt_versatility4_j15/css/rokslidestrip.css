@@ -298,6 +298,7 @@ form .order{
 }
 .maincontent-surround{
     border-top: none !important;
+    overflow: hidden;
 }
 .moduletable,
 .moduletable_menu{
@@ -335,9 +336,6 @@ form .order{
 }
 .contentpaneopen tbody tr td span table tbody tr td:nth-child(3){
     width: 300px !important;
-}
-.maincontent-block{
-    position: relative;
 }
 .message-content > div{
     display: inline-block;
@@ -470,8 +468,8 @@ form .user-data{
 }
 .phase-navigation {
     position: absolute;
-    top: 237px;
-    left: 281px;
+    top: 30px;
+    left: -207px;
     width: 192px;
     border: none;
 }
@@ -526,7 +524,7 @@ form .user-data{
     border-bottom: 15px solid transparent;
     z-index: -1;
 }
-#maincontent-block > .contentheading:first-child{
+.phase-navigation-header:first-child{
     position: absolute;
     left: 304px;
 }

@@ -375,6 +375,12 @@ echo "  <div style='font-size:15px;color:#008;'>
 
 
 
+<<<<<<< HEAD
+=======
+    
+<div class='contentheading'>Allergies Tracking</div>    
+
+>>>>>>> d135d0ca7114dc5dcea3d9cc9aa7b0a623644db6
 <?php
 if($evalution[madtrack][allergies][db_list])
 {	
@@ -441,12 +447,23 @@ if(isset($allergiesList))
 <?php    
 }
 ?>
+<<<<<<< HEAD
 <div>
     <?= "Or, if not found";?>
 </div>
 <?="+ Add New:"?>
 <input type="text" name="evalution[madtrack][allergies][extra_allergies][name]" value="<?=null?>" />
 <button class="button validate" type="submit" id="test" value="add" name="action"><?= "Add" ?></button>
+=======
+            
+<?='Add New'?> 
+<input type="text" name="evalution[madtrack][new_allergies][name]" value="<?=null?>" />
+
+<?='Note'?>
+<input type="text" name="evalution[madtrack][new_allergies][note]" value="<?="No info"?>" />
+
+<input type="submit" id="test" value="add" name="action"/>
+>>>>>>> d135d0ca7114dc5dcea3d9cc9aa7b0a623644db6
 
 </div>
 

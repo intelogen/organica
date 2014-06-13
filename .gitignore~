@@ -1,4 +1,6 @@
 .idea
 /nbproject/
 /uploads_jtpl/phase_details/
-/tmp
+/temp/
+configuration.php
+

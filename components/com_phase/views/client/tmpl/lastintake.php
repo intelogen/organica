@@ -8,13 +8,30 @@ $pid = 0;
 $loockingfor = $this->loockingfor;
 ?>
 
-
 <?php
 if($this->evalution)
 {
     $evalution = $this->evalution; 
-    
 }
+
+if($this->allergiesList)
+{
+    $allergiesList = $this->allergiesList;
+}
+
+if($this->symptomList)
+{
+    $symptomList = $this->symptomList;
+}
+if($this->medtrackList)
+{
+    $medtrackList = $this->medtrackList;
+}
+if($this->diseasesList)
+{
+    $diseasesList = $this->diseasesList;
+}
+
 ?>
 
 <div class='contentheading'>Intake Survey</div>   
@@ -180,9 +197,9 @@ endif;
             <input type="radio" name="evalution[body_type][own]" <?php if($evalution[body_type][own] == "normal.png"){echo 'checked';} ?> value="normal.png"> 2 
             <input type="radio" name="evalution[body_type][own]" <?php if($evalution[body_type][own] == "toll.png"){echo 'checked';} ?> value="toll.png"> 3 
             <?= "  <div style='font-size:15px;color:#008;'>
-        <img src=\"".JURI::root().'uploads_jtpl/phase_details/'."fat.png"."\" width=\"200\" height=\"350\">
-        <img src=\"".JURI::root().'uploads_jtpl/phase_details/'."normal.png"."\" width=\"200\" height=\"350\">
-        <img src=\"".JURI::root().'uploads_jtpl/phase_details/'."toll.png"."\" width=\"200\" height=\"350\">
+        <img src=\"".JURI::root().'uploads_jtpl/phase_img/'."fat.png"."\" width=\"200\" height=\"350\">
+        <img src=\"".JURI::root().'uploads_jtpl/phase_img/'."normal.png"."\" width=\"200\" height=\"350\">
+        <img src=\"".JURI::root().'uploads_jtpl/phase_img/'."toll.png"."\" width=\"200\" height=\"350\">
                 
         </div>";?>   
             
@@ -191,7 +208,6 @@ endif;
 </table>
 </div>
         
-
 
 
 <div class='contentheading'>Lifestyle analysis</div>    
@@ -228,10 +244,6 @@ endif;
 
 
 
-
-
-
-
 <div class='contentheading'>Current Photo</div>    
 <div class='tabContainer2' style="background-color:#E1FFE3"> 
 <table>
@@ -248,7 +260,7 @@ echo "  <div style='font-size:15px;color:#008;'><img src=\"".JURI::root().'uploa
 else
 {
 echo "  <div style='font-size:15px;color:#008;'>
-        <img src=\"".JURI::root().'uploads_jtpl/phase_details/'."no1.png"."\" width=\"200\" height=\"350\">
+        <img src=\"".JURI::root().'uploads_jtpl/phase_img/'."no1.png"."\" width=\"200\" height=\"350\">
         </div>";        
 }
 ?>
@@ -268,7 +280,7 @@ echo "  <div style='font-size:15px;color:#008;'><img src=\"".JURI::root().'uploa
 else
 {
 echo "  <div style='font-size:15px;color:#008;'>
-        <img src=\"".JURI::root().'uploads_jtpl/phase_details/'."no2.png"."\" width=\"200\" height=\"350\">
+        <img src=\"".JURI::root().'uploads_jtpl/phase_img/'."no2.png"."\" width=\"200\" height=\"350\">
         </div>";        
 }
 ?><input type='file' name="evalution[new_file][1]" />    
@@ -286,9 +298,6 @@ echo "  <div style='font-size:15px;color:#008;'>
 
 </div>      
       
-
-
-    
 
 <div class='contentheading'>Medical Tracking</div>    
 <div class='tabContainer2' style="background-color:#E1FFE3">    
@@ -359,193 +368,354 @@ echo "  <div style='font-size:15px;color:#008;'>
     
     
 <div class='tabContainer2' style="background-color:#E1FFE3">   
+<div class='contentheading'>Allergies Tracking</div>  
+
+
+
+
+
+
+<?php
+if($evalution[madtrack][allergies][db_list])
+{	
+
+	foreach ($allergiesList as $value)
+		{
+			if(in_array($value['id'],$evalution[madtrack][allergies][db_list]))
+			{
+				echo " - ".$value[name]."<br>";
+			}
+		}
+	foreach($evalution[madtrack][allergies][db_list] as $value)
+	{
+	?>
+
+		<input type="hidden" name="evalution[madtrack][allergies][db_list][]" value="<?= $value ?>" />
+	<?php	
+	}
+}		
+
+if(isset($evalution[madtrack][allergies][extra_list]))
+{
+
+	foreach($evalution[madtrack][allergies][extra_list] as $value)
+	{
+	?>
+		<?= " - new = ".$value."<br>" ?>
+		<input type="hidden" name="evalution[madtrack][allergies][extra_list][]" value="<?= $value ?>" />
+	<?php	
+	}
+}		
+?>
+
+
+
+
+
+
+
+
+
+
+
+<?php
+if(isset($allergiesList))
+{
+?>
+    <div>
+		<?= "Choose from the list :";?>
+		
+		<select name="evalution[madtrack][allergies][new_allergies][name]">
+			<option selected value= "" > Click to show </option>
+			<?php 
+			foreach ($allergiesList as $value)
+			{
+			?>
+			<option value="<?= $value[id]?>"><?=$value[name]?></option>
+			<?php
+			}
+			?>   
+		</select>
+<button class="button validate" type="submit" id="test" value="add" name="action"><?= "Add" ?></button>
+    </div>   
+<?php    
+}
+?>
+<div>
+    <?= "Or, if not found";?>
+</div>
+<?="+ Add New:"?>
+<input type="text" name="evalution[madtrack][allergies][extra_allergies][name]" value="<?=null?>" />
+<button class="button validate" type="submit" id="test" value="add" name="action"><?= "Add" ?></button>
+
+</div>
+
+
+
+<div class='tabContainer2' style="background-color:#E1FFE3">   
+<div class='contentheading'>Symptoms Tracking</div>    
+
+<?php
+if(isset($evalution[madtrack][symptoms][db_list]))
+{	
+
+	foreach ($symptomList as $value)
+		{
+			if(in_array($value['id'],$evalution[madtrack][symptoms][db_list]))
+			{
+				echo " - ".$value[name]."<br>";
+			}
+		}
+	foreach($evalution[madtrack][symptoms][db_list] as $value)
+	{
+	?>
+
+		<input type="hidden" name="evalution[madtrack][symptoms][db_list][]" value="<?= $value ?>" />
+	<?php	
+	}
+}		
+
+if(isset($evalution[madtrack][symptoms][extra_list]))
+{
+
+	foreach($evalution[madtrack][symptoms][extra_list] as $value)
+	{
+	?>
+		<?= " - new = ".$value."<br>" ?>
+		<input type="hidden" name="evalution[madtrack][symptoms][extra_list][]" value="<?= $value ?>" />
+	<?php	
+	}
+}		
+?>
+
+
+
+
+<?php
+if(isset($symptomList))
+{
+?>
+    <div>
+		<?= "Choose from the list :";?>
+		
+		<select name="evalution[madtrack][symptoms][new_symptoms][name]">
+			<option selected value= "" > Click to show </option>
+			<?php 
+			foreach ($symptomList as $value)
+			{
+			?>
+			<option value="<?= $value[id]?>"><?=$value[name]?></option>
+			<?php
+			}
+			?>   
+		</select>
+<button class="button validate" type="submit" id="test" value="add" name="action"><?= "Add" ?></button>
+    </div>   
+<?php    
+}
+?>
+<div>
+    <?= "Or, if not found";?>
+</div>
+<?="+ Add New:"?>
+<input type="text" name="evalution[madtrack][symptoms][extra_symptoms][name]" value="<?=null?>" />
+<button class="button validate" type="submit" id="test" value="add" name="action"><?= "Add" ?></button>
+</div>
+
 
     
-<div class='contentheading'>Allergies Tracking</div>    
-<?php
-if(isset($evalution[madtrack][allergies]))
-{
-?>
-<table>
-            <tr>
-            <td>
-            <?php
-            foreach ($evalution[madtrack][allergies][name] as $value)
-            {
-            ?>
-                Name: <input type="text" name="evalution[madtrack][allergies][name][]" value="<?=$value?>" /><?="<br>"?>
-            <?php
-            }
-            ?>
-            </td>
-           
-            <td>    
-            <?php
-            foreach ($evalution[madtrack][allergies][note] as $value)
-            {
-            ?>
-                Note: <input type="text" name="evalution[madtrack][allergies][note][]" value="<?=$value?>" /><?="<br>"?>
-            <?php
-            }
-            ?>
-            </td>
-            </tr>
-</table>
-<?php
-}
-echo '<br>';
-?>
-            
-<?='Add New'?> 
-<input type="text" name="evalution[madtrack][new_allergies][name]" value="<?=null?>" />
-
-<?='Note'?>
-<input type="text" name="evalution[madtrack][new_allergies][note]" value="<?="No info"?>" />
-<input type="submit" id="test" value="add" name="action"/>
-
-
-
-
-<div class='contentheading'>Symptoms Tracking</div>    
-<?php
-if(isset($evalution[madtrack][symptoms]))
-{
-?>
-<table>
-            <tr>
-            <td>
-            <?php
-            foreach ($evalution[madtrack][symptoms][name] as $value)
-            {
-            ?>
-                Name: <input type="text" name="evalution[madtrack][symptoms][name][]" value="<?=$value?>" /><?="<br>"?>
-            <?php
-            }
-            ?>
-            </td>
-           
-            <td>    
-            <?php
-            foreach ($evalution[madtrack][symptoms][note] as $value)
-            {
-            ?>
-                Note: <input type="text" name="evalution[madtrack][symptoms][note][]" value="<?=$value?>" /><?="<br>"?>
-            <?php
-            }
-            ?>
-            </td>
-            </tr>
-</table>
-<?php
-}
-echo '<br>';
-?>
-<?='Add New'?> 
-<input type="text" name="evalution[madtrack][new_symptoms][name]" value="<?=null?>" />
-
-
-<?='Note'?>
-<input type="text" name="evalution[madtrack][new_symptoms][note]" value="<?="No info"?>" />
-<input type="submit" id="test" value="add" name="action"/>
-
-
-
+<div class='tabContainer2' style="background-color:#E1FFE3">   
 
 <div class='contentheading'>Medical preparations Tracking</div>
+
+
+
+
+
+
+
 <?php
-if(isset($evalution[madtrack][drug]))
+if(isset($evalution[madtrack][drug][db_list]))
+{	
+
+	foreach ($medtrackList as $value)
+		{
+			if(in_array($value['id'],$evalution[madtrack][drug][db_list]))
+			{
+				echo " - ".$value[name]."<br>";
+			}
+		}
+	foreach($evalution[madtrack][drug][db_list] as $value)
+	{
+	?>
+
+		<input type="hidden" name="evalution[madtrack][drug][db_list][]" value="<?= $value ?>" />
+	<?php	
+	}
+}		
+
+if(isset($evalution[madtrack][drug][extra_list]))
 {
+
+	foreach($evalution[madtrack][drug][extra_list] as $value)
+	{
+	?>
+		<?= " - new = ".$value."<br>" ?>
+		<input type="hidden" name="evalution[madtrack][drug][extra_list][]" value="<?= $value ?>" />
+	<?php	
+	}
+}		
 ?>
-<table>
-            <tr>
-            <td>
-            <?php
-            foreach ($evalution[madtrack][drug][name] as $value)
-            {
-            ?>
-                Name: <input type="text" name="evalution[madtrack][drug][name][]" value="<?=$value?>" /><?="<br>"?>
-            <?php
-            }
-            ?>
-            </td>
-           
-            <td>    
-            <?php
-            foreach ($evalution[madtrack][drug][note] as $value)
-            {
-            ?>
-                Note: <input type="text" name="evalution[madtrack][drug][note][]" value="<?=$value?>" /><?="<br>"?>
-            <?php
-            }
-            ?>
-            </td>
-            </tr>
-</table>
+
 <?php
-}
-echo '<br>';
+if(isset($medtrackList))
+{
+    
 ?>
+    <div>
+    <?= "Choose from the list :";?>
+    <select name="evalution[madtrack][drug][new_drug][name]">
+        <option selected value= "" > Click to show </option>
+    <?php 
+    foreach ($medtrackList as $value)
+    {
+    ?>
+        <option value="<?= $value[id]?>"><?=$value[name]?></option>
+    <?php
+    }
+    ?>   
+    </select>
+<button class="button validate" type="submit" id="test" value="add" name="action"><?= "Add" ?></button>
+    </div>
+        
+    
+<?php    
+}
+
+?>
+<div>
+    <?= "Or, if not found";?>
+</div>
+
+<?="+ Add New:"?>
 
 
-<?='Add New'?> 
-<input type="text" name="evalution[madtrack][new_drug][name]" value="<?=null?>" />
+<input type="text" name="evalution[madtrack][drug][extra_drug][name]" value="<?=null?>" />
 
 
-<?='Note'?>
-<input type="text" name="evalution[madtrack][new_drug][note]" value="<?="No info"?>" />
-<input type="submit" id="test" value="add" name="action"/>
-
-
-
-
+<button class="button validate" type="submit" id="test" value="add" name="action"><?= "Add" ?></button>
+</div>
+    
+    
+	
+<div class='tabContainer2' style="background-color:#E1FFE3">   
 
 <div class='contentheading'>Diseases Tracking</div>
+
+
+
+
+
+
+
+
 <?php
-if(isset($evalution[madtrack][diseases]))
+if(isset($evalution[madtrack][diseases][db_list]))
+{	
+
+	foreach ($diseasesList as $value)
+		{
+			if(in_array($value['id'],$evalution[madtrack][diseases][db_list]))
+			{
+				echo " - ".$value[name]."<br>";
+			}
+		}
+	foreach($evalution[madtrack][diseases][db_list] as $value)
+	{
+	?>
+
+		<input type="hidden" name="evalution[madtrack][diseases][db_list][]" value="<?= $value ?>" />
+	<?php	
+	}
+}		
+
+if(isset($evalution[madtrack][diseases][extra_list]))
 {
+
+	foreach($evalution[madtrack][diseases][extra_list] as $value)
+	{
+	?>
+		<?= " - new = ".$value."<br>" ?>
+		<input type="hidden" name="evalution[madtrack][diseases][extra_list][]" value="<?= $value ?>" />
+	<?php	
+	}
+}		
 ?>
-<table>
-            <tr>
-            <td>
-            <?php
-            foreach ($evalution[madtrack][diseases][name] as $value)
-            {
-            ?>
-                Name: <input type="text" name="evalution[madtrack][diseases][name][]" value="<?=$value?>" /><?="<br>"?>
-            <?php
-            }
-            ?>
-            </td>
-           
-            <td>    
-            <?php
-            foreach ($evalution[madtrack][diseases][note] as $value)
-            {
-            ?>
-                Note: <input type="text" name="evalution[madtrack][diseases][note][]" value="<?=$value?>" /><?="<br>"?>
-            <?php
-            }
-            ?>
-            </td>
-            </tr>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <?php
-}
-echo '<br>';
+if(isset($diseasesList))
+{   
 ?>
+    <div>
+    <?= "Choose from the list :";?>
+    <select name="evalution[madtrack][diseases][new_diseases][name]">
+        <option selected value= "" > Click to show </option>
+    <?php 
+    foreach ($diseasesList as $value)
+    {
+    ?>
+        <option value="<?= $value[id]?>"><?=$value[name]?></option>
+    <?php
+    }
+    ?>   
+    </select>
+<button class="button validate" type="submit" id="test" value="add" name="action"><?= "Add" ?></button>
+    </div>
+        
+    
+<?php    
+}
 
-<?='Add New'?> 
-<input type="text" name="evalution[madtrack][new_diseases][name]" value="<?=null?>" />
+?>
+<div>
+    <?= "Or, if not found";?>
+</div>
+<?="+ Add New :"?>
+<input type="text" name="evalution[madtrack][diseases][extra_diseases][name]" value="<?=null?>" />
 
-<?='Note'?>
-<input type="text" name="evalution[madtrack][new_diseases][note]" value="<?="No info"?>" />
-<input type="submit" id="test" value="add" name="action"/>
+
+<button class="button validate" type="submit" id="test" value="add" name="action"><?= "Add" ?></button>
 </div>
 
 </div>     
 
 
-<input type="submit" value="save" name="action"/>
-<input type="submit" id="test" value="add" name="action"/>
+
+
+<button class="button validate" type="submit" id="test" value="add" name="action"><?= "Update" ?></button>
+<button class="button validate" type="submit" value="save" name="action"><?= "Save" ?></button>
+
+
+
 </form>   
 </div>

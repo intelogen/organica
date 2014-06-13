@@ -5,6 +5,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 $uid = $this->uid;
 $pid = $this->pid;
 $phases = $this->phases;
+
 if(JRequest::getVar('c') && JRequest::getVar('c') != "")
         {
             $uid = JRequest::getVar('c');
@@ -16,29 +17,122 @@ if(JRequest::getVar('c') && JRequest::getVar('c') != "")
 if($this->evalution)
 {
     $evalution = $this->evalution; 
-
-
 }
+if($this->list)
+{
+    $list = $this->list; 
+}
+
 ?>
 
+<?="<br>"?>
 <div class='contentheading'>Phases Navigation</div>
 <div class='tabContainer2' style="background-color:#E1FFE3">
 
 <a href="index.php?option=com_phase&controller=client&action=show_repo&c=<?=$uid?>">Intake Survey</a>
 
 <?php
-
-$numb = 1;
-for ($i = 0; $i < count($phases); $i++)
+if ($phases && $phases[0][id] !== null && $phases[0][name] !== null )
+{
+echo "<br>";
+foreach ($phases as $value)
 {
 ?>
-    <a href="index.php?option=com_phase&controller=client&action=show_repoz&c=<?=$uid?>&pid=<?=$phases[$i][id]?>"><?="Phase - ".$numb?></a>
-<?php    
-$numb ++;
+    <?=" | "?>
+    <a href="index.php?option=com_phase&controller=client&action=show_repoz&c=<?=$uid?>&pid=<?=$value[id]?>"><?=$value[name]?></a> 
+    <?=" | "?>
+<?php
+}
+echo "<br>";
 }
 ?>
-    <a href="index.php?option=com_phase&controller=client&action=show_repo&c=<?=$uid?>">Total Progress</a>
+    <a href="index.php?option=com_phase&controller=client&action=show_total_repo&c=<?=$uid?>">Total Progress</a>
 </div>
+
+
+
+
+
+
+
+
+<?php
+if ($phases && $phases[0][id] !== null && $phases[0][name] !== null )
+{
+?>
+<div class='contentheading'>Compare The Phases</div>   
+<div class='tabContainer2' style="background-color:#E1FFE3">
+    <form action="index.php?option=com_phase&controller=client&compare=1"  method="post" enctype="multipart/form-data"> 
+<input type="hidden" name="uid" value="<?=$uid?>"/>
+        <select name="phaseId[0]">
+                    <option value= "0" > Intake Survey </option>
+                    <?php
+                    foreach ($phases as $value)
+                    {
+                    ?>
+                        <option value= "<?=$value[id]?>"><?=$value[name]?></option>
+                    <?php
+                    }
+                    ?>
+</select>
+    and
+<select name="phaseId[1]">
+                    <option value= "0" > Intake Survey </option>
+                    <?php
+                    foreach ($phases as $value)
+                    {
+                    ?>
+                        <option value= "<?=$value[id]?>"><?=$value[name]?></option>
+                    <?php
+                    }
+                    ?>
+</select>
+    <button class="button validate" type="submit" id="test" value="compare" name="action"><?= "Compare" ?></button>
+    </form>
+</div>
+<?php
+}
+?>
+
+
+
+
+
+
+<?php
+if ($phases && $phases[0][id] !== null && $phases[0][name] !== null )
+{
+?>
+<div class='contentheading'>Show Detailed Report Of Phase</div>   
+<div class='tabContainer2' style="background-color:#E1FFE3">
+<form action="index.php?option=com_phase&controller=client&show_detail=1"  method="post" enctype="multipart/form-data">    
+    <input type="hidden" name="uid" value="<?=$uid?>"/>
+    <select name="pid">
+                    <?php
+                    foreach ($phases as $value)
+                    {
+                    ?>
+                        <option value= "<?=$value[id]?>"><?=$value[name]?></option>
+                    <?php
+                    }
+                    ?>
+</select>
+        <button class="button validate" type="submit" id="test" value="show_detail" name="action"><?= "Show" ?></button>
+</form>
+</div>
+<?php
+}
+?>
+
+
+
+
+
+
+
+
+
+
 
 <div class='contentheading'>Intake Survey</div>   
 <div class='tabContainer2' style="background-color:#E1FFE3">
@@ -48,7 +142,8 @@ $numb ++;
 <input type="hidden" name="evalution[uid]" value="<?=$uid?>" />
 
 
-        
+
+     
 <div class='contentheading'>Lifestyle analysis</div>    
 <div class='tabContainer2' style="background-color:#E1FFE3">    
 <?php
@@ -170,7 +265,7 @@ if($this->trackingStart){  ?>
         else
         {
             echo "  <div style='font-size:15px;color:#008;'>
-                    <img src=\"".JURI::root().'uploads_jtpl/phase_details/'."no1.png"."\" width=\"200\" height=\"350\">
+                    <img src=\"".JURI::root().'uploads_jtpl/phase_img/'."no1.png"."\" width=\"200\" height=\"350\">
                     </div>";        
         }
         ?>
@@ -188,7 +283,7 @@ if($this->trackingStart){  ?>
         else
         {
             echo "  <div style='font-size:15px;color:#008;'>
-                    <img src=\"".JURI::root().'uploads_jtpl/phase_details/'."no2.png"."\" width=\"200\" height=\"350\">
+                    <img src=\"".JURI::root().'uploads_jtpl/phase_img/'."no2.png"."\" width=\"200\" height=\"350\">
                     </div>";        
         }
         ?>
@@ -207,17 +302,26 @@ if($this->trackingStart){  ?>
 <div class='tabContainer2' style="background-color:#E1FFE3">
 
 <table border="1">
-    <tr><td>Name</td><td>Status</td><td>Note</td></tr>
+    <tr><td>№</td><td>Name</td><td>Status</td><td>Note</td></tr>
 <?php
 if (isset($evalution[symptoms]))
 {
+    $cnt = 1;
     for ($i = 0; $i < count($evalution[symptoms][val]); $i++)
     {
     ?>
         <tr>
+            <td><?=$cnt++?></td>
         <td>
-            <input type="hidden" name="evalution[symptoms][val][]" value="<?=$evalution[symptoms][val][$i]?>" />
-            <?=$evalution[symptoms][val][$i];?>
+            <?php
+            foreach($list[symptomList] as $value)
+            {
+                if($value[id] == $evalution[symptoms][val][$i])
+                {
+                    echo $value[name];
+                }
+            }
+            ?>
         </td>
         <td>
             <?=$evalution[symptoms][status][$i];?>
@@ -245,20 +349,29 @@ else
 <div class='tabContainer2' style="background-color:#E1FFE3">
 
 <table border="1">
-    <tr><td>Name</td><td>Status</td><td>Note</td></tr>
+    <tr><td>№</td><td>Name</td><td>Status</td><td>Note</td></tr>
 <?php
 if (isset($evalution[drug]))
 {
+    $cnt = 1;
     for ($i = 0; $i < count($evalution[drug][val]); $i++)
     {
     ?>
         <tr>
+            <td><?=$cnt++?></td>
         <td>
-            <input type="hidden" name="evalution[drug][val][]" value="<?=$evalution[drug][val][$i]?>" />
-            <?=$evalution[drug][val][$i];?>
+            <?php
+            foreach($list[medtrackList] as $value)
+            {
+                if($value[id] == $evalution[drug][val][$i])
+                {
+                    echo $value[name];
+                }
+            }
+            ?>
         </td>
         <td>
-            <?=$evalution[drug][status][$i];?>
+            <?=$evalution[drug][status][$i]?>
         </td>
         <td>
             <?=$evalution[drug][note][$i];?>
@@ -283,17 +396,26 @@ else
 <div class='tabContainer2' style="background-color:#E1FFE3">
 
 <table border="1">
-    <tr><td>Name</td><td>Status</td><td>Note</td></tr>
+    <tr><td>№</td><td>Name</td><td>Status</td><td>Note</td></tr>
 <?php
 if (isset($evalution[diseases]))
 {
+    $cnt = 1;
     for ($i = 0; $i < count($evalution[diseases][val]); $i++)
     {
     ?>
         <tr>
+            <td><?=$cnt++?></td>
         <td>
-            <input type="hidden" name="evalution[diseases][val][]" value="<?=$evalution[diseases][val][$i]?>" />
-            <?=$evalution[drug][val][$i];?>
+            <?php
+            foreach($list[diseasesList] as $value)
+            {
+                if($value[id] == $evalution[drug][val][$i])
+                {
+                    echo $value[name];
+                }
+            }
+            ?>
         </td>
         <td>
             <?=$evalution[diseases][status][$i];?>

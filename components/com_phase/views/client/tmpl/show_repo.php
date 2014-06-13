@@ -16,26 +16,43 @@ if($this->evalution)
 $phases = $this-> phases;
 $count = count($phases);
 
-?>
-<<<<<<< HEAD
+if($this->allergiesList)
+{
+    $allergiesList = $this->allergiesList;
+}
 
-<div class='contentheading'> Phases Navigation </div>
-<div class='menu-conteiner'>
-    <div class='menu-pad'>
-        <a href="index.php?option=com_phase&controller=client&action=show_repo&c=<?=$uid?>">Intake Survey</a>
-    </div>
-=======
+if($this->symptomList)
+{
+    $symptomList = $this->symptomList;
+}
+if($this->medtrackList)
+{
+    $medtrackList = $this->medtrackList;
+}
+if($this->diseasesList)
+{
+    $diseasesList = $this->diseasesList;
+}
+
+
+?>
+
 <div class='contentheading'>Phases Navigation</div>
 <div class='tabContainer2 phase-navigation' style="background-color:#E1FFE3">
 <a href="index.php?option=com_phase&controller=client&action=show_repo&c=<?=$uid?>">Intake Survey</a>
->>>>>>> 318859a6c9524a4893a1cf06f55041f11d1d02b4
+
 <?php
+/*
+echo "<pre>";
+var_dump($phases);
+echo "</pre>";
+*/
 $numb = 1;
 for ($i = 0; $i < count($phases); $i++)
 {
 ?>
     <div class='menu-pad'>
-    <a href="index.php?option=com_phase&controller=client&action=show_repoz&c=<?=$uid?>&pid=<?=$phases[$i][id]?>"><?=" Phase-".$numb." "?></a>
+    <a href="index.php?option=com_phase&controller=client&action=show_repoz&c=<?=$uid?>&pid=<?=$phases[$i][id]?>"><?=$phases[$i][name]?></a>
     </div>
 <?php    
 $numb ++;
@@ -190,17 +207,17 @@ endif;
         <td>
             <?php
             if($evalution[body_type][5] == "fat.png"){echo "  <div style='font-size:15px;color:#008;'>
-            <img src=\"".JURI::root().'uploads_jtpl/phase_details/'."fat.png"."\" width=\"200\" height=\"350\">
+            <img src=\"".JURI::root().'uploads_jtpl/phase_img/'."fat.png"."\" width=\"200\" height=\"350\">
             </div>";}
             ?>
             <?php
             if($evalution[body_type][5] == "normal.png"){echo "  <div style='font-size:15px;color:#008;'> 
-            <img src=\"".JURI::root().'uploads_jtpl/phase_details/'."normal.png"."\" width=\"200\" height=\"350\">
+            <img src=\"".JURI::root().'uploads_jtpl/phase_img/'."normal.png"."\" width=\"200\" height=\"350\">
             </div>";}
             ?>
             <?php
             if($evalution[body_type][5] == "toll.png"){echo "  <div style='font-size:15px;color:#008;'>
-            <img src=\"".JURI::root().'uploads_jtpl/phase_details/'."toll.png"."\" width=\"200\" height=\"350\">
+            <img src=\"".JURI::root().'uploads_jtpl/phase_img/'."toll.png"."\" width=\"200\" height=\"350\">
             </div>";}
             ?> 
         </td>
@@ -405,35 +422,15 @@ echo "  <div style='font-size:15px;color:#008;'>
 <?php
 if(isset($evalution[madtrack][allergies]))
 {
-?>
-<table>
-            <tr>
-            <td>
-            <?php
-            foreach ($evalution[madtrack][allergies][status] as $value)
-            {
-            ?>
-                Name: <?=$value?><?="<br>"?>
-            <?php
-            }
-            ?>
-            </td>
-           
-            <td>    
-            <?php
-            foreach ($evalution[madtrack][allergies][note] as $value)
-            {
-            ?>
-                Note: <?=$value?><?="<br>"?>
-            <?php
-            }
-            ?>
-            </td>
-            </tr>
-</table>
-<?php
+
+	foreach ($allergiesList as $value)
+	{
+		if(in_array($value['id'],$evalution[madtrack][allergies][status]))
+		{
+			echo " - ".$value[name]."<br>";
+		}
+	}
 }
-echo '<br>';
 ?>
 
 
@@ -444,35 +441,14 @@ echo '<br>';
 <?php
 if(isset($evalution[madtrack][symptoms]))
 {
-?>
-<table>
-            <tr>
-            <td>
-            <?php
-            foreach ($evalution[madtrack][symptoms][status] as $value)
-            {
-            ?>
-                Name: <?=$value?><?="<br>"?>
-            <?php
-            }
-            ?>
-            </td>
-           
-            <td>    
-            <?php
-            foreach ($evalution[madtrack][symptoms][note] as $value)
-            {
-            ?>
-                Note: <?=$value?><?="<br>"?>
-            <?php
-            }
-            ?>
-            </td>
-            </tr>
-</table>
-<?php
+	foreach ($symptomList as $value)
+	{
+		if(in_array($value['id'],$evalution[madtrack][symptoms][status]))
+		{
+			echo " - ".$value[name]."<br>";
+		}
+	}
 }
-echo '<br>';
 ?>
 
 
@@ -483,33 +459,13 @@ echo '<br>';
 <?php
 if(isset($evalution[madtrack][drug]))
 {
-?>
-<table>
-            <tr>
-            <td>
-            <?php
-            foreach ($evalution[madtrack][drug][status] as $value)
-            {
-            ?>
-                Name: <?=$value?><?="<br>"?>
-            <?php
-            }
-            ?>
-            </td>
-           
-            <td>    
-            <?php
-            foreach ($evalution[madtrack][drug][note] as $value)
-            {
-            ?>
-                Note: <?=$value?><?="<br>"?>
-            <?php
-            }
-            ?>
-            </td>
-            </tr>
-</table>
-<?php
+foreach ($medtrackList as $value)
+	{
+		if(in_array($value['id'],$evalution[madtrack][drug][status]))
+		{
+			echo " - ".$value[name]."<br>";
+		}
+	}
 }
 echo '<br>';
 ?>
@@ -523,33 +479,13 @@ echo '<br>';
 <?php
 if(isset($evalution[madtrack][diseases]))
 {
-?>
-<table>
-            <tr>
-            <td>
-            <?php
-            foreach ($evalution[madtrack][diseases][status] as $value)
-            {
-            ?>
-                Name: <?=$value?>"<?="<br>"?>
-            <?php
-            }
-            ?>
-            </td>
-           
-            <td>    
-            <?php
-            foreach ($evalution[madtrack][diseases][note] as $value)
-            {
-            ?>
-                Note: <?=$value?><?="<br>"?>
-            <?php
-            }
-            ?>
-            </td>
-            </tr>
-</table>
-<?php
+foreach ($diseasesList as $value)
+	{
+		if(in_array($value['id'],$evalution[madtrack][diseases][status]))
+		{
+			echo " - ".$value[name]."<br>";
+		}
+	}
 }
 echo '<br>';
 ?>

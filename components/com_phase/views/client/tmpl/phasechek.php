@@ -8,14 +8,9 @@ $pid = $this->pid;
 
 
 <?php
-if($this->evalution)
+if (isset($this->data))
 {
-    $evalution = $this->evalution; 
-/*
-    echo '<pre>';
-    var_dump($evalution);
-    echo '</pre>';
-*/
+    $data = $this->data;
 }
 ?>
 
@@ -33,7 +28,9 @@ if($this->evalution)
 <div class='contentheading'>Lifestyle analysis</div>    
 <div class='tabContainer2' style="background-color:#E1FFE3">    
 <?php
-if($this->questionList):
+//lifestyle
+if($data[questionList])
+{
 ?>
         <table class="allleft">
         <tr>
@@ -41,12 +38,12 @@ if($this->questionList):
         <?php
         $cnt = 1;
             
-            foreach($this->questionList as $value):
+            foreach($data[questionList] as $value):
 
             
-           ?>
-            <td style='border:1px solid #EEE;padding:3px;' align="center"><input type="checkbox" name="evalution[life_style][]"<?php if(isset($evalution[life_style])){ if(in_array($value['id'],$evalution[life_style])) {echo "checked";} } ?> value="<?=$value['id'];?>"></td>
-                <td style='border:1px solid #EEE;padding:3px;'><?=$value['question'];?></td>
+            ?>
+            <td style='border:1px solid #EEE;padding:3px;' align="center"><input type="checkbox" name="data[content][life_style][val][]"<?php if(isset($data[content][life_style][val])){if(in_array($value['id'],$data[content][life_style][val])){echo "checked";}}?> value="<?=$value['id'];?>"></td>
+            <td style='border:1px solid #EEE;padding:3px;'><?=$value['question'];?></td>
             <?php
 
             if($cnt % 2 == 0) {
@@ -58,11 +55,14 @@ if($this->questionList):
         </tr>
     </table>
 <?php
-endif;
+}
 ?>
     
 <?php
-if($this->trackingStart){  ?>
+//chart
+if($this->trackingStart)
+{
+?>
     <!-- Body score chart initialization -->
     <script type="text/javascript">
         var bodyscore_chart;
@@ -108,7 +108,9 @@ if($this->trackingStart){  ?>
         });
     </script>
     <div id="bs_container" style="width: 100%; height: 300px"></div>
-<?php }?>
+<?php
+}
+?>
 </div>
 
 
@@ -117,15 +119,15 @@ if($this->trackingStart){  ?>
    <table width="50%">
     <tr>
         <td><?="Weight"?></td>
-        <td><input type="text" name="evalution[body][weight]" size="2" value="<?php if(isset($evalution[body][0])){ echo $evalution[body][0];} ?>" /><?="lbs"?></td>
+        <td><input type="text" name="data[content][body][val][0]" size="2" value="<?php if(isset($data[content][body][val][0])){ echo $data[content][body][val][0];} ?>" /><?="lbs"?></td>
     </tr>
     <tr>
         <td><?="Body Fat"?></td>
-        <td><input type="text" name="evalution[body][fat]" size="1" value="<?php if(isset($evalution[body][1])){ echo $evalution[body][1];} ?>" /><?="%"?></td>
+        <td><input type="text" name="data[content][body][val][1]" size="1" value="<?php if(isset($data[content][body][val][1])){ echo $data[content][body][val][1];} ?>" /><?="%"?></td>
     </tr>
     <tr>
         <td><?="PH"?></td>
-        <td><input type="text" name="evalution[body][ph]" size="1" value="<?php if(isset($evalution[body][2])){ echo $evalution[body][2];} ?>" /><?="%"?></td>
+        <td><input type="text" name="data[content][body][val][2]" size="1" value="<?php if(isset($data[content][body][val][2])){ echo $data[content][body][val][2];} ?>" /><?="%"?></td>
     </tr>
     
 </table> 
@@ -140,12 +142,12 @@ if($this->trackingStart){  ?>
 <tr>
     <td>
         <?php
-        if($evalution[photo][0])
+        if($data[content][photo][0])
         {
             ?>
-            <input type="hidden" name="evalution[file][]" value="<?=$evalution[photo][0]?>" />
+            <input type="hidden" name="data[content][photo][0]" value="<?=$data[content][photo][0]?>" />
             <?php
-            echo "  <div style='font-size:15px;color:#008;'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$evalution[photo][0]."\" width=\"200\" height=\"350\"></div>";
+            echo "  <div style='font-size:15px;color:#008;'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$data[content][photo][0]."\" width=\"200\" height=\"350\"></div>";
         }
         else
         {
@@ -154,16 +156,16 @@ if($this->trackingStart){  ?>
                     </div>";        
         }
         ?>
-        <input type='file' name="evalution[new_file][0]" />     
+        <input type='file' name="data[content][new_photo][0]" />     
     </td>
     <td>
         <?php
-        if($evalution[photo][1])
+        if($data[content][photo][1])
         {
             ?>
-            <input type="hidden" name="evalution[file][]" value="<?=$evalution[photo][1]?>" />
+            <input type="hidden" name="data[content][photo][1]" value="<?=$data[content][photo][1]?>" />
             <?php
-            echo "  <div style='font-size:15px;color:#008;'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$evalution[photo][1]."\" width=\"200\" height=\"350\"></div>";
+            echo "  <div style='font-size:15px;color:#008;'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$data[content][photo][1]."\" width=\"200\" height=\"350\"></div>";
         }
         else
         {
@@ -172,13 +174,17 @@ if($this->trackingStart){  ?>
                     </div>";        
         }
         ?>
-        <input type='file' name="evalution[new_file][1]" />
+        <input type='file' name="data[content][new_photo][1]" />
     </td>
 </tr>
     
     
     </table>
 </div>      
+ 
+ 
+ 
+ 
  
 <div class='contentheading'>Medical Tracking</div>    
 <div class='tabContainer2' style="background-color:#E1FFE3">    
@@ -187,166 +193,624 @@ if($this->trackingStart){  ?>
 <div class='tabContainer2' style="background-color:#E1FFE3">
 
 <table border="1">
-    <tr><td>Name</td><td>Status</td><td>Note</td></tr>
-<?php
-if (isset($evalution[symptoms]))
-{
-    for ($i = 0; $i < count($evalution[symptoms][val]); $i++)
-    {
-    ?>
         <tr>
-        <td>
-            <input type="hidden" name="evalution[symptoms][val][]" value="<?=$evalution[symptoms][val][$i]?>" />
-            <?=$evalution[symptoms][val][$i];?>
-        </td>
-        <td>
-            <select name="evalution[symptoms][status][]">
-                <option value='Same'>Same2</option>
-                <option value='Better'>Better</option>
-                <option value='Worse'>Worse</option>
-                <option value='Finished'>Finished</option>
-            </select>
-        </td>
-        <td>
-            <input type="text" name="evalution[symptoms][note][]" value="<?=$evalution[symptoms][note][$i];?>"/>
-        </td>
+            <td>Name</td>
+            <td>Status</td>
+            <td>Note</td>
         </tr>
-    <?php    
-    }
-    ?>
+<?php
+if(isset($data[content][symptoms][name]) && $data[content][symptoms][name][0] !== "" && isset($data[symptomList]))
+{
+?>
+        <?php
+        for ($i=0; $i < count($data[content][symptoms][name]); $i++)
+        {
+        ?>
+        <tr>
+            <td>
+            <?php            
+            foreach ($data[symptomList] as $value)
+            {
+            ?>
+                <?php
+                if($value['id'] == $data[content][symptoms][name][$i])
+                {
+                ?>    
+                    <input type="hidden" name="data[content][symptoms][name][<?=$i?>]" value="<?=$data[content][symptoms][name][$i]?>" />
+                    <?=$value[name]?>
+                <?php
+                }
+                ?>
+            <?php
+            }
+            ?>            
+            </td>
+            <td>
+                <select name="data[content][symptoms][status][<?=$i?>]">
+                    <option <?php if(isset($data[content][symptoms][status][$i]) && $data[content][symptoms][status][$i] == 'new'){echo "selected";} ?> value= "new" > New </option>
+                    <option <?php if(isset($data[content][symptoms][status][$i]) && $data[content][symptoms][status][$i] == 'same'){echo "selected";} ?> value= "same" > Same </option>
+                    <option <?php if(isset($data[content][symptoms][status][$i]) && $data[content][symptoms][status][$i] == 'better'){echo "selected";} ?> value= "better" > Better </option>
+                    <option <?php if(isset($data[content][symptoms][status][$i]) && $data[content][symptoms][status][$i] == 'worse'){echo "selected";} ?> value= "worse" > Worse </option>
+                    <option <?php if(isset($data[content][symptoms][status][$i]) && $data[content][symptoms][status][$i] == 'finished'){echo "selected";} ?> value= "finished" > Finished </option>
+                </select>
+            </td>
+            <td>
+                <input type="text" name="data[content][symptoms][note][<?=$i?>]" value="<?php if(isset($data[content][symptoms][note][$i])){echo $data[content][symptoms][note][$i];}else{echo "no info";}?>" />
+            </td>
+        </tr>
+        <?php
+        }
+
+        ?>
 <?php
 }
 else
 {
 ?>
-        <tr><td colspan="3">You dont have any symptoms</td></tr>
+        <tr><td colspan="3">No info was edit yet</td></tr>
 <?php
 }
 ?>
 </table>
+
+    <?php
+
+    
+    if(isset($data[content][extra_symptoms][db_list][name]) && $data[content][extra_symptoms][db_list][name][0] !== "")
+    {
+    ?>    
+    <table border="1">
+    <?php
+    if(isset($data[content][extra_symptoms][db_list][name]) && $data[content][extra_symptoms][db_list][name][0] !== "" && isset($data[symptomList]))
+    {
+    ?>
+            <?php
+            for ($i=0; $i < count($data[content][extra_symptoms][db_list][name]); $i++)
+            {
+            ?>
+            <tr>
+                <td>
+                <?php            
+                foreach ($data[symptomList] as $value)
+                {
+                ?>
+                    <?php
+                    if($value['id'] == $data[content][extra_symptoms][db_list][name][$i])
+                    {
+                    ?>    
+                        <input type="hidden" name="data[content][extra_symptoms][db_list][name][<?=$i?>]" value="<?=$data[content][extra_symptoms][db_list][name][$i]?>" />
+                        <?=$value[name]?>
+                    <?php
+                    }
+                    ?>
+                <?php
+                }
+                ?>            
+                </td>
+                <td>
+                    <select name="data[content][extra_symptoms][db_list][status][<?=$i?>]">
+                        <option  value= "new" > New </option>
+                    </select>
+                </td>
+                <td>
+                    <input type="text" name="data[content][extra_symptoms][db_list][note][<?=$i?>]" value="<?php if(isset($data[content][extra_symptoms][db_list][note][$i])){echo $data[content][extra_symptoms][db_list][note][$i];}else{echo "no info";}?>" />
+                </td>
+            </tr>
+            <?php
+            }
+
+            ?>
+    <?php
+    }
+    ?>
+    </table>
+    <?php    
+    }
+    if(isset($data[content][extra_symptoms][user_list][name]) && $data[content][extra_symptoms][user_list][name][0] !== "")
+    {
+    ?>    
+    <table border="1">
+    <?php
+    if(isset($data[content][extra_symptoms][user_list][name]) && $data[content][extra_symptoms][user_list][name][0] !== "" && isset($data[symptomList]))
+    {
+    ?>
+            <?php
+            for ($i=0; $i < count($data[content][extra_symptoms][user_list][name]); $i++)
+            {
+            ?>
+            <tr>
+                <td>
+                    <input type="hidden" name="data[content][extra_symptoms][user_list][name][<?=$i?>]" value="<?=$data[content][extra_symptoms][user_list][name][$i]?>" />
+                    <?=$data[content][extra_symptoms][user_list][name][$i]?>
+                </td>
+                <td>
+                    <select name="data[content][extra_symptoms][user_list][status][<?=$i?>]">
+                        <option  value= "new" > New </option>
+                    </select>
+                </td>
+                <td>
+                    <input type="text" name="data[content][extra_symptoms][user_list][note][<?=$i?>]" value="<?php if(isset($data[content][extra_symptoms][user_list][note][$i])){echo $data[content][extra_symptoms][user_list][note][$i];}else{echo "no info";}?>" />
+                </td>
+            </tr>
+            <?php
+            }
+            ?>
+    <?php
+    }
+    ?>
+    </table>
+    <?php    
+    }  
+    ?>
+    
+<div>
+<?="<br>+ Edit New:"?> 
 </div>
+
+<?php
+if(isset($data[symptomList]))
+{
+?>
+    <div>
+		<?= "Choose from the list :";?>
+		
+		<select name="data[content][extra_symptoms][db_list][new_name][]">
+			<option selected value= "" > Click to show </option>
+			<?php 
+			foreach ($data[symptomList] as $value)
+			{
+			?>
+			<option value="<?= $value[id]?>"><?=$value[name]?></option>
+			<?php
+			}
+			?>   
+		</select>
+<button class="button validate" type="submit" id="test" value="add" name="action"><?= "Add" ?></button>
+    </div>   
+<?php    
+}
+?>
+<div>
+    <?= "Or, if not found";?>
+</div>
+<?="+ Add New:"?>
+<input type="text" name="data[content][extra_symptoms][user_list][new_name][]" value="<?=null?>" />
+<button class="button validate" type="submit" id="test" value="add" name="action"><?= "Add" ?></button>
+
+
+
+
+</div>
+
+
+
 
 <div class='contentheading'>Medical preparations Tracking</div>
 <div class='tabContainer2' style="background-color:#E1FFE3">
 
+
 <table border="1">
-    <tr><td>Name</td><td>Status</td><td>Note</td></tr>
-<?php
-if (isset($evalution[drug]))
-{
-    for ($i = 0; $i < count($evalution[drug][val]); $i++)
-    {
-    ?>
         <tr>
-        <td>
-            <input type="hidden" name="evalution[drug][val][]" value="<?=$evalution[drug][val][$i]?>" />
-            <?=$evalution[drug][val][$i];?>
-        </td>
-        <td>
-            <?php
-            if(isset($evalution[drug][status][$i]) && !empty($evalution[drug][status][$i]))
-            {
-            ?>
-            <select name="evalution[drug][status][]">
-                <option value='Same'>Same1</option>
-                <option value='Better'>Better</option>
-                <option value='Worse'>Worse</option>
-                <option value='Finished'>Finished</option>
-            </select>
-            <?php
-            }
-            else
-            {
-            ?>
-            <select name="evalution[drug][status][]">
-                <option value='Same'>Same2</option>
-                <option value='Better'>Better</option>
-                <option value='Worse'>Worse</option>
-                <option value='Finished'>Finished</option>
-            </select>
-            <?php
-            }
-            ?>
-        </td>
-        <td>
-            <input type="text" name="evalution[drug][note][]" value="<?=$evalution[drug][note][$i];?>"/>
-        </td>
+            <td>Name</td>
+            <td>Status</td>
+            <td>Note</td>
         </tr>
-    <?php    
-    }
-    ?>
+<?php
+if(isset($data[content][drug][name]) && $data[content][drug][name][0] !== "" && isset($data[medtrackList]))
+{
+?>
+        <?php
+        for ($i=0; $i < count($data[content][drug][name]); $i++)
+        {
+        ?>
+        <tr>
+            <td>
+            <?php            
+            foreach ($data[medtrackList] as $value)
+            {
+            ?>
+                <?php
+                if($value['id'] == $data[content][drug][name][$i])
+                {
+                ?>
+                    <input type="hidden" name="data[content][drug][name][<?=$i?>]" value="<?=$data[content][drug][name][$i]?>" />
+                    <?= $value[name]?>
+                <?php
+                }
+                ?>
+            <?php
+            }
+            ?>            
+            </td>
+            <td>
+                <select name="data[content][drug][status][<?=$i?>]">
+                    <option <?php if(isset($data[content][drug][status][$i]) && $data[content][drug][status][$i] == 'new'){echo "selected";} ?> value= "new" > New </option>
+                    <option <?php if(isset($data[content][drug][status][$i]) && $data[content][drug][status][$i] == 'same'){echo "selected";} ?> value= "same" > Same </option>
+                    <option <?php if(isset($data[content][drug][status][$i]) && $data[content][drug][status][$i] == 'better'){echo "selected";} ?> value= "better" > Better </option>
+                    <option <?php if(isset($data[content][drug][status][$i]) && $data[content][drug][status][$i] == 'worse'){echo "selected";} ?> value= "worse" > Worse </option>
+                    <option <?php if(isset($data[content][drug][status][$i]) && $data[content][drug][status][$i] == 'finished'){echo "selected";} ?> value= "finished" > Finished </option>
+                </select>
+            </td>
+            <td>
+                <input type="text" name="data[content][drug][note][<?=$i?>]" value="<?php if(isset($data[content][drug][note][$i])){echo $data[content][drug][note][$i];}else{echo "no info";}?>" />
+            </td>
+        </tr>
+        <?php
+        }
+
+        ?>
 <?php
 }
 else
 {
 ?>
-        <tr><td colspan="3">You dont have any drug</td></tr>
+        <tr><td colspan="3">No info was edit yet</td></tr>
 <?php
 }
 ?>
 </table>
+        <?php
+
+    
+    if(isset($data[content][extra_drug][db_list][name]) && $data[content][extra_drug][db_list][name][0] !== "")
+    {
+    ?>    
+    <table border="1">
+    <?php
+    if(isset($data[content][extra_drug][db_list][name]) && $data[content][extra_drug][db_list][name][0] !== "" && isset($data[medtrackList]))
+    {
+    ?>
+            <?php
+            for ($i=0; $i < count($data[content][extra_drug][db_list][name]); $i++)
+            {
+            ?>
+            <tr>
+                <td>
+                <?php            
+                foreach ($data[medtrackList] as $value)
+                {
+                ?>
+                    <?php
+                    if($value['id'] == $data[content][extra_drug][db_list][name][$i])
+                    {
+                    ?>    
+                        <input type="hidden" name="data[content][extra_drug][db_list][name][<?=$i?>]" value="<?=$data[content][extra_drug][db_list][name][$i]?>" />
+                        <?=$value[name]?>
+                    <?php
+                    }
+                    ?>
+                <?php
+                }
+                ?>            
+                </td>
+                <td>
+                    <select name="data[content][extra_drug][db_list][status][<?=$i?>]">
+                        <option  value= "new" > New </option>
+                    </select>
+                </td>
+                <td>
+                    <input type="text" name="data[content][extra_drug][db_list][note][<?=$i?>]" value="<?php if(isset($data[content][extra_drug][db_list][note][$i])){echo $data[content][extra_drug][db_list][note][$i];}else{echo "no info";}?>" />
+                </td>
+            </tr>
+            <?php
+            }
+
+            ?>
+    <?php
+    }
+    ?>
+    </table>
+    <?php    
+    }
+    if(isset($data[content][extra_drug][user_list][name]) && $data[content][extra_drug][user_list][name][0] !== "")
+    {
+    ?>    
+    <table border="1">
+    <?php
+    if(isset($data[content][extra_drug][user_list][name]) && $data[content][extra_drug][user_list][name][0] !== "" && isset($data[medtrackList]))
+    {
+    ?>
+            <?php
+            for ($i=0; $i < count($data[content][extra_drug][user_list][name]); $i++)
+            {
+            ?>
+            <tr>
+                <td>
+                    <input type="hidden" name="data[content][extra_drug][user_list][name][<?=$i?>]" value="<?=$data[content][extra_drug][user_list][name][$i]?>" />
+                    <?=$data[content][extra_drug][user_list][name][$i]?>
+                </td>
+                <td>
+                    <select name="data[content][extra_drug][user_list][status][<?=$i?>]">
+                        <option  value= "new" > New </option>
+                    </select>
+                </td>
+                <td>
+                    <input type="text" name="data[content][extra_drug][user_list][note][<?=$i?>]" value="<?php if(isset($data[content][extra_drug][user_list][note][$i])){echo $data[content][extra_drug][user_list][note][$i];}else{echo "no info";}?>" />
+                </td>
+            </tr>
+            <?php
+            }
+            ?>
+    <?php
+    }
+    ?>
+    </table>
+    <?php    
+    }  
+    ?>
+<div>
+<?="<br>+ Edit New:"?> 
 </div>
+
+
+<?php
+if(isset($data[medtrackList]))
+{
+    
+?>
+    <div>
+    <?= "Choose from the list :";?>
+    <select name="data[content][extra_drug][db_list][new_name][]">
+        <option selected value= "" > Click to show </option>
+    <?php 
+    foreach ($data[medtrackList] as $value)
+    {
+    ?>
+        <option value="<?= $value[id]?>"><?=$value[name]?></option>
+    <?php
+    }
+    ?>   
+    </select>
+<button class="button validate" type="submit" id="test" value="add" name="action"><?= "Add" ?></button>
+    </div>
+        
+    
+<?php    
+}
+
+?>
+<div>
+    <?= "Or, if not found";?>
+</div>
+
+<?="+ Add New:"?>
+
+
+<input type="text" name="data[content][extra_drug][user_list][new_name][]" value="<?=null?>" />
+
+
+<button class="button validate" type="submit" id="test" value="add" name="action"><?= "Add" ?></button>
+
+</div>
+
+
+
 
 <div class='contentheading'>Diseases Tracking</div>
 <div class='tabContainer2' style="background-color:#E1FFE3">
 
+
+
 <table border="1">
-    <tr><td>Name</td><td>Status</td><td>Note</td></tr>
-<?php
-if (isset($evalution[diseases]))
-{
-    for ($i = 0; $i < count($evalution[diseases][val]); $i++)
-    {
-    ?>
         <tr>
-        <td>
-            <input type="hidden" name="evalution[diseases][val][]" value="<?=$evalution[diseases][val][$i]?>" />
-            <?=$evalution[drug][val][$i];?>
-        </td>
-        <td>
-            <?php
-            if(isset($evalution[diseases][status][$i]) && !empty($evalution[diseases][status][$i]))
-            {
-            ?>
-            <select name="evalution[diseases][status][]">
-                <option value='Same'>Same1</option>
-                <option value='Better'>Better</option>
-                <option value='Worse'>Worse</option>
-                <option value='Finished'>Finished</option>
-            </select>
-            <?php
-            }
-            else
-            {
-            ?>
-            <select name="evalution[diseases][status][]">
-                <option value='Same'>Same2</option>
-                <option value='Better'>Better</option>
-                <option value='Worse'>Worse</option>
-                <option value='Finished'>Finished</option>
-            </select>
-            <?php
-            }
-            ?>
-        </td>
-        <td>
-            <input type="text" name="evalution[diseases][note][]" value="<?=$evalution[diseases][note][$i];?>"/>
-        </td>
+            <td>Name</td>
+            <td>Status</td>
+            <td>Note</td>
         </tr>
-    <?php    
-    }
-    ?>
+<?php
+if(isset($data[content][diseases][name]) && $data[content][diseases][name][0] !== "" && isset($data[diseasesList]))
+{
+?>
+        <?php
+        for ($i=0; $i < count($data[content][diseases][name]); $i++)
+        {
+        ?>
+        <tr>
+            <td>
+            <?php            
+            foreach ($data[diseasesList] as $value)
+            {
+            ?>
+                <?php
+                if($value['id'] == $data[content][diseases][name][$i])
+                {
+                ?>
+                    <input type="hidden" name="data[content][diseases][name][<?=$i?>]" value="<?=$data[content][diseases][name][$i]?>" />
+                    <?=$value[name]?>
+                <?php
+                }
+                ?>
+            <?php
+            }
+            ?>            
+            </td>
+            <td>
+                <select name="data[content][diseases][status][<?=$i?>]">
+                    <option <?php if(isset($data[content][diseases][status][$i]) && $data[content][diseases][status][$i] == 'new'){echo "selected";} ?> value= "new" > New </option>
+                    <option <?php if(isset($data[content][diseases][status][$i]) && $data[content][diseases][status][$i] == 'same'){echo "selected";} ?> value= "same" > Same </option>
+                    <option <?php if(isset($data[content][diseases][status][$i]) && $data[content][diseases][status][$i] == 'better'){echo "selected";} ?> value= "better" > Better </option>
+                    <option <?php if(isset($data[content][diseases][status][$i]) && $data[content][diseases][status][$i] == 'worse'){echo "selected";} ?> value= "worse" > Worse </option>
+                    <option <?php if(isset($data[content][diseases][status][$i]) && $data[content][diseases][status][$i] == 'finished'){echo "selected";} ?> value= "finished" > Finished </option>
+                </select>
+            </td>
+            <td>
+                <input type="text" name="data[content][diseases][note][<?=$i?>]" value="<?php if(isset($data[content][diseases][note][$i])){echo $data[content][diseases][note][$i];}else{echo "no info";}?>" />
+            </td>
+        </tr>
+        <?php
+        }
+
+        ?>
 <?php
 }
 else
 {
 ?>
-        <tr><td colspan="3">You dont have any drug</td></tr>
+        <tr><td colspan="3">No info was edit yet</td></tr>
 <?php
 }
 ?>
 </table>
+<?php
+
+    if(isset($data[content][extra_diseases][db_list][name]) && $data[content][extra_diseases][db_list][name][0] !== "")
+    {
+    ?>    
+    <table border="1">
+    <?php
+    if(isset($data[content][extra_diseases][db_list][name]) && $data[content][extra_diseases][db_list][name][0] !== "" && isset($data[diseasesList]))
+    {
+    ?>
+            <?php
+            for ($i=0; $i < count($data[content][extra_diseases][db_list][name]); $i++)
+            {
+            ?>
+            <tr>
+                <td>
+                <?php            
+                foreach ($data[diseasesList] as $value)
+                {
+                ?>
+                    <?php
+                    if($value['id'] == $data[content][extra_diseases][db_list][name][$i])
+                    {
+                    ?>    
+                        <input type="hidden" name="data[content][extra_diseases][db_list][name][<?=$i?>]" value="<?=$data[content][extra_diseases][db_list][name][$i]?>" />
+                        <?=$value[name]?>
+                    <?php
+                    }
+                    ?>
+                <?php
+                }
+                ?>            
+                </td>
+                <td>
+                    <select name="data[content][extra_diseases][db_list][status][<?=$i?>]">
+                        <option  value= "new" > New </option>
+                    </select>
+                </td>
+                <td>
+                    <input type="text" name="data[content][extra_diseases][db_list][note][<?=$i?>]" value="<?php if(isset($data[content][extra_diseases][db_list][note][$i])){echo $data[content][extra_diseases][db_list][note][$i];}else{echo "no info";}?>" />
+                </td>
+            </tr>
+            <?php
+            }
+
+            ?>
+    <?php
+    }
+    ?>
+    </table>
+    <?php    
+    }
+    if(isset($data[content][extra_diseases][user_list][name]) && $data[content][extra_diseases][user_list][name][0] !== "")
+    {
+    ?>    
+    <table border="1">
+    <?php
+    if(isset($data[content][extra_diseases][user_list][name]) && $data[content][extra_diseases][user_list][name][0] !== "" && isset($data[diseasesList]))
+    {
+    ?>
+            <?php
+            for ($i=0; $i < count($data[content][extra_diseases][user_list][name]); $i++)
+            {
+            ?>
+            <tr>
+                <td>
+                    <input type="hidden" name="data[content][extra_diseases][user_list][name][<?=$i?>]" value="<?=$data[content][extra_diseases][user_list][name][$i]?>" />
+                    <?=$data[content][extra_diseases][user_list][name][$i]?>
+                </td>
+                <td>
+                    <select name="data[content][extra_diseases][user_list][status][<?=$i?>]">
+                        <option  value= "new" > New </option>
+                    </select>
+                </td>
+                <td>
+                    <input type="text" name="data[content][extra_diseases][user_list][note][<?=$i?>]" value="<?php if(isset($data[content][extra_diseases][user_list][note][$i])){echo $data[content][extra_diseases][user_list][note][$i];}else{echo "no info";}?>" />
+                </td>
+            </tr>
+            <?php
+            }
+            ?>
+    <?php
+    }
+    ?>
+    </table>
+    <?php    
+    }  
+    ?>
+<div>
+<?="<br>+ Edit New:"?> 
 </div>
+
+<?php
+if(isset($data[diseasesList]))
+{
+    
+?>
+    <div>
+    <?= "Choose from the list :";?>
+    <select name="data[content][extra_diseases][db_list][new_name][]">
+        <option selected value= "" > Click to show </option>
+    <?php 
+    foreach ($data[diseasesList] as $value)
+    {
+    ?>
+        <option value="<?= $value[id]?>"><?=$value[name]?></option>
+    <?php
+    }
+    ?>   
+    </select>
+<button class="button validate" type="submit" id="test" value="add" name="action"><?= "Add" ?></button>
+    </div>
+        
+    
+<?php    
+}
+
+?>
+<div>
+    <?= "Or, if not found";?>
+</div>
+
+<?="+ Add New:"?>
+
+
+<input type="text" name="data[content][extra_diseases][user_list][new_name][]" value="<?=null?>" />
+
+
+<button class="button validate" type="submit" id="test" value="add" name="action"><?= "Add" ?></button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
 
 </div>
 
@@ -354,3 +818,10 @@ else
 
 </form>   
 </div>
+
+
+
+
+
+
+

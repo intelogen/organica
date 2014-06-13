@@ -1182,7 +1182,7 @@ class PhaseModelClient extends JModel
     function questionList()
     {
         $db =& $this->_db;
-        $query = "SELECT * FROM #__jf_jtpl_survey_body_score ORDER BY id";
+        $query = "SELECT id, question FROM #__jf_jtpl_survey_body_score ORDER BY id";
         $ids = $this->_getList($query);
         $db->setQuery($query);
         return $db->loadAssocList();
@@ -1353,6 +1353,7 @@ class PhaseModelClient extends JModel
         $pid = $evalution[pid];
         $date =  date('Y-m-d G:i:s');
         
+
         $goals_body = $evalution[goals][weight].",".$evalution[goals][fat];
         $result = $this->saveLastintake($uid, $pid, "goals_body", $goals_body, null, null, null, $date);
         if($result == false){return false;}
@@ -1418,29 +1419,45 @@ class PhaseModelClient extends JModel
         $drugs = $evalution[madtrack][drugs];
         $result = $this->saveLastintake($uid, $pid, "drugs", null, $drugs[status], $drugs[note], null, $date);
         if($result == false){return false;}
-        
-        
+
+		
+		
+		
+		
+		
+		
+
         $allergies = $evalution[madtrack][allergies];
-        $allergies = $this->parse($allergies);
-        $result = $this->saveLastintake($uid, $pid, "allergies", $allergies[name], null, $allergies[note], null, $date);
+        $allergies = $this->parseAllergies($allergies);
+		$result = $this->saveLastintake($uid, $pid, "allergies", $allergies, null, null, null, $date);
         if($result == false){return false;}
-        
-        $symptoms = $evalution[madtrack][symptoms];
-        $symptoms = $this->parse($symptoms);
-        $result = $this->saveLastintake($uid, $pid, "symptoms", $symptoms[name], null, $symptoms[note], 4, $date);
-        if($result == false){return false;}
-        
-        $drug = $evalution[madtrack][drug];
-        $drug = $this->parse($drug);
-        $result = $this->saveLastintake($uid, $pid, "drug", $drug[name], null, $drug[note], 5, $date);
-        if($result == false){return false;}
-        
-        $diseases = $evalution[madtrack][diseases];
-        $diseases = $this->parse($diseases);
-        $result = $this->saveLastintake($uid, $pid, "diseases", $diseases[name], null, $diseases[note], 6, $date);
-        if($result == false){return false;}
-        
-        return true;
+
+
+            $symptoms = $evalution[madtrack][symptoms];
+            $symptoms = $this->parseSymptoms($symptoms);
+            $result = $this->saveLastintake($uid, $pid, "symptoms", $symptoms[name], $symptoms[status], $symptoms[note], 4, $date);
+            if($result == false){return false;}
+
+
+              $drug = $evalution[madtrack][drug];
+              $drug = $this->parseDrug($drug);
+
+
+              $result = $this->saveLastintake($uid, $pid, "drug", $drug[name], $drug[status], $drug[note], 5, $date);
+              if($result == false){return false;}
+
+
+              $diseases = $evalution[madtrack][diseases];
+              $diseases = $this->parseDiseases($diseases);
+              $result = $this->saveLastintake($uid, $pid, "diseases", $diseases[name], $diseases[status], $diseases[note], 6, $date);
+              if($result == false){return false;}
+
+
+
+
+
+              return true;
+
     }
     
     function parse($val)
@@ -1449,7 +1466,262 @@ class PhaseModelClient extends JModel
         $val[note] = implode(",", $val[note]);
         return $val;
     }
-            
+    
+	function parseAllergies($symptoms)
+	{
+		if(count($symptoms[db_list]) > 0)
+		{
+			$db_list = implode(",", $symptoms[db_list]);
+		}
+		
+		if(count($symptoms[extra_list]) > 0)
+		{
+			foreach($symptoms[extra_list] as $value)
+			{
+				$extra_list[] = $this->recordNewAllergies($value);
+			}
+			$extra_list = implode(",", $extra_list);
+		}
+		
+		if(isset($db_list) && isset($extra_list))
+		{
+			$result = $db_list.",".$extra_list;
+		}
+		elseif(isset($db_list))
+		{
+			$result = $db_list;
+		}
+		elseif(isset($extra_list))
+		{
+			$result = $extra_list;
+		}
+		
+		return $result;
+	}
+	
+	function recordNewAllergies($value)
+	{
+		
+		$query = "INSERT INTO #__jf_my_allergies (`name`) VALUES ('$value') ";
+		$this->_db->setQuery($query);
+        $result = $this->_db->query();
+		if ($result)
+		{
+			$q = "SELECT id FROM `jos_jf_my_allergies` ORDER BY `id` DESC LIMIT 1";
+			$db =& $this->_db;
+			$db->setQuery($q);
+			$res = $db->loadResult();
+			
+		}
+		return $res;
+	}
+	
+	function parseSymptoms($symptoms)
+	{
+		if(count($symptoms[db_list]) > 0)
+		{
+			$db_list = implode(",", $symptoms[db_list]);
+		}
+		
+		if(count($symptoms[extra_list]) > 0)
+		{
+			foreach($symptoms[extra_list] as $value)
+			{
+				$extra_list[] = $this->recordNewSymptom($value);
+			}
+			$extra_list = implode(",", $extra_list);
+		}
+		
+		if(isset($db_list) && isset($extra_list))
+		{
+			$result[name] = $db_list.",".$extra_list;
+        }
+		elseif(isset($db_list))
+		{
+			$result[name] = $db_list;
+		}
+		elseif(isset($extra_list))
+		{
+			$result[name] = $extra_list;
+		}
+
+
+
+        if(!is_null($result[name]))
+        {
+            $temp = explode(",",$result[name]);
+            foreach($temp as $value)
+            {
+                $count[] = "new";
+            }
+            $result[status] = implode   (",",$count );
+
+            $temp = explode(",",$result[name]);
+            foreach($temp as $value)
+            {
+                $count2[] = "no info";
+            }
+            $result[note] = implode   (",",$count2 );
+        }
+
+
+		return $result;
+	}
+	
+	function recordNewSymptom($value)
+	{
+		
+		$query = "INSERT INTO #__jf_my_symptoms (`name`) VALUES ('$value') ";
+		$this->_db->setQuery($query);
+        $result = $this->_db->query();
+		if ($result)
+		{
+			$q = "SELECT id FROM `jos_jf_my_symptoms` ORDER BY `id` DESC LIMIT 1";
+			$db =& $this->_db;
+			$db->setQuery($q);
+			$res = $db->loadResult();
+			
+		}
+		return $res;
+	}
+	
+	function parseDrug($symptoms)
+	{
+		if(count($symptoms[db_list]) > 0)
+		{
+			$db_list = implode(",", $symptoms[db_list]);
+		}
+		
+		if(count($symptoms[extra_list]) > 0)
+		{
+			foreach($symptoms[extra_list] as $value)
+			{
+				$extra_list[] = $this->recordNewDrug($value);
+			}
+			$extra_list = implode(",", $extra_list);
+		}
+		
+		if(isset($db_list) && isset($extra_list))
+		{
+			$result[name] = $db_list.",".$extra_list;
+		}
+		elseif(isset($db_list))
+		{
+			$result[name] = $db_list;
+		}
+		elseif(isset($extra_list))
+		{
+			$result[name] = $extra_list;
+		}
+
+        if(!is_null($result[name]))
+        {
+            $temp = explode(",",$result[name]);
+            foreach($temp as $value)
+            {
+                $count[] = "new";
+            }
+            $result[status] = implode   (",",$count );
+
+            $temp = explode(",",$result[name]);
+            foreach($temp as $value)
+            {
+                $count2[] = "no info";
+            }
+            $result[note] = implode   (",",$count2 );
+        }
+
+		return $result;
+	}
+	
+	function recordNewDrug($value)
+	{
+		
+		$query = "INSERT INTO #__jf_my_medtrack (`name`) VALUES ('$value') ";
+		$this->_db->setQuery($query);
+        $result = $this->_db->query();
+		if ($result)
+		{
+			$q = "SELECT id FROM `jos_jf_my_medtrack` ORDER BY `id` DESC LIMIT 1";
+			$db =& $this->_db;
+			$db->setQuery($q);
+			$res = $db->loadResult();
+			
+		}
+		return $res;
+	}
+	
+	function parseDiseases($symptoms)
+	{
+		if(count($symptoms[db_list]) > 0)
+		{
+			$db_list = implode(",", $symptoms[db_list]);
+		}
+		
+		if(count($symptoms[extra_list]) > 0)
+		{
+			foreach($symptoms[extra_list] as $value)
+			{
+				$extra_list[] = $this->recordNewDiseases($value);
+			}
+			$extra_list = implode(",", $extra_list);
+		}
+		
+		if(isset($db_list) && isset($extra_list))
+		{
+			$result[name] = $db_list.",".$extra_list;
+		}
+		elseif(isset($db_list))
+		{
+			$result[name] = $db_list;
+		}
+		elseif(isset($extra_list))
+		{
+			$result[name] = $extra_list;
+		}
+
+        if(!is_null($result[name]))
+        {
+            $temp = explode(",",$result[name]);
+            foreach($temp as $value)
+            {
+                $count[] = "new";
+            }
+            $result[status] = implode   (",",$count );
+
+            $temp = explode(",",$result[name]);
+            foreach($temp as $value)
+            {
+                $count2[] = "no info";
+            }
+            $result[note] = implode   (",",$count2 );
+        }
+
+		return $result;
+	}
+	
+	function recordNewDiseases($value)
+	{
+		
+		$query = "INSERT INTO #__jf_my_diseases (`name`) VALUES ('$value') ";
+		$this->_db->setQuery($query);
+        $result = $this->_db->query();
+		if ($result)
+		{
+			$q = "SELECT id FROM `jos_jf_my_diseases` ORDER BY `id` DESC LIMIT 1";
+			$db =& $this->_db;
+			$db->setQuery($q);
+			$res = $db->loadResult();
+			
+		}
+		return $res;
+	}
+	
+	
+	
+	
+	
+	
     function saveLastintake($uid, $pid, $name, $val, $status, $note, $step, $date)
     {
         $row = & JTable::getInstance('Lastintake');
@@ -1500,6 +1772,15 @@ class PhaseModelClient extends JModel
         
     }
     
+    function getFirstData($uid)
+    {
+        $db =& $this->_db;
+        $query = "SELECT * FROM  #__jf_my_lastintake WHERE uid = $uid AND step IN (1,2,3,4,5,6) AND pid = 0 ORDER BY step";
+        $ids = $this->_getList($query);
+        $db->setQuery($query);
+        return  $db->loadAssocList();
+    }
+    
     function getIntakeData($uid)
     {
         $db =& $this->_db;
@@ -1507,7 +1788,6 @@ class PhaseModelClient extends JModel
         $ids = $this->_getList($query);
         $db->setQuery($query);
         return  $db->loadAssocList();
-        
     }
     
     
@@ -1569,7 +1849,7 @@ class PhaseModelClient extends JModel
     function getPhasesId($uid)
     {
         $db =& $this->_db;
-        $query = "SELECT id FROM  #__jf_projects WHERE leader = $uid ORDER BY id";
+        $query = "SELECT id, name FROM  #__jf_projects WHERE leader = $uid ORDER BY id";
         $ids = $this->_getList($query);
         $db->setQuery($query);
         return  $db->loadAssocList();
@@ -1604,10 +1884,91 @@ class PhaseModelClient extends JModel
         return $db->loadAssocList(); 
     }
     
+	function getAllergiesList()
+	{
+		$db =& $this->_db;
+        $query = "SELECT * FROM  #__jf_my_allergies ORDER BY name";
+        $ids = $this->_getList($query);
+        $db->setQuery($query);
+        return $db->loadAssocList();
+	}
+	
+    function getSymptomList()
+    {
+        $db =& $this->_db;
+        $query = "SELECT * FROM  #__jf_my_symptoms ORDER BY name";
+        $ids = $this->_getList($query);
+        $db->setQuery($query);
+        return $db->loadAssocList();
+    }
     
+    function getMedtrackList()
+    {
+        $db =& $this->_db;
+        $query = "SELECT * FROM  #__jf_my_medtrack ORDER BY name";
+        $ids = $this->_getList($query);
+        $db->setQuery($query);
+        return $db->loadAssocList();
+    }
     
+    function getDiseasesList()
+    {
+        $db =& $this->_db;
+        $query = "SELECT * FROM  #__jf_my_diseases ORDER BY name";
+        $ids = $this->_getList($query);
+        $db->setQuery($query);
+        return $db->loadAssocList();
+    }
     
+    function getPhaseDates($pid)
+    {
+        $db =& $this->_db;
+        $query = "SELECT DISTINCT(date) FROM  #__jf_my_lastintake WHERE pid = $pid";
+        $ids = $this->_getList($query);
+        $db->setQuery($query);
+        return $db->loadAssocList(); 
+    }
     
+    function getC($date, $pid)
+    {
+        $db =& $this->_db;
+        $query = "SELECT val, status, note, date, name FROM  #__jf_my_lastintake WHERE pid = $pid and date = '$date'";
+        $ids = $this->_getList($query);
+        $db->setQuery($query);
+        return $db->loadAssocList(); 
+     }
     
+     function getShowTotal($pid)
+     {
+         $result = $this->getPhaseDat($pid);
+         
+         foreach ($result as $value)
+         {
+            $date = $value[date];
+            $pid = $value[pid];
+            $re[] = $this->getC($date, $pid);
+         }
+         
+         
+        return $re;
+         
+     }
+     
+    function getPhaseDat($pid)
+    {
+        $db =& $this->_db;
+        $query = "SELECT DISTINCT(date),pid FROM  #__jf_my_lastintake WHERE pid = $pid";
+        $ids = $this->_getList($query);
+        $db->setQuery($query);
+        return $db->loadAssocList(); 
+    }
     
+    function getPhaseName($pid)
+    {
+        $db =& $this->_db;
+        $query = "SELECT name FROM #__jf_projects WHERE id = $pid";
+        $db->setQuery($query);
+	$result = $db->loadResult();
+        return $result;
+    }
 }

@@ -14,7 +14,7 @@ if (isset($this->data))
 }
 ?>
 
-
+<div class='tabContainer2 phase-navigation' style="background-color:#E1FFE3"></div>
 
 <div class='contentheading'>Intake Survey</div>   
 <div class='tabContainer2' style="background-color:#E1FFE3">

@@ -48,10 +48,10 @@ class PhaseViewPhase extends JView
         {
         $url = "index.php?option=com_phase&controller=admin";
         }
-		else
-		{
-		$url = "index.php?option=com_phase";
-		}
+	else
+	{
+            $url = "index.php?option=com_phase";
+	}
         $mainframe->redirect($url);
         
 

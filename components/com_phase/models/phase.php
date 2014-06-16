@@ -12,7 +12,6 @@ class PhaseModelPhase extends JModel
      
      function isAdmin($userId)
      {
-         echo $userId;
          /*
         $query = "SELECT usertype FROM #__users WHERE id = $userId";
         $result =  $this->_getList($query);

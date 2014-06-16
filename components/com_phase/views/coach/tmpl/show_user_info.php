@@ -52,9 +52,6 @@ $editor = & JFactory::getEditor();
                 <div class='objectTitle'>
                     <a href="index.php?option=com_phase&controller=client&action=show_repo&c=<?=$value->id?>">User Progress</a>
                 </div>
-                <div class='objectTitle'>
-                    <a href="index.php?option=com_phase&controller=coach&action=show_detail_repo&c=<?=$value->id?>">Detail Progress(not working - in progress)</a>
-                </div>
                 
     
 

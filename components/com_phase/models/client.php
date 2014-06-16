@@ -946,17 +946,20 @@ class PhaseModelClient extends JModel
         $user_id = (int)$user_id;
         $phase_id = (int)$phase_id;
 
-/*
-        // get bodyscore retake
-        $sql = "SELECT val FROM #__jf_my_bodyscore WHERE name = 'bodyscore' AND user_id = $user_id AND pid = $phase_id";
-        $db->setQuery($sql);
-        $ids = $db->loadResult();
-*/
+        /*
+                // get bodyscore retake
+                $sql = "SELECT val FROM #__jf_my_bodyscore WHERE name = 'bodyscore' AND user_id = $user_id AND pid = $phase_id";
+                $db->setQuery($sql);
+                $ids = $db->loadResult();
+        */
+
+        // get data for chart
         
-// get data for chart
         if($numbers)
             {
             $percents = $this->_getBodyScorePercents($numbers);
+            
+            
             
             $chartdata = $this->getBodyScoreChartData($percents);
             
@@ -985,6 +988,8 @@ class PhaseModelClient extends JModel
                   GROUP BY category_id";
         $db->setQuery($cat_query);
         $cats_q_ranks = $db->loadAssocList();
+        
+        
 
         
         
@@ -996,14 +1001,13 @@ class PhaseModelClient extends JModel
                       GROUP BY category_id";
         $db->setQuery($max_query);
         $cats_max_ranks = $db->loadAssocList();
-
-        
         
 
         // calculating percentage for each category
         $percents = array();
         $cats_len = count($cats_max_ranks);
-        for($i = 0; $i < $cats_len; $i++) {
+        for($i = 0; $i < $cats_len; $i++)
+        {
             $q_rank = $cats_q_ranks[$i];
             $q_amount = $q_rank !== null ? $q_rank['amount'] : 0;
             $percents[$cats_max_ranks[$i]['catid']] = array(
@@ -1019,7 +1023,8 @@ class PhaseModelClient extends JModel
        
     }
     
-    function getBodyScoreChartData($percents) {
+    function getBodyScoreChartData($percents)
+    {
         $bs_cats = array();
         $bs_percent_vals = array();
         $bs_opposite_vals = array();

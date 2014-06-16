@@ -3469,6 +3469,10 @@ class PhaseViewClient extends JView
         
         $numbers = implode(",", $data[content][life_style][val]);
         $trackingStart = $model->getProgressTrackingDetails($uid, $pid, $numbers);
+        
+        
+        
+        
         $this->assignRef('trackingStart', $trackingStart);
         
         $this->assignRef('data', $data);

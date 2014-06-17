@@ -69,6 +69,93 @@ foreach ($content as $value)
 
 
 
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Date', 'Weight'],
+          ['2014-06-10', 200],
+          ['2014-06-10', 190],
+          ['2014-06-10', 180],
+		  ['2014-06-10', 175],
+		  ['Goal'	   , 100]
+        ]);
+
+        var options = {
+          title: 'Weight History',
+          hAxis: {title: 'Date',  titleTextStyle: {color: '#333'}},
+          vAxis: {minValue: 30},
+		  vAxis: {maxValue: 152}
+		  
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+    <div id="chart_div" style="width: 700px; height: 200px;"></div>
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Date', 'Fat'],
+          ['2014-06-10', 20],
+          ['2014-06-10', 19],
+          ['2014-06-10', 18],
+		  ['2014-06-10', 17],
+		  ['Goal'	   , 10]
+        ]);
+
+        var options = {
+          title: 'Fat History',
+          hAxis: {title: 'Date',  titleTextStyle: {color: '#333'}},
+          vAxis: {minValue: 0}
+		  
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div_2'));
+        chart.draw(data, options);
+      }
+    </script>
+    <div id="chart_div_2" style="width: 700px; height: 200px;"></div>
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Date', 'PH'],
+          ['2014-06-10', 20],
+          ['2014-06-10', 19],
+          ['2014-06-10', 18],
+		  ['2014-06-10', 17],
+		  ['Goal'	   , 7]
+        ]);
+
+        var options = {
+          title: 'PH History',
+          hAxis: {title: 'Date',  titleTextStyle: {color: '#333'}},
+          vAxis: {minValue: 0}
+		  
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div_3'));
+        chart.draw(data, options);
+      }
+    </script>
+    <div id="chart_div_3" style="width: 700px; height: 200px;"></div>
+
+
+
+
+
+
 <div class='contentheading'>Symptoms Tracking</div>  
 <div class='tabContainer2' style="background-color:#E1FFE3">
     

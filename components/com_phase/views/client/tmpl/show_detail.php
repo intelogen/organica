@@ -62,6 +62,13 @@ foreach ($content as $value)
     </tr>
 </table>
 </div>  
+
+
+
+
+
+
+
 <div class='contentheading'>Symptoms Tracking</div>  
 <div class='tabContainer2' style="background-color:#E1FFE3">
     

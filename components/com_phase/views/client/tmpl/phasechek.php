@@ -62,6 +62,9 @@ if($data[questionList])
 //chart
 if($this->trackingStart)
 {
+
+//echo $this->trackingStart->cats;
+$this->trackingStart->cats = '["Digestive","Intestinal","Circulatory","Nervous","Immune","Respiratory","Urinary","Glandular","Structural"]';
 ?>
     <!-- Body score chart initialization -->
     <script type="text/javascript">

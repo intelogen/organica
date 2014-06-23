@@ -192,10 +192,11 @@ $this->trackingStart->cats = '["Digestive","Intestinal","Circulatory","Nervous",
 <div class='contentheading'>Medical Tracking</div>    
 <div class='tabContainer2' style="background-color:#E1FFE3">    
 
+
 <div class='contentheading'>Symptoms Tracking</div>    
 <div class='tabContainer2' style="background-color:#E1FFE3">
 
-<table border="1">
+<table id="symptoms" border="1">
         <tr>
             <td>Name</td>
             <td>Status</td>
@@ -349,7 +350,8 @@ else
 <div>
 <?="<br>+ Edit New:"?> 
 </div>
-
+    
+<!--
 <?php
 if(isset($data[symptomList]))
 {
@@ -379,8 +381,57 @@ if(isset($data[symptomList]))
 <?="+ Add New:"?>
 <input type="text" name="data[content][extra_symptoms][user_list][new_name][]" value="<?=null?>" />
 <button class="button validate" type="submit" id="test" value="add" name="action"><?= "Add" ?></button>
+-->
 
 
+<div class='tabContainer2' style="background-color:#E1FFE3">   
+    
+    <!--Название раздела-->
+    <div class='contentheading'>Symptoms Tracking</div>
+    
+    <!--список симптомов-->
+    
+    <?php
+    if(isset($data[symptomList]))
+    {
+    ?>
+        <div>
+            
+
+                    <select id="s_list">
+                            <?php 
+                            foreach ($data[symptomList] as $value)
+                            {
+                            ?>
+                            <option value="<?= $value[id]?>"><?=$value[name]?></option>
+                            <?php
+                            }
+                            ?>   
+                    </select>
+        
+        <!--Кнопка добавления симптомов из списка-->
+        <button id="add_s_list">Add</button>
+        </div>   
+    <?php    
+    }
+    ?>
+
+    
+    
+    <!--инпут для собственных симптомов-->
+    <div>
+        <?="+ Add New:"?>
+        <input type="text" id="s_extra"/>
+        
+        <!--Кнопка добавления своих симптомов-->
+        <button id="add_s_extra">Add</button>
+    </div>
+    
+    
+    <!--результат выборки-->
+    <div id="symptom_list"><ul></ul></div>
+    
+</div>
 
 
 </div>
@@ -392,7 +443,7 @@ if(isset($data[symptomList]))
 <div class='tabContainer2' style="background-color:#E1FFE3">
 
 
-<table border="1">
+<table id="medical" border="1">
         <tr>
             <td>Name</td>
             <td>Status</td>
@@ -545,7 +596,7 @@ else
 <?="<br>+ Edit New:"?> 
 </div>
 
-
+<!--
 <?php
 if(isset($data[medtrackList]))
 {
@@ -583,82 +634,135 @@ if(isset($data[medtrackList]))
 
 
 <button class="button validate" type="submit" id="test" value="add" name="action"><?= "Add" ?></button>
+-->
+
+
+<div class='tabContainer2' style="background-color:#E1FFE3">   
+    
+    <!--Название раздела-->
+    <div class='contentheading'>Medical preparations Tracking</div>    
+<?php
+if(isset($data[medtrackList]))
+{
+    
+?>
+    <div>
+    <?= "Choose from the list :";?>
+    <select id="dr_list">
+    <?php 
+    foreach ($data[medtrackList] as $value)
+    {
+    ?>
+        <option value="<?= $value[id]?>"><?=$value[name]?></option>
+    <?php
+    }
+    ?>   
+    </select>
+        <button id="add_dr_list">Add</button>
+    </div>
+        
+    
+<?php    
+}
+
+?>
+    <!--инпут для собственных симптомов-->
+    <div>
+        <?="+ Add New:"?>
+        <input type="text" id="dr_extra"/>
+        
+        <!--Кнопка добавления своих симптомов-->
+        <button id="add_dr_extra">Add</button>
+    </div>
+    
+    
+    <!--результат выборки-->
+    <div id="drug_list"><ul></ul></div>
+</div>
+
 
 </div>
 
 
 
 
+
+
+
+
+
+
+
 <div class='contentheading'>Diseases Tracking</div>
 <div class='tabContainer2' style="background-color:#E1FFE3">
-
-
-
-<table border="1">
-        <tr>
-            <td>Name</td>
-            <td>Status</td>
-            <td>Note</td>
-        </tr>
-<?php
-if(isset($data[content][diseases][name]) && $data[content][diseases][name][0] !== "" && isset($data[diseasesList]))
-{
-?>
+<table id="diseases" border="1">
+                <tr>
+                    <td>Name</td>
+                    <td>Status</td>
+                    <td>Note</td>
+                </tr>
         <?php
-        for ($i=0; $i < count($data[content][diseases][name]); $i++)
+        if(isset($data[content][diseases][name]) && $data[content][diseases][name][0] !== "" && isset($data[diseasesList]))
         {
         ?>
-        <tr>
-            <td>
-            <?php            
-            foreach ($data[diseasesList] as $value)
-            {
-            ?>
                 <?php
-                if($value['id'] == $data[content][diseases][name][$i])
+                for ($i=0; $i < count($data[content][diseases][name]); $i++)
                 {
                 ?>
-                    <input type="hidden" name="data[content][diseases][name][<?=$i?>]" value="<?=$data[content][diseases][name][$i]?>" />
-                    <?=$value[name]?>
+                <tr>
+                    <td>
+                    <?php            
+                    foreach ($data[diseasesList] as $value)
+                    {
+                    ?>
+                        <?php
+                        if($value['id'] == $data[content][diseases][name][$i])
+                        {
+                        ?>
+                            <input type="hidden" name="data[content][diseases][name][<?=$i?>]" value="<?=$data[content][diseases][name][$i]?>" />
+                            <?=$value[name]?>
+                        <?php
+                        }
+                        ?>
+                    <?php
+                    }
+                    ?>            
+                    </td>
+                    <td>
+                        <select name="data[content][diseases][status][<?=$i?>]">
+                            <option <?php if(isset($data[content][diseases][status][$i]) && $data[content][diseases][status][$i] == 'new'){echo "selected";} ?> value= "new" > New </option>
+                            <option <?php if(isset($data[content][diseases][status][$i]) && $data[content][diseases][status][$i] == 'same'){echo "selected";} ?> value= "same" > Same </option>
+                            <option <?php if(isset($data[content][diseases][status][$i]) && $data[content][diseases][status][$i] == 'better'){echo "selected";} ?> value= "better" > Better </option>
+                            <option <?php if(isset($data[content][diseases][status][$i]) && $data[content][diseases][status][$i] == 'worse'){echo "selected";} ?> value= "worse" > Worse </option>
+                            <option <?php if(isset($data[content][diseases][status][$i]) && $data[content][diseases][status][$i] == 'finished'){echo "selected";} ?> value= "finished" > Finished </option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" name="data[content][diseases][note][<?=$i?>]" value="<?php if(isset($data[content][diseases][note][$i])){echo $data[content][diseases][note][$i];}else{echo "no info";}?>" />
+                    </td>
+                </tr>
                 <?php
                 }
+
                 ?>
-            <?php
-            }
-            ?>            
-            </td>
-            <td>
-                <select name="data[content][diseases][status][<?=$i?>]">
-                    <option <?php if(isset($data[content][diseases][status][$i]) && $data[content][diseases][status][$i] == 'new'){echo "selected";} ?> value= "new" > New </option>
-                    <option <?php if(isset($data[content][diseases][status][$i]) && $data[content][diseases][status][$i] == 'same'){echo "selected";} ?> value= "same" > Same </option>
-                    <option <?php if(isset($data[content][diseases][status][$i]) && $data[content][diseases][status][$i] == 'better'){echo "selected";} ?> value= "better" > Better </option>
-                    <option <?php if(isset($data[content][diseases][status][$i]) && $data[content][diseases][status][$i] == 'worse'){echo "selected";} ?> value= "worse" > Worse </option>
-                    <option <?php if(isset($data[content][diseases][status][$i]) && $data[content][diseases][status][$i] == 'finished'){echo "selected";} ?> value= "finished" > Finished </option>
-                </select>
-            </td>
-            <td>
-                <input type="text" name="data[content][diseases][note][<?=$i?>]" value="<?php if(isset($data[content][diseases][note][$i])){echo $data[content][diseases][note][$i];}else{echo "no info";}?>" />
-            </td>
-        </tr>
         <?php
         }
-
+        else
+        {
         ?>
-<?php
-}
-else
-{
-?>
-        <tr><td colspan="3">No info was edit yet</td></tr>
-<?php
-}
-?>
+                <tr><td colspan="3">No info was edit yet</td></tr>
+        <?php
+        }
+        ?>
 </table>
+    
+    
 <?php
 
     if(isset($data[content][extra_diseases][db_list][name]) && $data[content][extra_diseases][db_list][name][0] !== "")
     {
     ?>    
+    
     <table border="1">
     <?php
     if(isset($data[content][extra_diseases][db_list][name]) && $data[content][extra_diseases][db_list][name][0] !== "" && isset($data[diseasesList]))
@@ -704,6 +808,7 @@ else
     }
     ?>
     </table>
+    
     <?php    
     }
     if(isset($data[content][extra_diseases][user_list][name]) && $data[content][extra_diseases][user_list][name][0] !== "")
@@ -743,9 +848,12 @@ else
     }  
     ?>
 <div>
+    
+    
+    
 <?="<br>+ Edit New:"?> 
 </div>
-
+<!--
 <?php
 if(isset($data[diseasesList]))
 {
@@ -784,31 +892,49 @@ if(isset($data[diseasesList]))
 
 <button class="button validate" type="submit" id="test" value="add" name="action"><?= "Add" ?></button>
 
+-->
 
+<div class='tabContainer2' style="background-color:#E1FFE3">   
+    
+    <!--Название раздела-->
+    <div class='contentheading'>Diseases Tracking</div>    
+<?php
+if(isset($data[diseasesList]))
+{   
+?>
+    <div>
+    <?= "Choose from the list :";?>
+    <select id="d_list">
+    <?php 
+    foreach ($data[diseasesList] as $value)
+    {
+    ?>
+        <option value="<?= $value[id]?>"><?=$value[name]?></option>
+    <?php
+    }
+    ?>   
+    </select>
+        <button id="add_d_list">Add</button>
+    </div>
+        
+    
+<?php    
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+?>
+    <!--инпут для собственных симптомов-->
+    <div>
+        <?="+ Add New:"?>
+        <input type="text" id="d_extra"/>
+        
+        <!--Кнопка добавления своих симптомов-->
+        <button id="add_d_extra">Add</button>
+    </div>
+    
+    
+    <!--результат выборки-->
+    <div id="diseases_list"><ul></ul></div>
+</div>
 
 </div>
 
@@ -826,5 +952,168 @@ if(isset($data[diseasesList]))
 
 
 
+
+
+
+
+
+
+<script type="text/javascript">
+    $(function(){
+        var x;
+        
+        //////////////////////////////////////////////////   symptoms
+        x = $('button#add_s_list').on('click', function() {
+                                                    
+                                                    var sel = $('select#s_list option:selected');
+                                                    //выбираем id
+                                                    var id = sel.val();
+                                                    //если id нет возвращаем фолс
+                                                    if(id.length < 1)return false;
+                                                    //выбираем текст    
+                                                    var txt = sel.text();
+                                                    //грохаем выбраный елемент   
+                                                    sel.remove('');    
+                                                    //добавляем текст на страницу в див new_sym_list
+                                                    //var div = $('div#symptom_list ul').append("<li>"+txt+"</li>");
+                                                    var tbl = $('#symptoms');
+                                                    tbl.append('<tr>\n\
+                                                                    <td>'+txt+'<input type="hidden" name="data[content][symptoms][name][]" value="'+id+'" /></td>\n\
+                                                                    <td> <select name="data[content][symptoms][status][]"> <option  value= "new" >New</option> </select></td>\n\
+                                                                    <td><input type="text" name="data[content][symptoms][note][]" value="no info"" /></td>\n\
+                                                                </tr>');
+                                                     
+                                                    //добавляем скрытое поле с значением
+                                                    //$('form').append("<input type='hidden' name='data[content][extra_symptoms][db_list][new_name][]' value='"+id+"' />");
+                                                    return false;
+                                                });
+       
+        x = $('button#add_s_extra').on('click', function(){
+                                                    var sel = $('input[type="text"]#s_extra');
+                                                    //выбираем текст
+                                                    var txt = sel.val();
+                                                    //если текста нет возвращаем фолс
+                                                    if(txt.length < 1)return false;
+                                                    //добавляем текст на страницу в див new_sym_list
+                                                    //var div = $('div#symptom_list ul').append("<li>"+txt+"</li>");
+                                                    var tbl = $('#symptoms').append('<tr>\n\
+                                                                                        <td>'+txt+' <input type="hidden" name="data[content][extra_symptoms][user_list][name][]" value="'+txt+'" /></td>\n\
+                                                                                        <td> <select name="data[content][extra_symptoms][user_list][status][]"> <option  value= "new" >New</option> </select></td>\n\
+                                                                                        <td><input type="text" name="data[content][extra_symptoms][user_list][note][]" value="no info"/></td>\n\
+                                                                                    </tr>');  
+                                                    //добавляем скрытое поле с значением
+                                                    //$('form').append("<input type='hidden' name='data[content][extra_symptoms][user_list][new_name][]' value='"+txt+"' />");
+                                                    //чистим инпут
+                                                    sel.val('');
+                                                    return false;
+                                                });
+        
+        
+        
+        //////////////////////////////////////////////////
+        ////////////////////////////////////////////////// medical
+        x = $('button#add_dr_list').on('click', function() {
+                                                    
+                                                    var sel = $('select#dr_list option:selected');
+                                                    //выбираем id
+                                                    var id = sel.val();
+                                                    //если id нет возвращаем фолс
+                                                    if(id.length < 1)return false;
+                                                    //выбираем текст    
+                                                    var txt = sel.text();
+                                                    //грохаем выбраный елемент   
+                                                    sel.remove('');    
+                                                    //добавляем текст на страницу в див new_sym_list
+                                                    //var div = $('div#drug_list ul').append("<li>"+txt+"</li>");
+                                                    var tbl = $('#medical');
+                                                    tbl.append('<tr>\n\
+                                                                    <td>'+txt+'<input type="hidden" name="data[content][drug][name][]" value="'+id+'" /></td>\n\
+                                                                    <td> <select name="data[content][drug][status][]"> <option  value= "new" >New</option> </select></td>\n\
+                                                                    <td><input type="text" name="data[content][drug][note][]" value="no info"" /></td>\n\
+                                                                </tr>');
+                                                     
+                                                    //добавляем скрытое поле с значением
+                                                    //$('form').append("<input type='hidden' name='data[content][extra_drug][db_list][new_name][]' value='"+id+"' />");
+                                                    return false;
+                                                });
+       
+        x = $('button#add_dr_extra').on('click', function(){
+                                                    var sel = $('input[type="text"]#dr_extra');
+                                                    //выбираем текст
+                                                    var txt = sel.val();
+                                                    //если текста нет возвращаем фолс
+                                                    if(txt.length < 1)return false;
+                                                    //добавляем текст на страницу в див new_sym_list
+                                                    //var div = $('div#drug_list ul').append("<li>"+txt+"</li>");
+                                                    var tbl = $('#medical').append('<tr>\n\
+                                                                                        <td>'+txt+' <input type="hidden" name="data[content][extra_drug][user_list][name][]" value="'+txt+'" /></td>\n\
+                                                                                        <td> <select name="data[content][extra_drug][user_list][status][]"> <option  value= "new" >New</option> </select></td>\n\
+                                                                                        <td><input type="text" name="data[content][extra_drug][user_list][note][]" value="no info"/></td>\n\
+                                                                                    </tr>');    
+                                                    //добавляем скрытое поле с значением
+                                                    //$('form').append("<input type='hidden' name='data[content][extra_drug][user_list][new_name][]' value='"+txt+"' />");
+                                                    //чистим инпут
+                                                    sel.val('');
+                                                    return false;
+                                                });
+        
+        ///////////////////////////////////////////
+        ///////////////////////////////////////////   diseases
+        x = $('button#add_d_list').on('click', function() {
+                                                    
+                                                    var sel = $('select#d_list option:selected');
+                                                    //выбираем id
+                                                    var id = sel.val();
+                                                    //если id нет возвращаем фолс
+                                                    if(id.length < 1)return false;
+                                                    //выбираем текст    
+                                                    var txt = sel.text();
+                                                    //грохаем выбраный елемент   
+                                                    sel.remove('');    
+                                                    //добавляем текст на страницу в див new_sym_list
+                                                    //var div = $('div#diseases_list ul').append("<li>"+txt+"</li>");
+                                                    var tbl = $('#diseases');
+                                                    tbl.append('<tr>\n\
+                                                                    <td>'+txt+'<input type="hidden" name="data[content][diseases][name][]" value="'+id+'" /></td>\n\
+                                                                    <td> <select name="data[content][diseases][status][]"> <option  value= "new" >New</option> </select></td>\n\
+                                                                    <td><input type="text" name="data[content][diseases][note][]" value="no info"" /></td>\n\
+                                                                </tr>');
+                                                                        
+                                                    //добавляем скрытое поле с значением
+                                                    //$('form').append("<input type='hidden' name='data[content][extra_diseases][db_list][new_name][]' value='"+id+"' />");
+                                                    return false;
+                                                });
+       
+        x = $('button#add_d_extra').on('click', function(){
+                                                    var sel = $('input[type="text"]#d_extra');
+                                                    //выбираем текст
+                                                    var txt = sel.val();
+                                                    //если текста нет возвращаем фолс
+                                                    if(txt.length < 1)return false;
+                                                    //добавляем текст на страницу в див new_sym_list
+                                                    //var div = $('div#diseases_list ul').append("<li>"+txt+"</li>");
+                                                    var tbl = $('#diseases').append('<tr>\n\
+                                                                                        <td>'+txt+' <input type="hidden" name="data[content][extra_diseases][user_list][name][]" value="'+txt+'" /></td>\n\
+                                                                                        <td> <select name="data[content][extra_diseases][user_list][status][]"> <option  value= "new" >New</option> </select></td>\n\
+                                                                                        <td><input type="text" name="data[content][extra_diseases][user_list][note][]" value="no info"/></td>\n\
+                                                                                    </tr>');                        
+                                                    //добавляем скрытое поле с значением
+                                                    //$('form').append("<input type='hidden' name='data[content][extra_diseases][user_list][new_name][]' value='"+txt+"' />");
+                                                    //чистим инпут
+                                                    sel.val('');
+                                                    return false;
+                                                });
+        /////////////////////////////////////
+      
+
+        
+        
+        if(x.length > 0) console.log('Селектор есть, кол-во = '+ x.length);
+        else console.log('Селектора нет');
+
+        console.log(x);
+        
+    });
+</script>
 
 

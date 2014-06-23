@@ -64,7 +64,12 @@ s#form-login div input.button,
 }
 #vmMainPage table tbody tr td{
     border: 10px solid transparent !important;
-    box-shadow: 0 0 2px rgba(0,0,0,0.3) inset !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+#vmMainPage table tbody tr td a img{
+    width: 90% !important;
+    height: auto;
 }
 #vmMainPage table tbody tr td:hover{
     box-shadow: 0 0 5px rgba(0,0,0,0.3) !important;
@@ -241,6 +246,11 @@ form .order{
     border-left: 1px solid transparent;
     border-right: 1px solid transparent;
 }
+#horiz-menu{
+    /*z-index: 9999;*/
+    position: relative;
+    background: #0094D6;
+}
 .menustyle3 #horiz-menu li.sfHover,
 .menustyle3 #horiz-menu li.active a,
 .separator,
@@ -253,8 +263,8 @@ form .order{
     background: none !important;
 }
 .menustyle3 #sub-menu li a{
-    padding-right: 3px;
-    margin-right: 5px;
+    padding: 0 10px;
+    margin: 0;
 }
 .menustyle3 #sub-menu li.active a span{
     border: 1px solid rgba(255,255,255,0.06);
@@ -266,43 +276,51 @@ form .order{
     background: none !important;
 }
 .menustyle3 #sub-menu li:hover{
-    background: none !important;
+    background: #0094D6;
 }
 .menustyle3 #sub-menu li a span{
     border: 1px solid transparent;
-    padding: 5px 10px;
-    border-radius: 30px;
+    padding: 0;
+    margin: 0;
 }
-.menustyle3 #sub-menu li:hover a span{
-    border: 1px solid rgba(255,255,255,0.2);
+.menustyle3 #sub-menu li:hover a{
+    background-color: #326aa3;
 }
 .menutop li:hover{
-    background: -moz-linear-gradient(top, #24A5CE 0%, #0094D6 100%) !important;
-    background: -webkit-linear-gradient(top, #24A5CE 0%, #0094D6 100%) !important;
+    background: #326aa3!important;
 }
 .menustyle3 #horiz-menu li.active{
-    background:  -moz-linear-gradient(top, #24A5CE 0%, #0094D6 100%) !important;
-    background:  -webkit-linear-gradient(top, #24A5CE 0%, #0094D6 100%) !important;
+    background: #326aa3 !important;
 }
 #main-body{
     margin-bottom: 0 !important;
-    border-top: none !important;
-    border-bottom: none !important;
+    border: none !important;
     background: none;
 }
 #maincol{
-    /*padding: 20px 20px 0 20px !important;
-    position: relative;
-    left: -30px;box-shadow: 0 0 17px 17px rgba(0,0,0,0.15);*/
-    width: 806px;
+    width: 710px
 }
 .maincontent-surround{
     border-top: none !important;
-    overflow: hidden;
+    overflow: visible;
+    position: relative;
 }
 .moduletable,
 .moduletable_menu{
-    min-width: 190px;
+    width: 100%;
+    /*z-index: 2;*/
+    position: relative;
+}
+#submenu-container, .menustyle2 #horiz-menu li.active a, .menustyle2 #horiz-menu li.active .separator, .sidenav-block, .moduletable_menu{
+    background-color: transparent;
+    position: relative;
+    /*z-index: 9999;*/
+}
+ul.menu{
+    padding: 0;
+}
+ul.menu li, .moduletable-hilite7 table td{
+    border: none;
 }
 #form-login div:first-child{
     padding: 10px 20px;
@@ -326,7 +344,7 @@ form .order{
     width: 672px !important;
 }
 .contentpaneopen{
-    width: 750px !important;
+    width: 680px !important;
 }
 .contentpaneopen tbody tr td span table tbody tr td:nth-child(1){
     width: 200px !important;
@@ -448,6 +466,9 @@ form .user-data{
     font-size: 20px;
     margin: 10px 20px 15px;
 }
+.tabContainer2{
+    clear: none;
+}
 .tabContainer2 > form[enctype="multipart/form-data"] > .tabContainer2{
     background: #fff !important;
 }
@@ -467,65 +488,59 @@ form .user-data{
     text-decoration: none;
 }
 .phase-navigation {
-    position: absolute;
-    top: 30px;
-    left: -207px;
-    width: 192px;
+    position: relative;
+    display: block;
+    width: 50%;
+    overflow: hidden;
+    text-align: left;
     border: none;
+    left: -30px;
+    background: none !important;
+/*    background: #e2e2e2;
+    background: -moz-linear-gradient(top, #ccc 0%, #999 100%);
+    background: -webkit-linear-gradient(top, #ccc 0%, #999 100%);
+    background: -o-linear-gradient(top, #ccc 0%, #999 100%);
+    background: linear-gradient(top, #ccc 0%, #999 100%);*/
+}
+.phase-navigation ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 .phase-navigation a{
-    display: block;
     background: #0094D6;
-    padding: 0px 10px;
-    position: relative;
+    display: inline-block;
+    margin: 1px 1px 9px 1px;
+    padding: 5px 10px 5px 10px;
     color: #fff;
-    width: 150px;
-    position: relative;
+    width: auto;
     line-height: 30px;
     vertical-align: middle;
-    z-index: 2;
-    margin: 2px 0px 2px 2px;
+    /*z-index: 2;*/
     font-size: 14px;
-    left: 20px;
+    position: relative;
 }
-.phase-navigation a:after, .phase-navigation a:before{
-    content: "";
+.phase-navigation a:hover:after{
+    border-top-color: #1b3957;
+}
+.phase-navigation a:after{
+    content: '';
     display: block;
     position: absolute;
-    left: -19px;
-    top: 1px;
     width: 0;
     height: 0;
-    border-top: 14px solid transparent;
-    border-right: 20px solid #0094D6;
-    border-bottom: 14px solid transparent;
-    z-index: 99999;
+    border-left: 14px solid transparent;
+    border-top: 8px solid #326AA3;
+    left: -1px;
+    bottom: -8px;
 }
 .phase-navigation a:hover{
     background: #326AA3;
 }
-.phase-navigation a:after, .phase-navigation a:hover:before{
-    border-right-color: #326AA3;
-}
 .phase-navigation{
-    background: #fff !important;
     padding: 0 !important;
 }
-.phase-navigation a:after, .phase-navigation a:after{
-    content: "";
-    display: block;
-    position: absolute;
-    left: -20px;
-    top: 0;
-    width: 0;
-    height: 0;
-    border-top: 15px solid transparent;
-    border-right: 21px solid #204469;
-    border-bottom: 15px solid transparent;
-    z-index: -1;
-}
 .phase-navigation-header:first-child{
-    position: absolute;
     left: 304px;
 }
 .response-data{
@@ -537,4 +552,89 @@ form .user-data{
     min-width: 80px;
     text-align: right;
     margin-right: 5px;
+}
+.padding{
+    overflow: visible;
+}
+.contentheading{
+    color: #ccc;
+}
+#mainblock{
+    margin-right: 198px !important;
+    box-shadow: 0 0 3px rgba(0,0,0,0.5);
+}
+#rightbanner .moduletable img{
+    position: relative;
+    display: inline-block;
+    /*z-index: -5;*/
+    margin-left: 10px;
+}
+#rightbanner{
+    width: 248px !important;
+    position: relative;
+}
+
+ul.menu li a, ul.menu li .separator {
+    background: none repeat scroll 0 0 #0094d6;
+    margin: 1px 1px 9px 1px;
+    padding: 4px 10px;
+}
+ul.menu li a:hover{
+    background-color: #326aa3;
+}
+.moduletable_menu{
+    margin: 0;
+    padding: 0;
+}
+.contentpaneopen td div {
+    max-width: 670px;
+}
+#nsp-nsp_75{
+    margin: 0;
+    max-width: 740px;
+}
+.showcase-module .moduletable{
+    max-width: 740px;
+    padding: 10px 0;
+}
+#mainblock{
+    width: 710px;
+    margin-right: 0 !important;
+}
+#main-body {
+    min-height: 615px;
+    width: 710px;
+}
+#rightbanner .padding {
+    padding: 20px 0 0;
+}
+.contentheading {
+    border: 0 none;
+    font-family: Helvetica,Arial,FreeSans,sans-serif !important;
+    font-size: 180%;
+    font-weight: normal;
+    line-height: 140%;
+    padding: 0;
+}
+.showcase-module{
+    position: relative;
+    /*z-index: 9999;*/
+    border: none;
+}
+#sub-menu ul.menusub li{
+    background-color: #0094D6;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid #fff;
+}
+.menusub{
+    padding: 0 !important;
+    margin: 0 !important;
+}
+#sub-menu{
+    padding-top: 0 !important;
+}
+.module h3, .moduletable h3, .module-clean h3, .moduletable-clean h3{
+    margin-left: 0;
+    width: 680px;
 }

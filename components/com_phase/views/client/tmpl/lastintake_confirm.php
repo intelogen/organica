@@ -499,12 +499,12 @@ if(isset($evalution[madtrack][drug][extra_list]))
 
 
 
-
-
 <?php
 if(isset($evalution[madtrack][diseases][db_list]))
 {	
 
+    
+    
 	foreach ($diseasesList as $value)
 		{
 			if(in_array($value['id'],$evalution[madtrack][diseases][db_list]))
@@ -540,11 +540,11 @@ if(isset($evalution[madtrack][diseases][extra_list]))
 
 </div>     
 
-<a onclick="javascript:history.back();">edit</a>
+
 <button class="button validate" type="submit" value="save" name="action"><?= "Save information" ?></button>
 
 
 
 
-</form>   
+</form>  
 </div>

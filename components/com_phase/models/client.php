@@ -1194,6 +1194,15 @@ class PhaseModelClient extends JModel
        
     }
     
+    function getQAnswers($val)
+    {
+        $db =& $this->_db;
+        $query = "SELECT answer FROM #__jf_jtpl_survey_body_score WHERE id IN($val) ORDER BY id";
+        $ids = $this->_getList($query);
+        $db->setQuery($query);
+        return $db->loadAssocList();
+       
+    }
     
     function recordSurvey($uid, $pid, $survey)
     {

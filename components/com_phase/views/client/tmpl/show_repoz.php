@@ -298,9 +298,11 @@ if($this->trackingStart){?>
 <div class='contentheading'>Medical Tracking</div>    
 <div class='tabContainer2' style="background-color:#E1FFE3">    
 
+    
+    
+    
 <div class='contentheading'>Symptoms Tracking</div>    
 <div class='tabContainer2' style="background-color:#E1FFE3">
-
 <table border="1">
     <tr><td>№</td><td>Name</td><td>Status</td><td>Note</td></tr>
 <?php
@@ -410,7 +412,7 @@ if (isset($evalution[diseases]))
             <?php
             foreach($list[diseasesList] as $value)
             {
-                if($value[id] == $evalution[drug][val][$i])
+                if($value[id] == $evalution[diseases][val][$i])
                 {
                     echo $value[name];
                 }
@@ -445,3 +447,9 @@ else
 
 </form>   
 </div>
+
+
+
+
+
+

@@ -225,6 +225,7 @@ endif;
 <div class='contentheading'>Lifestyle analysis</div>    
 <div class='tabContainer2' style="background-color:#E1FFE3">    
 <?php
+/*
 if($this->questionList):
 ?>
         <table class="allleft">
@@ -251,7 +252,57 @@ if($this->questionList):
     </table>
 <?php
 endif;
+*/
 ?>
+    
+<?php
+
+
+if($this->qAnswers){
+    foreach ($this->qAnswers as $value) {
+        echo "- ".$value['answer'].'<br>';
+    }
+}
+?>
+    <?php 
+        $var = explode(",", $this->trackingStart->cats);
+        
+        foreach ($var as $value) {
+            $res[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
+        }
+        
+        $var2 = explode(",", $this->trackingStart->opp_vals);
+        foreach ($var2 as $value) {
+            $res2[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
+        }
+        
+        if(count($res) == count($res2))
+            {
+                $cnt = array_combine( $res2, $res);
+            }
+        
+        echo "<br><div class='contentheading'>Lifestyle analysis result:</div><ul>";
+        foreach ($cnt as $key => $value) {
+            echo "<li>".$value;
+            
+            if($key > 75)
+            {
+                echo " - BAD</li>";
+            }
+            elseif ($key <=75 && $key > 50) {
+                echo " - ALMOST BAD</li>";
+            }
+            elseif($key <=50 && $key > 25){
+                echo " - ALMOST NICE</li>";
+            }
+            elseif($key <=25 && $key >= 0){
+                echo " - NICE</li>";
+            }
+
+        }
+         echo "</ul>";
+    ?>
+    
 </div>
 
 

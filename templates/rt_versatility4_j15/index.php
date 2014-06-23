@@ -358,8 +358,9 @@ $ms_module10				= $this->params->get("msModule10", "user20");
 								</div></div>
 								<?php endif; ?>
 								<div id="maincontent-block">
+
+                                    <jdoc:include type="component" />
 									<jdoc:include type="message" />
-									<jdoc:include type="component" />
 								</div>
 							</div></div>
 							<?php if ($show_moduleslider=="true" and $js_compatibility=="false" and ($moduleslider_location=="mid-bottom" and ($this->countModules('user11') or $this->countModules('user12') or $this->countModules('user13') or $this->countModules('user14') or $this->countModules('user15') or $this->countModules('user16') or $this->countModules('user17') or $this->countModules('user18') or $this->countModules('user19') or $this->countModules('user20')))) : ?>

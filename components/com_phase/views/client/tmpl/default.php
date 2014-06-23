@@ -13,26 +13,26 @@ Furhter, you will be responsible for signing off the phases and assigning new ph
 
 <div class='contentheading'> My Places </div>
 
-<div class='tabContainer2' style="background-color:#E1FFE3">
-    <div class='objectTitle'>
+<div class='tabContainer2 phase-navigation'>
+    <li class=''>
         <a href="index.php?option=com_phase&controller=client&action=show_my_coach">My Coach</a>
-    </div>
+    </li>
     
-    <div class='objectTitle'>
+    <li class=''>
         <a href="index.php?option=com_phase&controller=client&action=show_my_profile">My Profile</a>
-    </div>
+    </li>
     
-    <div class='objectTitle'>
+    <li class=''>
 <a href="index.php?option=com_phase&controller=message">My Massage</a>
-    </div>
+    </li>
     
-    <div class='objectTitle'>
+    <li class=''>
 <a href="index.php?option=com_phase&controller=client&action=deshbord">My Phases</a>
-    </div>
+    </li>
     
-    <div class='objectTitle'>
+    <li class=''>
 <a href="index.php?option=com_phase&controller=client&action=show_repo">Progress report</a>
-    </div>
+    </li>
   
 
 

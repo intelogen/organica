@@ -11,7 +11,9 @@ div#frame div.button {display: none;}
 
 
 /*custom styles*/
-
+#rightcol, .showcase-module, #horiz-menu, #sub-menu, #main-body, #header-bar{
+    border: none;
+}
 input[type="text"], input[type="password"]{
     border-radius: 3px;
     padding: 3px 10px;
@@ -21,23 +23,27 @@ input[type="text"], input[type="password"]{
 s#form-login div input.button:active,
 .input .button:active,
 .button:active{
-    background: #3F85ee !important;
+    background: #1b3957 !important;
+    border-bottom: 3px solid #1b3957 !important;
 }
 #form-login div input[type="submit"]:hover,
 s#form-login div input.button:hover,
 .input .button:hover,
 .button{
     color: #fff !important;
+    background: #326aa3 !important;);
+    border: none !important;
+    border-bottom: 3px solid #1b3957 !important;
 }
 s#form-login div input[type="submit"],
 s#form-login div input.button,
 .input .button,
 .button{
     border: none !important;
-    background-color: #3F85CC !important;
+    border-bottom: 3px solid #326aa3 !important;
+    background-color: #0094D6 !important;
     color: #fff;
-    border-radius: 30px;
-    height: 24px !important;
+    height: 34px !important;
     outline: none !important;
     cursor: pointer;
     padding: 0 5px;
@@ -47,7 +53,7 @@ s#form-login div input.button,
     text-transform: uppercase;
 }
 .button{
-    padding: 2px 5px 0 5px !important;
+    padding: 8px 32px !important;
     width: auto !important;
 }
 .div-spacer{
@@ -66,13 +72,15 @@ s#form-login div input.button,
     border: 10px solid transparent !important;
     box-shadow: none !important;
     padding: 0 !important;
+    border-radius: 0 !important;
 }
 #vmMainPage table tbody tr td a img{
     width: 90% !important;
     height: auto;
 }
 #vmMainPage table tbody tr td:hover{
-    box-shadow: 0 0 5px rgba(0,0,0,0.3) !important;
+    box-shadow: 0 0 0px rgba(0,0,0,0.3) !important;
+    border-color: #e2ecf0 !important;
 }
 #product_list{
     width: 100% !important;
@@ -117,7 +125,7 @@ s#form-login div input.button,
     height: 420px !important;
 }
 #product_list > div:hover {
-   /* box-shadow: 0 0 2px 2px rgba(0,0,0,0.05), 0 0 0 0 rgba(0,0,0,0) inset !important;*/
+    /* box-shadow: 0 0 2px 2px rgba(0,0,0,0.05), 0 0 0 0 rgba(0,0,0,0) inset !important;*/
     background: #f6f6f6;
 }
 .inputboxquantity{
@@ -267,13 +275,13 @@ form .order{
     margin: 0;
 }
 .menustyle3 #sub-menu li.active a span{
-    border: 1px solid rgba(255,255,255,0.06);
-    background: rgba(255,255,255,0.1);
+    border: transparent;
+    background: transparent;
 }
 .menustyle3 #sub-menu li.active a,
 .menustyle3 #sub-menu li.active .separator,
 .menustyle3 #sub-menu li.active{
-    background: none !important;
+    background: #326aa3 !important;
 }
 .menustyle3 #sub-menu li:hover{
     background: #0094D6;
@@ -327,6 +335,7 @@ ul.menu li, .moduletable-hilite7 table td{
 }
 .moduletable h3:first-child{
     margin-bottom: -11px;
+    display: none;
 }
 #modlgn_remember{
     position: relative;
@@ -354,6 +363,13 @@ ul.menu li, .moduletable-hilite7 table td{
 }
 .contentpaneopen tbody tr td span table tbody tr td:nth-child(3){
     width: 300px !important;
+}
+.contentpaneopen table tbody tr td p{
+    max-width: 672px;
+}
+.contentpaneopen table tbody tr td p img{
+    max-width: 669px !important;
+    width: 100%;
 }
 .message-content > div{
     display: inline-block;
@@ -496,11 +512,11 @@ form .user-data{
     border: none;
     left: -30px;
     background: none !important;
-/*    background: #e2e2e2;
-    background: -moz-linear-gradient(top, #ccc 0%, #999 100%);
-    background: -webkit-linear-gradient(top, #ccc 0%, #999 100%);
-    background: -o-linear-gradient(top, #ccc 0%, #999 100%);
-    background: linear-gradient(top, #ccc 0%, #999 100%);*/
+    /*    background: #e2e2e2;
+        background: -moz-linear-gradient(top, #ccc 0%, #999 100%);
+        background: -webkit-linear-gradient(top, #ccc 0%, #999 100%);
+        background: -o-linear-gradient(top, #ccc 0%, #999 100%);
+        background: linear-gradient(top, #ccc 0%, #999 100%);*/
 }
 .phase-navigation ul{
     list-style: none;
@@ -561,23 +577,42 @@ form .user-data{
 }
 #mainblock{
     margin-right: 198px !important;
-    box-shadow: 0 0 3px rgba(0,0,0,0.5);
+    border-right: 1px solid #ccc;
+    padding-top: 30px !important;
+    border-top: none !important;
 }
 #rightbanner .moduletable img{
     position: relative;
     display: inline-block;
     /*z-index: -5;*/
-    margin-left: 10px;
+    margin-left: 5px;
 }
 #rightbanner{
-    width: 248px !important;
+    width: 208px !important;
     position: relative;
 }
 
-ul.menu li a, ul.menu li .separator {
+ul.menu li a:hover:after{
+    border-top-color: #1b3957;
+}
+ul.menu li a:after{
+    border-right: 14px solid transparent;
+    border-top: 8px solid #326aa3;
+    bottom: -7px;
+    content: "";
+    display: block;
+    height: 0;
+    position: absolute;
+    right: 0px;
+    width: 0;
+}
+ul.menu li a {
     background: none repeat scroll 0 0 #0094d6;
-    margin: 1px 1px 9px 1px;
+    margin: 1px 0 9px 0;
     padding: 4px 10px;
+    width: 202px;
+    position: relative;
+    overflow: visible;
 }
 ul.menu li a:hover{
     background-color: #326aa3;
@@ -596,6 +631,7 @@ ul.menu li a:hover{
 .showcase-module .moduletable{
     max-width: 740px;
     padding: 10px 0;
+    border: none;
 }
 #mainblock{
     width: 710px;
@@ -619,7 +655,7 @@ ul.menu li a:hover{
 .showcase-module{
     position: relative;
     /*z-index: 9999;*/
-    border: none;
+    border: none !important;
 }
 #sub-menu ul.menusub li{
     background-color: #0094D6;
@@ -627,14 +663,177 @@ ul.menu li a:hover{
     padding: 0;
     border-top: 1px solid #fff;
 }
+#sub-menu ul.menusub li a{
+    padding-right: 0;
+}
+#sub-menu ul.menusub li:first-child a:after{
+    content: '';
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 13px solid transparent;
+    border-top: 8px solid #326AA3;
+    left: 0px;
+    bottom: -8px;
+}
+#sub-menu ul.menusub li:first-child a:hover:after{
+    border-top-color: #1b3957;
+}
+#sub-menu ul.menusub li a span{
+    padding-right: 10px;
+    border-right: 1px solid #29a1d6;
+}
+#sub-menu ul.menusub li:last-child a span{
+    border-right: none;
+}
 .menusub{
     padding: 0 !important;
     margin: 0 !important;
 }
 #sub-menu{
-    padding-top: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+
 }
 .module h3, .moduletable h3, .module-clean h3, .moduletable-clean h3{
     margin-left: 0;
     width: 680px;
+}
+body > div.wrapper {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+}
+div.wrapper {
+    width: 918px !important;
+}
+#sub-menu {
+    left: 50%;
+    margin-left: -473px;
+    padding-top: 0 !important;
+    position: absolute;
+}
+form#form-login fieldset.input{
+    width: 150px;
+    margin: 0 auto;
+}
+#form-login-username, #form-login-password, #form-login-remember{
+    width: auto;
+    max-width: 150px !important;
+}
+#form-login-username input, #form-login-password input, #form-login-remember input{
+    max-width: 128px;
+}
+form#form-login{
+    text-align: center;
+}
+form#form-login ul{
+    text-align: left;
+    list-style: none;
+    padding-left: 30px;
+}
+.nsp_main_portal_mode2 .nsp_bottom_interface .prev, .nsp_main_portal_mode2 .nsp_bottom_interface .next{
+    background-color: #0094D6 !important;
+    background-position: 5px 7px;
+    padding: 5px 10px 5px 25px !important;
+    border-radius: 0 !important;
+    cursor: pointer;
+    font-size: 10px;
+    height: 20px;
+    line-height: 22px;
+    width: 54px;
+    text-align: center;
+    margin: 0 0 0 15px !important;
+    margin-top: -22px !important;
+    position: relative;
+    z-index: auto;
+}
+.nsp_main_portal_mode2 .nsp_bottom_interface .prev:hover{
+    background-color: #326aa3 !important;
+    background-position: 5px 7px;;
+    border-color: #1b3957;
+}
+.nsp_main_portal_mode2 .nsp_bottom_interface .next:hover{
+    background-color: #326aa3 !important;
+    background-position: 66px -18px;;
+    border-color: #1b3957;
+}
+.nsp_bottom_interface{
+    padding: 0 !important;
+    position: relative;
+    z-index: 2;
+}
+.nsp_main_portal_mode2 .nsp_bottom_interface .next{
+    background-position: 66px -18px;
+    padding: 5px 25px 5px 10px !important;
+    margin: -22px 15px 0 0 !important;
+}
+.nsp_main_portal_mode2 .nsp_bottom_interface .prev:after, .nsp_main_portal_mode2 .nsp_bottom_interface .next:after{
+    content: '';
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-right: 14px solid transparent;
+    border-top: 8px solid #326AA3;
+    right: -14px;
+    bottom: 0;
+}
+.nsp_main_portal_mode2 .nsp_bottom_interface .next:after{
+    border-left: 14px solid transparent;
+    border-right: medium none;
+    bottom: 0;
+    left: -14px;
+    right: auto;
+}
+.nsp_main_portal_mode2 .nsp_bottom_interface .prev:hover:after, .nsp_main_portal_mode2 .nsp_bottom_interface .next:hover:after{
+    border-top-color: #1b3957;
+}
+.nsp_images{
+    padding: 0 !important;
+    position: relative;
+    z-index: 1;
+}
+.nsp_art{
+    width: 710px !important;
+}
+.nsp_art div{
+    padding: 0 !important;
+}
+.nsp_art div a img{
+    max-width: 710px !important;
+    padding: 0 !important;
+}
+.nsp_main_portal_mode2 .nsp_bottom_interface{
+    border: none !important;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2) inset;
+    overflow: inherit;
+    width: 740px;
+    margin-left: -15px !important;
+}
+
+.nsp_main_portal_mode2 .nsp_bottom_interface .nsp_text_block {
+    height: 48px;
+    margin: 0 140px;
+    position: absolute;
+    width: 490px;
+    z-index: 1;
+    overflow: hidden;
+}
+.nsp_art_headline > div > h4{
+    margin: 0 !important;
+    padding: 18px 0;
+}
+.nsp_info, .nsp_headline{
+    display: inline-block;
+    float: left;
+}
+.nsp_headline{
+    clear: right;
+    height: 48px;
+}
+.nsp_info{
+    clear: left;
+}
+.nsp_text_wrap{
+    text-align: left;
 }

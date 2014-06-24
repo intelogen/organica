@@ -3499,15 +3499,16 @@ class PhaseViewClient extends JView
     }
     
     
-    function show_repo($tpl = null)
-    {
-        
+    function show_repo($tpl = null){
+        //модель
         $model = $this->getModel();
         
+        //id usera
         $user =& JFactory::getUser();
         $uid = $user->id;
-        if(JRequest::getVar('c') && JRequest::getVar('c') != "")
-        {
+        
+        
+        if(JRequest::getVar('c') && JRequest::getVar('c') != ""){
             $uid = JRequest::getVar('c');
         }
         
@@ -3516,40 +3517,30 @@ class PhaseViewClient extends JView
         $loockingfor = $model->loockingfor();
         $this->assignRef('loockingfor', $loockingfor);
         
-        $questionList = $model->questionList();
-        $this->assignRef('questionList', $questionList);
+        //$questionList = $model->questionList();
+        //$this->assignRef('questionList', $questionList);
         
-        
-        
+        //результаты первичного опроса
         $content = $model->getFirstContent($uid);
         
-        
-
-        if(count($content) == 0)
-        {
+        if(count($content) == 0){
             global $mainframe;
             $mainframe->redirect('index.php?option=com_phase&controller=client&action=lastintake',"Enter intake data");
-        }
-        else
-        {
+        }else{
             $content = $this->prepContent($content);
-            if($content[life_style] || count($content[life_style]) !== 0)
-            {
+            
+            if($content[life_style] && count($content[life_style]) !== 0){
                 $res = implode(",", $content[life_style]);
                 $qAnswers = $model->getQAnswers($res);
                 $this->assignRef('qAnswers', $qAnswers);
-         }
+            }
          
             $this->assignRef('evalution', $content);
         }
         
+        //берём газвания фаз для меню
         $phases_id = $model->getPhasesId($uid);
         $this->assignRef('phases', $phases_id);
-        
-        
-        
-        
-        
         
         //графики
         $document =& JFactory::getDocument();
@@ -3561,23 +3552,16 @@ class PhaseViewClient extends JView
         // adding chart
         JHTML::script('jquery-1.7.1.min.js',JURI::root().'components/com_jforce/js/charts/');
         JHTML::script('highcharts.js',JURI::root().'components/com_jforce/js/charts/');
-        //графики
         
         $numbers = implode(",", $content[life_style]);
         $trackingStart = $model->getProgressTrackingDetails($uid, $pid, $numbers);
         $this->assignRef('trackingStart', $trackingStart);
+        //графики
         
-
-
-		
-		
-		
-			
-		//Взять список алергий
-		$allergiesList = $model->getAllergiesList();
+	//Взять список алергий
+	$allergiesList = $model->getAllergiesList();
         $this->assignRef('allergiesList', $allergiesList);
 		
-        
         //Взять список симпомов
         $symptomList = $model->getSymptomList();
         $this->assignRef('symptomList', $symptomList);
@@ -3586,17 +3570,10 @@ class PhaseViewClient extends JView
         $medtrackList = $model->getMedtrackList();
         $this->assignRef('medtrackList', $medtrackList);
         
-        
         //Взять список заболеваний
         $diseasesList = $model->getDiseasesList();
         $this->assignRef('diseasesList', $diseasesList);	
-			
- 
-
-
-
- 
-        
+	
         parent::display($tpl);
     }
     
@@ -3616,7 +3593,11 @@ class PhaseViewClient extends JView
         $this->assignRef('questionList', $questionList);
         
         $content = $model->testPhaseData($uid, $pid);
-        
+        if(!$content || count($content) == 0)
+        {
+            global $mainframe;
+            $mainframe->redirect("index.php?option=com_phase&controller=client&action=show_repo&c=$uid", "you don't have result for this phase");
+        }
         $evalution[life_style] = explode(",", $content[0][val]);
         
         if($evalution[life_style] || count($evalution[life_style]) !== 0)
@@ -3744,6 +3725,7 @@ class PhaseViewClient extends JView
 	
 	function prepContent($content)
     {
+            
         $temp = explode(",", $content[0][val]);
         
         $data[goals][weight] = $temp[0];
@@ -3809,20 +3791,12 @@ class PhaseViewClient extends JView
     {
         $model = $this->getModel();
         
-        
-
-        
-        
-        if(JRequest::getVar('c'))
-        {
+        if(JRequest::getVar('c')){
             $uid = JRequest::getVar('c');
-        }
-        else
-        {
+        }else{
             $user =& JFactory::getUser();
             $uid = $user->id;
         }
-        
         
         $target = $model->getTargets($uid);
         $target = $this->parseTargets($target);
@@ -3830,25 +3804,11 @@ class PhaseViewClient extends JView
         
         $current = $model->getIntakeData($uid);
         
-        
         $result[body] = explode(",", $current[1][val]);
         $this->assignRef('current', $result);
         
-        
-        
         $bodyHistory = $model->getBodyHistory($uid, "body");
         $this->assignRef('bodyHistory', $bodyHistory);
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         parent::display($tpl);
     }
@@ -4014,6 +3974,7 @@ class PhaseViewClient extends JView
     
     function show_total_repo($tpl = null)
     {
+        
         $model = $this->getModel();
         $uid = JRequest::getvar('c');
         
@@ -4068,8 +4029,12 @@ class PhaseViewClient extends JView
                 $this->assignRef('gols', $gols);
                    
             }
+            
         
         $phases_id = $model->getPhasesId($uid);
+        
+        if($phases_id && count($phases_id) !== 0 )
+        {
         
         foreach($phases_id as $value)
         {
@@ -4077,8 +4042,9 @@ class PhaseViewClient extends JView
             $data[dirty_content][] = $model->getShowTotal($pid);
 
                 }
+        }
         
-        
+        /*
         foreach ($data[dirty_content] as $value)
         {
             foreach($value as $data[dirty_content])
@@ -4091,12 +4057,12 @@ class PhaseViewClient extends JView
                 {
        
        
-                    /*
+                    
                     if (isset($data[dirty_content][0]) && $data[dirty_content][0][name] == 'life_style')
                     {
                         $data[content][life_style][val] = explode(",", $data[dirty_content][0][val]);
                     }    
-                    */
+                    
                     
                     if (isset($data[dirty_content][1]) && $data[dirty_content][1][name] == 'body')
                     {
@@ -4184,7 +4150,7 @@ class PhaseViewClient extends JView
 
         
         $this->assignRef('content', $content);
-    
+    */
         parent::display($tpl);
     }
     

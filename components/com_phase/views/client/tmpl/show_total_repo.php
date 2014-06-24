@@ -1,3 +1,4 @@
+<!--
 <?php
 
 if ($this->content)
@@ -240,3 +241,4 @@ foreach ($content as $value)
 }
 ?>
 </div>
+-->

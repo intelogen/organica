@@ -1,37 +1,28 @@
-<?php
-defined( '_JEXEC' ) or die( 'Restricted access' );
-?>
-<?php
-$uid = $this->uid;
-$pid = 0;
+<?php defined( '_JEXEC' ) or die( 'Restricted access' ); ?>
 
+<?php
 $loockingfor = $this->loockingfor;
 
-
-if($this->evalution)
-{
+if($this->evalution){
     $evalution = $this->evalution; 
 }
-
 
 $phases = $this-> phases;
 $count = count($phases);
 
-if($this->allergiesList)
-{
+if($this->allergiesList){
     $allergiesList = $this->allergiesList;
 }
 
-if($this->symptomList)
-{
+if($this->symptomList){
     $symptomList = $this->symptomList;
 }
-if($this->medtrackList)
-{
+
+if($this->medtrackList){
     $medtrackList = $this->medtrackList;
 }
-if($this->diseasesList)
-{
+
+if($this->diseasesList){
     $diseasesList = $this->diseasesList;
 }
 ?>
@@ -224,7 +215,9 @@ endif;
         
 <div class='contentheading'>Lifestyle analysis</div>    
 <div class='tabContainer2' style="background-color:#E1FFE3">    
+
 <?php
+// здесь были вопросы с галочками (отключены в виде)
 /*
 if($this->questionList):
 ?>

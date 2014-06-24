@@ -257,7 +257,6 @@ endif;
     
 <?php
 
-
 if($this->qAnswers){
     foreach ($this->qAnswers as $value) {
         echo "- ".$value['answer'].'<br>';
@@ -271,32 +270,38 @@ if($this->qAnswers){
             $res[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
         }
         
+        
         $var2 = explode(",", $this->trackingStart->opp_vals);
         foreach ($var2 as $value) {
             $res2[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
         }
         
+        
+        
         if(count($res) == count($res2))
             {
-                $cnt = array_combine( $res2, $res);
-            }
+                $cnt = array_combine( $res, $res2);
         
+            }
+
+            
+
         echo "<br><div class='contentheading'>Lifestyle analysis result:</div><ul>";
         foreach ($cnt as $key => $value) {
-            echo "<li>".$value;
+            echo "<li>".$key;
             
-            if($key > 75)
+            if($value > 75)
             {
-                echo " - BAD</li>";
+                echo " - NICE";
             }
-            elseif ($key <=75 && $key > 50) {
-                echo " - ALMOST BAD</li>";
-            }
-            elseif($key <=50 && $key > 25){
+            elseif ($value <=75 && $value > 50) {
                 echo " - ALMOST NICE</li>";
             }
-            elseif($key <=25 && $key >= 0){
-                echo " - NICE</li>";
+            elseif($value <=50 && $value > 25){
+                echo " - ALMOST BAD</li>";
+            }
+            elseif($value <=25 && $value >= 0){
+                echo " - BAD</li>";
             }
 
         }

@@ -1,4 +1,98 @@
+
 <?php
+
+                    //$this->trackingStart1->cats
+                    //$this->trackingStart1->opp_vals
+
+                       $var = explode(",", $this->trackingStart1->cats);
+
+                       foreach ($var as $value) {
+                           $res[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
+                       }
+                       
+
+
+                        $var2 = explode(",", $this->trackingStart1->opp_vals);
+                        foreach ($var2 as $value) {
+                           $res2[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
+                        }
+                        
+                        $var3 = explode(",", $this->trackingStart2->opp_vals);
+                        foreach ($var3 as $value) {
+                           $res3[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
+                        }
+                        
+                        
+
+
+
+
+
+
+
+                        for($i = 0; $i < count($res); $i++){
+                            $t = ",['".$res[$i]."', ".$res2[$i].", ".$res3[$i]."]";
+                            $b = $b."".$t;
+                        }
+                        
+                        $a = "[['step', '".$this->evalution_1[name]."', '".$this->evalution_2[name]."']";
+                        
+                        //$b = ",['1',  100,  100]";
+                        
+                        $c = "]";    
+                        
+                        $d = $a."".$b."".$c;
+                        
+                        
+    
+                        
+       
+                           
+?>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        /*
+        $(function(){
+                                
+            var x = "1";
+        
+        
+            //проверка
+            if(x.length > 0) console.log('X = Селектор есть, кол-во = '+ x.length);
+            else console.log('X = Селектора нет');
+            console.log(x);
+        });
+      */
+
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+        function drawChart() {
+        var data = google.visualization.arrayToDataTable(<?=$d?>);
+        
+        
+        
+        var options = {
+          //title: 'Lifestyle analysis',
+          //hAxis: {title: 'Year', titleTextStyle: {color: 'red'}}
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+      
+      
+    </script>
+
+
+
+
+
+
+
+<?php
+
+
 defined( '_JEXEC' ) or die( 'Restricted access' );
 ?>
 <?php
@@ -14,6 +108,7 @@ if(JRequest::getVar('c') && JRequest::getVar('c') != "")
 
 
 <?php
+
 if($this->evalution_1)
 {
     $evalution = $this->evalution_1; 
@@ -21,22 +116,51 @@ if($this->evalution_1)
 
 }
 
-if($this->evalution_1)
+if($this->evalution_2)
 {
     $evalution_2 = $this->evalution_2; 
 
 
 }
+
+
 if($this->list)
 {
     $list = $this->list; 
 }
-
+ 
 ?>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 <table>
-    <tr><td colspan="2"><div class='contentheading'>Compare Phases</div></td></tr>
+    <tr>
+        <td><div id="name1" class='contentheading'><?=$this->evalution_1[name]?></div></td>
+        <td><div id="name2" class='contentheading'><?=$this->evalution_2[name]?></div></td>
+    </tr>
     <tr><td colspan="2"><div class='contentheading'>Body Tracking</div></td></tr>
     <tr>
         <td>
@@ -80,6 +204,127 @@ if($this->list)
             </div>
         </td>
     </tr>
+    
+    <tr>
+        <tr><td colspan="2"><div class='contentheading'>Lifestyle analysis:</div></td></tr>
+        <td>
+                            <?php
+
+
+               if($this->qAnswers1){
+                   foreach ($this->qAnswers1 as $value) {
+                       echo "- ".$value['answer'].'<br>';
+                   }
+               }
+            
+                   ?>
+        </td>
+        <td>
+                            <?php
+
+
+               if($this->qAnswers2){
+                   foreach ($this->qAnswers2 as $value) {
+                       echo "- ".$value['answer'].'<br>';
+                   }
+               }
+            
+                   ?>
+        </td>
+    </tr>
+    <tr><td colspan="2"><div class='contentheading'>Result</div></td></tr>
+    <tr>
+        <td>
+            <?php   
+            
+                       $var = explode(",", $this->trackingStart1->cats);
+
+                       foreach ($var as $value) {
+                           $res[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
+                       }
+
+                       $var2 = explode(",", $this->trackingStart1->opp_vals);
+                       foreach ($var2 as $value) {
+                           $res2[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
+                       }
+
+                       if(count($res) == count($res2))
+                           {
+                               $cnt = array_combine( $res, $res2);
+
+                           }
+
+
+
+                       
+                       foreach ($cnt as $key => $value) {
+                           echo "<li>".$key;
+
+                           if($value > 75)
+                           {
+                               echo " - NICE";
+                           }
+                           elseif ($value <=75 && $value > 50) {
+                               echo " - ALMOST NICE</li>";
+                           }
+                           elseif($value <=50 && $value > 25){
+                               echo " - ALMOST BAD</li>";
+                           }
+                           elseif($value <=25 && $value >= 0){
+                               echo " - BAD</li>";
+                           }
+
+                       }
+                        echo "</ul>";
+            
+            ?>
+        </td>
+        <td>
+            <?php
+
+                       $var = explode(",", $this->trackingStart2->cats);
+
+                       foreach ($var as $value) {
+                           $res[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
+                       }
+
+                       $var2 = explode(",", $this->trackingStart2->opp_vals);
+                       foreach ($var2 as $value) {
+                           $res2[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
+                       }
+
+                       if(count($res) == count($res2))
+                           {
+                               $cnt = array_combine( $res, $res2);
+
+                           }
+
+
+
+                       
+                       foreach ($cnt as $key => $value) {
+                           echo "<li>".$key;
+
+                           if($value > 75)
+                           {
+                               echo " - NICE";
+                           }
+                           elseif ($value <=75 && $value > 50) {
+                               echo " - ALMOST NICE</li>";
+                           }
+                           elseif($value <=50 && $value > 25){
+                               echo " - ALMOST BAD</li>";
+                           }
+                           elseif($value <=25 && $value >= 0){
+                               echo " - BAD</li>";
+                           }
+
+                       }
+                        echo "</ul>";
+            ?>
+        </td>
+    </tr>        
+    <tr><td colspan="2"><div id="chart_div" style="width: 750px; height: 500px;"></div></td></tr>
     <tr>
         <td colspan="2"><div class='contentheading'>Current Photo</div></td>
     </tr>
@@ -362,7 +607,7 @@ if (isset($evalution[diseases]))
             <?php
             foreach($list[diseasesList] as $value)
             {
-                if($value[id] == $evalution[drug][val][$i])
+                if($value[id] == $evalution[diseases][val][$i])
                 {
                     echo $value[name];
                 }
@@ -406,7 +651,7 @@ if (isset($evalution_2[diseases]))
             <?php
             foreach($list[diseasesList] as $value)
             {
-                if($value[id] == $evalution_2[drug][val][$i])
+                if($value[id] == $evalution_2[diseases][val][$i])
                 {
                     echo $value[name];
                 }
@@ -436,3 +681,8 @@ else
         </td>
     </tr>
 </table>
+
+
+
+
+

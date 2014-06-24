@@ -1,41 +1,134 @@
 <?php
-if ($this->content)
-{
-    $content = $this->content;
+    
+    $date[] = "Intake data";
+    $weight[] = $this->gols[body][val][0]; 
+    $fat[] =  $this->gols[body][val][1];
+    $ph[] =  $this->gols[body][val][2];
+    
+foreach ($this->content as $value){
+    $date[] = $value[date][val];
+    $weight[] = $value[body][val][0];
+    $fat[] = $value[body][val][1];
+    $ph[] = $value[body][val][2];
 }
+
+    
+    $g_name = "goal";
+    $g_weight = $this->gols[goal_body][val][0]; 
+    $g_fat =  $this->gols[goal_body][val][1];
+    $g_ph =  "7";
+    
+    for($i = 0; $i < count($date); $i++){
+        $t = ",['".$date[$i]."', ".$weight[$i].", ".$g_weight."]";
+        $b = $b."".$t;
+    }
+    $a = "[['Date', 'Weight', 'Goal']";
+    $c = "]";    
+    $d = $a."".$b."".$c;
+    
+    
+    
+    for($i = 0; $i < count($date); $i++){
+        $t1 = ",['".$date[$i]."', ".$fat[$i].", ".$g_fat."]";
+        $b1 = $b1."".$t1;
+    }
+    $a1 = "[['Date', 'Fat', 'Goal']";
+    $c1 = "]";    
+    $d1 = $a1."".$b1."".$c1;
+    
+    
+    for($i = 0; $i < count($date); $i++){
+        $t2 = ",['".$date[$i]."', ".$ph[$i].", ".$g_ph."]";
+        $b2 = $b2."".$t2;
+    }
+    $a2 = "[['Date', 'PH', 'Goal']";
+    $c2 = "]";    
+    $d2 = $a2."".$b2."".$c2;
+    
+    ?>
+    
+    
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(<?=$d?>);
+
+        var options = {
+          title: 'Weight History',
+          //hAxis: {title: 'Date',  titleTextStyle: {color: '#333'}},
+          //vAxis: {minValue: 300},
+		  //vAxis: {maxValue: 1520}
+		  
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(<?=$d1?>);
+
+        var options = {
+          title: 'Fat History',
+          //hAxis: {title: 'Date',  titleTextStyle: {color: '#333'}},
+          //vAxis: {minValue: 0}
+		  
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div_2'));
+        chart.draw(data, options);
+      }
+    </script>
+
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(<?=$d2?>);
+
+        var options = {
+          title: 'PH History',
+         // hAxis: {title: 'Date',  titleTextStyle: {color: '#333'}},
+          //vAxis: {minValue: 0}
+		  
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div_3'));
+        chart.draw(data, options);
+      }
+    </script>
+<?php
+
+
 
 if ($this->gols)
 {
     $gols = $this->gols;
 }
 
-if ($this->name)
-{
-    $name = $this->name;
-}
+
+
 if ($this->list)
 {
-    $list = $this->list;
+    //$list = $this->list;
 }
-
 ?>
-<div class='contentheading'><?=$name?></div>
+<div class='contentheading'><?=$this->name?></div>
+
+
+
 <?php
-
-
-
-
-
-
-
-
-
-
-
-
-if($content){
-    echo '<br>';
+if($this->content){
+    
 ?>
+
 <div class='contentheading'>Body History</div>
 <div class='tabContainer2' style="background-color:#E1FFE3">
 <table border ='1'>
@@ -51,10 +144,12 @@ if($content){
     <td><div class='contentheading'><?=$gols[body][val][1]?></div></td>
     <td><div class='contentheading'><?=$gols[body][val][2]?></div></td>
 </tr>
+
 <?php
-foreach ($content as $value) 
-{
-?>    
+
+foreach ($this->content as $value) 
+{   
+ ?> 
     <tr>
         <td><div class='contentheading'><?=$value[date][val]?></div></td>
         <td><div class='contentheading'><?=$value[body][val][0]?></div></td>
@@ -63,6 +158,7 @@ foreach ($content as $value)
     </tr>
 <?php
 }
+
 ?>
     <tr>
         <td><div class='contentheading'>Goal</div></td>
@@ -71,110 +167,23 @@ foreach ($content as $value)
         <td><div class='contentheading'>7</div></td>
     </tr>
 </table>
+    <div id="chart_div" style="width: 735px; height: 200px;"></div>
+    <div id="chart_div_2" style="width: 735px; height: 200px;"></div>
+    <div id="chart_div_3" style="width: 735px; height: 200px;"></div>
 </div>  
-
-
-
-
-
-
-
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Date', 'Weight'],
-          ['2014-06-10', 200],
-          ['2014-06-10', 190],
-          ['2014-06-10', 180],
-		  ['2014-06-10', 175],
-		  ['Goal'	   , 100]
-        ]);
-
-        var options = {
-          title: 'Weight History',
-          hAxis: {title: 'Date',  titleTextStyle: {color: '#333'}},
-          vAxis: {minValue: 30},
-		  vAxis: {maxValue: 152}
-		  
-        };
-
-        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-    </script>
-    <div id="chart_div" style="width: 700px; height: 200px;"></div>
-
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Date', 'Fat'],
-          ['2014-06-10', 20],
-          ['2014-06-10', 19],
-          ['2014-06-10', 18],
-		  ['2014-06-10', 17],
-		  ['Goal'	   , 10]
-        ]);
-
-        var options = {
-          title: 'Fat History',
-          hAxis: {title: 'Date',  titleTextStyle: {color: '#333'}},
-          vAxis: {minValue: 0}
-		  
-        };
-
-        var chart = new google.visualization.AreaChart(document.getElementById('chart_div_2'));
-        chart.draw(data, options);
-      }
-    </script>
-    <div id="chart_div_2" style="width: 700px; height: 200px;"></div>
-
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Date', 'PH'],
-          ['2014-06-10', 20],
-          ['2014-06-10', 19],
-          ['2014-06-10', 18],
-		  ['2014-06-10', 17],
-		  ['Goal'	   , 7]
-        ]);
-
-        var options = {
-          title: 'PH History',
-          hAxis: {title: 'Date',  titleTextStyle: {color: '#333'}},
-          vAxis: {minValue: 0}
-		  
-        };
-
-        var chart = new google.visualization.AreaChart(document.getElementById('chart_div_3'));
-        chart.draw(data, options);
-      }
-    </script>
-    <div id="chart_div_3" style="width: 700px; height: 200px;"></div>
-
-
-
-
 
 
 <div class='contentheading'>Symptoms Tracking</div>  
 <div class='tabContainer2' style="background-color:#E1FFE3">
     
 <?php
-foreach($content as $value)
+    
+foreach($this->content as $value)
 {
 $symptoms = $value[symptoms][name];
 $status =  $value[symptoms][status];
 }
+
 
 
 
@@ -196,10 +205,12 @@ else
 {
     echo "<div class='contentheading'>CONGRATULATIONS ".$finish." out of ".$all." symptoms FINISHED !</div>";
 }
+
 ?>
 <table>
 <?php
-foreach ($list[symptomList] as $value)
+if(!result){
+foreach ($this->list[symptomList] as $value)
 {
     if(in_array($value[id], $result))
     {
@@ -208,6 +219,7 @@ foreach ($list[symptomList] as $value)
     <?php
     }
 }
+            }
 ?>
 </table>
 </div>
@@ -220,7 +232,7 @@ foreach ($list[symptomList] as $value)
     
 <?php
 
-foreach($content as $value)
+foreach($this->content as $value)
 {
 $medtrack_symptoms = $value[drug][name];
 $medtrack_status =  $value[drug][status];
@@ -236,6 +248,8 @@ for($i = 0; count($medtrack_status) > $i; $i++)
     }
 }
 
+
+
 $medtrack_all = count($medtrack_symptoms);
 $medtrack_finish = count($medtrack_result);
 if($medtrack_finish == $all)
@@ -246,10 +260,12 @@ else
 {
     echo "<div class='contentheading'>CONGRATULATIONS ".$finish." out of ".$all." medical preparations FINISHED !</div>";
 }
+
 ?>
 <table>
 <?php
-foreach ($list[medtrackList] as $value)
+if($medtrack_result){
+foreach ($this->list[medtrackList] as $value)
 {
     if(in_array($value[id], $medtrack_result))
     {
@@ -257,6 +273,7 @@ foreach ($list[medtrackList] as $value)
         <tr><?="<td>".$value[name]."</td><td> - FINISHED ! </td>"?></tr>
     <?php
     }
+}
 }
 ?>
 </table>
@@ -270,10 +287,10 @@ foreach ($list[medtrackList] as $value)
     
 <?php
 
-foreach($content as $value)
+foreach($this->content as $value)
 {
 
-    $diseases_symptoms = $value[diseases][name];
+$diseases_symptoms = $value[diseases][name];
 $diseases_status =  $value[diseases][status];
 }
 
@@ -297,10 +314,12 @@ else
 {
     echo "<div class='contentheading'>CONGRATULATIONS ".$finish." out of ".$all." diseases FINISHED !</div>";
 }
+
 ?>
 <table>
 <?php
-foreach ($list[diseasesList] as $value)
+if($diseases_result){
+foreach ($this->list[diseasesList] as $value)
 {
     if(in_array($value[id], $diseases_result))
     {
@@ -308,6 +327,7 @@ foreach ($list[diseasesList] as $value)
         <tr><?="<td>".$value[name]."</td><td> - FINISHED ! </td>"?></tr>
     <?php
     }
+}
 }
 ?>
 </table>
@@ -326,7 +346,8 @@ foreach ($list[diseasesList] as $value)
 
     
     <?php
-foreach ($content as $value)
+    
+foreach ($this->content as $value)
 {
 ?>
     <div class='tabContainer2' style="background-color:#E1FFE3">
@@ -339,6 +360,7 @@ foreach ($content as $value)
     </div>
 <?php
 }
+
 ?>
 </div>
 <?php

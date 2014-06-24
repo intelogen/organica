@@ -3618,7 +3618,14 @@ class PhaseViewClient extends JView
         $content = $model->testPhaseData($uid, $pid);
         
         $evalution[life_style] = explode(",", $content[0][val]);
-        $evalution[body] = explode(",", $content[1][val]);
+        
+        if($evalution[life_style] || count($evalution[life_style]) !== 0)
+            {
+                $res = implode(",", $evalution[life_style]);
+                $qAnswers = $model->getQAnswers($res);
+                $this->assignRef('qAnswers', $qAnswers);
+            }
+                $evalution[body] = explode(",", $content[1][val]);
         $evalution[photo] = explode(",", $content[2][val]);
         $evalution[symptoms][val] = explode(",", $content[3][val]);
         $evalution[symptoms][status] = explode(",", $content[3][status]);
@@ -3857,7 +3864,7 @@ class PhaseViewClient extends JView
     
     function show_detail($tpl = null)
     {
-        
+       
         $post = Jrequest::get(post);
         $pid = $post[pid];
         $uid = $post[uid];
@@ -3866,16 +3873,19 @@ class PhaseViewClient extends JView
         //Имя фазы
         $name = $model->getPhaseName($pid);
         $this->assignRef('name', $name);
-        
-        // проверка на наличие данных и дат по конкретной фазе        
+    
+       
+        // выбираем уникальные даты по фазе        
         $phaseDates = $model->getPhaseDates($pid);
         
+
+           
         // если что-то есть - формируем контент
         if(count($phaseDates) !== 0)
         {
             //первичная инфа(goals & pid=0)
             $inteke = $model->getFirstContent($uid);
-            
+
             if(count($inteke) !== 0)
             {
                 
@@ -3899,9 +3909,6 @@ class PhaseViewClient extends JView
                     
                 }
                 
-                
-                
-                
                 if (isset($res[goal_body]))
                     {
                         $gols[goal_body][date] = $res[date];
@@ -3919,8 +3926,9 @@ class PhaseViewClient extends JView
                         $gols[body][date] = $res[date];
                         $gols[body][val] = $res[body];
                     }
-                    
-                $this->assignRef('gols', $gols);
+
+
+                    $this->assignRef('gols', $gols);
                    
             }
             
@@ -3929,17 +3937,19 @@ class PhaseViewClient extends JView
             {
                 $date = $value[date];
                 $data[dirty_content] = $model->getC($date, $pid);
-                
-                
+
+
+
+
                 // розбор данных из базы
                 if(isset($data[dirty_content]))
                 {
-                    /*
+                    
                     if (isset($data[dirty_content][0]) && $data[dirty_content][0][name] == 'life_style')
                     {
                         $data[content][life_style][val] = explode(",", $data[dirty_content][0][val]);
                     }    
-                    */
+                    
                     
                     if (isset($data[dirty_content][1]) && $data[dirty_content][1][name] == 'body')
                     {
@@ -3978,7 +3988,7 @@ class PhaseViewClient extends JView
                }
                $content[] = $data[content];
                
-            }    
+                       }    
         }
         
         
@@ -3990,17 +4000,15 @@ class PhaseViewClient extends JView
         
         //Взять список препараты
         $list[medtrackList] = $model->getMedtrackList();
-        
+       
         //Взять список заболеваний
         $list[diseasesList] = $model->getDiseasesList();
-
         $this->assignRef('list', $list);
 
 
 
-
-       $this->assignRef('content', $content);
-        
+        $this->assignRef('content', $content);
+     
         parent::display($tpl);
     }
     
@@ -4188,10 +4196,35 @@ class PhaseViewClient extends JView
         $pid_2 = $post[phaseId][1];
         $model = $this->getModel();
         
+        if($pid_1 == 0) {$evalution_1[name] = 'Phase 0 - Intake Survey';}
+        else {$evalution_1[name] = $model->getPhaseName($pid_1);}
         
+        
+        
+        if($pid_2 == 0) {$evalution_2[name] = 'Phase 0 / Intake Survey';}
+        else {$evalution_2[name] = $model->getPhaseName($pid_2);}
+     
+            
+        
+        
+
+
+
+
+
         $dirty_content_1 = $model->testPhaseData($uid, $pid_1);
         
         $evalution_1[life_style] = explode(",", $dirty_content_1[0][val]);
+        if($evalution_1[life_style] || count($evalution_1[life_style]) !== 0)
+            {
+                $res = implode(",", $evalution_1[life_style]);
+                $qAnswers1 = $model->getQAnswers($res);
+                $this->assignRef('qAnswers1', $qAnswers1);
+                
+                $trackingStart1 = $model->getProgressTrackingDetails($uid, $pid_1, $res);
+                $this->assignRef('trackingStart1', $trackingStart1);
+         }
+        
         $evalution_1[body] = explode(",", $dirty_content_1[1][val]);
         $evalution_1[photo] = explode(",", $dirty_content_1[2][val]);
         $evalution_1[symptoms][val] = explode(",", $dirty_content_1[3][val]);
@@ -4204,12 +4237,24 @@ class PhaseViewClient extends JView
         $evalution_1[diseases][status] = explode(",", $dirty_content_1[5][status]);
         $evalution_1[diseases][note] = explode(",", $dirty_content_1[5][note]);
         
+        
+
+
         $this->assignRef('evalution_1', $evalution_1);
         
 
         $dirty_content_2 = $model->testPhaseData($uid, $pid_2);
         
         $evalution_2[life_style] = explode(",", $dirty_content_2[0][val]);
+        if($evalution_2[life_style] || count($evalution_2[life_style]) !== 0)
+            {
+                $res = implode(",", $evalution_2[life_style]);
+                $qAnswers2 = $model->getQAnswers($res);
+                $this->assignRef('qAnswers2', $qAnswers2);
+                
+                $trackingStart2 = $model->getProgressTrackingDetails($uid, $pid_2, $res);
+                $this->assignRef('trackingStart2', $trackingStart2);
+         }
         $evalution_2[body] = explode(",", $dirty_content_2[1][val]);
         $evalution_2[photo] = explode(",", $dirty_content_2[2][val]);
         $evalution_2[symptoms][val] = explode(",", $dirty_content_2[3][val]);

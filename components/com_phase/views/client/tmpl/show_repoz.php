@@ -146,8 +146,10 @@ if ($phases && $phases[0][id] !== null && $phases[0][name] !== null )
      
 <div class='contentheading'>Lifestyle analysis</div>    
 <div class='tabContainer2' style="background-color:#E1FFE3">    
-<?php
+<!--
+    <?php
 if($this->questionList):
+    
 ?>
         <table class="allleft">
         <tr>
@@ -173,8 +175,59 @@ if($this->questionList):
     </table>
 <?php
 endif;
+
 ?>
-    
+-->
+ <?php
+
+
+if($this->qAnswers){
+    foreach ($this->qAnswers as $value) {
+        echo "- ".$value['answer'].'<br>';
+    }
+}
+?>
+    <?php 
+        $var = explode(",", $this->trackingStart->cats);
+        
+        foreach ($var as $value) {
+            $res[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
+        }
+        
+        $var2 = explode(",", $this->trackingStart->opp_vals);
+        foreach ($var2 as $value) {
+            $res2[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
+        }
+        
+        if(count($res) == count($res2))
+            {
+                $cnt = array_combine( $res, $res2);
+        
+            }
+
+            
+
+        echo "<br><div class='contentheading'>Lifestyle analysis result:</div><ul>";
+        foreach ($cnt as $key => $value) {
+            echo "<li>".$key;
+            
+            if($value > 75)
+            {
+                echo " - NICE";
+            }
+            elseif ($value <=75 && $value > 50) {
+                echo " - ALMOST NICE</li>";
+            }
+            elseif($value <=50 && $value > 25){
+                echo " - ALMOST BAD</li>";
+            }
+            elseif($value <=25 && $value >= 0){
+                echo " - BAD</li>";
+            }
+
+        }
+         echo "</ul>";
+    ?>
 <?php
 if($this->trackingStart){?>
     <!-- Body score chart initialization -->

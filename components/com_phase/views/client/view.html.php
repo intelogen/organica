@@ -3522,7 +3522,9 @@ class PhaseViewClient extends JView
         
         //результаты первичного опроса
         $content = $model->getFirstContent($uid);
-        
+
+
+
         if(count($content) == 0 || !$content){
             global $mainframe;
             $mainframe->redirect('index.php?option=com_phase&controller=client&action=lastintake',"Enter intake data");
@@ -3573,7 +3575,7 @@ class PhaseViewClient extends JView
         //Взять список заболеваний
         $diseasesList = $model->getDiseasesList();
         $this->assignRef('diseasesList', $diseasesList);	
-	
+
         parent::display($tpl);
     }
     

@@ -971,19 +971,14 @@ class PhaseViewClient extends JView
         
         // первичный опросс
         if(JRequest::getVar('in') == 1)
-        {
-		
-		
-		
-		
-		
+        {		
             session_start();
             global $mainframe;
             
             $evalution = $this->prepareData();
         
 		
-		
+            
             if (
                 $evalution[goals][weight] == null || 
                 $evalution[goals][fat] == null || 
@@ -1023,7 +1018,7 @@ class PhaseViewClient extends JView
           
 		  
 			
-		}
+	}
         
         if(JRequest::getVar('inc') == 1)
         {
@@ -1044,7 +1039,7 @@ class PhaseViewClient extends JView
 			if(result)
 			{
 				unset($_SESSION['evalution']);
-				$mainframe->redirect("index.php?option=com_phase&controller=client");
+				$mainframe->redirect("index.php?option=com_phase&controller=client", 'information has been saved');
 			}
 			else
 			{
@@ -1059,7 +1054,7 @@ class PhaseViewClient extends JView
 			{
 				$mainframe->redirect("index.php?option=com_phase&controller=client&action=lastintake");
 			}
-
+        
         }
         
 		
@@ -1070,6 +1065,8 @@ class PhaseViewClient extends JView
         {
             $model = $this->getModel();
             
+
+
             
             $result =  $this->preparePhasechekDataSave();
             
@@ -1077,13 +1074,13 @@ class PhaseViewClient extends JView
             global  $mainframe;
             if(result)
             {
-                $mainframe->redirect("index.php?option=com_phase&controller=client","yra");
+                $mainframe->redirect("index.php?option=com_phase&controller=client","new information has been saved");
             }
             else
             {
-                $mainframe->redirect("index.php?option=com_phase&controller=client","gora");
+                $mainframe->redirect("index.php?option=com_phase&controller=client","new information is has not survived");
             }
-            
+           
         }
         
         parent::display($tpl);
@@ -1091,6 +1088,7 @@ class PhaseViewClient extends JView
     
     function preparePhasechekDataSave()
     {
+        
         $model = $this->getModel();
         $post = JRequest::get('post');
         $date =  date('Y-m-d G:i:s');
@@ -1098,6 +1096,9 @@ class PhaseViewClient extends JView
         $pid = $post[evalution][pid];
         $uid = $post[evalution][uid];
         
+        
+
+
         
         if(count($post[data][content][life_style][val]) > 0 && $post[data][content][life_style][val][0] !== "")
         {
@@ -1143,14 +1144,24 @@ class PhaseViewClient extends JView
         $res = $model->saveLastintake($uid, $pid, "photo", $result[photo], null, null, 3, $date);
         if($res == false){return false;}
         
+        
+        
+        
         $result[symptoms] = $this->pSympa();
         $res = $model->saveLastintake($uid, $pid, "symptoms", $result[symptoms][name], $result[symptoms][status], $result[symptoms][note], 4, $date);
         if($res == false){return false;}
         
+        
+       
+
+
+
         $result[drug] = $this->pDrug();
         $res = $model->saveLastintake($uid, $pid, "drug", $result[drug][name], $result[drug][status], $result[drug][note], 5, $date);
         if($res == false){return false;}
         
+        
+
         $result[diseases] = $this->pDiseases();
         $res = $model->saveLastintake($uid, $pid, "diseases", $result[diseases][name], $result[diseases][status], $result[diseases][note], 6, $date);
         if($res == false){return false;}
@@ -1162,9 +1173,9 @@ class PhaseViewClient extends JView
     
     function pSympa()
     {
+       
         $post = JRequest::get('post');
-
-        
+           
         if(isset($post[data][content][symptoms]) && $post[data][content][symptoms][name][0] !== null)
         {
             $sympa = $post[data][content][symptoms];
@@ -1172,6 +1183,10 @@ class PhaseViewClient extends JView
             $result[status] = implode(",", $post[data][content][symptoms][status]);
             $result[note] = implode(",", $post[data][content][symptoms][note]);
         }
+        
+
+
+
         
         if(isset($post[data][content][extra_symptoms][db_list]) && $post[data][content][extra_symptoms][db_list][name][0] !== null)
         {
@@ -1194,7 +1209,7 @@ class PhaseViewClient extends JView
             }
         }
 
-        if(isset($post[data][content][extra_symptoms][user_list][new_name]) && $post[data][content][extra_symptoms][user_list][new_name][name][0] !== null)
+        if(isset($post[data][content][extra_symptoms][user_list]) && $post[data][content][extra_symptoms][user_list][name][0] !== null)
         {
             unset($post[data][content][extra_symptoms][user_list][new_name]);
             $extraSympaU = $post[data][content][extra_symptoms][user_list];
@@ -1223,16 +1238,16 @@ class PhaseViewClient extends JView
             }
         }
         
-        return $result;
-        
+        return $result;   
+       
     }
     
     
     function pDrug()
     {
         $post = JRequest::get('post');
-
         
+    
         if(isset($post[data][content][drug]) && $post[data][content][drug][name][0] !== null)
         {
             $sympa = $post[data][content][drug];
@@ -1262,7 +1277,7 @@ class PhaseViewClient extends JView
             }
         }
 
-        if(isset($post[data][content][extra_drug][user_list][new_name]) && $post[data][content][extra_drug][user_list][new_name][name][0] !== null)
+        if(isset($post[data][content][extra_drug][user_list]) && $post[data][content][extra_drug][user_list][name][0] !== null)
         {
             unset($post[data][content][extra_drug][user_list][new_name]);
             $extraSympaU = $post[data][content][extra_drug][user_list];
@@ -1292,15 +1307,16 @@ class PhaseViewClient extends JView
         }
         
         return $result;
-        
+  
     }
     
     
     function pDiseases()
     {
         $post = JRequest::get('post');
-
         
+        
+    
         if(isset($post[data][content][diseases]) && $post[data][content][diseases][name][0] !== null)
         {
             $sympa = $post[data][content][drug];
@@ -1309,6 +1325,7 @@ class PhaseViewClient extends JView
             $result[note] = implode(",", $post[data][content][diseases][note]);
         }
 
+        
         if(isset($post[data][content][extra_diseases][db_list]) && $post[data][content][extra_diseases][db_list][name][0] !== null)
         {
             unset($post[data][content][extra_diseases][db_list][new_name]);
@@ -1329,11 +1346,13 @@ class PhaseViewClient extends JView
                 $result[note] = $extraSympaDb[note]; 
             }
         }
-
-        if(isset($post[data][content][extra_diseases][user_list][new_name]) && $post[data][content][extra_diseases][user_list][new_name][name][0] !== null)
+        
+        
+        if(isset($post[data][content][extra_diseases][user_list][name]) && $post[data][content][extra_diseases][user_list][name][0] !== null)
         {
-            unset($post[data][content][extra_diseases][user_list][new_name]);
+            //unset($post[data][content][extra_diseases][user_list][new_name]);
             $extraSympaU = $post[data][content][extra_diseases][user_list];
+            
             $model = $this->getModel();
             
             
@@ -1357,9 +1376,10 @@ class PhaseViewClient extends JView
                 $result[status] = $extraSympaU[status];
                 $result[note] = $extraSympaU[note]; 
             }
-        }
+            
+                }
         
-        return $result;
+       return $result;
         
     }
     
@@ -1808,91 +1828,88 @@ class PhaseViewClient extends JView
             
 			
 			
-			
-			
-			
-			
-			if(!empty($evalution[madtrack][allergies][new_allergies][name]))
-            {
-				//список id симпомов из базы
-                $evalution[madtrack][allergies][db_list][] = $evalution[madtrack][allergies][new_allergies][name];
-            }
-			else
+
+                         if(!empty($evalution[madtrack][allergies][new_allergies][name]))
+                        {
+                            
+                            //список id симпомов из базы
+                             $evalution[madtrack][allergies][db_list] = $evalution[madtrack][allergies][new_allergies][name];
+                        }
+			if(!empty($evalution[madtrack][allergies][extra_allergies][name]))
 			{
-			
-				if(!empty($evalution[madtrack][allergies][extra_allergies][name]))
-				{
 					//список имён новых симпомов
-                	$evalution[madtrack][allergies][extra_list][] = $evalution[madtrack][allergies][extra_allergies][name];
-				}
-			
+                                $evalution[madtrack][allergies][extra_list] = $evalution[madtrack][allergies][extra_allergies][name];
 			}
-			unset($evalution[madtrack][allergies][new_symptoms]);
-			unset($evalution[madtrack][allergies][extra_symptoms]);
+			
+			unset($evalution[madtrack][allergies][new_allergies]);
+			unset($evalution[madtrack][allergies][extra_allergies]);
+			
+                        
+                            
 			
 			
 			
 			
 			
+                        if(!empty($evalution[madtrack][symptoms][new_symptoms][name]))
+                        {
+                                            //список id симпомов из базы
+                            $evalution[madtrack][symptoms][db_list] = $evalution[madtrack][symptoms][new_symptoms][name];
+                        }
+                        if(!empty($evalution[madtrack][symptoms][extra_symptoms][name]))
+                        {
+                                                //список имён новых симпомов
+                                $evalution[madtrack][symptoms][extra_list] = $evalution[madtrack][symptoms][extra_symptoms][name];
+                        }
+
+                        unset($evalution[madtrack][symptoms][new_symptoms]);
+                        unset($evalution[madtrack][symptoms][extra_symptoms]);
+
+                        
 			
-            if(!empty($evalution[madtrack][symptoms][new_symptoms][name]))
-            {
-				//список id симпомов из базы
-                $evalution[madtrack][symptoms][db_list][] = $evalution[madtrack][symptoms][new_symptoms][name];
-            }
-			else
-			{
-			
-				if(!empty($evalution[madtrack][symptoms][extra_symptoms][name]))
-				{
-					//список имён новых симпомов
-                	$evalution[madtrack][symptoms][extra_list][] = $evalution[madtrack][symptoms][extra_symptoms][name];
-				}
-			
-			}
-			unset($evalution[madtrack][symptoms][new_symptoms]);
-			unset($evalution[madtrack][symptoms][extra_symptoms]);
-			
-			
+                        
+                        
+                        
+                        
 			if(!empty($evalution[madtrack][drug][new_drug][name]))
-            {
+                        {
 				//список id симпомов из базы
-                $evalution[madtrack][drug][db_list][] = $evalution[madtrack][drug][new_drug][name];
-            }
-			else
-			{
-			
-				if(!empty($evalution[madtrack][drug][extra_drug][name]))
+                              $evalution[madtrack][drug][db_list] = $evalution[madtrack][drug][new_drug][name];
+                         }
+			if(!empty($evalution[madtrack][drug][extra_drug][name]))
 				{
 					//список имён новых симпомов
-                	$evalution[madtrack][drug][extra_list][] = $evalution[madtrack][drug][extra_drug][name];
+                	$evalution[madtrack][drug][extra_list] = $evalution[madtrack][drug][extra_drug][name];
 				}
 			
-			}
+			
 			unset($evalution[madtrack][drug][new_drug]);
 			unset($evalution[madtrack][drug][extra_drug]);
+                        
+                        
             
-			
+                        
+                        
+
 			if(!empty($evalution[madtrack][diseases][new_diseases][name]))
-            {
-				//список id симпомов из базы
-                $evalution[madtrack][diseases][db_list][] = $evalution[madtrack][diseases][new_diseases][name];
-            }
-			else
-			{
-			
-				if(!empty($evalution[madtrack][diseases][extra_diseases][name]))
-				{
+                        {
+                                            //список id симпомов из базы
+                                $evalution[madtrack][diseases][db_list] = $evalution[madtrack][diseases][new_diseases][name];
+                        }
+			if(!empty($evalution[madtrack][diseases][extra_diseases][name]))
+                        {
 					//список имён новых симпомов
-                	$evalution[madtrack][diseases][extra_list][] = $evalution[madtrack][diseases][extra_diseases][name];
-				}
-			
+                        	$evalution[madtrack][diseases][extra_list] = $evalution[madtrack][diseases][extra_diseases][name];
 			}
+			
+			
 			unset($evalution[madtrack][diseases][new_diseases]);
 			unset($evalution[madtrack][diseases][extra_diseases]);
-            
-			
+                        
+                        
 
+			
+                        
             if(!empty($file[evalution][name][new_file][0]))
             {
                 $file_1_name = $file[evalution][name][new_file][0];
@@ -1911,7 +1928,7 @@ class PhaseViewClient extends JView
                 $evalution[file][name][1] = $file_2_name;
             }  
         return $evalution;
-
+        
     }
     
     function edit($tpl = null)
@@ -3310,6 +3327,7 @@ class PhaseViewClient extends JView
         $this->assignRef('evalution', $evalution);
         //unset($_SESSION['evalution']);
         }
+
         
         $user =& JFactory::getUser();
         $uid = $user->id;
@@ -3481,15 +3499,16 @@ class PhaseViewClient extends JView
     }
     
     
-    function show_repo($tpl = null)
-    {
-        
+    function show_repo($tpl = null){
+        //модель
         $model = $this->getModel();
         
+        //id usera
         $user =& JFactory::getUser();
         $uid = $user->id;
-        if(JRequest::getVar('c') && JRequest::getVar('c') != "")
-        {
+        
+        
+        if(JRequest::getVar('c') && JRequest::getVar('c') != ""){
             $uid = JRequest::getVar('c');
         }
         
@@ -3498,33 +3517,30 @@ class PhaseViewClient extends JView
         $loockingfor = $model->loockingfor();
         $this->assignRef('loockingfor', $loockingfor);
         
-        $questionList = $model->questionList();
-        $this->assignRef('questionList', $questionList);
+        //$questionList = $model->questionList();
+        //$this->assignRef('questionList', $questionList);
         
-        
-        
+        //результаты первичного опроса
         $content = $model->getFirstContent($uid);
         
-        
-        
-        if(count($content) == 0)
-        {
+        if(count($content) == 0 || !$content){
             global $mainframe;
             $mainframe->redirect('index.php?option=com_phase&controller=client&action=lastintake',"Enter intake data");
-        }
-        else
-        {
-			$content = $this->prepContent($content);
+        }else{
+            $content = $this->prepContent($content);
+            
+            if($content[life_style] && count($content[life_style]) !== 0){
+                $res = implode(",", $content[life_style]);
+                $qAnswers = $model->getQAnswers($res);
+                $this->assignRef('qAnswers', $qAnswers);
+            }
+         
             $this->assignRef('evalution', $content);
         }
         
+        //берём названия фаз для меню
         $phases_id = $model->getPhasesId($uid);
         $this->assignRef('phases', $phases_id);
-        
-        
-        
-        
-        
         
         //графики
         $document =& JFactory::getDocument();
@@ -3536,23 +3552,16 @@ class PhaseViewClient extends JView
         // adding chart
         JHTML::script('jquery-1.7.1.min.js',JURI::root().'components/com_jforce/js/charts/');
         JHTML::script('highcharts.js',JURI::root().'components/com_jforce/js/charts/');
-        //графики
         
         $numbers = implode(",", $content[life_style]);
         $trackingStart = $model->getProgressTrackingDetails($uid, $pid, $numbers);
         $this->assignRef('trackingStart', $trackingStart);
+        //графики
         
-
-
-		
-		
-		
-			
-		//Взять список алергий
-		$allergiesList = $model->getAllergiesList();
+	//Взять список алергий
+	$allergiesList = $model->getAllergiesList();
         $this->assignRef('allergiesList', $allergiesList);
 		
-        
         //Взять список симпомов
         $symptomList = $model->getSymptomList();
         $this->assignRef('symptomList', $symptomList);
@@ -3561,17 +3570,10 @@ class PhaseViewClient extends JView
         $medtrackList = $model->getMedtrackList();
         $this->assignRef('medtrackList', $medtrackList);
         
-        
         //Взять список заболеваний
         $diseasesList = $model->getDiseasesList();
         $this->assignRef('diseasesList', $diseasesList);	
-			
- 
-
-
-
- 
-        
+	
         parent::display($tpl);
     }
     
@@ -3591,9 +3593,20 @@ class PhaseViewClient extends JView
         $this->assignRef('questionList', $questionList);
         
         $content = $model->testPhaseData($uid, $pid);
-        
+        if(!$content || count($content) == 0)
+        {
+            global $mainframe;
+            $mainframe->redirect("index.php?option=com_phase&controller=client&action=show_repo&c=$uid", "you don't have result for this phase");
+        }
         $evalution[life_style] = explode(",", $content[0][val]);
-        $evalution[body] = explode(",", $content[1][val]);
+        
+        if($evalution[life_style] || count($evalution[life_style]) !== 0)
+            {
+                $res = implode(",", $evalution[life_style]);
+                $qAnswers = $model->getQAnswers($res);
+                $this->assignRef('qAnswers', $qAnswers);
+            }
+                $evalution[body] = explode(",", $content[1][val]);
         $evalution[photo] = explode(",", $content[2][val]);
         $evalution[symptoms][val] = explode(",", $content[3][val]);
         $evalution[symptoms][status] = explode(",", $content[3][status]);
@@ -3604,6 +3617,7 @@ class PhaseViewClient extends JView
         $evalution[diseases][val] = explode(",", $content[5][val]);
         $evalution[diseases][status] = explode(",", $content[5][status]);
         $evalution[diseases][note] = explode(",", $content[5][note]);
+
         
         $this->assignRef('evalution', $evalution);
         
@@ -3711,6 +3725,7 @@ class PhaseViewClient extends JView
 	
 	function prepContent($content)
     {
+            
         $temp = explode(",", $content[0][val]);
         
         $data[goals][weight] = $temp[0];
@@ -3776,20 +3791,12 @@ class PhaseViewClient extends JView
     {
         $model = $this->getModel();
         
-        
-
-        
-        
-        if(JRequest::getVar('c'))
-        {
+        if(JRequest::getVar('c')){
             $uid = JRequest::getVar('c');
-        }
-        else
-        {
+        }else{
             $user =& JFactory::getUser();
             $uid = $user->id;
         }
-        
         
         $target = $model->getTargets($uid);
         $target = $this->parseTargets($target);
@@ -3797,25 +3804,11 @@ class PhaseViewClient extends JView
         
         $current = $model->getIntakeData($uid);
         
-        
         $result[body] = explode(",", $current[1][val]);
         $this->assignRef('current', $result);
         
-        
-        
         $bodyHistory = $model->getBodyHistory($uid, "body");
         $this->assignRef('bodyHistory', $bodyHistory);
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         parent::display($tpl);
     }
@@ -3831,7 +3824,7 @@ class PhaseViewClient extends JView
     
     function show_detail($tpl = null)
     {
-        
+       
         $post = Jrequest::get(post);
         $pid = $post[pid];
         $uid = $post[uid];
@@ -3840,16 +3833,19 @@ class PhaseViewClient extends JView
         //Имя фазы
         $name = $model->getPhaseName($pid);
         $this->assignRef('name', $name);
-        
-        // проверка на наличие данных и дат по конкретной фазе        
+    
+       
+        // выбираем уникальные даты по фазе        
         $phaseDates = $model->getPhaseDates($pid);
         
+
+           
         // если что-то есть - формируем контент
         if(count($phaseDates) !== 0)
         {
             //первичная инфа(goals & pid=0)
             $inteke = $model->getFirstContent($uid);
-            
+
             if(count($inteke) !== 0)
             {
                 
@@ -3873,9 +3869,6 @@ class PhaseViewClient extends JView
                     
                 }
                 
-                
-                
-                
                 if (isset($res[goal_body]))
                     {
                         $gols[goal_body][date] = $res[date];
@@ -3893,8 +3886,9 @@ class PhaseViewClient extends JView
                         $gols[body][date] = $res[date];
                         $gols[body][val] = $res[body];
                     }
-                    
-                $this->assignRef('gols', $gols);
+
+
+                    $this->assignRef('gols', $gols);
                    
             }
             
@@ -3903,17 +3897,19 @@ class PhaseViewClient extends JView
             {
                 $date = $value[date];
                 $data[dirty_content] = $model->getC($date, $pid);
-                
-                
+
+
+
+
                 // розбор данных из базы
                 if(isset($data[dirty_content]))
                 {
-                    /*
+                    
                     if (isset($data[dirty_content][0]) && $data[dirty_content][0][name] == 'life_style')
                     {
                         $data[content][life_style][val] = explode(",", $data[dirty_content][0][val]);
                     }    
-                    */
+                    
                     
                     if (isset($data[dirty_content][1]) && $data[dirty_content][1][name] == 'body')
                     {
@@ -3952,7 +3948,7 @@ class PhaseViewClient extends JView
                }
                $content[] = $data[content];
                
-            }    
+                       }    
         }
         
         
@@ -3964,25 +3960,25 @@ class PhaseViewClient extends JView
         
         //Взять список препараты
         $list[medtrackList] = $model->getMedtrackList();
-        
+       
         //Взять список заболеваний
         $list[diseasesList] = $model->getDiseasesList();
-
         $this->assignRef('list', $list);
 
 
 
-
-       $this->assignRef('content', $content);
-        
+        $this->assignRef('content', $content);
+     
         parent::display($tpl);
     }
     
     function show_total_repo($tpl = null)
     {
+        
         $model = $this->getModel();
         $uid = JRequest::getvar('c');
         
+       
         //первичная инфа(goals & pid=0)
             $inteke = $model->getFirstContent($uid);
             
@@ -4033,8 +4029,12 @@ class PhaseViewClient extends JView
                 $this->assignRef('gols', $gols);
                    
             }
+            
         
         $phases_id = $model->getPhasesId($uid);
+        
+        if($phases_id && count($phases_id) !== 0 )
+        {
         
         foreach($phases_id as $value)
         {
@@ -4042,8 +4042,9 @@ class PhaseViewClient extends JView
             $data[dirty_content][] = $model->getShowTotal($pid);
 
                 }
+        }
         
-        
+        /*
         foreach ($data[dirty_content] as $value)
         {
             foreach($value as $data[dirty_content])
@@ -4054,12 +4055,14 @@ class PhaseViewClient extends JView
               // розбор данных из базы
                 if(isset($data[dirty_content]))
                 {
-                    /*
+       
+       
+                    
                     if (isset($data[dirty_content][0]) && $data[dirty_content][0][name] == 'life_style')
                     {
                         $data[content][life_style][val] = explode(",", $data[dirty_content][0][val]);
                     }    
-                    */
+                    
                     
                     if (isset($data[dirty_content][1]) && $data[dirty_content][1][name] == 'body')
                     {
@@ -4147,7 +4150,7 @@ class PhaseViewClient extends JView
 
         
         $this->assignRef('content', $content);
-    
+    */
         parent::display($tpl);
     }
     
@@ -4159,10 +4162,35 @@ class PhaseViewClient extends JView
         $pid_2 = $post[phaseId][1];
         $model = $this->getModel();
         
+        if($pid_1 == 0) {$evalution_1[name] = 'Phase 0 - Intake Survey';}
+        else {$evalution_1[name] = $model->getPhaseName($pid_1);}
         
+        
+        
+        if($pid_2 == 0) {$evalution_2[name] = 'Phase 0 / Intake Survey';}
+        else {$evalution_2[name] = $model->getPhaseName($pid_2);}
+     
+            
+        
+        
+
+
+
+
+
         $dirty_content_1 = $model->testPhaseData($uid, $pid_1);
         
         $evalution_1[life_style] = explode(",", $dirty_content_1[0][val]);
+        if($evalution_1[life_style] || count($evalution_1[life_style]) !== 0)
+            {
+                $res = implode(",", $evalution_1[life_style]);
+                $qAnswers1 = $model->getQAnswers($res);
+                $this->assignRef('qAnswers1', $qAnswers1);
+                
+                $trackingStart1 = $model->getProgressTrackingDetails($uid, $pid_1, $res);
+                $this->assignRef('trackingStart1', $trackingStart1);
+         }
+        
         $evalution_1[body] = explode(",", $dirty_content_1[1][val]);
         $evalution_1[photo] = explode(",", $dirty_content_1[2][val]);
         $evalution_1[symptoms][val] = explode(",", $dirty_content_1[3][val]);
@@ -4175,12 +4203,24 @@ class PhaseViewClient extends JView
         $evalution_1[diseases][status] = explode(",", $dirty_content_1[5][status]);
         $evalution_1[diseases][note] = explode(",", $dirty_content_1[5][note]);
         
+        
+
+
         $this->assignRef('evalution_1', $evalution_1);
         
 
         $dirty_content_2 = $model->testPhaseData($uid, $pid_2);
         
         $evalution_2[life_style] = explode(",", $dirty_content_2[0][val]);
+        if($evalution_2[life_style] || count($evalution_2[life_style]) !== 0)
+            {
+                $res = implode(",", $evalution_2[life_style]);
+                $qAnswers2 = $model->getQAnswers($res);
+                $this->assignRef('qAnswers2', $qAnswers2);
+                
+                $trackingStart2 = $model->getProgressTrackingDetails($uid, $pid_2, $res);
+                $this->assignRef('trackingStart2', $trackingStart2);
+         }
         $evalution_2[body] = explode(",", $dirty_content_2[1][val]);
         $evalution_2[photo] = explode(",", $dirty_content_2[2][val]);
         $evalution_2[symptoms][val] = explode(",", $dirty_content_2[3][val]);

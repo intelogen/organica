@@ -1,3 +1,4 @@
+<!--
 <?php
 
 if ($this->content)
@@ -36,6 +37,7 @@ echo '<br>';
     <td><div class='contentheading'><?=$gols[body][val][2]?></div></td>
 </tr>
 <?php
+if($content){
 foreach ($content as $value) 
 {
 ?>    
@@ -46,6 +48,7 @@ foreach ($content as $value)
         <td><div class='contentheading'><?=$value[body][val][2]?></div></td>
     </tr>
 <?php
+}
 }
 ?>
         <tr>
@@ -89,6 +92,7 @@ else
 ?>
 <table>
 <?php
+if($list[symptomList]){
 foreach ($list[symptomList] as $value)
 {
     if(in_array($value[id], $result))
@@ -97,6 +101,7 @@ foreach ($list[symptomList] as $value)
         <tr><?="<td>".$value[name]."</td><td> - FINISHED ! </td>"?></tr>
     <?php
     }
+}
 }
 ?>
 </table>
@@ -134,6 +139,7 @@ else
 ?>
 <table>
 <?php
+if($list[medtrackList]){
 foreach ($list[medtrackList] as $value)
 {
     if(in_array($value[id], $medtrack_result))
@@ -142,6 +148,7 @@ foreach ($list[medtrackList] as $value)
         <tr><?="<td>".$value[name]."</td><td> - FINISHED ! </td>"?></tr>
     <?php
     }
+}
 }
 ?>
 </table>
@@ -182,6 +189,7 @@ else
 ?>
 <table>
 <?php
+if($list[diseasesList]){
 foreach ($list[diseasesList] as $value)
 {
     if(in_array($value[id], $diseases_result))
@@ -190,6 +198,7 @@ foreach ($list[diseasesList] as $value)
         <tr><?="<td>".$value[name]."</td><td> - FINISHED ! </td>"?></tr>
     <?php
     }
+}
 }
 ?>
 </table>
@@ -215,6 +224,7 @@ foreach ($list[diseasesList] as $value)
         <?= "  <img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$gols[photo][val][1]."\" width=\"200\" height=\"350\"></div>";?>
 
 <?php
+if($content){
 foreach ($content as $value)
 {
 ?>
@@ -228,5 +238,7 @@ foreach ($content as $value)
     </div>
 <?php
 }
+}
 ?>
 </div>
+-->

@@ -8,6 +8,7 @@
 <div class='contentheading'> My Places </div>
 
 <div class='tabContainer2 phase-navigation'>
+    <ul>
     <li class=''>
         <a href="index.php?option=com_phase&controller=client&action=show_my_coach">My Coach</a>
     </li>
@@ -27,9 +28,7 @@
     <li class=''>
 <a href="index.php?option=com_phase&controller=client&action=show_repo">Progress report</a>
     </li>
-  
-
-
+</ul>
 </div>
 <div class='contentheading'>
     <?="Welcome"?>

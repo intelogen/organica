@@ -1,3 +1,18 @@
+<div class='contentheading'><?="Total progress"?></div>
+<div class='contentheading'>Body History</div>
+    <div class='tabContainer2' style="background-color:#E1FFE3">
+        
+        <div class="value-name">Date</div><div class="value-name">Weight</div><div class="value-name">Fat</div><div class="value-name">Ph</div>
+        
+        
+    </div>
+<?php
+    echo "<pre>";
+    var_dump($this->content);
+    echo "</pre>";
+?>
+
+
 <!--
 <?php
 

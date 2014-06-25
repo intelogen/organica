@@ -14,6 +14,7 @@ Furhter, you will be responsible for signing off the phases and assigning new ph
 <div class='contentheading'> My Places </div>
 
 <div class='tabContainer2 phase-navigation'>
+    <ul>
     <li class=''>
         <a href="index.php?option=com_phase&controller=client&action=show_my_coach">My Coach</a>
     </li>
@@ -33,9 +34,7 @@ Furhter, you will be responsible for signing off the phases and assigning new ph
     <li class=''>
 <a href="index.php?option=com_phase&controller=client&action=show_repo">Progress report</a>
     </li>
-  
-
-
+</ul>
 </div>
 
 

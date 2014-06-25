@@ -444,7 +444,7 @@ $count = count($phases);
                 if(in_array($value['id'],$this->evalution[madtrack][diseases][status]))
                 {
                     echo "<div class='value'>".$value[name]."</div>";
-                }
+                } 
             }
         }
         ?>

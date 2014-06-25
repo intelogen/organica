@@ -1,37 +1,30 @@
-<?php
-defined( '_JEXEC' ) or die( 'Restricted access' );
-?>
-<?php
-$uid = $this->uid;
-$pid = 0;
+<?php defined( '_JEXEC' ) or die( 'Restricted access' ); ?>
 
+<?php
 $loockingfor = $this->loockingfor;
 
 
-if($this->evalution)
-{
-    $evalution = $this->evalution;
-}
+if($this->evalution){
+    $evalution = $this->evalution; 
 
+}
 
 $phases = $this-> phases;
 $count = count($phases);
 
-if($this->allergiesList)
-{
+if($this->allergiesList){
     $allergiesList = $this->allergiesList;
 }
 
-if($this->symptomList)
-{
+if($this->symptomList){
     $symptomList = $this->symptomList;
 }
-if($this->medtrackList)
-{
+
+if($this->medtrackList){
     $medtrackList = $this->medtrackList;
 }
-if($this->diseasesList)
-{
+
+if($this->diseasesList){
     $diseasesList = $this->diseasesList;
 }
 ?>
@@ -222,6 +215,30 @@ if($this->diseasesList)
     </table>
 </div>
 
+        
+<div class='contentheading'>Lifestyle analysis</div>    
+<div class='tabContainer2' style="background-color:#E1FFE3">    
+
+<?php
+// здесь были вопросы с галочками (отключены в виде)
+/*
+if($this->questionList):
+?>
+        <table class="allleft">
+        <tr>
+            
+        <?php
+        $cnt = 1;
+            
+            foreach($this->questionList as $value):
+
+            
+           ?>
+                <td style='border:1px solid #EEE;padding:3px;' align="center"><input type="checkbox" name="evalution[life_style][]"<?php if(isset($evalution[life_style])){ if(in_array($value['id'],$evalution[life_style])) {echo "checked";} } ?> value="<?=$value['id'];?>"></td>
+                <td style='border:1px solid #EEE;padding:3px;'><?=$value['question'];?></td>
+            <?php
+
+
 <div class='contentheading'>Lifestyle analysis</div>
 <div class='tabContainer2' style="background-color:#E1FFE3">
     <?php
@@ -252,6 +269,68 @@ if($this->diseasesList)
     <?php
     endif;
     ?>
+
+        </tr>
+    </table>
+<?php
+endif;
+*/
+?>
+    
+<?php
+
+if($this->qAnswers){
+    foreach ($this->qAnswers as $value) {
+        echo "- ".$value['answer'].'<br>';
+    }
+}
+?>
+    <?php 
+        $var = explode(",", $this->trackingStart->cats);
+        
+        foreach ($var as $value) {
+            $res[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
+        }
+        
+        
+        $var2 = explode(",", $this->trackingStart->opp_vals);
+        foreach ($var2 as $value) {
+            $res2[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
+        }
+        
+        
+        
+        if(count($res) == count($res2))
+            {
+                $cnt = array_combine( $res, $res2);
+        
+            }
+
+            
+
+        echo "<br><div class='contentheading'>Lifestyle analysis result:</div><ul>";
+        foreach ($cnt as $key => $value) {
+            echo "<li>".$key;
+            
+            if($value > 75)
+            {
+                echo " - NICE";
+            }
+            elseif ($value <=75 && $value > 50) {
+                echo " - ALMOST NICE</li>";
+            }
+            elseif($value <=50 && $value > 25){
+                echo " - ALMOST BAD</li>";
+            }
+            elseif($value <=25 && $value >= 0){
+                echo " - BAD</li>";
+            }
+
+        }
+         echo "</ul>";
+    ?>
+    
+
 </div>
 
 

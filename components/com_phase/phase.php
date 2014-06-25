@@ -1,3 +1,4 @@
+<script src="jquery.js" type="text/javascript"></script>
 <?php
 defined( '_JEXEC' ) or die( 'Restricted access' );
 

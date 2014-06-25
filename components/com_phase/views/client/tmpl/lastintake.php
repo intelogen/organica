@@ -1,3 +1,5 @@
+
+
 <?php
 defined( '_JEXEC' ) or die( 'Restricted access' );
 ?>
@@ -368,19 +370,11 @@ echo "  <div style='font-size:15px;color:#008;'>
     
     
 <div class='tabContainer2' style="background-color:#E1FFE3">   
-<div class='contentheading'>Allergies Tracking</div>  
-
-
-
-
-
-
-<<<<<<< HEAD
-=======
     
+    <!--
 <div class='contentheading'>Allergies Tracking</div>    
 
->>>>>>> d135d0ca7114dc5dcea3d9cc9aa7b0a623644db6
+
 <?php
 if($evalution[madtrack][allergies][db_list])
 {	
@@ -455,7 +449,7 @@ if(isset($allergiesList))
 <input type="text" name="evalution[madtrack][allergies][extra_allergies][name]" value="<?=null?>" />
 <button class="button validate" type="submit" id="test" value="add" name="action"><?= "Add" ?></button>
 =======
-            
+           
 <?='Add New'?> 
 <input type="text" name="evalution[madtrack][new_allergies][name]" value="<?=null?>" />
 
@@ -725,14 +719,344 @@ if(isset($diseasesList))
 </div>
 
 </div>     
+-->
+
+
+<div class='tabContainer2' style="background-color:#E1FFE3">   
+    
+    <!--Название раздела-->
+    <div class='contentheading'>Allergies Tracking</div>    
+
+<?php
+if(isset($allergiesList))
+{
+?>
+    <div>
+		<?= "Choose from the list :";?>
+		
+		<select id="a_list">
+			<?php 
+			foreach ($allergiesList as $value)
+			{
+			?>
+			<option value="<?= $value[id]?>"><?=$value[name]?></option>
+			<?php
+			}
+			?>   
+		</select>
+        <button id="add_a_list" ty>Add</button>
+    </div>   
+<?php    
+}
+?>
+    <!--инпут для собственных симптомов-->
+    <div>
+        <?="+ Add New:"?>
+        <input type="text" id="a_extra"/>
+        
+        <!--Кнопка добавления своих симптомов-->
+        <button id="add_a_extra">Add</button>
+    </div>
+    
+    
+    <!--результат выборки-->
+    <div id="alergies_list"><ul></ul></div>
+</div>
+
+<div class='tabContainer2' style="background-color:#E1FFE3">   
+    
+    <!--Название раздела-->
+    <div class='contentheading'>Symptoms Tracking</div>
+    
+    <!--список симптомов-->
+    <?php
+    if(isset($symptomList))
+    {
+    ?>
+        <div>
+            
+
+                    <select id="s_list">
+                            <?php 
+                            foreach ($symptomList as $value)
+                            {
+                            ?>
+                            <option value="<?= $value[id]?>"><?=$value[name]?></option>
+                            <?php
+                            }
+                            ?>   
+                    </select>
+        
+        <!--Кнопка добавления симптомов из списка-->
+        <button id="add_s_list">Add</button>
+        </div>   
+    <?php    
+    }
+    ?>
+
+    
+    <!--инпут для собственных симптомов-->
+    <div>
+        <?="+ Add New:"?>
+        <input type="text" id="s_extra"/>
+        
+        <!--Кнопка добавления своих симптомов-->
+        <button id="add_s_extra">Add</button>
+    </div>
+    
+    
+    <!--результат выборки-->
+    <div id="symptom_list"><ul></ul></div>
+    
+</div>
+
+<div class='tabContainer2' style="background-color:#E1FFE3">   
+    
+    <!--Название раздела-->
+    <div class='contentheading'>Medical preparations Tracking</div>    
+<?php
+if(isset($medtrackList))
+{
+    
+?>
+    <div>
+    <?= "Choose from the list :";?>
+    <select id="dr_list">
+    <?php 
+    foreach ($medtrackList as $value)
+    {
+    ?>
+        <option value="<?= $value[id]?>"><?=$value[name]?></option>
+    <?php
+    }
+    ?>   
+    </select>
+        <button id="add_dr_list">Add</button>
+    </div>
+        
+    
+<?php    
+}
+
+?>
+    <!--инпут для собственных симптомов-->
+    <div>
+        <?="+ Add New:"?>
+        <input type="text" id="dr_extra"/>
+        
+        <!--Кнопка добавления своих симптомов-->
+        <button id="add_dr_extra">Add</button>
+    </div>
+    
+    
+    <!--результат выборки-->
+    <div id="drug_list"><ul></ul></div>
+</div>
+
+<div class='tabContainer2' style="background-color:#E1FFE3">   
+    
+    <!--Название раздела-->
+    <div class='contentheading'>Diseases Tracking</div>    
+<?php
+if(isset($diseasesList))
+{   
+?>
+    <div>
+    <?= "Choose from the list :";?>
+    <select id="d_list">
+    <?php 
+    foreach ($diseasesList as $value)
+    {
+    ?>
+        <option value="<?= $value[id]?>"><?=$value[name]?></option>
+    <?php
+    }
+    ?>   
+    </select>
+        <button id="add_d_list">Add</button>
+    </div>
+        
+    
+<?php    
+}
+
+?>
+    <!--инпут для собственных симптомов-->
+    <div>
+        <?="+ Add New:"?>
+        <input type="text" id="d_extra"/>
+        
+        <!--Кнопка добавления своих симптомов-->
+        <button id="add_d_extra">Add</button>
+    </div>
+    
+    
+    <!--результат выборки-->
+    <div id="diseases_list"><ul></ul></div>
+</div>
 
 
 
-
-<button class="button validate" type="submit" id="test" value="add" name="action"><?= "Update" ?></button>
 <button class="button validate" type="submit" value="save" name="action"><?= "Save" ?></button>
 
 
 
 </form>   
 </div>
+
+
+
+<script type="text/javascript">
+    $(function(){
+        var x;
+        
+        x = $('button#add_s_list').on('click', function() {
+                                                    
+                                                    var sel = $('select#s_list option:selected');
+                                                    //выбираем id
+                                                    var id = sel.val();
+                                                    //если id нет возвращаем фолс
+                                                    if(id.length < 1)return false;
+                                                    //выбираем текст    
+                                                    var txt = sel.text();
+                                                    //грохаем выбраный елемент   
+                                                    sel.remove('');    
+                                                    //добавляем текст на страницу в див new_sym_list
+                                                    var div = $('div#symptom_list ul').append("<li>"+txt+"</li>");
+                                                    //добавляем скрытое поле с значением
+                                                    $('form').append("<input type='hidden' name='evalution[madtrack][symptoms][new_symptoms][name][]' value='"+id+"' />");
+                                                    return false;
+                                                });
+       
+       x = $('button#add_s_extra').on('click', function(){
+                                                    var sel = $('input[type="text"]#s_extra');
+                                                    //выбираем текст
+                                                    var txt = sel.val();
+                                                    //если текста нет возвращаем фолс
+                                                    if(txt.length < 1)return false;
+                                                    //добавляем текст на страницу в див new_sym_list
+                                                    var div = $('div#symptom_list ul').append("<li>"+txt+"</li>");
+                                                    //добавляем скрытое поле с значением
+                                                    $('form').append("<input type='hidden' name='evalution[madtrack][symptoms][extra_symptoms][name][]' value='"+txt+"' />");
+                                                    //чистим инпут
+                                                    sel.val('');
+                                                    return false;
+                                                });
+        
+        
+        
+        x = $('button#add_a_list').on('click', function() {
+                                                    
+                                                    var sel = $('select#a_list option:selected');
+                                                    //выбираем id
+                                                    var id = sel.val();
+                                                    //если id нет возвращаем фолс
+                                                    if(id.length < 1)return false;
+                                                    //выбираем текст    
+                                                    var txt = sel.text();
+                                                    //грохаем выбраный елемент   
+                                                    sel.remove('');    
+                                                    //добавляем текст на страницу в див new_sym_list
+                                                    var div = $('div#alergies_list ul').append("<li>"+txt+"</li>");
+                                                    //добавляем скрытое поле с значением
+                                                    $('form').append("<input type='hidden' name='evalution[madtrack][allergies][new_allergies][name][]' value='"+id+"' />");
+                                                    return false;
+                                                });
+       
+       x = $('button#add_a_extra').on('click', function(){
+                                                    var sel = $('input[type="text"]#a_extra');
+                                                    //выбираем текст
+                                                    var txt = sel.val();
+                                                    //если текста нет возвращаем фолс
+                                                    if(txt.length < 1)return false;
+                                                    //добавляем текст на страницу в див new_sym_list
+                                                    var div = $('div#alergies_list ul').append("<li>"+txt+"</li>");
+                                                    //добавляем скрытое поле с значением
+                                                    $('form').append("<input type='hidden' name='evalution[madtrack][allergies][extra_allergies][name][]' value='"+txt+"' />");
+                                                    //чистим инпут
+                                                    sel.val('');
+                                                    return false;
+                                                });
+        
+        
+        
+        x = $('button#add_dr_list').on('click', function() {
+                                                    
+                                                    var sel = $('select#dr_list option:selected');
+                                                    //выбираем id
+                                                    var id = sel.val();
+                                                    //если id нет возвращаем фолс
+                                                    if(id.length < 1)return false;
+                                                    //выбираем текст    
+                                                    var txt = sel.text();
+                                                    //грохаем выбраный елемент   
+                                                    sel.remove('');    
+                                                    //добавляем текст на страницу в див new_sym_list
+                                                    var div = $('div#drug_list ul').append("<li>"+txt+"</li>");
+                                                    //добавляем скрытое поле с значением
+                                                    $('form').append("<input type='hidden' name='evalution[madtrack][drug][new_drug][name][]' value='"+id+"' />");
+                                                    return false;
+                                                });
+       
+       x = $('button#add_dr_extra').on('click', function(){
+                                                    var sel = $('input[type="text"]#dr_extra');
+                                                    //выбираем текст
+                                                    var txt = sel.val();
+                                                    //если текста нет возвращаем фолс
+                                                    if(txt.length < 1)return false;
+                                                    //добавляем текст на страницу в див new_sym_list
+                                                    var div = $('div#drug_list ul').append("<li>"+txt+"</li>");
+                                                    //добавляем скрытое поле с значением
+                                                    $('form').append("<input type='hidden' name='evalution[madtrack][drug][extra_drug][name][]' value='"+txt+"' />");
+                                                    //чистим инпут
+                                                    sel.val('');
+                                                    return false;
+                                                });
+        
+        
+        
+        x = $('button#add_d_list').on('click', function() {
+                                                    
+                                                    var sel = $('select#d_list option:selected');
+                                                    //выбираем id
+                                                    var id = sel.val();
+                                                    //если id нет возвращаем фолс
+                                                    if(id.length < 1)return false;
+                                                    //выбираем текст    
+                                                    var txt = sel.text();
+                                                    //грохаем выбраный елемент   
+                                                    sel.remove('');    
+                                                    //добавляем текст на страницу в див new_sym_list
+                                                    var div = $('div#diseases_list ul').append("<li>"+txt+"</li>");
+                                                    //добавляем скрытое поле с значением
+                                                    $('form').append("<input type='hidden' name='evalution[madtrack][diseases][new_diseases][name][]' value='"+id+"' />");
+                                                    return false;
+                                                });
+       
+       x = $('button#add_d_extra').on('click', function(){
+                                                    var sel = $('input[type="text"]#d_extra');
+                                                    //выбираем текст
+                                                    var txt = sel.val();
+                                                    //если текста нет возвращаем фолс
+                                                    if(txt.length < 1)return false;
+                                                    //добавляем текст на страницу в див new_sym_list
+                                                    var div = $('div#diseases_list ul').append("<li>"+txt+"</li>");
+                                                    //добавляем скрытое поле с значением
+                                                    $('form').append("<input type='hidden' name='evalution[madtrack][diseases][extra_diseases][name][]' value='"+txt+"' />");
+                                                    //чистим инпут
+                                                    sel.val('');
+                                                    return false;
+                                                });
+        
+        
+
+        
+        /*
+        if(x.length > 0) console.log('Селектор есть, кол-во = '+ x.length);
+        else console.log('Селектора нет');
+
+        console.log(x);
+        */
+    });
+</script>
+

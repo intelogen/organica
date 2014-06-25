@@ -1795,6 +1795,16 @@ class PhaseModelClient extends JModel
         return  $db->loadAssocList();
     }
     
+    function getAllData($uid){
+        
+        $db =& $this->_db;
+        $query = "SELECT * FROM  #__jf_my_lastintake WHERE uid = $uid";
+        $ids = $this->_getList($query);
+        $db->setQuery($query);
+        return  $db->loadAssocList();
+        
+    }
+    
     function getIntakeData($uid)
     {
         $db =& $this->_db;

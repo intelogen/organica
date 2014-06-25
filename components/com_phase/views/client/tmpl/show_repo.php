@@ -9,7 +9,7 @@ $count = count($phases);
 <div class='contentheading phase-navigation-header'>Phases Navigation</div>
 <div class='tabContainer2 phase-navigation' style="background-color:#E1FFE3">
     <ul>
-        <li><a href="index.php?option=com_phase&controller=client&action=show_repo&c=<?=$uid?>">Intake Survey</a></li>
+        <li><a href="index.php?option=com_phase&controller=client&action=show_repo&c=<?=$this->uid?>">Intake Survey</a></li>
 
         <?php
         if ($phases && $phases[0][id] !== null && $phases[0][name] !== null )
@@ -17,12 +17,12 @@ $count = count($phases);
             foreach ($phases as $value)
             {
                 ?>
-                <li><a href="index.php?option=com_phase&controller=client&action=show_repoz&c=<?=$uid?>&pid=<?=$value[id]?>"><?=$value[name]?></a></li>
+                <li><a href="index.php?option=com_phase&controller=client&action=show_repoz&c=<?=$this->uid?>&pid=<?=$value[id]?>"><?=$value[name]?></a></li>
             <?php
             }
         }
         ?>
-        <li><a href="index.php?option=com_phase&controller=client&action=show_total_repo&c=<?=$uid?>">Total Progress</a></li>
+        <li><a href="index.php?option=com_phase&controller=client&action=show_total_repo&c=<?=$this->uid?>">Total Progress</a></li>
     </ul>
 </div>
 

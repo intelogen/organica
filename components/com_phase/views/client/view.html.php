@@ -3976,10 +3976,9 @@ class PhaseViewClient extends JView
     
     function show_total_repo($tpl = null)
     {
-        
         $model = $this->getModel();
         $uid = JRequest::getvar('c');
-        
+/*        
         $result = $model->getAllData($uid);
         
         if($result && $result !== null && $result[0] !== "")
@@ -4025,13 +4024,13 @@ class PhaseViewClient extends JView
         }
         
         $this->assignRef('content', $content);
+*/
 
 
-        /*
         //первичная инфа(goals & pid=0)
-            $inteke = $model->getFirstContent($uid);
-            
-            if(count($inteke) !== 0 && $inteke !== null && $inteke)
+        $inteke = $model->getFirstContent($uid);
+        
+        if(count($inteke) !== 0 && $inteke !== null && $inteke)
             {
                 
                 foreach ($inteke as $value){
@@ -4067,79 +4066,71 @@ class PhaseViewClient extends JView
                 
                 $this->assignRef('gols', $gols);
                    
-            }
-            else{
-                global $mainframe;
-                $mainframe->redirect('index.php?option=com_phase&controller=client&action=lastintake',"Enter intake data");
-            }
+        }
+        else{
+            global $mainframe;
+            $mainframe->redirect('index.php?option=com_phase&controller=client&action=lastintake',"Enter intake data");
+        }
             
         // id фаз
         $phases_id = $model->getPhasesId($uid);
         
         //данные по каждой
         if($phases_id && count($phases_id) !== 0 && $phases_id !== null){
-        
+            
             foreach($phases_id as $value){
                 $pid =  $value[id];
                 $data[dirty_content][] = $model->getShowTotal($pid);
-
-            }
-        }
+                }
+                    }
         
         if($data[dirty_content][0] && $data[dirty_content][0] !== null && $data[dirty_content][0] !== ""){
         
             foreach ($data[dirty_content] as $value){
-            
-                foreach($value as $data[dirty_content]){
+                
+                if($value !== null){
+                    foreach($value as $data[dirty_content]){
         
-                    // розбор данных из базы
-                    if(isset($data[dirty_content]))
-                    {
+                        // розбор данных из базы
+                        if($data[dirty_content]){
+
+                            if (isset($data[dirty_content][0]) && $data[dirty_content][0][name] == 'life_style'){
+                                $data[content][life_style][val] = explode(",", $data[dirty_content][0][val]);
+                            }    
 
 
+                            if (isset($data[dirty_content][1]) && $data[dirty_content][1][name] == 'body'){
+                                $data[content][date][val] = $data[dirty_content][1][date];
+                                $data[content][body][val] = explode(",", $data[dirty_content][1][val]);
+                            }    
 
-                        if (isset($data[dirty_content][0]) && $data[dirty_content][0][name] == 'life_style')
-                        {
-                            $data[content][life_style][val] = explode(",", $data[dirty_content][0][val]);
-                        }    
+                            if (isset($data[dirty_content][2]) && $data[dirty_content][2][name] == 'photo'){
+                                $data[content][photo] = explode(",", $data[dirty_content][2][val]);
+                            }    
 
+                            if (isset($data[dirty_content][3]) && $data[dirty_content][3][name] == 'symptoms'){
+                                $data[content][symptoms][name] = explode(",", $data[dirty_content][3][val]);
+                                $data[content][symptoms][status] = explode(",", $data[dirty_content][3][status]);
+                                $data[content][symptoms][note] = explode(",", $data[dirty_content][3][note]);
+                            }    
 
-                        if (isset($data[dirty_content][1]) && $data[dirty_content][1][name] == 'body')
-                        {
-                            $data[content][date][val] = $data[dirty_content][1][date];
-                            $data[content][body][val] = explode(",", $data[dirty_content][1][val]);
-                        }    
+                            if (isset($data[dirty_content][4]) && $data[dirty_content][4][name] == 'drug'){
+                                $data[content][drug][name] = explode(",", $data[dirty_content][4][val]);
+                                $data[content][drug][status] = explode(",", $data[dirty_content][4][status]);
+                                $data[content][drug][note] = explode(",", $data[dirty_content][4][note]);
+                            }    
 
-                        if (isset($data[dirty_content][2]) && $data[dirty_content][2][name] == 'photo')
-                        {
-                            $data[content][photo] = explode(",", $data[dirty_content][2][val]);
-                        }    
-
-                        if (isset($data[dirty_content][3]) && $data[dirty_content][3][name] == 'symptoms')
-                        {
-                            $data[content][symptoms][name] = explode(",", $data[dirty_content][3][val]);
-                            $data[content][symptoms][status] = explode(",", $data[dirty_content][3][status]);
-                            $data[content][symptoms][note] = explode(",", $data[dirty_content][3][note]);
-                        }    
-
-                        if (isset($data[dirty_content][4]) && $data[dirty_content][4][name] == 'drug')
-                        {
-                            $data[content][drug][name] = explode(",", $data[dirty_content][4][val]);
-                            $data[content][drug][status] = explode(",", $data[dirty_content][4][status]);
-                            $data[content][drug][note] = explode(",", $data[dirty_content][4][note]);
-                        }    
-
-                        if (isset($data[dirty_content][5]) && $data[dirty_content][5][name] == 'diseases')
-                        {
-                            $data[content][diseases][name] = explode(",", $data[dirty_content][5][val]);
-                            $data[content][diseases][status] = explode(",", $data[dirty_content][5][status]);
-                            $data[content][diseases][note] = explode(",", $data[dirty_content][5][note]);
-                        }
+                            if (isset($data[dirty_content][5]) && $data[dirty_content][5][name] == 'diseases'){
+                                $data[content][diseases][name] = explode(",", $data[dirty_content][5][val]);
+                                $data[content][diseases][status] = explode(",", $data[dirty_content][5][status]);
+                                $data[content][diseases][note] = explode(",", $data[dirty_content][5][note]);
+                            }
 
 
-                        unset($data[dirty_content]);
-                   }
+                            unset($data[dirty_content]);
+                       }
                    $content[] = $data[content];  
+                    }
                 }
             }
         }
@@ -4148,8 +4139,8 @@ class PhaseViewClient extends JView
         // взять роследние данные
         $last = $model->getIntakeData($uid);
         
-        
-         if($last)
+
+        if($last && $last !== null)
                 {
                 foreach($last as $value)
                 {
@@ -4174,14 +4165,10 @@ class PhaseViewClient extends JView
                  
                 
         $this->assignRef('last_list', $last_list);
-        */
-    
-        
-    /*          
+
         //Взять список симпомов
         $list[symptomList] = $model->getSymptomList();
 
-        
         //Взять список препараты
         $list[medtrackList] = $model->getMedtrackList();
         
@@ -4190,9 +4177,8 @@ class PhaseViewClient extends JView
 
         $this->assignRef('list', $list);
 
-        
         $this->assignRef('content', $content);
-    */
+
         parent::display($tpl);
     }
     

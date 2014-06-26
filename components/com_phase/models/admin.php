@@ -37,14 +37,31 @@ class PhaseModelAdmin extends JModel
      
      function getCompanyId($userId)
      {
-         $query = "SELECT id FROM #__jf_companies` WHERE owner = $userId";
-        return $this->_getList($query);
+        //$query = "SELECT id FROM #__jf_companies WHERE owner = $userId";
+        //return $this->_getList($query);
+        
+        $db =& $this->_db;
+        $query = "SELECT id FROM #__jf_companies WHERE owner = $userId";
+        $this->_getList($query);
+        $db->setQuery($query);
+        return $db->loadResult();
+        
      }
      
-     function updateUserInfo($companyId, $userId)
+     function updateUserInfo($companyId, $userId, $sysRole)
      {
-         $query = "UPDATE  #__jf_persons SET company = $companyId WHERE uid = $userId";
-        $this->_getList($query);
+        $query = "UPDATE  #__jf_persons SET company = $companyId, systemrole = $sysRole WHERE uid = $userId";
+        $this->_db->setQuery($query);
+        $this->_db->query();
+        return true;
+     }
+     
+     function updateUserInfo2($companyId, $comp, $sysRole)
+     {
+        $query = "UPDATE  #__jf_persons SET company = $companyId, systemrole = $sysRole WHERE company = $comp";
+        $this->_db->setQuery($query);
+        $this->_db->query();
+        return true;
      }
      
      //3 добавление нового пользователя
@@ -77,9 +94,10 @@ class PhaseModelAdmin extends JModel
         $this->setError($this->_db->getErrorMsg());
         return false;
         }
+        
     
     return true;
- 
+    
      }
      
      

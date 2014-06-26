@@ -45,6 +45,8 @@ class PhaseViewAdmin extends JView
     //2-3 добавление нового пользователя
     function add_coach($tpl = null)
     {
+        
+        
         global $mainframe;
         $post = JRequest::get('post');
         $userId = $post['userId'];
@@ -57,8 +59,8 @@ class PhaseViewAdmin extends JView
         }
         
         
-        
         $addCoachResult = $model->addCoach($userId, $userName);
+        
         if (!$addCoachResult)
         {
             $msg = JText::_('New coach not add');
@@ -66,9 +68,12 @@ class PhaseViewAdmin extends JView
         }
         
         $companyId = $model->getCompanyId($userId);
-        foreach ($companyId as $companyId) { $companyId = $companyId->id; }
-        $updateUserInfo = $model->updateUserInfo($companyId, $userId);
         
+        //foreach ($companyId as $companyId) { $companyId = $companyId->id; }
+        
+        $updateUserInfo = $model->updateUserInfo($companyId, $userId, 2);
+        
+
         if (!$updateUserInfo)
         {
             $msg = JText::_('New coach not add');
@@ -86,14 +91,14 @@ class PhaseViewAdmin extends JView
     //удаление тренера
     function Delete($tpl = null)
     {
+        
         $post = JRequest::get('post');
         $userId = $post['userId'];
+        $model = $this->getModel();
         
         if (!$userId)
         {
             $msg = JText::_('Coach not selected');
-            global $mainframe;
-            $mainframe->redirect('index.php?option=com_phase&controller=admin&action=show_all_coaches', $msg);
         }
         
         $model = $this->getModel();
@@ -101,6 +106,7 @@ class PhaseViewAdmin extends JView
         if ($delete_result)
         {
             $msg = JText::_('Coach delete');
+            $model->updateUserInfo2('0', $userId, '4');
         }
         else
         {

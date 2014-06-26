@@ -10,22 +10,14 @@ class PhaseModelPhase extends JModel
          parent::__construct();
      }
      
-     function isAdmin($userId)
+     function redirectTo($userId)
      {
-         /*
-        $query = "SELECT usertype FROM #__users WHERE id = $userId";
-        $result =  $this->_getList($query);
+        $db =& $this->_db;
+        $query = "SELECT systemrole FROM #__jf_persons WHERE uid = $userId";
+        $ids = $this->_getList($query);
+        $db->setQuery($query);
+        return $db->loadResult();
         
-        foreach ($result as $result) { $result = $result->usertype;}
-        if($result == 'Super Administrator')
-        {
-            return 1;
-        }
-        else
-        {
-            return 0;
-        }
-        */
      }
      
      function isCoach($userId)

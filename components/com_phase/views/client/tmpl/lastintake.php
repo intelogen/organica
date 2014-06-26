@@ -338,7 +338,7 @@ echo "  <div style='font-size:15px;color:#008;'>
         <option <?php if($evalution[madtrack][smoke][status] == 'NO'){echo 'selected ';} ?>  value='NO'>NO</option>
         </select>
             </td>
-            <td>        <input type="text" size="40"  name="evalution[madtrack][smoke][note]" value="<?php if(isset($evalution[madtrack][smoke][note])){ echo $evalution[madtrack][smoke][note];}else{echo "If YES explain";} ?>" /></td>
+            <td>        <input type="text" placeholder="строка" size="40"  name="evalution[madtrack][smoke][note]"  /></td>
         </tr>
         <tr>
             <td><?="5. Alcohol use ?"?></td>

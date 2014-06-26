@@ -11,46 +11,29 @@ class PhaseViewPhase extends JView
         $user =& JFactory:: getUser();
         $userId = $user->id;
         global $mainframe;
-        
         $model = $this->getModel();
-        $admin = $model->isAdmin($userId);
+       
+        $redirect = $model->redirectTo($userId);
         
         
         
         
-        
-        
-        
-        
-        $user =& JFactory:: getUser();
-        $userId = $user->id;
-        global $mainframe;
-
-        
-        
-        if ($userId == 430)
-        {
-        $url = "index.php?option=com_phase&controller=coach";
-        }
-        elseif ($userId == 431)
-        {
-        $url = "index.php?option=com_phase&controller=client";
-        }
-        elseif ($userId == 432)
-        {
-        $url = "index.php?option=com_phase&controller=client";
-        }
-        elseif ($userId == 435)
-        {
-        $url = "index.php?option=com_phase&controller=client";
-        }
-        elseif ($userId == 62)
+        if ($redirect == '1')
         {
         $url = "index.php?option=com_phase&controller=admin";
         }
-	else
+        elseif ($redirect == '2')
+        {
+        $url = "index.php?option=com_phase&controller=coach";
+        }
+        elseif ($redirect == '4')
+        {
+        $url = "index.php?option=com_phase&controller=client";
+        }
+	
+        else
 	{
-            $url = "index.php?option=com_phase";
+            $url = "index.php";
 	}
         $mainframe->redirect($url);
         

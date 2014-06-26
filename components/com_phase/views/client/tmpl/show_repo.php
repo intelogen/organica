@@ -34,12 +34,16 @@ $count = count($phases);
     <div class='tabContainer2' style="background-color:#E1FFE3">
         
             <?php if(isset($this->evalution[goals][weight]) && $this->evalution[goals][weight] !== ""){?>
-            <div class="value-name"><?="Target Weight: "?></div> <div class="value"><?=$this->evalution[goals][weight]." lbs."?></div>
-            <?php
+            <div class="data-result">
+                <span class="value-name"><?="Target Weight: "?></span> <span class="value"><?=$this->evalution[goals][weight]." lbs."?></span>
+            </div>
+                <?php
             }
 
             if(isset($this->evalution[goals][fat]) && $this->evalution[goals][fat] !== ""){?>
-            <div class="value-name"><?="Target Body Fat: "?></div> <div class="value"><?=$this->evalution[goals][fat]." %"?></div>
+            <div class="data-result">
+            <span class="value-name"><?="Target Body Fat: "?></span> <span class="value"><?=$this->evalution[goals][fat]." %"?></span>
+            </div>
             <?php
             }
             ?>
@@ -71,70 +75,95 @@ $count = count($phases);
     <div class='tabContainer2' style="background-color:#E1FFE3">
         
         <?php if($this->evalution[stats][sex] !== ""){ ?>
-        <div class="value-name"><?="Sex - "?></div>
-        <div class="value"><?= $this->evalution[stats][sex]?></div>
+        <div class="data-result">
+        <span class="value-name"><?="Sex - "?></span>
+        <span class="value"><?= $this->evalution[stats][sex]?></span>
+        </div>
         <?php }
             
         if($this->evalution[stats][height][0] !== "" && $this->evalution[stats][height][1] !== ""){ ?>
-        <div class="value-name"><?="Height"?></div>
-        <div class="value"><?=$this->evalution[stats][height][0]." ft ".$this->evalution[stats][height][1]." inches"?></div>
-        <?php }
+        <div class="data-result">
+        <span class="value-name"><?="Height"?></span>
+        <span class="value"><?=$this->evalution[stats][height][0]." ft ".$this->evalution[stats][height][1]." inches"?></span>
+        </div>
+            <?php }
 
         if($this->evalution[stats][weight] !== ""){ ?>
-        <div class="value-name"><?="Weight"?></div>
-        <div class="value"><?= $this->evalution[stats][weight]."lbs"?></div>
-        <?php } 
+        <div class="data-result">
+        <span class="value-name"><?="Weight"?></span>
+        <span class="value"><?= $this->evalution[stats][weight]."lbs"?></span>
+        </div>
+            <?php } 
         
         if($this->evalution[stats][fat] !== ""){ ?>
-        <div class="value-name"><?="Body Fat"?></div>
-        <div class="value"><?=$this->evalution[stats][fat]."%"?></div>
-        <?php }
+        <div class="data-result">
+        <span class="value-name"><?="Body Fat"?></span>
+        <span class="value"><?=$this->evalution[stats][fat]."%"?></span>
+        </div>
+            <?php }
         
         if($this->evalution[stats][ph] !== ""){ ?>
-        <div class="value-name"><?="PH"?></div>
-        <div class="value"><?=$this->evalution[stats][ph]."%"?></div>
-        <?php }
+        <div class="data-result">
+        <span class="value-name"><?="PH"?></span>
+        <span class="value"><?=$this->evalution[stats][ph]."%"?></span>
+        </div>
+            <?php }
         
         if($this->evalution[stats][blood_p][0] !== "" && $this->evalution[stats][blood_p][1] !== ""){ ?>
-        <div class="value-name"><?="Blood Pressure"?></div>
-        <div class="value"><?=$this->evalution[stats][blood_p][0]." / ".$this->evalution[stats][blood_p][1]?></div>
-        <?php }
+        <div class="data-result">
+        <span class="value-name"><?="Blood Pressure"?></span>
+        <span class="value"><?=$this->evalution[stats][blood_p][0]." / ".$this->evalution[stats][blood_p][1]?></span>
+        </div>
+            <?php }
         
         if($this->evalution[stats][blood_t] !== ""){ ?>
-        <div class="value-name"><?="Blood Type"?></div>
-        <div class="value"><?=$this->evalution[stats][blood_t]?></div>
-        <?php } ?>
+        <div class="data-result">
+        <span class="value-name"><?="Blood Type"?></span>
+        <span class="value"><?=$this->evalution[stats][blood_t]?></span>
+        </div>
+            <?php } ?>
     </div>
 
     <div class='contentheading'>Body Type</div>
     <div class='tabContainer2' style="background-color:#E1FFE3">
 
         <?php if($this->evalution[body_type][0] !== ""){ ?>
-        <div class="value-name"><?="1. Bone structure - "?></div>
-        <div class="value"><?=$this->evalution[body_type][0]?></div>
-        <?php }
+        <div class="data-result">
+        <span class="value-name"><?="1. Bone structure - "?></span>
+        <span class="value"><?=$this->evalution[body_type][0]?></span>
+        </div>
+            <?php }
         
         if($this->evalution[body_type][1] !== ""){ ?>
-        <div class="value-name"><?="2. Muscle type  - "?></div>
-        <div class="value"><?=$this->evalution[body_type][1]?></div>
-        <?php }
+        <div class="data-result">
+        <span class="value-name"><?="2. Muscle type  - "?></span>
+        <span class="value"><?=$this->evalution[body_type][1]?></span>
+        </div>
+            <?php }
         
         if($this->evalution[body_type][2] !== ""){?>
-        <div class="value-name"><?="3. Tendency to gain weight - "?></div>
-        <div class="value"><?=$this->evalution[body_type][2]?></div>
-        <?php }
+        <div class="data-result">
+            <span class="value-name"><?="3. Tendency to gain weight - "?></span>
+        <span class="value"><?=$this->evalution[body_type][2]?></span>
+        </div>
+            <?php }
         
         if($this->evalution[body_type][3] !== ""){ ?>
-        <div class="value-name"><?="4. Desribes the clients apperance, knowing thei age  - "?></div>
-        <div class="value"><?=$this->evalution[body_type][3];?></div>
-        <?php }
+        <div class="data-result">
+            <span class="value-name"><?="4. Desribes the clients apperance, knowing thei age  - "?></span>
+        <span class="value"><?=$this->evalution[body_type][3];?></span>
+        </div>
+            <?php }
         
         if($this->evalution[body_type][4] !== ""){ ?>
-        <div class="value-name"><?="5. Risk of heart disease - "?></div>
-        <div class="value"><?= $this->evalution[body_type][4]; ?></div>
-        <?php } ?>
-        
-        <div class="value-name"><?="6. Body shape that most resembles you own."?></div>
+        <div class="data-result">
+        <span class="value-name"><?="5. Risk of heart disease - "?></span>
+        <span class="value"><?= $this->evalution[body_type][4]; ?></span>
+        </div>
+            <?php } ?>
+        <div class="data-result">
+        <span class="value-name"><?="6. Body shape that most resembles you own."?></span>
+        </div>
         <div class="body-type-photo">
         <?php
         if($this->evalution[body_type][5] !== "" && $this->evalution[body_type][5] == "fat.png"){

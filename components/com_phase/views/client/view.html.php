@@ -4198,14 +4198,6 @@ class PhaseViewClient extends JView
         if($pid_2 == 0) {$evalution_2[name] = 'Phase 0 / Intake Survey';}
         else {$evalution_2[name] = $model->getPhaseName($pid_2);}
      
-            
-        
-        
-
-
-
-
-
         $dirty_content_1 = $model->testPhaseData($uid, $pid_1);
         
         $evalution_1[life_style] = explode(",", $dirty_content_1[0][val]);
@@ -4231,12 +4223,8 @@ class PhaseViewClient extends JView
         $evalution_1[diseases][status] = explode(",", $dirty_content_1[5][status]);
         $evalution_1[diseases][note] = explode(",", $dirty_content_1[5][note]);
         
-        
-
-
         $this->assignRef('evalution_1', $evalution_1);
         
-
         $dirty_content_2 = $model->testPhaseData($uid, $pid_2);
         
         $evalution_2[life_style] = explode(",", $dirty_content_2[0][val]);
@@ -4263,7 +4251,74 @@ class PhaseViewClient extends JView
         
         $this->assignRef('evalution_2', $evalution_2);
         
-                //Взять список симпомов
+        
+        if(count($evalution_1[body]) == 3 && count($evalution_2[body]) == 3){
+            
+            $a = "[['Weigth', 'Phase 1', 'Phase 2']";
+            $b = ",['Weigth',  ".$evalution_1[body][0].",  ".$evalution_2[body][0]."]";
+            $c = "]";    
+            $d[] = $a."".$b."".$c;
+            
+            $a2 = "[['Fat', 'Phase 1', 'Phase 2']";
+            $b2 = ",['Fat',  ".$evalution_1[body][1].",  ".$evalution_2[body][1]."]";
+            $c2 = "]";    
+            $d[] = $a2."".$b2."".$c2;
+            
+            $a3 = "[['Ph', 'Phase 1', 'Phase 2']";
+            $b3 = ",['Ph',  ".$evalution_1[body][2].",  ".$evalution_2[body][2]."]";
+            $c3 = "]";    
+            $d[] = $a3."".$b3."".$c3;
+            
+            $this->assignRef('charts', $d);
+        }
+        
+        
+        
+        if($trackingStart1 && $trackingStart2){
+            
+            $vari = explode(",", $trackingStart1->cats);
+            foreach ($vari as $value) {
+                $resi[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
+            }
+            
+            
+            $vari2 = explode(",", $trackingStart1->opp_vals);
+            foreach ($vari2 as $value) {
+               $resi2[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
+            }
+            $vari3 = explode(",", $trackingStart2->opp_vals);
+            foreach ($vari3 as $value) {
+               $resi3[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
+            }
+            for($i = 0; $i < count($resi); $i++){
+                $ti = ",['".$resi[$i]."', ".$resi2[$i].", ".$resi3[$i]."]";
+                $bi = $bi."".$ti;
+            }
+            $ai = "[['step', '".$this->evalution_1[name]."', '".$this->evalution_2[name]."']";
+            $ci = "]";    
+            $di = $ai."".$bi."".$ci;
+            $this->assignRef('charts_life', $di);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //Взять список симпомов
         $list[symptomList] = $model->getSymptomList();
 
         
@@ -4274,8 +4329,16 @@ class PhaseViewClient extends JView
         $list[diseasesList] = $model->getDiseasesList();
 
         $this->assignRef('list', $list);
-
+        
+       
 
         parent::display($tpl);
     }
-}
+    
+    
+    
+
+    
+ 
+            
+    }

@@ -1,74 +1,11 @@
 
-<?php
-
-                    //$this->trackingStart1->cats
-                    //$this->trackingStart1->opp_vals
-
-                       $var = explode(",", $this->trackingStart1->cats);
-
-                       foreach ($var as $value) {
-                           $res[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
-                       }
-                       
-
-
-                        $var2 = explode(",", $this->trackingStart1->opp_vals);
-                        foreach ($var2 as $value) {
-                           $res2[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
-                        }
-                        
-                        $var3 = explode(",", $this->trackingStart2->opp_vals);
-                        foreach ($var3 as $value) {
-                           $res3[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
-                        }
-                        
-                        
-
-
-
-
-
-
-
-                        for($i = 0; $i < count($res); $i++){
-                            $t = ",['".$res[$i]."', ".$res2[$i].", ".$res3[$i]."]";
-                            $b = $b."".$t;
-                        }
-                        
-                        $a = "[['step', '".$this->evalution_1[name]."', '".$this->evalution_2[name]."']";
-                        
-                        //$b = ",['1',  100,  100]";
-                        
-                        $c = "]";    
-                        
-                        $d = $a."".$b."".$c;
-                        
-                        
-    
-                        
-       
-                           
-?>
-
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
-        /*
-        $(function(){
-                                
-            var x = "1";
-        
-        
-            //проверка
-            if(x.length > 0) console.log('X = Селектор есть, кол-во = '+ x.length);
-            else console.log('X = Селектора нет');
-            console.log(x);
-        });
-      */
-
+     
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
         function drawChart() {
-        var data = google.visualization.arrayToDataTable(<?=$d?>);
+        var data = google.visualization.arrayToDataTable(<?=$this->charts_life?>);
         
         
         
@@ -84,8 +21,55 @@
       
     </script>
 
+    
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(<?=$this->charts[0]?>);
 
+        var options = {
+          title: 'Weight Compair',
+          //hAxis: {title: 'Year', titleTextStyle: {color: 'red'}}
+        };
 
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div2'));
+        chart.draw(data, options);
+      }
+    </script>
+    
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(<?=$this->charts[1]?>);
+
+        var options = {
+          title: 'Weight Compair',
+          //hAxis: {title: 'Year', titleTextStyle: {color: 'red'}}
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div3'));
+        chart.draw(data, options);
+      }
+    </script>
+
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(<?=$this->charts[2]?>);
+
+        var options = {
+          title: 'Ph Compair',
+          //hAxis: {title: 'Year', titleTextStyle: {color: 'red'}}
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div4'));
+        chart.draw(data, options);
+      }
+    </script>
+    
 
 
 
@@ -180,6 +164,7 @@ if($this->list)
                 </tr>
 
             </table> 
+                            
             </div>
         </td>
         <td>
@@ -204,7 +189,15 @@ if($this->list)
             </div>
         </td>
     </tr>
-    
+    <tr>
+        <td colspan="2">
+    <div class="body-chart">
+        <div id="chart_div2" style="width: 200px; height: 400px;"></div>
+        <div id="chart_div3" style="width: 200px; height: 400px;"></div>
+        <div id="chart_div4" style="width: 200px; height: 400px;"></div>
+    </div>
+        </td>
+    </tr>
     <tr>
         <tr><td colspan="2"><div class='contentheading'>Lifestyle analysis:</div></td></tr>
         <td>
@@ -324,7 +317,7 @@ if($this->list)
             ?>
         </td>
     </tr>        
-    <tr><td colspan="2"><div id="chart_div" style="width: 750px; height: 500px;"></div></td></tr>
+    <tr><td colspan="2"><div id="chart_div" style="width: 750px; height: 300px;"></div></td></tr>
     <tr>
         <td colspan="2"><div class='contentheading'>Current Photo</div></td>
     </tr>

@@ -1,5 +1,5 @@
 <?php defined( '_JEXEC' ) or die( 'Restricted access' ); ?>
-wwwwwwwwww
+
 <?php
 $phases = $this-> phases;
 $count = count($phases);
@@ -31,7 +31,7 @@ $count = count($phases);
 
     
     <div class='contentheading'>Client goals</div>
-    <div class='tabContainer2' style="background-color:#E1FFE3">
+    <div class='goals'>
         
             <?php if(isset($this->evalution[goals][weight]) && $this->evalution[goals][weight] !== ""){?>
             <div class="data-result">
@@ -72,7 +72,7 @@ $count = count($phases);
     </div>
 
     <div class='contentheading'>Body stats</div>
-    <div class='tabContainer2' style="background-color:#E1FFE3">
+    <div class='body-stats'>
         
         <?php if($this->evalution[stats][sex] !== ""){ ?>
         <div class="data-result">
@@ -125,7 +125,7 @@ $count = count($phases);
     </div>
 
     <div class='contentheading'>Body Type</div>
-    <div class='tabContainer2' style="background-color:#E1FFE3">
+    <div class='body-type'>
 
         <?php if($this->evalution[body_type][0] !== ""){ ?>
         <div class="data-result">
@@ -179,7 +179,7 @@ $count = count($phases);
 </div>
     
     <div class='contentheading'>Lifestyle analysis</div>    
-    <div class='tabContainer2' style="background-color:#E1FFE3">    
+    <div class='lifestyle'>    
 
     <?php
     // здесь были вопросы с галочками (отключены в виде)
@@ -338,7 +338,7 @@ $count = count($phases);
     <?php } ?>
         
     <div class='contentheading'>Current Photo</div>
-    <div class='tabContainer2' style="background-color:#E1FFE3">
+    <div class='current-photo'>
 
         <?php
         if($this->evalution[file][0] !== null && $this->evalution[file][0] !== "")
@@ -374,7 +374,7 @@ $count = count($phases);
     </div>
 
     <div class='contentheading'>Medical Tracking</div>
-    <div class='tabContainer2' style="background-color:#E1FFE3">
+    <div class='medical-tracking' style="background-color:#E1FFE3">
     <div class='tabContainer2' style="background-color:#E1FFE3">
     <?php if($this->evalution[madtrack][exem] && $this->evalution[madtrack][exem] !== null && $this->evalution[madtrack][exem] !== ""){?>
     <div class='value-name'><?="1. Your last physical exam was - "?></div>

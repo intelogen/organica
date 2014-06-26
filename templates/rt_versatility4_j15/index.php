@@ -358,7 +358,6 @@ $ms_module10				= $this->params->get("msModule10", "user20");
 								</div></div>
 								<?php endif; ?>
 								<div id="maincontent-block">
-
                                     <jdoc:include type="component" />
 									<jdoc:include type="message" />
 								</div>

@@ -51,19 +51,17 @@
 <?php endif; ?>
 <?php if($enable_fontspans=="true" and $js_compatibility=="false") :?>
 <script type="text/javascript" src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template?>/js/rokfonts.js"></script>
-<script type="text/javascript">
-	window.addEvent('domready', function() {
-		var modules = ['module','moduletable', 'module-menu', 'module-hilite1', 'moduletable-hilite1', 'module-hilite2', 'moduletable-hilite2', 'module-hilite3', 'moduletable-hilite3', 'module-hilite4', 'moduletable-hilite4', 'module-hilite5', 'moduletable-hilite5', 'module-hilite6', 'moduletable-hilite6', 'module-hilite7', 'moduletable-hilite7', 'module-hilite8', 'moduletable-hilite8', 'module-hilite9', 'moduletable-hilite9', 'module-clean', 'moduletable-clean', 'submenu-block', 'moduletable_menu'];
-		var header = "h3";
-		RokBuildSpans(modules, header);
-	});
-</script>
 <?php endif; ?>
 <?php if($mtype=="moomenu" and $js_compatibility=="false") :?>
 <script type="text/javascript" src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template?>/js/rokmoomenu.js"></script>
 <script type="text/javascript" src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template?>/js/mootools.bgiframe.js"></script>
 <script type="text/javascript">
 window.addEvent('domready', function() {
+
+    if (){
+        console.log($$('#system-message'));
+    }
+
 	new Rokmoomenu($E('ul.menutop '), {
 		bgiframe: <?php echo $moo_bgiframe; ?>,
 		delay: <?php echo $moo_delay; ?>,

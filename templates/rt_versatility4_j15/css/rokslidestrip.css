@@ -484,6 +484,7 @@ form .user-data{
 }
 .tabContainer2{
     clear: none;
+    background: #fff !important;
 }
 .tabContainer2 > form[enctype="multipart/form-data"] > .tabContainer2{
     background: #fff !important;
@@ -665,6 +666,8 @@ ul.menu li a:hover{
 }
 #sub-menu ul.menusub li a{
     padding-right: 0;
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 #sub-menu ul.menusub li:first-child a:after{
     content: '';
@@ -674,10 +677,13 @@ ul.menu li a:hover{
     height: 0;
     border-left: 13px solid transparent;
     border-top: 8px solid #326AA3;
-    left: 0px;
-    bottom: -8px;
+    left: 0;
+    bottom: -15px;
 }
 #sub-menu ul.menusub li:first-child a:hover:after{
+    border-top-color: #1b3957;
+}
+#sub-menu ul.menusub li.active:first-child a:after{
     border-top-color: #1b3957;
 }
 #sub-menu ul.menusub li a span{
@@ -773,16 +779,16 @@ form#form-login ul{
     position: absolute;
     width: 0;
     height: 0;
-    border-right: 14px solid transparent;
+    border-right: 8px solid transparent;
     border-top: 8px solid #326AA3;
-    right: -14px;
+    right: -8px;
     bottom: 0;
 }
 .nsp_main_portal_mode2 .nsp_bottom_interface .next:after{
-    border-left: 14px solid transparent;
+    border-left: 8px solid transparent;
     border-right: medium none;
     bottom: 0;
-    left: -14px;
+    left: -8px;
     right: auto;
 }
 .nsp_main_portal_mode2 .nsp_bottom_interface .prev:hover:after, .nsp_main_portal_mode2 .nsp_bottom_interface .next:hover:after{
@@ -836,4 +842,38 @@ form#form-login ul{
 }
 .nsp_text_wrap{
     text-align: left;
+}
+.buttonheading{
+    display: inline-block;
+    float: right;
+    position: absolute;
+    top: -25px;
+    right: 0;
+    z-index: 20;
+}
+.buttonheading:first-child{
+    right: 40px;
+}
+.buttonheading:nth-child(2){
+    right: 20px;
+}
+.buttonheading:nth-child(3){
+    right: 0px;
+}
+#system-message{
+    left: 0;
+    margin: 0;
+    position: fixed;
+    text-align: center;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+    box-shadow: 0 0 3px rgba(0,0,0,0.5);
+}
+
+#system-message dd ul{
+    border-color:  #de7a7b;
+    margin: 0;
+    background-color: #e6c0c0;
+    color: #c00;
 }

@@ -158,9 +158,12 @@ else
 ?>
 <ul>
 <?php
-if(!result){
-foreach ($this->list[symptomList] as $value)
+if(result){
+    
+    foreach ($this->list[symptomList] as $value)
 {
+    
+
     if(in_array($value[id], $result))
     {
     ?>

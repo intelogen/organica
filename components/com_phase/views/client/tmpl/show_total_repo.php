@@ -90,8 +90,12 @@ for($i = 0; count($status) > $i; $i++)
 
 
 $all = count($symptoms);
-$finish = count($result);
 
+$finish = count($result);
+if($symptoms[0] == ""){
+    echo "<div class='contentheading'> YOU DON'T HAVE ANY SYMPTOMS</div>";
+}
+else{
 if($finish == $all)
 {
     echo "<div class='contentheading'> CONGRATULATIONS all the symptoms FINISHED !</div>";
@@ -101,9 +105,9 @@ elseif($finish > 0)
     echo "<div class='contentheading'>CONGRATULATIONS ".$finish." out of ".$all." symptoms FINISHED !</div>";
 }
 else{
-    echo "<div class='contentheading'>NO ONE SYMPTON IS FINISHID</div>";
+    echo "<div class='contentheading'>NO ONE SYMPTOM IS FINISHID</div>";
 }
-
+}
 ?>
 
 <ul>
@@ -153,6 +157,9 @@ for($i = 0; count($medtrack_status) > $i; $i++)
 
 $medtrack_all = count($medtrack_symptoms);
 $medtrack_finish = count($medtrack_result);
+if($medtrack_symptoms[0] == ""){
+    echo "<div class='contentheading'> YOU DON'T HAVE ANY MEDICAL PREPARATIONS</div>";
+}else{
 if($medtrack_finish == $all)
 {
     echo "<div class='contentheading'> CONGRATULATIONS all the medical preparations FINISHED !</div>";
@@ -163,6 +170,7 @@ elseif($medtrack_finish > 0)
 }
 else{
     echo "<div class='contentheading'>NO ONE Medical preparations IS FINISHID</div>";
+}
 }
 ?>
 <table>
@@ -205,7 +213,11 @@ for($i = 0; count($diseases_status) > $i; $i++)
 }
 
 $diseases_all = count($symptoms);
-$diseases_finish = count($result);
+
+$diseases_finish = count($diseases_status );
+if($diseases_status[0] == ""){
+        echo "<div class='contentheading'> YOU DON'T HAVE ANY DISEASES</div>";
+}else{
 if($diseases_finish == $diseases_all)
 {
     echo "<div class='contentheading'> CONGRATULATIONS all diseases  FINISHED !</div>";
@@ -217,6 +229,8 @@ elseif($diseases_finish > 0)
 else{
     echo "<div class='contentheading'>NO ONE Medical preparations IS FINISHID</div>";
 }
+}
+
 ?>
 <table>
 <?php

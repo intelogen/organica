@@ -448,7 +448,7 @@ else
 </div>
 
 <div class='contentheading'>Diseases Tracking</div>
-<div class='tabContainer2' style="background-color:#E1FFE3">
+<div class='tabContainer2 horizontal-shadow' style="background-color:#E1FFE3">
 
 <table border="1">
     <tr><td>№</td><td>Name</td><td>Status</td><td>Note</td></tr>

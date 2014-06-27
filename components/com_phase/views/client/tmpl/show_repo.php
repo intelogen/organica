@@ -185,63 +185,6 @@ $count = count($phases);
     <div class='contentheading'>Lifestyle analysis</div>    
     <div class='lifestyle horizontal-shadow'>
 
-    <?php
-    // здесь были вопросы с галочками (отключены в виде)
-    /*
-    if($this->questionList):
-    ?>
-            <table class="allleft">
-            <tr>
-
-            <?php
-            $cnt = 1;
-
-                foreach($this->questionList as $value):
-
-
-               ?>
-                    <td style='border:1px solid #EEE;padding:3px;' align="center"><input type="checkbox" name="evalution[life_style][]"<?php if(isset($evalution[life_style])){ if(in_array($value['id'],$evalution[life_style])) {echo "checked";} } ?> value="<?=$value['id'];?>"></td>
-                    <td style='border:1px solid #EEE;padding:3px;'><?=$value['question'];?></td>
-                <?php
-
-
-    <div class='contentheading'>Lifestyle analysis</div>
-    <div class='tabContainer2' style="background-color:#E1FFE3">
-        <?php
-        if($this->questionList):
-            ?>
-            <table class="allleft">
-                <tr>
-
-                    <?php
-                    $cnt = 1;
-
-                    foreach($this->questionList as $value):
-
-
-                        ?>
-                        <td style='border:1px solid #EEE;padding:3px;' align="center"><input type="checkbox" name="evalution[life_style][]"<?php if(isset($evalution[life_style])){ if(in_array($value['id'],$evalution[life_style])) {echo "checked";} } ?> value="<?=$value['id'];?>"></td>
-                        <td style='border:1px solid #EEE;padding:3px;'><?=$value['question'];?></td>
-                        <?php
-
-                        if($cnt % 2 == 0) {
-                            echo "</tr><tr>\n";
-                        }
-                        $cnt++;
-                    endforeach;
-                    ?>
-                </tr>
-            </table>
-        <?php
-        endif;
-        ?>
-
-            </tr>
-        </table>
-    <?php
-    endif;
-    */
-    ?>
 
     <?php
     if($this->qAnswers && $this->qAnswers[0][answer] !== ""){
@@ -271,7 +214,7 @@ $count = count($phases);
         $cnt = array_combine( $res, $res2);?>
 
         <div class='contentheading'><?="Lifestyle analysis result:"?></div>
-
+        <div class="chart-desc">
         <?php
         foreach ($cnt as $key => $value){
             if($value > 75){
@@ -287,8 +230,13 @@ $count = count($phases);
                 $val = " - BAD";
             }
             else{$val = "So-so";}
-            echo "<div class='value-name'>".$key." - ".$val."</div>";
+
+            echo "<div class='chart-element'><span class='chart-element-name'>".$key."</span><span class='chart-element-val'>".$val."</span></div>";
+
         }
+        ?>
+            </div>
+            <?php
 
     } ?></div>
     <?php

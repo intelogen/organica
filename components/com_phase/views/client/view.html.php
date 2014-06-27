@@ -3978,9 +3978,9 @@ class PhaseViewClient extends JView
     {
         $model = $this->getModel();
         $uid = JRequest::getvar('c');
-/*        
+       
         $result = $model->getAllData($uid);
-        
+                 
         if($result && $result !== null && $result[0] !== "")
         {
             foreach ($result as $value){
@@ -4021,15 +4021,17 @@ class PhaseViewClient extends JView
                     $content[diseases][note] = explode(",", $value[note]);
                 }
             }
-        }
         
-        $this->assignRef('content', $content);
-*/
-
+        $this->assignRef('content', $content);    
+        }
+  
 
         //первичная инфа(goals & pid=0)
         $inteke = $model->getFirstContent($uid);
-        
+
+
+
+
         if(count($inteke) !== 0 && $inteke !== null && $inteke)
             {
                 
@@ -4071,7 +4073,7 @@ class PhaseViewClient extends JView
             global $mainframe;
             $mainframe->redirect('index.php?option=com_phase&controller=client&action=lastintake',"Enter intake data");
         }
-            
+         
         // id фаз
         $phases_id = $model->getPhasesId($uid);
         
@@ -4178,7 +4180,7 @@ class PhaseViewClient extends JView
         $this->assignRef('list', $list);
 
         $this->assignRef('content', $content);
-
+        
         parent::display($tpl);
     }
     
@@ -4299,13 +4301,134 @@ class PhaseViewClient extends JView
             $di = $ai."".$bi."".$ci;
             $this->assignRef('charts_life', $di);
         }
+		
+		
+		if(count($evalution_1[symptoms][status] > 0) && $evalution_1[symptoms][status][0] !== "" ){
+			$cnt_s1_new = 0;
+			$cnt_s1_progres = 0;
+			$cnt_s1_fin = 0;
+			foreach($evalution_1[symptoms][status] as $val){
+				if($val == "finished"){$cnt_s1_fin++;}
+				elseif($val == "new"){$cnt_s1_new++;}
+				else{$cnt_s1_progres++;}
+			}
+			
+			$s1 =	"[
+					['Task', 'cnt'],
+					['New',    ".$cnt_s1_new."],
+					['In progress',    ".$cnt_s1_progres."],
+					['Finished',     ".$cnt_s1_fin."]
+					]";
+					
+            $this->assignRef('s1', $s1);
+		}
+		
+		if(count($evalution_2[symptoms][status] > 0) && $evalution_2[symptoms][status][0] !== "" ){
+			$cnt_s2_new = 0;
+			$cnt_s2_progres = 0;
+			$cnt_s2_fin = 0;
+			foreach($evalution_2[symptoms][status] as $val){
+				if($val == "finished"){$cnt_s2_fin++;}
+				elseif($val == "new"){$cnt_s2_new++;}
+				else{$cnt_s2_progres++;}
+			}
+			
+			$s2 =	"[
+					['Task', 'cnt'],
+					['New',    ".$cnt_s2_new."],
+					['In progress',    ".$cnt_s2_progres."],
+					['Finished',     ".$cnt_s2_fin."]
+					]";
+					
+			
+            $this->assignRef('s2', $s2);
+		}
+		
 
+		
+		if(count($evalution_1[drug][status] > 0) && $evalution_1[drug][status][0] !== "" ){
+			$cnt_m1_new = 0;
+			$cnt_m1_progres = 0;
+			$cnt_m1_fin = 0;
+			foreach($evalution_1[drug][status] as $val){
+				if($val == "finished"){$cnt_m1_fin++;}
+				elseif($val == "new"){$cnt_m1_new++;}
+				else{$cnt_m1_progres++;}
+			}
+			
+			$m1 =	"[
+					['Task', 'cnt'],
+					['New',    ".$cnt_m1_new."],
+					['In progress',    ".$cnt_m1_progres."],
+					['Finished',     ".$cnt_m1_fin."]
+					]";
+					
+            $this->assignRef('m1', $m1);
+		}
+		
+		if(count($evalution_2[drug][status] > 0) && $evalution_2[drug][status][0] !== "" ){
+			$cnt_m2_new = 0;
+			$cnt_m2_progres = 0;
+			$cnt_m2_fin = 0;
+			foreach($evalution_2[drug][status] as $val){
+				if($val == "finished"){$cnt_m2_fin++;}
+				elseif($val == "new"){$cnt_m2_new++;}
+				else{$cnt_m2_progres++;}
+			}
+			
+			$m2 =	"[
+					['Task', 'cnt'],
+					['New',    ".$cnt_m2_new."],
+					['In progress',    ".$cnt_m2_progres."],
+					['Finished',     ".$cnt_m2_fin."]
+					]";
+					
+			
+            $this->assignRef('m2', $m2);
+		}
 
+		
 
-
-
-
-
+		if(count($evalution_1[diseases][status] > 0) && $evalution_1[diseases][status][0] !== "" ){
+			$cnt_d1_new = 0;
+			$cnt_d1_progres = 0;
+			$cnt_d1_fin = 0;
+			foreach($evalution_1[diseases][status] as $val){
+				if($val == "finished"){$cnt_d1_fin++;}
+				elseif($val == "new"){$cnt_d1_new++;}
+				else{$cnt_d1_progres++;}
+			}
+			
+			$d1 =	"[
+					['Task', 'cnt'],
+					['New',    ".$cnt_d1_new."],
+					['In progress',    ".$cnt_d1_progres."],
+					['Finished',     ".$cnt_d1_fin."]
+					]";
+					
+            $this->assignRef('d1', $d1);
+		}
+		
+		if(count($evalution_2[diseases][status] > 0) && $evalution_2[diseases][status][0] !== "" ){
+			$cnt_d2_new = 0;
+			$cnt_d2_progres = 0;
+			$cnt_d2_fin = 0;
+			foreach($evalution_2[diseases][status] as $val){
+				if($val == "finished"){$cnt_d2_fin++;}
+				elseif($val == "new"){$cnt_d2_new++;}
+				else{$cnt_d2_progres++;}
+			}
+			
+			$d2 =	"[
+					['Task', 'cnt'],
+					['New',    ".$cnt_d2_new."],
+					['In progress',    ".$cnt_d2_progres."],
+					['Finished',     ".$cnt_d2_fin."]
+					]";
+					
+			
+            $this->assignRef('d2', $d2);
+		}
 
 
 

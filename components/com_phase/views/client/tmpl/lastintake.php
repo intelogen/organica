@@ -318,7 +318,7 @@ echo "  <div style='font-size:15px;color:#008;'>
                     <option <?php if($evalution[madtrack][treatment][status] == 'NO'){echo 'selected ';} ?>   value='NO'>NO</option>
                 </select> 
             </td>
-            <td><input type="text" name="evalution[madtrack][treatment][note]" size="40"  value="<?php if(isset($evalution[madtrack][treatment][note])){ echo $evalution[madtrack][treatment][note];}else{echo "If YES explain";} ?>" /></td>
+            <td><input type="text" placeholder="If YES explain" name="evalution[madtrack][treatment][note]" size="40" /></td>
         </tr>
         <tr>
             <td><?="3. Have you ever had any seriousillness or operations ?"?></td>
@@ -328,7 +328,7 @@ echo "  <div style='font-size:15px;color:#008;'>
         <option <?php if($evalution[madtrack][operations][status] == 'NO'){echo 'selected ';} ?>  value='NO'>NO</option>
         </select>
             </td>
-            <td>        <input type="text" size="40"  name="evalution[madtrack][operations][note]" value="<?php if(isset($evalution[madtrack][operations][note])){ echo $evalution[madtrack][operations][note];}else{echo "If YES explain";} ?>" /></td>
+            <td>        <input type="text" placeholder="If YES explain" size="40"  name="evalution[madtrack][operations][note]"  /></td>
         </tr>
         <tr>
             <td><?="4. Do you smoke ?"?></td>
@@ -338,7 +338,7 @@ echo "  <div style='font-size:15px;color:#008;'>
         <option <?php if($evalution[madtrack][smoke][status] == 'NO'){echo 'selected ';} ?>  value='NO'>NO</option>
         </select>
             </td>
-            <td>        <input type="text" placeholder="строка" size="40"  name="evalution[madtrack][smoke][note]"  /></td>
+            <td>        <input type="text" placeholder="If YES explain" size="40"  name="evalution[madtrack][smoke][note]"  /></td>
         </tr>
         <tr>
             <td><?="5. Alcohol use ?"?></td>
@@ -349,7 +349,7 @@ echo "  <div style='font-size:15px;color:#008;'>
 
         </select>
             </td>
-            <td>        <input type="text" size="40"  name="evalution[madtrack][alcohol][note]" value="<?php if(isset($evalution[madtrack][alcohol][note])){ echo $evalution[madtrack][alcohol][note];}else{echo "If YES explain";} ?>" /></td>
+            <td>        <input type="text" placeholder="If YES explain" size="40"  name="evalution[madtrack][alcohol][note]" /></td>
         </tr>
         <tr>
             <td><?="6. Do you use cocaine or drugs ?"?></td>
@@ -359,7 +359,7 @@ echo "  <div style='font-size:15px;color:#008;'>
                 <option <?php if($evalution[madtrack][drugs][status] == 'NO'){echo 'selected ';} ?> value='NO'>NO</option>
                 </select>
             </td>
-            <td><input type="text" size="40" name="evalution[madtrack][drugs][note]" value="<?php if(isset($evalution[madtrack][drugs][note])){ echo $evalution[madtrack][drugs][note];}else{echo "If YES explain";} ?>" /></td>
+            <td><input type="text" placeholder="If YES explain" size="40" name="evalution[madtrack][drugs][note]" /></td>
         </tr>
     </table>
     

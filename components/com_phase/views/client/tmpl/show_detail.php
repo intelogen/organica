@@ -50,61 +50,7 @@ foreach ($this->content as $value){
     
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable(<?=$d?>);
 
-        var options = {
-          title: 'Weight History',
-          //hAxis: {title: 'Date',  titleTextStyle: {color: '#333'}},
-          //vAxis: {minValue: 300},
-		  //vAxis: {maxValue: 1520}
-		  
-        };
-
-        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-    </script>
-
-    <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable(<?=$d1?>);
-
-        var options = {
-          title: 'Fat History',
-          //hAxis: {title: 'Date',  titleTextStyle: {color: '#333'}},
-          //vAxis: {minValue: 0}
-		  
-        };
-
-        var chart = new google.visualization.AreaChart(document.getElementById('chart_div_2'));
-        chart.draw(data, options);
-      }
-    </script>
-
-    <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable(<?=$d2?>);
-
-        var options = {
-          title: 'PH History',
-         // hAxis: {title: 'Date',  titleTextStyle: {color: '#333'}},
-          //vAxis: {minValue: 0}
-		  
-        };
-
-        var chart = new google.visualization.AreaChart(document.getElementById('chart_div_3'));
-        chart.draw(data, options);
-      }
-    </script>
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
     
 <?php
@@ -210,21 +156,24 @@ else
 }
 
 ?>
-<table>
+<ul>
 <?php
-if(!result){
-foreach ($this->list[symptomList] as $value)
+if(result){
+    
+    foreach ($this->list[symptomList] as $value)
 {
+    
+
     if(in_array($value[id], $result))
     {
     ?>
-        <tr><?="<td>".$value[name]."</td><td> - FINISHED ! </td>"?></tr>
+        <li><div><?="<span>".$value[name]."</span><span> - FINISHED ! </span>"?></div></li>
     <?php
     }
 }
             }
 ?>
-</table>
+</ul>
 </div>
 
 
@@ -370,3 +319,60 @@ foreach ($this->content as $value)
 }
 
 ?>
+
+
+
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(<?=$d?>);
+
+        var options = {
+          title: 'Weight History',
+          //hAxis: {title: 'Date',  titleTextStyle: {color: '#333'}},
+          //vAxis: {minValue: 300},
+		  //vAxis: {maxValue: 1520}
+		  
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(<?=$d1?>);
+
+        var options = {
+          title: 'Fat History',
+          //hAxis: {title: 'Date',  titleTextStyle: {color: '#333'}},
+          //vAxis: {minValue: 0}
+		  
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div_2'));
+        chart.draw(data, options);
+      }
+    </script>
+
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(<?=$d2?>);
+
+        var options = {
+          title: 'PH History',
+         // hAxis: {title: 'Date',  titleTextStyle: {color: '#333'}},
+          //vAxis: {minValue: 0}
+		  
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div_3'));
+        chart.draw(data, options);
+      }
+    </script>

@@ -104,6 +104,9 @@ foreach ($this->content as $value){
         chart.draw(data, options);
       }
     </script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+    
 <?php
 
 

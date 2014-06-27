@@ -57,12 +57,7 @@
 <script type="text/javascript" src="<?php echo $this->baseurl; ?>/templates/<?php echo $this->template?>/js/mootools.bgiframe.js"></script>
 <script type="text/javascript">
 window.addEvent('domready', function() {
-
-    if (){
-        console.log($$('#system-message'));
-    }
-
-	new Rokmoomenu($E('ul.menutop '), {
+    new Rokmoomenu($E('ul.menutop '), {
 		bgiframe: <?php echo $moo_bgiframe; ?>,
 		delay: <?php echo $moo_delay; ?>,
 		animate: {
@@ -108,3 +103,8 @@ window.addEvent('domready', function() {
 <?php if((rok_isIe(6) or rok_isIe(7)) and ($mtype=="suckerfish" or $mtype=="splitmenu")) :
   echo "<script type=\"text/javascript\" src=\"" . $this->baseurl . "/templates/" . $this->template . "/js/ie_suckerfish.js\"></script>\n";
 endif; ?>
+<script>
+    $(document).ready(function(){
+        $('.highcharts-series').mouseover($(this).css('background','#000'));
+    });
+</script>

@@ -23,31 +23,31 @@ input[type="text"], input[type="password"]{
 s#form-login div input.button:active,
 .input .button:active,
 .button:active{
-    background: #1b3957 !important;
-    border-bottom: 3px solid #1b3957 !important;
+    background: #006064 !important;
+    border-bottom: 3px solid #006064 !important;
 }
 #form-login div input[type="submit"]:hover,
 s#form-login div input.button:hover,
 .input .button:hover,
 .button{
     color: #fff !important;
-    background: #326aa3 !important;);
+    background: #0097a7 !important;);
     border: none !important;
-    border-bottom: 3px solid #1b3957 !important;
+    border-bottom: 3px solid #006064 !important;
 }
 s#form-login div input[type="submit"],
 s#form-login div input.button,
 .input .button,
 .button{
     border: none !important;
-    border-bottom: 3px solid #326aa3 !important;
-    background-color: #0094D6 !important;
+    border-bottom: 3px solid #0097a7 !important;
+    background-color: #00bcd4 !important;
     color: #fff;
     height: 34px !important;
     outline: none !important;
     cursor: pointer;
     padding: 0 5px;
-    font-family: Helvetica, ​Arial, ​FreeSans, ​sans-serif;
+    font-family: Helvetica, ?Arial, ?FreeSans, ?sans-serif;
     font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
@@ -257,7 +257,7 @@ form .order{
 #horiz-menu{
     /*z-index: 9999;*/
     position: relative;
-    background: #0094D6;
+    background: #00bcd4;
 }
 .menustyle3 #horiz-menu li.sfHover,
 .menustyle3 #horiz-menu li.active a,
@@ -281,10 +281,10 @@ form .order{
 .menustyle3 #sub-menu li.active a,
 .menustyle3 #sub-menu li.active .separator,
 .menustyle3 #sub-menu li.active{
-    background: #326aa3 !important;
+    background: #0097a7 !important;
 }
 .menustyle3 #sub-menu li:hover{
-    background: #0094D6;
+    background: #00bcd4;
 }
 .menustyle3 #sub-menu li a span{
     border: 1px solid transparent;
@@ -292,13 +292,13 @@ form .order{
     margin: 0;
 }
 .menustyle3 #sub-menu li:hover a{
-    background-color: #326aa3;
+    background-color: #0097a7;
 }
 .menutop li:hover{
-    background: #326aa3!important;
+    background: #0097a7!important;
 }
 .menustyle3 #horiz-menu li.active{
-    background: #326aa3 !important;
+    background: #0097a7 !important;
 }
 #main-body{
     margin-bottom: 0 !important;
@@ -490,9 +490,7 @@ form .user-data{
     background: #fff !important;
 }
 #bs_container{
-    border-left: 1px solid #ccc;
-    border-right: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
+    border: none;
     width: calc(100% - 2px) !important;
 }
 .highcharts-container{
@@ -500,6 +498,9 @@ form .user-data{
     height: calc(100% - 1px) !important;
     left: 1px !important;
     top: 0 !important;
+}
+.highcharts-series rect{
+    background: #000 !important;
 }
 .phase-navigation a:hover{
     text-decoration: none;
@@ -525,7 +526,7 @@ form .user-data{
     padding: 0;
 }
 .phase-navigation a{
-    background: #0094D6;
+    background: #00bcd4;
     display: inline-block;
     margin: 1px 1px 9px 1px;
     padding: 5px 10px 5px 10px;
@@ -538,7 +539,7 @@ form .user-data{
     position: relative;
 }
 .phase-navigation a:hover:after{
-    border-top-color: #1b3957;
+    border-top-color: #006064;
 }
 .phase-navigation a:after{
     content: '';
@@ -547,12 +548,12 @@ form .user-data{
     width: 0;
     height: 0;
     border-left: 14px solid transparent;
-    border-top: 8px solid #326AA3;
+    border-top: 8px solid #0097a7;
     left: -1px;
     bottom: -8px;
 }
 .phase-navigation a:hover{
-    background: #326AA3;
+    background: #0097a7;
 }
 .phase-navigation{
     padding: 0 !important;
@@ -594,11 +595,11 @@ form .user-data{
 }
 
 ul.menu li a:hover:after{
-    border-top-color: #1b3957;
+    border-top-color: #006064;
 }
 ul.menu li a:after{
     border-right: 14px solid transparent;
-    border-top: 8px solid #326aa3;
+    border-top: 8px solid #0097a7;
     bottom: -7px;
     content: "";
     display: block;
@@ -608,7 +609,7 @@ ul.menu li a:after{
     width: 0;
 }
 ul.menu li a {
-    background: none repeat scroll 0 0 #0094d6;
+    background: none repeat scroll 0 0 #00bcd4;
     margin: 1px 0 9px 0;
     padding: 4px 10px;
     width: 202px;
@@ -616,7 +617,7 @@ ul.menu li a {
     overflow: visible;
 }
 ul.menu li a:hover{
-    background-color: #326aa3;
+    background-color: #0097a7;
 }
 .moduletable_menu{
     margin: 0;
@@ -659,10 +660,9 @@ ul.menu li a:hover{
     border: none !important;
 }
 #sub-menu ul.menusub li{
-    background-color: #0094D6;
+    background-color: #00bcd4;
     margin: 0;
     padding: 0;
-    border-top: 1px solid #fff;
 }
 #sub-menu ul.menusub li a{
     padding-right: 0;
@@ -676,15 +676,15 @@ ul.menu li a:hover{
     width: 0;
     height: 0;
     border-left: 13px solid transparent;
-    border-top: 8px solid #326AA3;
+    border-top: 8px solid #0097a7;
     left: 0;
-    bottom: -15px;
+    bottom: -8px;
 }
 #sub-menu ul.menusub li:first-child a:hover:after{
-    border-top-color: #1b3957;
+    border-top-color: #006064;
 }
 #sub-menu ul.menusub li.active:first-child a:after{
-    border-top-color: #1b3957;
+    border-top-color: #006064;
 }
 #sub-menu ul.menusub li a span{
     padding-right: 10px;
@@ -694,8 +694,15 @@ ul.menu li a:hover{
     border-right: none;
 }
 .menusub{
+    background: none repeat scroll 0 0 #00bcd4;
+    border-top: 1px solid #fff;
+    height: 38px !important;
+    margin: 0;
+    max-width: 724px;
+    position: relative;
+    width: 100%;
+    z-index: 1;
     padding: 0 !important;
-    margin: 0 !important;
 }
 #sub-menu{
     padding: 0 !important;
@@ -737,10 +744,17 @@ form#form-login ul{
     list-style: none;
     padding-left: 30px;
 }
-.nsp_main_portal_mode2 .nsp_bottom_interface .prev, .nsp_main_portal_mode2 .nsp_bottom_interface .next{
-    background-color: #0094D6 !important;
+.nsp_main_portal_mode2 .nsp_bottom_interface .next{
+    margin-right: 15px !important;
+}
+.nsp_main_portal_mode2 .nsp_bottom_interface .prev{
+    margin-left: 15px !important;
+}
+.nsp_main_portal_mode2 .nsp_bottom_interface .prev,
+.nsp_main_portal_mode2 .nsp_bottom_interface .next{
+    background: #00bcd4 !important;
     background-position: 5px 7px;
-    padding: 5px 10px 5px 25px !important;
+    padding: 5px 20px !important;
     border-radius: 0 !important;
     cursor: pointer;
     font-size: 10px;
@@ -748,30 +762,22 @@ form#form-login ul{
     line-height: 22px;
     width: 54px;
     text-align: center;
-    margin: 0 0 0 15px !important;
     margin-top: -22px !important;
     position: relative;
     z-index: auto;
 }
 .nsp_main_portal_mode2 .nsp_bottom_interface .prev:hover{
-    background-color: #326aa3 !important;
-    background-position: 5px 7px;;
-    border-color: #1b3957;
+    background: #0097a7 !important;
+    border-color: #006064;
 }
 .nsp_main_portal_mode2 .nsp_bottom_interface .next:hover{
-    background-color: #326aa3 !important;
-    background-position: 66px -18px;;
-    border-color: #1b3957;
+    background: #0097a7 !important;
+    border-color: #006064;
 }
 .nsp_bottom_interface{
     padding: 0 !important;
     position: relative;
     z-index: 2;
-}
-.nsp_main_portal_mode2 .nsp_bottom_interface .next{
-    background-position: 66px -18px;
-    padding: 5px 25px 5px 10px !important;
-    margin: -22px 15px 0 0 !important;
 }
 .nsp_main_portal_mode2 .nsp_bottom_interface .prev:after, .nsp_main_portal_mode2 .nsp_bottom_interface .next:after{
     content: '';
@@ -780,7 +786,7 @@ form#form-login ul{
     width: 0;
     height: 0;
     border-right: 8px solid transparent;
-    border-top: 8px solid #326AA3;
+    border-top: 8px solid #0097a7;
     right: -8px;
     bottom: 0;
 }
@@ -792,7 +798,7 @@ form#form-login ul{
     right: auto;
 }
 .nsp_main_portal_mode2 .nsp_bottom_interface .prev:hover:after, .nsp_main_portal_mode2 .nsp_bottom_interface .next:hover:after{
-    border-top-color: #1b3957;
+    border-top-color: #006064;
 }
 .nsp_images{
     padding: 0 !important;
@@ -811,7 +817,7 @@ form#form-login ul{
 }
 .nsp_main_portal_mode2 .nsp_bottom_interface{
     border: none !important;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.2) inset;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1) inset;
     overflow: inherit;
     width: 740px;
     margin-left: -15px !important;
@@ -858,7 +864,7 @@ form#form-login ul{
     right: 20px;
 }
 .buttonheading:nth-child(3){
-    right: 0px;
+    right: 0;
 }
 #system-message{
     left: 0;
@@ -876,4 +882,108 @@ form#form-login ul{
     margin: 0;
     background-color: #e6c0c0;
     color: #c00;
+}
+
+.goals table{
+    border-collapse: collapse;
+    max-width: 680px;
+    position: relative;
+    width: 100%;
+    z-index: -1;
+}
+.goals table td[align="center"]{
+    border-right: none !important;
+    padding-right: 0 !important;
+}
+.goals table td[align="center"] + td{
+    border-left: none !important;
+    padding-left: 0 !important;
+}
+.data-result{
+    padding: 0;
+    margin: 2px auto;
+    position: relative;
+    display: block;
+    width: 400px;
+    position: relative;
+    background-color: #f5f5f5;
+    z-index: -1;
+
+}
+.body-stats,
+.body-type,
+.goals,
+.lifestyle{
+    overflow: hidden;
+    width: 400px;
+    box-shadow: 0 0 3px rgba(0,0,0,0.3) inset;
+    position: relative;
+    margin: 10px auto;
+}
+.lifestyle{
+    width: 380px;
+    padding: 10px;
+}
+.horizontal-shadow:after {
+    border-radius: 100%;
+    bottom: 0;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 1);
+    content: "";
+    height: 90%;
+    position: absolute;
+    right: -6px;
+    top: 5%;
+    width: 5px;
+    z-index: 1;
+}
+.horizontal-shadow:before {
+    border-radius: 100%;
+    bottom: 0;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 1);
+    content: "";
+    height: 90%;
+    left: -6px;
+    position: absolute;
+    top: 5%;
+    width: 5px;
+    z-index: 1;
+}
+.data-result .value-name{
+    display: inline-block;
+    position: relative;
+    padding: 10px;
+    font-weight: bold;
+    color: #006064;
+}
+.data-result .value{
+    padding: 10px;
+    position: relative;
+    float: right;
+}
+.body-stats div:nth-child(2n),
+.body-type div:nth-child(2n),
+.goals div:nth-child(2n)
+{
+    background: #fff !important;
+}
+
+
+.current-photo div{
+    display: inline-block;
+}
+.photo-two{
+    float: right;
+    margin-right: 100px;
+}
+.photo-two{
+    float: left;
+    margin-left: 100px;
+}
+.body-type-photo{
+    width: 200px;
+    margin: 0 auto 20px auto;
+}
+.lifestyle{
+    color: #006064;
+    font-weight: bold;
 }

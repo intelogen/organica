@@ -1,80 +1,14 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-     
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-        function drawChart() {
-        var data = google.visualization.arrayToDataTable(<?=$this->charts_life?>);
-        
-        
-        
-        var options = {
-          //title: 'Lifestyle analysis',
-          //hAxis: {title: 'Year', titleTextStyle: {color: 'red'}}
-        };
 
-        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-      
-      
-    </script>
+
+
 
     
-    <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable(<?=$this->charts[0]?>);
-
-        var options = {
-          title: 'Weight Compair',
-          //hAxis: {title: 'Year', titleTextStyle: {color: 'red'}}
-        };
-
-        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div2'));
-        chart.draw(data, options);
-      }
-    </script>
     
-    <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable(<?=$this->charts[1]?>);
-
-        var options = {
-          title: 'Weight Compair',
-          //hAxis: {title: 'Year', titleTextStyle: {color: 'red'}}
-        };
-
-        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div3'));
-        chart.draw(data, options);
-      }
-    </script>
-
-    <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable(<?=$this->charts[2]?>);
-
-        var options = {
-          title: 'Ph Compair',
-          //hAxis: {title: 'Year', titleTextStyle: {color: 'red'}}
-        };
-
-        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div4'));
-        chart.draw(data, options);
-      }
-    </script>
     
-
-
-
-
 <?php
+
 
 
 defined( '_JEXEC' ) or die( 'Restricted access' );
@@ -201,29 +135,32 @@ if($this->list)
     <tr>
         <tr><td colspan="2"><div class='contentheading'>Lifestyle analysis:</div></td></tr>
         <td>
-                            <?php
+             <ul>               <?php
 
 
                if($this->qAnswers1){
                    foreach ($this->qAnswers1 as $value) {
-                       echo "- ".$value['answer'].'<br>';
+                       echo "<li>".$value['answer']."</li>";
                    }
                }
             
                    ?>
+		</ul>
         </td>
         <td>
+		<ul>
                             <?php
 
 
                if($this->qAnswers2){
                    foreach ($this->qAnswers2 as $value) {
-                       echo "- ".$value['answer'].'<br>';
+                       echo "<li>".$value['answer']."</li>";
                    }
                }
             
                    ?>
-        </td>
+        </ul>
+		</td>
     </tr>
     <tr><td colspan="2"><div class='contentheading'>Result</div></td></tr>
     <tr>
@@ -403,18 +340,22 @@ if($this->list)
         <td colspan="2"><div class='contentheading'>Symptoms Tracking</div></td>
     </tr>
     <tr>
+        <td>    <div id="symptom-1" style="width: 350px; height: 350px;"></div></td>
+        <td>    <div id="symptom-2" style="width: 350px; height: 350px;"></div></td>
+    </tr>
+    <tr>
         <td>
  
-<table border="1">
-    <tr><td>Name</td><td>Status</td><td>Note</td></tr>
+<ul>
+    <li><div><span>Name</span><span>Status</span><span>Note</span></div></li>
 <?php
 if (isset($evalution[symptoms]))
 {
     for ($i = 0; $i < count($evalution[symptoms][val]); $i++)
     {
     ?>
-        <tr>
-        <td>
+    <li><div>
+        <span>
             <?php
             foreach($list[symptomList] as $value)
             {
@@ -424,14 +365,14 @@ if (isset($evalution[symptoms]))
                 }
             }
             ?>
-        </td>
-        <td>
+        </span>
+        <span>
             <?=$evalution[symptoms][status][$i];?>
-        </td>
-        <td>
+        </span>
+        <span
             <?=$evalution[symptoms][note][$i];?>
-        </td>
-        </tr>
+        </span>
+        </div></li>
     <?php    
     }
     ?>
@@ -444,40 +385,45 @@ else
 <?php
 }
 ?>
-</table>
+</ul>
         </td>
         <td>
 
-<table border="1">
-    <tr><td>Name</td><td>Status</td><td>Note</td></tr>
+            
+            
+            
+<ul>
+    <li><div><span>Name</span><span>Status</span><span>Note</span></div></li>
 <?php
 if (isset($evalution_2[symptoms]))
 {
+			
     for ($i = 0; $i < count($evalution_2[symptoms][val]); $i++)
     {
     ?>
-        <tr>
-        <td>
+    <li><div>
+        <span>
             <?php
-            foreach($list[symptomList] as $value)
+			foreach($list[symptomList] as $value)
             {
                 if($value[id] == $evalution_2[symptoms][val][$i])
                 {
                     echo $value[name];
                 }
             }
+			
             ?>
-        </td>
-        <td>
+        </span>
+        <span>
             <?=$evalution_2[symptoms][status][$i];?>
-        </td>
-        <td>
+        </span>
+        <span>
             <?=$evalution_2[symptoms][note][$i];?>
-        </td>
-        </tr>
+        </span>
+        </div></li>
     <?php    
     }
-    ?>
+	?>
 <?php
 }
 else
@@ -487,25 +433,33 @@ else
 <?php
 }
 ?>
-</table>
+</ul>
+            
+            
+            
+            
         </td>
     </tr>
     <tr>
         <td colspan="2"><div class='contentheading'>Medical preparations Tracking</div></td>
     </tr>
     <tr>
+        <td>   <div id="drug-1" style="width: 350px; height: 350px;"></div></td>
+        <td>   <div id="drug-2" style="width: 350px; height: 350px;"></div> </td>
+    </tr>
+
         <td>
 
-<table border="1">
-    <tr><td>Name</td><td>Status</td><td>Note</td></tr>
+<ul>
+    <li><div><span>Name</span><span>Status</span><span>Note</span></div></li>
 <?php
 if (isset($evalution[drug]))
 {
     for ($i = 0; $i < count($evalution[drug][val]); $i++)
     {
     ?>
-        <tr>
-        <td>
+    <li><div>
+        <span>
             <?php
             foreach($list[medtrackList] as $value)
             {
@@ -515,14 +469,14 @@ if (isset($evalution[drug]))
                 }
             }
             ?>
-        </td>
-        <td>
+        </span>
+        <span>
             <?=$evalution[drug][status][$i];?>
-        </td>
-        <td>
+        </span>
+        <span>
             <?=$evalution[drug][note][$i];?>
-        </td>
-        </tr>
+        </span>
+        </div></li>
     <?php    
     }
     ?>
@@ -535,20 +489,20 @@ else
 <?php
 }
 ?>
-</table>
+</ul>
         </td>
         <td>
             
-<table border="1">
-    <tr><td>Name</td><td>Status</td><td>Note</td></tr>
+<ul>
+    <li><div><span>Name</span><span>Status</span><span>Note</span></div></li>
 <?php
 if (isset($evalution_2[drug]))
 {
     for ($i = 0; $i < count($evalution_2[drug][val]); $i++)
     {
     ?>
-        <tr>
-        <td>
+        <li><div>
+        <span>
             <?php
             foreach($list[medtrackList] as $value)
             {
@@ -558,14 +512,14 @@ if (isset($evalution_2[drug]))
                 }
             }
             ?>            
-        </td>
-        <td>
+        </span>
+        <span>
             <?=$evalution_2[drug][status][$i];?>
-        </td>
-        <td>
+        </span>
+        <span>
             <?=$evalution_2[drug][note][$i];?>
-        </td>
-        </tr>
+        </span>
+        </div></li>
     <?php    
     }
     ?>
@@ -578,25 +532,29 @@ else
 <?php
 }
 ?>
-</table>
+</ul>
         </td>
     </tr>
     <tr>
         <td colspan="2"><div class='contentheading'>Diseases Tracking</div></td>
     </tr>
+        <tr>
+        <td>   <div id="dis-1" style="width: 350px; height: 350px;"></div></td>
+        <td>   <div id="dis-2" style="width: 350px; height: 350px;"></div> </td>
+    </tr>
     <tr>
         <td>
 
-<table border="1">
-    <tr><td>Name</td><td>Status</td><td>Note</td></tr>
+<ul>
+    <li><div><span>Name</span><span>Status</span><span>Note</span></div></li>
 <?php
 if (isset($evalution[diseases]))
 {
     for ($i = 0; $i < count($evalution[diseases][val]); $i++)
     {
     ?>
-        <tr>
-        <td>
+       <li><div>
+        <span>
             <?php
             foreach($list[diseasesList] as $value)
             {
@@ -606,14 +564,14 @@ if (isset($evalution[diseases]))
                 }
             }
             ?>
-        </td>
-        <td>
+        </span>
+        <span>
             <?=$evalution[diseases][status][$i];?>
-        </td>
-        <td>
+        </span>
+        <span>
             <?=$evalution[diseases][note][$i];?>
-        </td>
-        </tr>
+        </span>
+        </div></li>
     <?php    
     }
     ?>
@@ -626,21 +584,21 @@ else
 <?php
 }
 ?>
-</table>
+</ul>
 
         </td>
         <td>
 
-<table border="1">
-    <tr><td>Name</td><td>Status</td><td>Note</td></tr>
+<ul>
+    <li><div><span>Name</span><span>Status</span><span>Note</span></div></li>
 <?php
 if (isset($evalution_2[diseases]))
 {
     for ($i = 0; $i < count($evalution_2[diseases][val]); $i++)
     {
     ?>
-        <tr>
-        <td>
+        <li><div>
+        <span>
             <?php
             foreach($list[diseasesList] as $value)
             {
@@ -650,14 +608,14 @@ if (isset($evalution_2[diseases]))
                 }
             }
             ?>
-        </td>
-        <td>
+        </span>
+        <span>
             <?=$evalution_2[diseases][status][$i];?>
-        </td>
-        <td>
+        </span>
+        <span>
             <?=$evalution_2[diseases][note][$i];?>
-        </td>
-        </tr>
+        </span>
+        </div></li>
     <?php    
     }
     ?>
@@ -670,12 +628,204 @@ else
 <?php
 }
 ?>
-</table>
+</ul>
         </td>
     </tr>
 </table>
+    
+    
+        <script type="text/javascript">
+     
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+        function drawChart() {
+        var data = google.visualization.arrayToDataTable(<?=$this->charts_life?>);
+        
+        
+        
+        var options = {
+          //title: 'Lifestyle analysis',
+          //hAxis: {title: 'Year', titleTextStyle: {color: 'red'}}
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+      
+      
+    </script>
+
+    
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(<?=$this->charts[0]?>);
+
+        var options = {
+          title: 'Weight Compair',
+          //hAxis: {title: 'Year', titleTextStyle: {color: 'red'}}
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div2'));
+        chart.draw(data, options);
+      }
+    </script>
+    
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(<?=$this->charts[1]?>);
+
+        var options = {
+          title: 'Weight Compair',
+          //hAxis: {title: 'Year', titleTextStyle: {color: 'red'}}
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div3'));
+        chart.draw(data, options);
+      }
+    </script>
+
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(<?=$this->charts[2]?>);
+
+        var options = {
+          title: 'Ph Compair',
+          //hAxis: {title: 'Year', titleTextStyle: {color: 'red'}}
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div4'));
+        chart.draw(data, options);
+      }
+    </script>
+    
+    
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(<?=$this->s1?>);
+
+        var options = {
+        legend: 'none',
+        pieSliceText: 'label',
+        title: 'Symptoms Result',
+        pieStartAngle: 100,
+         };
+
+        var chart = new google.visualization.PieChart(document.getElementById('symptom-1'));
+        chart.draw(data, options);
+      }
+    </script>
+    
+	
+	
+				
+	
+	
+
+	
+	
+	
+	
+	
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(<?=$this->s2?>);
+
+        var options = {
+        legend: 'none',
+        pieSliceText: 'label',
+        title: 'Symptoms Result',
+        pieStartAngle: 100,
+         };
+
+        var chart = new google.visualization.PieChart(document.getElementById('symptom-2'));
+        chart.draw(data, options);
+      }
+    </script>
+				
+				
+				
+
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(<?=$this->m1?>);
+
+        var options = {
+        legend: 'none',
+        pieSliceText: 'label',
+        title: 'Medical Preparations Result',
+        pieStartAngle: 100,
+         };
+
+        var chart = new google.visualization.PieChart(document.getElementById('drug-1'));
+        chart.draw(data, options);
+      }
+    </script>
+    
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(<?=$this->m2?>);
+
+        var options = {
+        legend: 'none',
+        pieSliceText: 'label',
+        title: 'Medical Preparations Result',
+        pieStartAngle: 100,
+         };
+
+        var chart = new google.visualization.PieChart(document.getElementById('drug-2'));
+        chart.draw(data, options);
+      }
+    </script>
 
 
+    
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(<?=$this->d1?>);
 
+        var options = {
+        legend: 'none',
+        pieSliceText: 'label',
+        title: 'Diseases Result',
+        pieStartAngle: 100,
+         };
 
+        var chart = new google.visualization.PieChart(document.getElementById('dis-1'));
+        chart.draw(data, options);
+      }
+    </script>
+    
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(<?=$this->d2?>);
+
+        var options = {
+        legend: 'none',
+        pieSliceText: 'label',
+        title: 'Diseases Result',
+        pieStartAngle: 100,
+         };
+
+        var chart = new google.visualization.PieChart(document.getElementById('dis-2'));
+        chart.draw(data, options);
+      }
+    </script>
 

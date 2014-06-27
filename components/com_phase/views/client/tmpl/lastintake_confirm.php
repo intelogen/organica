@@ -44,14 +44,20 @@ if($this->diseasesList)
 
 
 
+    
 
-<div class='contentheading'>Client goals</div>   
+
+
+
+
+<div class='contentheading'>Client goals</div>
 <div class='tabContainer2' style="background-color:#E1FFE3">
+    
+    
+<?php
 
-    
-    
-    
-<?php    
+
+
 if($loockingfor):   
 ?>
 <table>
@@ -85,6 +91,14 @@ if($loockingfor):
 endif;
 ?>
 </div>
+
+
+
+
+
+
+
+
 
 <div class='contentheading'>Body stats</div>    
 <div class='tabContainer2' style="background-color:#E1FFE3">

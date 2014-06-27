@@ -1,39 +1,31 @@
+<?php defined( '_JEXEC' ) or die( 'Restricted access' ); ?>
 
-
-<?php
-defined( '_JEXEC' ) or die( 'Restricted access' );
-?>
 <?php
 $uid = $this->uid;
 $pid = 0;
-
 $loockingfor = $this->loockingfor;
 ?>
 
 <?php
-if($this->evalution)
-{
+if($this->evalution){
     $evalution = $this->evalution; 
 }
 
-if($this->allergiesList)
-{
+if($this->allergiesList){
     $allergiesList = $this->allergiesList;
 }
 
-if($this->symptomList)
-{
+if($this->symptomList){
     $symptomList = $this->symptomList;
 }
-if($this->medtrackList)
-{
+
+if($this->medtrackList){
     $medtrackList = $this->medtrackList;
 }
-if($this->diseasesList)
-{
+
+if($this->diseasesList){
     $diseasesList = $this->diseasesList;
 }
-
 ?>
 
 <div class='contentheading'>Intake Survey</div>   

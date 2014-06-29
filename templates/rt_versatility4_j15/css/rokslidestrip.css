@@ -11,36 +11,60 @@ div#frame div.button {display: none;}
 
 
 /*custom styles*/
+a {
+    color: #006064;
+}
 #rightcol, .showcase-module, #horiz-menu, #sub-menu, #main-body, #header-bar{
     border: none;
 }
 input[type="text"], input[type="password"]{
-    border-radius: 3px;
+    border-radius: 0;
     padding: 3px 10px;
-    border: 1px solid #ccc
+    border: 1px solid #0097a7;
 }
 #form-login div input[type="submit"]:active,
 s#form-login div input.button:active,
 .input .button:active,
-.button:active{
+.button:active,
+input[type="submit"]:active,
+#add_d_extra:active,
+#add_d_list:active,
+#add_dr_extra:active,
+#add_dr_list:active,
+#add_s_extra:active,
+#add_s_list:active,
+input[type="file"]:active{
     background: #006064 !important;
-    border-bottom: 3px solid #006064 !important;
 }
 #form-login div input[type="submit"]:hover,
 s#form-login div input.button:hover,
 .input .button:hover,
-.button{
+.button:hover,
+input[type="submit"]:hover,
+#add_d_extra:hover,
+#add_d_list:hover,
+#add_dr_extra:hover,
+#add_dr_list:hover,
+#add_s_extra:hover,
+#add_s_list:hover,
+input[type="file"]:hover{
     color: #fff !important;
     background: #0097a7 !important;);
     border: none !important;
-    border-bottom: 3px solid #006064 !important;
 }
 s#form-login div input[type="submit"],
 s#form-login div input.button,
 .input .button,
-.button{
+.button,
+input[type="submit"],
+#add_d_extra,
+#add_d_list,
+#add_dr_extra,
+#add_dr_list,
+#add_s_extra,
+#add_s_list,
+input[type="file"]{
     border: none !important;
-    border-bottom: 3px solid #0097a7 !important;
     background-color: #00bcd4 !important;
     color: #fff;
     height: 34px !important;
@@ -51,6 +75,24 @@ s#form-login div input.button,
     font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
+}
+#add_d_extra,
+#add_d_list,
+#add_dr_extra,
+#add_dr_list,
+#add_s_extra,
+#add_s_list,
+input[type="file"],
+#test{
+    height: auto !important;
+    padding-top: 6px !important;
+    padding-bottom: 3px !important;
+}
+input[type="file"]{
+    padding-right: 9px;
+}
+select{
+    padding: 3px 0;
 }
 .button{
     padding: 8px 32px !important;
@@ -79,8 +121,11 @@ s#form-login div input.button,
     height: auto;
 }
 #vmMainPage table tbody tr td:hover{
-    box-shadow: 0 0 0px rgba(0,0,0,0.3) !important;
-    border-color: #e2ecf0 !important;
+    background: #e0f7fa;
+}
+#vmMainPage .pagination{
+    margin-bottom: 0;
+    padding: 0;
 }
 #product_list{
     width: 100% !important;
@@ -97,6 +142,9 @@ s#form-login div input.button,
     text-align: center;
     vertical-align: middle;
     width: 160px;
+}
+.addtocart_button:hover{
+    background: #00796b !important;
 }
 #product_list > div .line .details{
     display: none;
@@ -122,15 +170,16 @@ s#form-login div input.button,
     border-collapse: collapse;
     box-shadow: none !important;
     padding: 10px 0;
+    border-radius: 0 !important;
     height: 420px !important;
 }
 #product_list > div:hover {
     /* box-shadow: 0 0 2px 2px rgba(0,0,0,0.05), 0 0 0 0 rgba(0,0,0,0) inset !important;*/
-    background: #f6f6f6;
+    background: #e0f7fa;
 }
 .inputboxquantity{
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
     border: 1px solid #ccc;
     height: 28px;
     padding-left: 10px;
@@ -147,13 +196,13 @@ s#form-login div input.button,
     padding: 1px 10px !important;
     cursor: pointer;
     height: 18px !important;
-    border-color: #ccc;
+    border-color: #009688;
 }
 .quantity_box_button_up:hover{
     background-color: #ccc;
 }
 .quantity_box_button_up{
-    border-top-right-radius: 5px;
+    border-top-right-radius: 0;
     display: inline-block !important;
     right: 50px !important;
     position: absolute;
@@ -163,7 +212,7 @@ s#form-login div input.button,
     background-color: #ccc;
 }
 .quantity_box_button_down{
-    border-bottom-right-radius: 5px;
+    border-bottom-right-radius: 0px;
     bottom: 40px;
     position: absolute;
     right: 50px;
@@ -191,21 +240,22 @@ s#form-login div input.button,
 .addtocart_button, .notify_button{
     background-image: none !important;
     color: #fff;
-    background-color: #009900 !important;
+    background-color: #009688 !important;
     margin: 10px 0 0 0;
 }
 .notify_button{
     margin-top: 28px !important;
-    background-color: #CC8500 !important;
+    background-color: #f57c00 !important;
 }
 .pagenav{
-    color: #000;
-    background: #eee;
+    color: #fff;
+    background: #757575;
     display: inline-block;
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    padding: 13px;
     cursor: pointer;
+}
+.pagenav:hover{
+    background: #424242;
 }
 .pagination li:first-child{
     margin-right: 10px;
@@ -214,10 +264,13 @@ s#form-login div input.button,
     margin-left: 10px;
 }
 .pagination li:nth-child(3) span{
-    padding: 5px 10px;
+    top: 3px;
+    position: relative;
     cursor: auto;
     border: none;
     background: none;
+    color: #424242;
+    font-size: 20px;
 }
 form .order{
     text-align: right;
@@ -485,9 +538,29 @@ form .user-data{
 .tabContainer2{
     clear: none;
     background: #fff !important;
+    border: 1px solid #d5d4d4;
+    margin: 0;
+    overflow: hidden;
+    padding: 10px;
+}
+.tabContainer2 > table{
+    border-collapse: collapse;
+    border: none !important;
+    width: 100%;
+}
+.tabContainer2 > table tr:nth-child(2n){
+    background: #eee !important;
+}
+.tabContainer2 > table tr td{
+    padding: 5px;
+    border: none !important;
 }
 .tabContainer2 > form[enctype="multipart/form-data"] > .tabContainer2{
     background: #fff !important;
+}
+.tabContainer2 > .tabContainer2{
+    padding: 0;
+    position: relative;
 }
 #bs_container{
     border: none;
@@ -880,13 +953,24 @@ form#form-login ul{
     box-shadow: 0 0 3px rgba(0,0,0,0.5);
 }
 
-#system-message dd ul{
-    border-color:  #de7a7b;
-    margin: 0;
-    background-color: #e6c0c0;
-    color: #c00;
-}
 
+#system-message  > .message ul{
+    border-color:  #0097a7 !important;
+    margin: 0;
+    background-color: #b2ebf2 !important;
+    color: #006064 !important;
+}
+#system-message > .error ul{
+    border-color:  #d01716 !important;
+    margin: 0;
+    background-color: #f9bdbb !important;
+    color: #b0120a !important;
+}
+.add_d_list,
+.add_d_extra,
+input[type="submit"]{
+    background: ;
+}
 .goals table{
     border-collapse: collapse;
     max-width: 680px;
@@ -922,6 +1006,7 @@ form#form-login ul{
     box-shadow: 0 0 3px rgba(0,0,0,0.3) inset;
     position: relative;
     margin: 10px auto;
+    z-index: 2;
 }
 
 .goals{
@@ -997,15 +1082,9 @@ form#form-login ul{
     font-weight: bold;
 }
 .chart-element-val{
-    position: absolute;
+    position: relative;
     z-index: 20;
 }
 .chart-desc .chart-element:nth-child(1) .chart-element-val{
-    top: 2550px;
-    left: 100px;
-    -moz-transform: rotate(270deg); /* Для Firefox */
-    -ms-transform: rotate(270deg); /* Для IE */
-    -webkit-transform: rotate(270deg); /* Для Safari, Chrome, iOS */
-    -o-transform: rotate(270deg); /* Для Opera */
-    transform: rotate(270deg);
+    display: inline-block;
 }

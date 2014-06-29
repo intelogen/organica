@@ -273,3 +273,34 @@ foreach ($content as $value)
 
 ?>
 </div>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+	['Element', '', { role: 'style' }],
+        ['Copper', 8, 'red'],            // RGB value
+	['Silver', 8, 'red'],
+        ['Gold', 19, 'orange'],
+        ['Gold', 19, 'orange'],
+        ['Gold', 40, 'blue'],
+        ['Gold', 40, 'blue'],
+        ['Gold', 50, 'green'],// English color name
+	['Gold', 50.30, 'green'],
+	['Platinum', 60, 'green' ], // CSS-style declaration
+      ]);
+
+        var options = {
+          title: 'Company Performance',
+          hAxis: {title: 'Year', titleTextStyle: {color: 'red'}}
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('xchart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+
+    
+    <div id="xchart_div" style="width: 900px; height: 500px;"></div>

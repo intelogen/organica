@@ -47,49 +47,105 @@ if($this->diseasesList)
     
 
 
-
-
-
 <div class='contentheading'>Client goals</div>
-<div class='tabContainer2' style="background-color:#E1FFE3">
-    
-    
-<?php
+<div class='goals horizontal-shadow'>
 
+    <?php if(isset($this->evalution[goals][weight]) && $this->evalution[goals][weight] !== ""){?>
+        <div class="data-result">
+            <span class="value-name"><?="Target Weight: "?></span> <span class="value"><?=$this->evalution[goals][weight]." lbs."?></span>
+        </div>
 
-
-if($loockingfor):   
-?>
-<table>
-    <tr colspan="2">
-        <td><?="Target Weight = "?></td>
-        <td><?php if(isset($evalution[goals][weight])){ echo $evalution[goals][weight];} ?><?=" lbs."?></td>
-    </tr>
-    <tr colspan="2">
-        <td><?="Target Body Fat = "?></td>
-        <td><?php if(isset($evalution[goals][fat])){ echo $evalution[goals][fat];} ?><?=" %"?></td>
-    </tr>
-    <tr>
     <?php
-    $cnt = 1;    
-    foreach($loockingfor as $value):
-    ?>
-                <td style='border:1px solid #EEE;padding:3px;' align="center" ><input type="checkbox" name="evalution[goals][question][]" value="<?=$value['id'];?>" <?php if(isset($evalution[goals][question])){ if(in_array($value['id'],$evalution[goals][question])) {echo "checked";}} ?>></td>
-                <td style='border:1px solid #EEE;padding:3px;'><?=$value['var'];?></td>
-    <?php
-    if($cnt % 4 == 0)
-    {
-        echo "</tr><tr>\n";
     }
-    $cnt++;
-    endforeach;
-    ?>
-    </tr>
-</table>
 
-<?php
-endif;
-?>
+    if(isset($this->evalution[goals][fat]) && $this->evalution[goals][fat] !== ""){?>
+        <div class="data-result">
+            <span class="value-name"><?="Target Body Fat: "?></span> <span class="value"><?=$this->evalution[goals][fat]." %"?></span>
+        </div>
+    <?php
+    }
+    ?>
+
+    <table>
+        <?php
+        if($this->loockingfor && count($this->loockingfor) !== 0){ ?>
+            <tr>
+                <?php
+                $cnt = 1;
+                foreach($this->loockingfor as $value){
+                    ?>
+                    <td style='border:1px solid #EEE;padding:3px;' align="center" ><input type="checkbox" name="evalution[goals][question][]" value="<?=$value['id'];?>" <?php if(isset($this->evalution[goals][question])){ if(in_array($value['id'],$this->evalution[goals][question])) {echo "checked";}} ?>></td>
+                    <td style='border:1px solid #EEE;padding:3px;'><?=$value['var'];?></td>
+                    <?php
+                    if($cnt % 4 == 0)
+                    {
+                        echo "</tr><tr>\n";
+                    }
+                    $cnt++;
+                }
+                ?>
+            </tr>
+        <?php } ?>
+    </table>
+</div>
+
+<div class='contentheading'>Body stats</div>
+<div class='body-stats horizontal-shadow'>
+
+    <?php if($this->evalution[stats][sex] !== ""){ ?>
+        <div class="data-result">
+            <span class="value-name"><?="Sex - "?></span>
+            <span class="value"><?= $this->evalution[stats][sex]?></span>
+        </div>
+    <?php }
+
+    if($this->evalution[stats][height][0] !== "" && $this->evalution[stats][height][1] !== ""){ ?>
+        <div class="data-result">
+            <span class="value-name"><?="Height"?></span>
+            <span class="value"><?=$this->evalution[stats][height][0]." ft ".$this->evalution[stats][height][1]." inches"?></span>
+
+        </div>
+    <?php }
+
+    if($this->evalution[stats][weight] !== ""){ ?>
+        <div class="data-result">
+            <span class="value-name"><?="Weight"?></span>
+            <span class="value"><?= $this->evalution[stats][weight]."lbs"?></span>
+        </div>
+
+    <?php }
+
+    if($this->evalution[stats][fat] !== ""){ ?>
+        <div class="data-result">
+            <span class="value-name"><?="Body Fat"?></span>
+            <span class="value"><?=$this->evalution[stats][fat]."%"?></span>
+        </div>
+
+    <?php }
+
+    if($this->evalution[stats][ph] !== ""){ ?>
+        <div class="data-result">
+            <span class="value-name"><?="PH"?></span>
+            <span class="value"><?=$this->evalution[stats][ph]."%"?></span>
+        </div>
+
+    <?php }
+
+    if($this->evalution[stats][blood_p][0] !== "" && $this->evalution[stats][blood_p][1] !== ""){ ?>
+        <div class="data-result">
+            <span class="value-name"><?="Blood Pressure"?></span>
+            <span class="value"><?=$this->evalution[stats][blood_p][0]." / ".$this->evalution[stats][blood_p][1]?></span>
+        </div>
+
+    <?php }
+
+    if($this->evalution[stats][blood_t] !== ""){ ?>
+        <div class="data-result">
+            <span class="value-name"><?="Blood Type"?></span>
+            <span class="value"><?=$this->evalution[stats][blood_t]?></span>
+        </div>
+
+    <?php } ?>
 </div>
 
 

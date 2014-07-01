@@ -119,7 +119,7 @@ $ms_module10				= $this->params->get("msModule10", "user20");
 			<div class="wrapper">
 				<?php endif; ?>
 				<?php if($show_logo == "true") : ?>
-				<a href="<?php echo $this->baseurl; ?>" class="nounder"><img src="/images/stories/header.jpg" border="0" alt="" id="logo" /></a>
+				<a href="<?php echo $this->baseurl; ?>" class="nounder"><img src="/images/new-logo.png" border="0" alt="" id="logo" /></a>
 				<?php elseif($show_logo =="false" and $this->countModules('icon')) : ?>
 				<div class="logo-module">
 					<jdoc:include type="modules" name="icon" style="xhtml" />

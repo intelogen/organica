@@ -198,7 +198,7 @@ $count = count($phases);
     <div id="qchart_div" style="width: 690px; height: 400px;"></div>
     
     <div class='contentheading'>Current Photo</div>
-    <div class='current-photo'>
+    <div class='current-photo horizontal-shadow'>
 
         <?php
         if($this->evalution[file][0] !== null && $this->evalution[file][0] !== "")
@@ -287,7 +287,7 @@ $count = count($phases);
             
             
     <div class='contentheading'>Allergies Tracking</div>
-    <div class='tabContainer2' style="background-color:#E1FFE3">
+    <div class='tabContainer2 horizontal-shadow' style="background-color:#E1FFE3">
     <ul>
     <?php
     if($this->evalution[madtrack][allergies][status][0] !== "")
@@ -309,7 +309,7 @@ $count = count($phases);
     </div>
     
     <div class='contentheading'>Symptoms Tracking</div>
-    <div class='tabContainer2' style="background-color:#E1FFE3">
+    <div class='tabContainer2 horizontal-shadow' style="background-color:#E1FFE3">
         <ul>
         <?php
         if($this->evalution[madtrack][symptoms][status][0] !== "")
@@ -330,7 +330,7 @@ $count = count($phases);
     </div>
     
     <div class='contentheading'>Medical preparations Tracking</div>
-    <div class='tabContainer2' style="background-color:#E1FFE3">
+    <div class='tabContainer2 horizontal-shadow' style="background-color:#E1FFE3">
         <ul>
         <?php
         if($this->evalution[madtrack][drug][status][0] !== "")
@@ -351,7 +351,7 @@ $count = count($phases);
     </div>
     
     <div class='contentheading'>Diseases Tracking</div>
-    <div class='tabContainer2' style="background-color:#E1FFE3">
+    <div class='tabContainer2 horizontal-shadow' style="background-color:#E1FFE3">
         <ul>
         <?php
         if($this->evalution[madtrack][diseases][status][0] !== "")

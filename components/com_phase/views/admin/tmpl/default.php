@@ -34,12 +34,7 @@ Furhter, you will be responsible for signing off the phases and assigning new ph
     </div>
 
 
-<div class='contentheading'>
-<?="<br>My Alerts<br>"?>
-</div>
-    <div class='tabContainer2' style="background-color:#E1FFE3">
-<?="<br>There are no alerts for you this time."?>
-    </div>
+
 
 
 

@@ -82,7 +82,7 @@ if ($this->list){
 ?>
 
 <div class='contentheading'>Symptoms Tracking</div>  
-<div class='tabContainer2' style="background-color:#E1FFE3">
+<div class='tabContainer2 horizontal-shadow' style="background-color:#E1FFE3">
         <?php
         if($this->content !== null){
         foreach ($this->content as $key => $value) {
@@ -129,7 +129,7 @@ if ($this->list){
 </div>
 
 <div class='contentheading'>Medical preparations Tracking</div>  
-<div class='tabContainer2' style="background-color:#E1FFE3">
+<div class='tabContainer2 horizontal-shadow' style="background-color:#E1FFE3">
         <?php
         if($this->content !== null){
         foreach ($this->content as $key => $value) {
@@ -176,7 +176,7 @@ if ($this->list){
 </div>
 
 <div class='contentheading'>Diseases Tracking</div>  
-<div class='tabContainer2' style="background-color:#E1FFE3">
+<div class='tabContainer2 horizontal-shadow' style="background-color:#E1FFE3">
         <?php
         if($this->content !== null){       
         foreach ($this->content as $key => $value) {
@@ -229,7 +229,7 @@ if ($this->list){
 <div class='tabContainer2' style="background-color:#E1FFE3">
     
     <div class='contentheading'><?="Intake photo"?></div>
-    <div class='current-photo'>
+    <div class='current-photo horizontal-shadow'>
         <?= "<div class='photo-one'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$gols[photo][val][0]."\" width=\"200\" height=\"350\"></div>";?>
         <?= "  <div class='photo-two'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$gols[photo][val][1]."\" width=\"200\" height=\"350\"></div>";?>
     </div>
@@ -238,7 +238,7 @@ if ($this->list){
                 foreach ($this->content as $key => $value) {
                     ?>
                     <div class='contentheading'><?=$key?></div>
-                    <div class='current-photo'>
+                    <div class='current-photo horizontal-shadow'>
                     <?= "<div class='photo-one'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$value[photo][val][0]."\" width=\"200\" height=\"350\"></div>";?>
                     <?= "  <div class='photo-two'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$value[photo][val][1]."\" width=\"200\" height=\"350\"></div>";?>
                     </div>

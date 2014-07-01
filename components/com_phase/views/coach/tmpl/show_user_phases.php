@@ -18,7 +18,7 @@ $coachId = $this->coachId;
 
 if(count($this->phases) == 0)
 {
-    echo 'No phases yet';
+    echo "<div class='contentheading'> No phases yet</div>";
 }
 {
     foreach ($this->phases as $phases)

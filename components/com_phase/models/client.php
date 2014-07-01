@@ -1995,4 +1995,32 @@ class PhaseModelClient extends JModel
 	$result = $db->loadResult();
         return $result;
     }
+    
+    function getAllUserPhases($userId)
+     {
+        $db =& $this->_db;
+        $query = "SELECT id FROM #__jf_projects WHERE leader = $userId ORDER BY id";
+         $ids = $this->_getList($query);
+        $db->setQuery($query);
+        return $db->loadAssocList(); 
+     }
+    
+    function editFinished($road, $key, $pid_n){
+
+        $db =& $this->_db;
+        $query = "SELECT fin FROM $road WHERE id = $key";
+        $db->setQuery($query);
+	$result = $db->loadResult();
+
+
+
+
+        $result = $result."".$pid_n.",";
+            
+        $query = "UPDATE $road SET `fin` = '$result' WHERE `id` = $key;";
+        $this->_db->setQuery($query);
+        $this->_db->query();
+        return true;
+
+    }
 }

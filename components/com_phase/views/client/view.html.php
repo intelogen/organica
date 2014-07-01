@@ -1070,7 +1070,7 @@ class PhaseViewClient extends JView
             
             $result =  $this->preparePhasechekDataSave();
             
-            
+           
             global  $mainframe;
             if(result)
             {
@@ -1096,7 +1096,14 @@ class PhaseViewClient extends JView
         $pid = $post[evalution][pid];
         $uid = $post[evalution][uid];
         
+        $phases = $model->getAllUserPhases($uid);
         
+        foreach ($phases as $value) {
+            $cnt_p++;
+            if($value[id] == $pid){$pid_n = $cnt_p;;}
+        }
+        
+
 
 
         
@@ -1148,6 +1155,20 @@ class PhaseViewClient extends JView
         
         
         $result[symptoms] = $this->pSympa();
+
+       
+        $n_sym = explode(",", $result[symptoms][name]);
+        $n_sta = explode(",", $result[symptoms][status]);
+        $n_t = array_combine($n_sym, $n_sta);
+        
+        foreach ($n_t as $key => $value) {
+            if($value == "finished"){
+                $record_sym = $model->editFinished("#__jf_my_symptoms", $key, $pid_n);
+            }
+        }
+        
+
+        
         $res = $model->saveLastintake($uid, $pid, "symptoms", $result[symptoms][name], $result[symptoms][status], $result[symptoms][note], 4, $date);
         if($res == false){return false;}
         
@@ -1157,12 +1178,34 @@ class PhaseViewClient extends JView
 
 
         $result[drug] = $this->pDrug();
+        
+        $n_drug = explode(",", $result[drug][name]);
+        $n_drugst = explode(",", $result[drug][status]);
+        $n_drug = array_combine($n_drug, $n_drugst);
+
+
+        
+        foreach ($n_drug as $key => $value) {
+            if($value == "finished"){
+                $record_sym = $model->editFinished("#__jf_my_medtrack", $key, $pid_n);
+            }
+        }
         $res = $model->saveLastintake($uid, $pid, "drug", $result[drug][name], $result[drug][status], $result[drug][note], 5, $date);
         if($res == false){return false;}
         
         
 
         $result[diseases] = $this->pDiseases();
+        $n_diseases = explode(",", $result[diseases][name]);
+        $n_diseasesst = explode(",", $result[diseases][status]);
+        $n_diseases = array_combine($n_diseases, $n_diseasesst);
+        foreach ($n_diseases as $key => $value) {
+            if($value == "finished"){
+                $record_sym = $model->editFinished("#__jf_my_diseases", $key, $pid_n);
+            }
+        }
+        
+        
         $res = $model->saveLastintake($uid, $pid, "diseases", $result[diseases][name], $result[diseases][status], $result[diseases][note], 6, $date);
         if($res == false){return false;}
         

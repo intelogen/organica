@@ -271,16 +271,16 @@ $phases = $this->phases;
         <td colspan="2"><div class='contentheading'>Symptoms Tracking</div></td>
     </tr>
     <tr>
-        <td>    <div id="symptom-1" style="width: 350px; height: 350px;"></div></td>
-        <td>    <div id="symptom-2" style="width: 350px; height: 350px;"></div></td>
-    </tr>
-    <tr>
         <td>
  
-<ul>
+
 <?php
-if (isset($evalution[symptoms]))
+if ($evalution[symptoms][val][0] !== "")
 {
+    ?>
+            <div id="symptom-1" style="width: 350px; height: 350px;"></div>
+            <ul>
+            <?php
     for ($i = 0; $i < count($evalution[symptoms][val]); $i++)
     {
     ?>
@@ -300,28 +300,31 @@ if (isset($evalution[symptoms]))
     <?php    
     }
     ?>
+            </ul>
 <?php
 }
 else
 {
 ?>
-        <tr><td colspan="3">You dont have any symptoms</td></tr>
+        <div class='contentheading'>You dont have any symptoms in this phase</div>
 <?php
 }
 ?>
-</ul>
         </td>
         <td>
 
             
             
             
-<ul>
+
 
 <?php
-if (isset($evalution_2[symptoms]))
+if ($evalution2[symptoms][val][0] !== "")
 {
-			
+?>
+    <div id="symptom-2" style="width: 350px; height: 350px;"></div>
+            <ul>
+            <?php
     for ($i = 0; $i < count($evalution_2[symptoms][val]); $i++)
     {
     ?>
@@ -339,16 +342,17 @@ if (isset($evalution_2[symptoms]))
     <?php    
     }
 	?>
-<?php
+</ul>
+            <?php
 }
 else
 {
 ?>
-        <tr><td colspan="3">You dont have any symptoms</td></tr>
+        <div class='contentheading'>You dont have any symptoms in this phase</div>
 <?php
 }
 ?>
-</ul>
+
             
             
             
@@ -365,11 +369,13 @@ else
 
         <td>
 
-<ul>
-
+            
 <?php
-if (isset($evalution[drug]))
+if ($evalution[drug][val][0] !== "")
 {
+    ?>
+    <ul>
+    <?php
     for ($i = 0; $i < count($evalution[drug][val]); $i++)
     {
     ?>
@@ -389,6 +395,7 @@ if (isset($evalution[drug]))
     <?php    
     }
     ?>
+    </ul>
 <?php
 }
 else
@@ -398,7 +405,7 @@ else
 <?php
 }
 ?>
-</ul>
+
         </td>
         <td>
             

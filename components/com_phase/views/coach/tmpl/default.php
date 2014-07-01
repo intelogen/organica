@@ -16,7 +16,3 @@
 </div>
 
 
-<div class='contentheading'>My Alerts</div>
-    <div class='tabContainer2' style="background-color:#E1FFE3">
-<?="There are no alerts for you this time."?>
-    </div>

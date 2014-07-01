@@ -3,10 +3,7 @@
 <div class='tabContainer2' style="background-color:#E1FFE3">
 <?php
 
-echo "<pre>";
-var_dump($this->coachInfo);
-echo "</pre>";
-
+if($this->coachInfo[0] !== null){
 foreach ($this->coachInfo as $coachInfo)
 :
 ?>
@@ -40,7 +37,8 @@ foreach ($this->coachInfo as $coachInfo)
     
 <?php
 endforeach;
-
+}else{
+        echo "<div class='contentheading'>You don't have coach</div>";}
 ?>
         </div>
 </div>

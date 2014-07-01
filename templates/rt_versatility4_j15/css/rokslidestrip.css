@@ -301,7 +301,14 @@ form .order{
     width: auto;
 }
 #header-bar .wrapper .nounder #logo{
-    border-bottom-left-radius: 60px !important;
+    width: 450px;
+    height: 150px;
+    background: none;
+    margin: 0 auto;
+    position: relative;
+}
+#header-bar{
+    background-position: 0 -8px !important;
 }
 .menutop li{
     border-left: 1px solid transparent;
@@ -1122,4 +1129,10 @@ input[type="submit"]{
 td .tabContainer2{
     max-width: 200px;
     margin: 0 auto;
+}
+#medical{
+    max-width: 500px !important;
+}
+.tabContainer2{
+    max-width: ;
 }

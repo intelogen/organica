@@ -178,7 +178,7 @@ if ($phases && $phases[0][id] !== null && $phases[0][name] !== null )
 
 
     <div class='contentheading'>Current Photo</div>
-    <div class='current-photo'>
+    <div class='current-photo horizontal-shadow'>
 
         <?php
         if($evalution[photo][0])
@@ -217,7 +217,7 @@ if ($phases && $phases[0][id] !== null && $phases[0][name] !== null )
 
     
 <div class='contentheading'>Symptoms Tracking</div>    
-<div class='tabContainer2' style="background-color:#E1FFE3">
+<div class='tabContainer2 horizontal-shadow' style="background-color:#E1FFE3">
     <table id="medical" border="1">
         <tr>
             <td>№</td>
@@ -273,7 +273,7 @@ else{
 
 
 <div class='contentheading'>Medical preparations Tracking</div>
-<div class='tabContainer2' style="background-color:#E1FFE3">
+<div class='tabContainer2 horizontal-shadow' style="background-color:#E1FFE3">
     <table id="medical" border="1">
         <tr>
             <td>№</td>
@@ -325,7 +325,7 @@ else
 </div>
 
 <div class='contentheading'>Diseases Tracking</div>
-<div class='tabContainer2' style="background-color:#E1FFE3">
+<div class='tabContainer2 horizontal-shadow' style="background-color:#E1FFE3">
     <table id="medical" border="1">
         <tr>
             <td>№</td>

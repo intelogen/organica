@@ -3,6 +3,10 @@
 <div class='tabContainer2' style="background-color:#E1FFE3">
 <?php
 
+echo "<pre>";
+var_dump($this->coachInfo);
+echo "</pre>";
+
 foreach ($this->coachInfo as $coachInfo)
 :
 ?>

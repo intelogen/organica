@@ -1,6 +1,5 @@
-<?php
-defined( '_JEXEC' ) or die( 'Restricted access' );
-?>
+<?php defined( '_JEXEC' ) or die( 'Restricted access' ); ?>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <?php
 $uid = $this->uid;
 $pid = $this->pid;
@@ -27,26 +26,24 @@ if($this->list)
 
 
 
-
-<?="<br>"?>
 <div class='contentheading phase-navigation-header'>Phases Navigation</div>
 <div class='tabContainer2 phase-navigation' style="background-color:#E1FFE3">
+    <ul>
+        <li><a href="index.php?option=com_phase&controller=client&action=show_repo&c=<?=$uid?>">Intake Survey</a></li>
 
-
-<a href="index.php?option=com_phase&controller=client&action=show_repo&c=<?=$uid?>">Intake Survey</a>
-
-<?php
-if ($phases && $phases[0][id] !== null && $phases[0][name] !== null )
-{
-foreach ($phases as $value)
-{
-?>
-    <a href="index.php?option=com_phase&controller=client&action=show_repoz&c=<?=$uid?>&pid=<?=$value[id]?>"><?=$value[name]?></a> 
-<?php
-}
-}
-?>
-    <a href="index.php?option=com_phase&controller=client&action=show_total_repo&c=<?=$uid?>">Total Progress</a>
+        <?php
+        if ($phases && $phases[0][id] !== null && $phases[0][name] !== null )
+        {
+            foreach ($phases as $value)
+            {
+                ?>
+                <li><a href="index.php?option=com_phase&controller=client&action=show_repoz&c=<?=$uid?>&pid=<?=$value[id]?>"><?=$value[name]?></a></a></li>
+            <?php
+            }
+        }
+        ?>
+        <li><a href="index.php?option=com_phase&controller=client&action=show_total_repo&c=<?=$uid?>">Total Progress</a></li>
+    </ul>
 </div>
 
 
@@ -141,199 +138,104 @@ if ($phases && $phases[0][id] !== null && $phases[0][name] !== null )
 
 
      
+
+ <div class='contentheading'>Body stats</div>
+    <div class='body-stats horizontal-shadow'>
+        <div class="data-result">
+            <span class="value-name"><?="Weight"?></span>
+            <span class="value"><?php if(isset($evalution[body][0])){ echo $evalution[body][0];} ?><?="lbs"?></span>
+        </div>
+        
+        <div class="data-result">
+            <span class="value-name"><?="Body Fat"?></span>
+            <span class="value"><?php if(isset($evalution[body][1])){ echo $evalution[body][1];} ?><?="%"?></span>
+        </div>
+        
+        <div class="data-result">
+            <span class="value-name"><?="PH"?></span>
+            <span class="value"><?php if(isset($evalution[body][2])){ echo $evalution[body][2];} ?></span>
+        </div>
+    </div>
+ 
+ 
+
 <div class='contentheading'>Lifestyle analysis</div>    
-<div class='tabContainer2' style="background-color:#E1FFE3">    
-
-<ul>
-<?php
-if($this->qAnswers){
-    foreach ($this->qAnswers as $value) {
-        echo "<li>".$value['answer'].'</li>';
-    }
-}
-?>
-</ul>
-    <?php 
-        $var = explode(",", $this->trackingStart->cats);
-        
-        foreach ($var as $value) {
-            $res[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
+    <div class='lifestyle horizontal-shadow'>
+        <ul>
+        <?php
+        if($this->qAnswers && $this->qAnswers[0][answer] !== ""){
+            foreach ($this->qAnswers as $value) {
+                echo "<li>".$value['answer']."</li>";
+            }
         }
-        
-        $var2 = explode(",", $this->trackingStart->opp_vals);
-        foreach ($var2 as $value) {
-            $res2[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
-        }
-        
-        if(count($res) == count($res2))
-            {
-                $cnt = array_combine( $res, $res2);
-        
-            }
+        else{echo "CONGRATULATIONS, YOU'VE ACHIEVED THE GOAL";}
+        ?>
+        </ul>
+    </div>
+<div id="qchart_div" style="width: 690px; height: 400px;"></div>
 
-            
-
-        echo "<br><div class='contentheading'>Lifestyle analysis result:</div><ul>";
-        foreach ($cnt as $key => $value) {
-            echo "<li>".$key;
-            
-            if($value > 75)
-            {
-                echo " - NICE";
-            }
-            elseif ($value <=75 && $value > 50) {
-                echo " - ALMOST NICE</li>";
-            }
-            elseif($value <=50 && $value > 25){
-                echo " - ALMOST BAD</li>";
-            }
-            elseif($value <=25 && $value >= 0){
-                echo " - BAD</li>";
-            }
-
-        }
-         echo "</ul>";
-    ?>
-<?php
-if($this->trackingStart){?>
-    <!-- Body score chart initialization -->
-    <script type="text/javascript">
-        var bodyscore_chart;
-        jQuery(document).ready(function() {
-            bodyscore_chart = new Highcharts.Chart({
-              chart: {
-                 renderTo: 'bs_container',
-                 defaultSeriesType: 'column'
-              },
-              colors: ['#0096D6'],
-              title: {
-                 text: ''
-              },
-              xAxis: {
-                 categories: <?php echo $this->trackingStart->cats ?>
-              },
-              yAxis: {
-                 min: 0,
-                 max: 100,
-                 title: {
-                    text: 'Percentage'
-                 },
-                 tickInterval: 10
-              },
-              tooltip: {
-                  enabled: false
-              },
-              legend: {
-                  enabled: false
-              },
-              credits: {
-                  enabled: false
-              },
-              plotOptions: {
-                 column: {
-                    enableMouseTracking: false
-                 }
-              },
-                   series: [{
-                  data: <?php echo $this->trackingStart->opp_vals ?>
-              }]
-           });
-        });
-    </script>
-    <div id="bs_container" style="width: 100%; height: 300px"></div>
-<?php }?>    
-
-</div>
+ 
 
 
-<div class='contentheading'>Body Tracking</div>    
-<div class='tabContainer2' style="background-color:#E1FFE3">
-   <table width="50%">
-    <tr>
-        <td><?="Weight"?></td>
-        <td><?php if(isset($evalution[body][0])){ echo $evalution[body][0];} ?><?="lbs"?></td>
-    </tr>
-    <tr>
-        <td><?="Body Fat"?></td>
-        <td><?php if(isset($evalution[body][1])){ echo $evalution[body][1];} ?><?="%"?></td>
-    </tr>
-    <tr>
-        <td><?="PH"?></td>
-        <td><?php if(isset($evalution[body][2])){ echo $evalution[body][2];} ?><?="%"?></td>
-    </tr>
-    
-</table> 
-    
-     
-</div>    
+    <div class='contentheading'>Current Photo</div>
+    <div class='current-photo'>
 
-
-<div class='contentheading'>Current Photo</div>    
-<div class='tabContainer2' style="background-color:#E1FFE3"> 
-<table>
-<tr>
-    <td>
         <?php
         if($evalution[photo][0])
         {
             ?>
 
             <?php
-            echo "  <div style='font-size:15px;color:#008;'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$evalution[photo][0]."\" width=\"200\" height=\"350\"></div>";
+            echo "<div class='photo-one'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$evalution[photo][0]."\" width=\"200\" height=\"350\"></div>";
         }
         else
         {
-            echo "  <div style='font-size:15px;color:#008;'>
+            echo "<div class='photo-one'>
                     <img src=\"".JURI::root().'uploads_jtpl/phase_img/'."no1.png"."\" width=\"200\" height=\"350\">
                     </div>";        
         }
         ?>
  
-    </td>
-    <td>
+
         <?php
         if($evalution[photo][1])
         {
             ?>
 
             <?php
-            echo "  <div style='font-size:15px;color:#008;'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$evalution[photo][1]."\" width=\"200\" height=\"350\"></div>";
+            echo "<div class='photo-two'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$evalution[photo][1]."\" width=\"200\" height=\"350\"></div>";
         }
         else
         {
-            echo "  <div style='font-size:15px;color:#008;'>
+            echo "<div class='photo-two'>
                     <img src=\"".JURI::root().'uploads_jtpl/phase_img/'."no2.png"."\" width=\"200\" height=\"350\">
                     </div>";        
         }
         ?>
 
-    </td>
-</tr>
-    
-    
-    </table>
 </div>      
- 
-<div class='contentheading'>Medical Tracking</div>    
-<div class='tabContainer2' style="background-color:#E1FFE3">    
 
-    
-    
     
 <div class='contentheading'>Symptoms Tracking</div>    
 <div class='tabContainer2' style="background-color:#E1FFE3">
-<ul>
-    <li><div><span>№</span><span>Name</span><span>Status</span><span>Note</span></div></li>
-<?php
-if (isset($evalution[symptoms]))
+    <table id="medical" border="1">
+        <tr>
+            <td>№</td>
+            <td>Name</td>
+            <td>Status</td>
+            <td>Note</td>
+        </tr>
+        
+        <?php
+if ($evalution[symptoms][val][0] !== "" && $evalution[symptoms][status][0] !== "")
 {
     $cnt = 1;
     for ($i = 0; $i < count($evalution[symptoms][val]); $i++)
     {
     ?>
-        <li><div>
-            <span><?=$cnt++?></span>
-        <span>
+        <tr>
+        <td><?=$cnt++?></td>
+        <td>
             <?php
             foreach($list[symptomList] as $value)
             {
@@ -343,38 +245,52 @@ if (isset($evalution[symptoms]))
                 }
             }
             ?>
-        </span>
-        <span>
+        </td>
+        <td>
             <?=$evalution[symptoms][status][$i];?>
-        </span>
-        <span>
+        </td>
+        <td>
             <?=$evalution[symptoms][note][$i];?>
-        </span>
-        </div></li>
+        </td>
+        </div></li></tr>
     <?php    
     }
     ?>
 <?php
 }
+else{
+    ?>
+    NO DATA TO DISPLAY
+    <?php
+    }
 ?>
-</ul>
+        
+    </table>
+  
 </div>
+
+
+
 
 <div class='contentheading'>Medical preparations Tracking</div>
 <div class='tabContainer2' style="background-color:#E1FFE3">
-
-<ul>
-    <li><div><span>№</span><span>Name</span><span>Status</span><span>Note</span></div></li>
+    <table id="medical" border="1">
+        <tr>
+            <td>№</td>
+            <td>Name</td>
+            <td>Status</td>
+            <td>Note</td>
+        </tr>
 <?php
-if (isset($evalution[drug]))
+
+if ($evalution[drug][val][0] !== "" && $evalution[drug][status][0] !== "")
 {
     $cnt = 1;
     for ($i = 0; $i < count($evalution[drug][val]); $i++)
     {
-    ?>
-        <li><div>
-            <span><?=$cnt++?></span>
-        <span>
+    ?><tr>
+            <td><?=$cnt++?></td>
+        <td>
             <?php
             foreach($list[medtrackList] as $value)
             {
@@ -384,14 +300,14 @@ if (isset($evalution[drug]))
                 }
             }
             ?>
-        </span>
-        <span>
+        </td>
+        <td>
             <?=$evalution[drug][status][$i]?>
-        </span>
-        <span>
+        </td>
+        <td>
             <?=$evalution[drug][note][$i];?>
-        </span>
-        </div></li>
+        </td>
+        </tr>
     <?php    
     }
     ?>
@@ -400,28 +316,35 @@ if (isset($evalution[drug]))
 else
 {
 ?>
-        <tr><td colspan="3">You dont have any drug</td></tr>
+        NO DATA TO DISPLAY
 <?php
 }
 ?>
-</ul>
+        </table>
+
 </div>
 
 <div class='contentheading'>Diseases Tracking</div>
-<div class='tabContainer2 horizontal-shadow' style="background-color:#E1FFE3">
+<div class='tabContainer2' style="background-color:#E1FFE3">
+    <table id="medical" border="1">
+        <tr>
+            <td>№</td>
+            <td>Name</td>
+            <td>Status</td>
+            <td>Note</td>
+        </tr>
+    
 
-<ul>
-    <li><div><span>№</span><span>Name</span><span>Status</span><span>Note</span></div></li>
 <?php
-if (isset($evalution[diseases]))
+if ($evalution[diseases][val][0] !== "" && $evalution[diseases][status][0] !== "")
 {
     $cnt = 1;
     for ($i = 0; $i < count($evalution[diseases][val]); $i++)
     {
     ?>
-        <li><div>
-            <span><?=$cnt++?></span>
-        <span>
+        <tr>
+            <td><?=$cnt++?></td>
+        <td>
             <?php
             foreach($list[diseasesList] as $value)
             {
@@ -431,14 +354,14 @@ if (isset($evalution[diseases]))
                 }
             }
             ?>
-        </span>
-        <span>
+        </td>
+        <td>
             <?=$evalution[diseases][status][$i];?>
-        </span>
-        <span>
+        </td>
+        <td>
             <?=$evalution[diseases][note][$i];?>
-        </span>
-        </div></li>
+        </td>
+        </tr>
     <?php    
     }
     ?>
@@ -447,20 +370,34 @@ if (isset($evalution[diseases]))
 else
 {
 ?>
-        <tr><td colspan="3">You dont have any drug</td></tr>
+        NO DATA TO DISPLAY
 <?php
 }
 ?>
-</ul>
-</div>
+        </table>
 
 </div>
 
-  
 </div>
 
 
 
+
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() { 
+        var data = google.visualization.arrayToDataTable(<?=$this->d?>);
+
+        
+        var options = {
+            vAxis: {minValue: 0, maxValue: 100}
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('qchart_div'));
+        chart.draw(data, options);
+      }
+    </script>
 
 
 

@@ -28,8 +28,7 @@ if($this->diseasesList){
 }
 ?>
 
-<div class='contentheading'>Intake Survey</div>   
-<div class='tabContainer2' style="background-color:#E1FFE3">
+
 <form action="index.php?option=com_phase&controller=client&in=1"  method="post" enctype="multipart/form-data">    
  
 <input type="hidden" name="evalution[pid]" value="<?=$pid?>" />
@@ -37,92 +36,93 @@ if($this->diseasesList){
     
  
 <div class='contentheading'>Client goals</div>   
-<div class='tabContainer2' style="background-color:#E1FFE3">
-
-    
-    
-    
-<?php    
-if($loockingfor):   
-?>
-<table>
-    <tr colspan="2">
-        <td><?="Target Weight"?></td>
-        <td><input type="text" name="evalution[goals][weight]" size="2"  value="<?php if(isset($evalution[goals][weight])){ echo $evalution[goals][weight];} ?>" /><?="lbs."?></td>
-    </tr>
-    <tr colspan="2">
-        <td><?="Target Body Fat"?></td>
-        <td><input type="text" name="evalution[goals][fat]" size="2"  value="<?php if(isset($evalution[goals][fat])){ echo $evalution[goals][fat];} ?>" /><?="%"?></td>
-    </tr>
-    <tr>
-    <?php
-    $cnt = 1;    
-    foreach($loockingfor as $value):
+<div class='goals horizontal-shadow'>
+    <?php    
+    if($loockingfor):   
     ?>
-                <td style='border:1px solid #EEE;padding:3px;' align="center" ><input type="checkbox" name="evalution[goals][question][]" value="<?=$value['id'];?>" <?php if(isset($evalution[goals][question])){ if(in_array($value['id'],$evalution[goals][question])) {echo "checked";}} ?>></td>
-                <td style='border:1px solid #EEE;padding:3px;'><?=$value['var'];?></td>
-    <?php
-    if($cnt % 4 == 0)
-    {
-        echo "</tr><tr>\n";
-    }
-    $cnt++;
-    endforeach;
-    ?>
-    </tr>
-</table>
+    
+        <div class="data-result">
+            <span class="value-name"><?="Target Weight"?></span>
+            <input type="text" name="evalution[goals][weight]" size="2"  value="<?php if(isset($evalution[goals][weight])){ echo $evalution[goals][weight];} ?>" /><?="lbs."?>
+        </div>
+    
+        <div class="data-result">
+            <span class="value-name"><?="Target Body Fat"?></span>
+            <input type="text" name="evalution[goals][fat]" size="2"  value="<?php if(isset($evalution[goals][fat])){ echo $evalution[goals][fat];} ?>" /><?="%"?></span> 
+       </div>
+        
+        
+    <table>
+        <tr>
+        <?php
+        $cnt = 1;    
+        foreach($loockingfor as $value):
+        ?>
+                    <td style='border:1px solid #EEE;padding:3px;' align="center" ><input type="checkbox" name="evalution[goals][question][]" value="<?=$value['id'];?>" <?php if(isset($evalution[goals][question])){ if(in_array($value['id'],$evalution[goals][question])) {echo "checked";}} ?>></td>
+                    <td style='border:1px solid #EEE;padding:3px;'><?=$value['var'];?></td>
+        <?php
+        if($cnt % 4 == 0)
+        {
+            echo "</tr><tr>\n";
+        }
+        $cnt++;
+        endforeach;
+        ?>
+        </tr>
+    </table>
 
-<?php
-endif;
-?>
+    <?php
+    endif;
+    ?>
 </div>
 
 
     
 <div class='contentheading'>Body stats</div>    
-<div class='tabContainer2' style="background-color:#E1FFE3">
-<table width="50%">
-    <tr>
-        <td><?="Sex"?></td>
-        <td>
+<div class='goals horizontal-shadow'>
+    <div class="data-result">
+            <span class="value-name"><?="Sex"?></span>
             <select name="evalution[stats][sex]">
                 <option <?php if($evalution[stats][sex] == 'male'){echo 'selected ';} ?>  value='male'>Male</option>
                 <option <?php if($evalution[stats][sex] == 'female'){echo 'selected ';} ?> value='female'>Female</option>
             </select>
-        </td>
-    </tr>
-    <tr>
-        <td><?="Height"?></td>   
-        <td><input type="text" name="evalution[stats][heigth][]" size="2" value="<?php if(isset($evalution[stats][heigth][0])){ echo $evalution[stats][heigth][0];} ?>" /><?="ft"?><input type="text" name="evalution[stats][heigth][]" size="2" value="<?php if(isset($evalution[stats][heigth][0])){ echo $evalution[stats][heigth][1];} ?>" /><?="inches"?></td>
-    </tr>
-    <tr>
-        <td><?="Weight"?></td>
-        <td><input type="text" name="evalution[stats][weight]" size="2" value="<?php if(isset($evalution[stats][weight])){ echo $evalution[stats][weight];} ?>" /><?="lbs"?></td>
-    </tr>
-    <tr>
-        <td><?="Body Fat"?></td>
-        <td><input type="text" name="evalution[stats][fat]" size="1" value="<?php if(isset($evalution[stats][fat])){ echo $evalution[stats][fat];} ?>" /><?="%"?></td>
-    </tr>
-    <tr>
-        <td><?="PH"?></td>
-        <td><input type="text" name="evalution[stats][ph]" size="1" value="<?php if(isset($evalution[stats][ph])){ echo $evalution[stats][ph];} ?>" /><?="%"?></td>
-    </tr>
-    <tr>
-        <td><?="Blood Pressure"?></td>
-        <td><input type="text" name="evalution[stats][blod_pressure][]" size="1" value="<?php if(isset($evalution[stats][blod_pressure][0])){ echo $evalution[stats][blod_pressure][0];} ?>" /><?="/"?><input type="text" name="evalution[stats][blod_pressure][]" size="1" value="<?php if(isset($evalution[stats][blod_pressure][0])){ echo $evalution[stats][blod_pressure][1];} ?>" /></td>
-    </tr>
-    <tr>
-        <td><?="Blood Type"?></td>
-        <td>
+    </div>
+   
+    <div class="data-result">
+            <span class="value-name"><?="Height"?></span>
+            <input type="text" name="evalution[stats][heigth][]" size="2" value="<?php if(isset($evalution[stats][heigth][0])){ echo $evalution[stats][heigth][0];} ?>" /><?="ft"?><input type="text" name="evalution[stats][heigth][]" size="2" value="<?php if(isset($evalution[stats][heigth][0])){ echo $evalution[stats][heigth][1];} ?>" /><?="inches"?>
+    </div>
+    
+    <div class="data-result">
+            <span class="value-name"><?="Weight"?></span>
+            <input type="text" name="evalution[stats][weight]" size="2" value="<?php if(isset($evalution[stats][weight])){ echo $evalution[stats][weight];} ?>" /><?="lbs"?>
+    </div>
+    
+    <div class="data-result">
+            <span class="value-name"><?="Body Fat"?></span>
+            <input type="text" name="evalution[stats][fat]" size="1" value="<?php if(isset($evalution[stats][fat])){ echo $evalution[stats][fat];} ?>" /><?="%"?>
+    </div>
+    
+    <div class="data-result">
+            <span class="value-name"><?="PH"?></span>
+            <input type="text" name="evalution[stats][ph]" size="1" value="<?php if(isset($evalution[stats][ph])){ echo $evalution[stats][ph];} ?>" />
+    </div>
+    
+    <div class="data-result">
+            <span class="value-name"><?="Blood Pressure"?></span>
+            <input type="text" name="evalution[stats][blod_pressure][]" size="1" value="<?php if(isset($evalution[stats][blod_pressure][0])){ echo $evalution[stats][blod_pressure][0];} ?>" /><?="/"?><input type="text" name="evalution[stats][blod_pressure][]" size="1" value="<?php if(isset($evalution[stats][blod_pressure][0])){ echo $evalution[stats][blod_pressure][1];} ?>" />
+    </div>
+    
+    <div class="data-result">
+            <span class="value-name"><?="Blood Type"?></span>
             <select name="evalution[stats][blood_type]">
                 <option <?php if($evalution[stats][blood_type] == 'A'){echo 'selected ';} ?> value='A'>A</option>
                 <option <?php if($evalution[stats][blood_type] == 'B'){echo 'selected ';} ?>  value='B'>B</option>
                 <option <?php if($evalution[stats][blood_type] == 'AB'){echo 'selected ';} ?>   value='AB'>AB</option>
                 <option <?php if($evalution[stats][blood_type] == 'O'){echo 'selected ';} ?>    value='O'>O</option>
             </select>
-        </td>
-    </tr>
-</table>
+    </div>
+
 
 </div>
 
@@ -238,8 +238,8 @@ endif;
 
 
 
-<div class='contentheading'>Current Photo</div>    
-<div class='tabContainer2' style="background-color:#E1FFE3"> 
+    <div class='contentheading'>Current Photo</div>
+    <div class='current-photo'>
 <table>
 <tr>
     <td>
@@ -249,11 +249,11 @@ if($evalution[file][name][0])
 ?>
 <input type="hidden" name="evalution[file][name][0]" value="<?=$evalution[file][name][0]?>" />
 <?php
-echo "  <div style='font-size:15px;color:#008;'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$evalution[file][name][0]."\" width=\"200\" height=\"350\"></div>";
+echo "<div class='photo-one'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$evalution[file][name][0]."\" width=\"200\" height=\"350\"></div>";
 }
 else
 {
-echo "  <div style='font-size:15px;color:#008;'>
+echo "<div class='photo-one'>
         <img src=\"".JURI::root().'uploads_jtpl/phase_img/'."no1.png"."\" width=\"200\" height=\"350\">
         </div>";        
 }
@@ -269,11 +269,11 @@ if($evalution[file][name][1])
 
         
 <?php
-echo "  <div style='font-size:15px;color:#008;'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$evalution[file][name][1]."\" width=\"200\" height=\"350\"></div>";
+echo "<div class='photo-two'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$evalution[file][name][1]."\" width=\"200\" height=\"350\"></div>";
 }
 else
 {
-echo "  <div style='font-size:15px;color:#008;'>
+echo "<div class='photo-two'>
         <img src=\"".JURI::root().'uploads_jtpl/phase_img/'."no2.png"."\" width=\"200\" height=\"350\">
         </div>";        
 }
@@ -354,7 +354,7 @@ echo "  <div style='font-size:15px;color:#008;'>
             <td><input type="text" placeholder="If YES explain" size="40" name="evalution[madtrack][drugs][note]" /></td>
         </tr>
     </table>
-    
+    </div>
    
 
 
@@ -714,11 +714,11 @@ if(isset($diseasesList))
 -->
 
 
-<div class='tabContainer2' style="background-color:#E1FFE3">   
+  
     
     <!--Название раздела-->
     <div class='contentheading'>Allergies Tracking</div>    
-
+    <div class='tabContainer2' style="background-color:#E1FFE3"> 
 <?php
 if(isset($allergiesList))
 {
@@ -755,11 +755,11 @@ if(isset($allergiesList))
     <div id="alergies_list"><ul></ul></div>
 </div>
 
-<div class='tabContainer2' style="background-color:#E1FFE3">   
+  
     
     <!--Название раздела-->
     <div class='contentheading'>Symptoms Tracking</div>
-    
+    <div class='tabContainer2' style="background-color:#E1FFE3"> 
     <!--список симптомов-->
     <?php
     if(isset($symptomList))
@@ -767,7 +767,7 @@ if(isset($allergiesList))
     ?>
         <div>
             
-
+Choose from the list :
                     <select id="s_list">
                             <?php 
                             foreach ($symptomList as $value)
@@ -802,10 +802,11 @@ if(isset($allergiesList))
     
 </div>
 
-<div class='tabContainer2' style="background-color:#E1FFE3">   
+
     
     <!--Название раздела-->
     <div class='contentheading'>Medical preparations Tracking</div>    
+    <div class='tabContainer2' style="background-color:#E1FFE3">   
 <?php
 if(isset($medtrackList))
 {
@@ -845,10 +846,11 @@ if(isset($medtrackList))
     <div id="drug_list"><ul></ul></div>
 </div>
 
-<div class='tabContainer2' style="background-color:#E1FFE3">   
+
     
     <!--Название раздела-->
-    <div class='contentheading'>Diseases Tracking</div>    
+    <div class='contentheading'>Diseases Tracking</div>   
+    <div class='tabContainer2' style="background-color:#E1FFE3">   
 <?php
 if(isset($diseasesList))
 {   
@@ -894,7 +896,7 @@ if(isset($diseasesList))
 
 
 </form>   
-</div>
+
 
 
 

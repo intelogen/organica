@@ -33,18 +33,12 @@ if($this->diseasesList)
 }  
 ?>
 
-<div class='contentheading'>Intake Survey</div>   
-<div class='tabContainer2' style="background-color:#E1FFE3">
+
 <form action="index.php?option=com_phase&controller=client&inc=1"  method="post" enctype="multipart/form-data">    
  
 <input type="hidden" name="evalution[pid]" value="<?=$pid?>" />
 <input type="hidden" name="evalution[uid]" value="<?=$uid?>" />
 
-
-
-
-
-    
 
 
 <div class='contentheading'>Client goals</div>
@@ -89,165 +83,98 @@ if($this->diseasesList)
     </table>
 </div>
 
-<div class='contentheading'>Body stats</div>
-<div class='body-stats horizontal-shadow'>
-
-    <?php if($this->evalution[stats][sex] !== ""){ ?>
-        <div class="data-result">
-            <span class="value-name"><?="Sex - "?></span>
-            <span class="value"><?= $this->evalution[stats][sex]?></span>
-        </div>
-    <?php }
-
-    if($this->evalution[stats][height][0] !== "" && $this->evalution[stats][height][1] !== ""){ ?>
-        <div class="data-result">
-            <span class="value-name"><?="Height"?></span>
-            <span class="value"><?=$this->evalution[stats][height][0]." ft ".$this->evalution[stats][height][1]." inches"?></span>
-
-        </div>
-    <?php }
-
-    if($this->evalution[stats][weight] !== ""){ ?>
-        <div class="data-result">
-            <span class="value-name"><?="Weight"?></span>
-            <span class="value"><?= $this->evalution[stats][weight]."lbs"?></span>
-        </div>
-
-    <?php }
-
-    if($this->evalution[stats][fat] !== ""){ ?>
-        <div class="data-result">
-            <span class="value-name"><?="Body Fat"?></span>
-            <span class="value"><?=$this->evalution[stats][fat]."%"?></span>
-        </div>
-
-    <?php }
-
-    if($this->evalution[stats][ph] !== ""){ ?>
-        <div class="data-result">
-            <span class="value-name"><?="PH"?></span>
-            <span class="value"><?=$this->evalution[stats][ph]."%"?></span>
-        </div>
-
-    <?php }
-
-    if($this->evalution[stats][blood_p][0] !== "" && $this->evalution[stats][blood_p][1] !== ""){ ?>
-        <div class="data-result">
-            <span class="value-name"><?="Blood Pressure"?></span>
-            <span class="value"><?=$this->evalution[stats][blood_p][0]." / ".$this->evalution[stats][blood_p][1]?></span>
-        </div>
-
-    <?php }
-
-    if($this->evalution[stats][blood_t] !== ""){ ?>
-        <div class="data-result">
-            <span class="value-name"><?="Blood Type"?></span>
-            <span class="value"><?=$this->evalution[stats][blood_t]?></span>
-        </div>
-
-    <?php } ?>
-</div>
-
-
-
-
-
-
 
 
 
 <div class='contentheading'>Body stats</div>    
-<div class='tabContainer2' style="background-color:#E1FFE3">
-<table width="50%">
-    <tr>
-        <td><?="Sex - "?></td>
-        <td>
-            <?php if(isset($evalution[stats][sex])){echo $evalution[stats][sex];}?>
-        </td>
-    </tr>
-    <tr>
-        <td><?="Height"?></td>   
-        <td><?php if(isset($evalution[stats][heigth][0])){ echo $evalution[stats][heigth][0];} ?><?=" ft "?><?php if(isset($evalution[stats][heigth][0])){ echo $evalution[stats][heigth][1];} ?><?=" inches"?></td>
-    </tr>
-    <tr>
-        <td><?="Weight"?></td>
-        <td><?php if(isset($evalution[stats][weight])){ echo $evalution[stats][weight];} ?><?="lbs"?></td>
-    </tr>
-    <tr>
-        <td><?="Body Fat"?></td>
-        <td><?php if(isset($evalution[stats][fat])){ echo $evalution[stats][fat];} ?><?="%"?></td>
-    </tr>
-    <tr>
-        <td><?="PH"?></td>
-        <td><?php if(isset($evalution[stats][ph])){ echo $evalution[stats][ph];} ?><?="%"?></td>
-    </tr>
-    <tr>
-        <td><?="Blood Pressure"?></td>
-        <td><?php if(isset($evalution[stats][blod_pressure][0])){ echo $evalution[stats][blod_pressure][0];} ?><?=" / "?><?php if(isset($evalution[stats][blod_pressure][0])){ echo $evalution[stats][blod_pressure][1];} ?></td>
-    </tr>
-    <tr>
-        <td><?="Blood Type"?></td>
-        <td>
+<div class='goals horizontal-shadow'>
+
+                
+        <div class="data-result">
+            <span class="value-name"><?="Sex"?></span>
+            <span class="value"><?php if(isset($evalution[stats][sex])){echo $evalution[stats][sex];}?></span>
+        </div>
+    <div class="data-result">
+        <span class="value-name"><?="Height"?></span>   
+        <span class="value"><?php if(isset($evalution[stats][heigth][0])){ echo $evalution[stats][heigth][0];} ?><?=" ft "?><?php if(isset($evalution[stats][heigth][0])){ echo $evalution[stats][heigth][1];} ?><?=" inches"?></span>
+    </div>
+    
+    <div class="data-result">
+        <span class="value-name"><?="Weight"?></span>
+        <span class="value"><?php if(isset($evalution[stats][weight])){ echo $evalution[stats][weight];} ?><?="lbs"?></span>
+    </div>
+    
+    <div class="data-result">
+        <span class="value-name"><?="Body Fat"?></span>
+        <span class="value"><?php if(isset($evalution[stats][fat])){ echo $evalution[stats][fat];} ?><?="%"?></span>
+    </div>
+    
+    <div class="data-result">
+        <span class="value-name"><?="PH"?></span>
+        <span class="value"><?php if(isset($evalution[stats][ph])){ echo $evalution[stats][ph];} ?></span>
+    </div>
+    
+    <div class="data-result">
+        <span class="value-name"><?="Blood Pressure"?></span>
+        <span class="value"><?php if(isset($evalution[stats][blod_pressure][0])){ echo $evalution[stats][blod_pressure][0];} ?><?=" / "?><?php if(isset($evalution[stats][blod_pressure][0])){ echo $evalution[stats][blod_pressure][1];} ?></span>
+    </div>
+
+    <div class="data-result">
+        <span class="value-name"><?="Blood Type"?></span>
+        <span class="value">
             <?php
             if(isset($evalution[stats][blood_type])){echo $evalution[stats][blood_type];}
             ?>
-        </td>
-    </tr>
-</table>
+        </span>
+    </div>
+
 
 </div>
 
-<div class='contentheading'>Body Type</div> <?="Answer the questions below to help us identify your body type<br>"?>   
-<div class='tabContainer2' style="background-color:#E1FFE3">    
 
-     
-<table>
-    <tr>
-        <td><?="1. Bone structure - "?><?php echo $evalution[body_type][bone]; ?></td>
-    </tr>
-    <tr>
-        <td>
-            
-        </td>
-    </tr>
-    <tr>
-        <td><?="2. Muscle type  - "?><?php echo $evalution[body_type][muscle]; ?></td>
-    </tr>
-    <tr>
-        <td>
+
+    <div class='contentheading'>Body Type</div>
+    <div class='body-type horizontal-shadow'>
+
+        <?php if($this->evalution[body_type][0] !== ""){ ?>
+        <div class="data-result">
+            <span class="value-name"><?="1. Bone structure"?></span>
+            <span class="value"><?php echo $evalution[body_type][bone]; ?></span>
+        </div>
+            <?php }
         
-        </td>
-    </tr>
-    <tr>
-        <td><?="3. Tendency to gain weight - "?><?php echo $evalution[body_type][weigth];?></td>
-    </tr>
-    <tr>
-        <td>
-
-        </td>
-    </tr>
-    <tr>
-        <td><?="4. Desribes the clients apperance, knowing thei age  - "?><?php echo $evalution[body_type][age];?></td>
-    </tr>
-    <tr>
-        <td>
-
-        </td>
-    </tr>
-    <tr>
-        <td><?="5. Risk of heart disease - "?><?php echo $evalution[body_type][disease]; ?></td>
-    </tr>
-    <tr>
-        <td>
-
-        </td>
-    </tr>
-    <tr>
-        <td><?="6. Body shape that most resembles you own."?></td>
-    </tr>
-    <tr>
-        <td>
-            <?php
+        if($this->evalution[body_type][1] !== ""){ ?>
+        <div class="data-result">
+            <span class="value-name"><?="2. Muscle type"?></span>
+            <span class="value"><?php echo $evalution[body_type][muscle]; ?></span>
+        </div>
+            <?php }
+        
+        if($this->evalution[body_type][2] !== ""){?>
+        <div class="data-result">
+                <span class="value-name"><?="3. Tendency to gain weight"?></span>
+            <span class="value"><?php echo $evalution[body_type][weigth];?></span>
+        </div>
+            <?php }
+        
+        if($this->evalution[body_type][3] !== ""){ ?>
+        <div class="data-result">
+            <span class="value-name"><?="4. Describe yourself, knowing your age"?></span>
+            <span class="value"><?php echo $evalution[body_type][age];?></span>
+        </div>
+            <?php }
+        
+        if($this->evalution[body_type][4] !== ""){ ?>
+        <div class="data-result">
+            <span class="value-name"><?="5. Risk of heart disease"?></span>
+            <span class="value"><?php echo $evalution[body_type][disease]; ?></span>
+        </div>
+            <?php } ?>
+        <div class="data-result">
+            <span class="value-name"><?="6. Body shape that most resembles you own"?></span>
+        </div>
+        <div class="body-type-photo">
+        <?php
             if($evalution[body_type][own] == "fat.png"){echo "  <div style='font-size:15px;color:#008;'>
             <img src=\"".JURI::root().'uploads_jtpl/phase_img/'."fat.png"."\" width=\"200\" height=\"350\">
             </div>";}
@@ -262,9 +189,16 @@ if($this->diseasesList)
             <img src=\"".JURI::root().'uploads_jtpl/phase_img/'."toll.png"."\" width=\"200\" height=\"350\">
             </div>";}
             ?> 
-        </td>
-    </tr>
-</table>
+        </div>
+
+
+
+
+
+
+
+
+
 </div>
         
 <div class='contentheading'>Lifestyle analysis</div>    
@@ -299,29 +233,25 @@ endif;
 ?>
 </div>
 
-<div class='contentheading'>Current Photo</div>    
-<div class='tabContainer2' style="background-color:#E1FFE3"> 
-<table>
-<tr>
-    <td>
+    <div class='contentheading'>Current Photo</div>
+    <div class='current-photo'>
+
         <?php
 if($evalution[file][name][0])
 {
 ?>
 <input type="hidden" name="evalution[file][name][0]" value="<?=$evalution[file][name][0]?>" />
 <?php
-echo "  <div style='font-size:15px;color:#008;'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$evalution[file][name][0]."\" width=\"200\" height=\"350\"></div>";
+echo "<div class='photo-one'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$evalution[file][name][0]."\" width=\"200\" height=\"350\"></div>";
 }
 else
 {
-echo "  <div style='font-size:15px;color:#008;'>
+echo "<div class='photo-one'>
         <img src=\"".JURI::root().'uploads_jtpl/phase_details/'."no1.png"."\" width=\"200\" height=\"350\">
         </div>";        
 }
 ?>
 
-    </td>
-    <td>
         <?php
 if($evalution[file][name][1])
 {
@@ -330,20 +260,16 @@ if($evalution[file][name][1])
 
         
 <?php
-echo "  <div style='font-size:15px;color:#008;'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$evalution[file][name][1]."\" width=\"200\" height=\"350\"></div>";
+echo "  <div class='photo-two'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$evalution[file][name][1]."\" width=\"200\" height=\"350\"></div>";
 }
 else
 {
-echo "  <div style='font-size:15px;color:#008;'>
+echo "  <div class='photo-two'>
         <img src=\"".JURI::root().'uploads_jtpl/phase_details/'."no2.png"."\" width=\"200\" height=\"350\">
         </div>";        
 }
 ?>  
-    </td>
-</tr>
-    
-    
-    </table>
+
 
 
 
@@ -354,8 +280,9 @@ echo "  <div style='font-size:15px;color:#008;'>
 </div>      
       
 <div class='contentheading'>Medical Tracking</div>    
-<div class='tabContainer2' style="background-color:#E1FFE3">    
-<?="Answer the questions below to help us identify your body type<br>"?>
+<div class='tabContainer2' style="background-color:#E1FFE3">  
+
+
     <table>
         <tr>
             <td><?="1. When was your last physical exam ?"?></td>
@@ -420,15 +347,9 @@ echo "  <div style='font-size:15px;color:#008;'>
 
 
     
-    
-<div class='tabContainer2' style="background-color:#E1FFE3">   
 <div class='contentheading'>Allergies Tracking</div>  
-
-
-
-
-
-
+<div class='tabContainer2' style="background-color:#E1FFE3">   
+<ul>
 <?php
 if($evalution[madtrack][allergies][db_list])
 {	
@@ -437,7 +358,7 @@ if($evalution[madtrack][allergies][db_list])
 		{
 			if(in_array($value['id'],$evalution[madtrack][allergies][db_list]))
 			{
-				echo " - ".$value[name]."<br>";
+				echo "<li>".$value[name]."</li>";
 			}
 		}
 	foreach($evalution[madtrack][allergies][db_list] as $value)
@@ -455,22 +376,21 @@ if(isset($evalution[madtrack][allergies][extra_list]))
 	foreach($evalution[madtrack][allergies][extra_list] as $value)
 	{
 	?>
-		<?= $value."<br>" ?>
+                <li><?= $value?></li>
 		<input type="hidden" name="evalution[madtrack][allergies][extra_list][]" value="<?= $value ?>" />
 	<?php	
 	}
 }		
 ?>
-
+</ul>
 
 </div>
 
 
 
-
+<div class='contentheading'>Symptoms Tracking</div>   
 <div class='tabContainer2' style="background-color:#E1FFE3">   
-<div class='contentheading'>Symptoms Tracking</div>    
-
+ <ul>
 <?php
 if(isset($evalution[madtrack][symptoms][db_list]))
 {	
@@ -480,7 +400,7 @@ if(isset($evalution[madtrack][symptoms][db_list]))
 		{
 			if(in_array($value['id'],$evalution[madtrack][symptoms][db_list]))
 			{
-				echo " - ".$value[name]."<br>";
+				echo "<li>".$value[name]."</li>";
 			}
 		}
 	foreach($evalution[madtrack][symptoms][db_list] as $value)
@@ -498,30 +418,20 @@ if(isset($evalution[madtrack][symptoms][extra_list]))
 	foreach($evalution[madtrack][symptoms][extra_list] as $value)
 	{
 	?>
-		<?= $value."<br>" ?>
+                <li><?= $value?></li>
 		<input type="hidden" name="evalution[madtrack][symptoms][extra_list][]" value="<?= $value ?>" />
 	<?php	
 	}
 }		
 ?>
-
-
-
-
+ </ul>
 </div>
 
 
-    
+<div class='contentheading'>Medical preparations Tracking</div>
 <div class='tabContainer2' style="background-color:#E1FFE3">   
 
-<div class='contentheading'>Medical preparations Tracking</div>
-
-
-
-
-
-
-
+<ul>
 <?php
 if(isset($evalution[madtrack][drug][db_list]))
 {	
@@ -530,7 +440,7 @@ if(isset($evalution[madtrack][drug][db_list]))
 		{
 			if(in_array($value['id'],$evalution[madtrack][drug][db_list]))
 			{
-				echo " - ".$value[name]."<br>";
+				echo "<li>".$value[name]."</li>";
 			}
 		}
 	foreach($evalution[madtrack][drug][db_list] as $value)
@@ -548,27 +458,20 @@ if(isset($evalution[madtrack][drug][extra_list]))
 	foreach($evalution[madtrack][drug][extra_list] as $value)
 	{
 	?>
-		<?= $value."<br>" ?>
+                <li><?= $value?></li>
 		<input type="hidden" name="evalution[madtrack][drug][extra_list][]" value="<?= $value ?>" />
 	<?php	
 	}
 }		
 ?>
 
-
+</ul>
 </div>
     
     
-	
+<div class='contentheading'>Diseases Tracking</div>	
 <div class='tabContainer2' style="background-color:#E1FFE3">   
-
-<div class='contentheading'>Diseases Tracking</div>
-
-
-
-
-
-
+<ul>
 <?php
 if(isset($evalution[madtrack][diseases][db_list]))
 {	
@@ -579,7 +482,7 @@ if(isset($evalution[madtrack][diseases][db_list]))
 		{
 			if(in_array($value['id'],$evalution[madtrack][diseases][db_list]))
 			{
-				echo " - ".$value[name]."<br>";
+				echo "<li>".$value[name]."</li>";
 			}
 		}
 	foreach($evalution[madtrack][diseases][db_list] as $value)
@@ -597,15 +500,14 @@ if(isset($evalution[madtrack][diseases][extra_list]))
 	foreach($evalution[madtrack][diseases][extra_list] as $value)
 	{
 	?>
-		<?= $value."<br>" ?>
+		<li><?= $value?></li>
 		<input type="hidden" name="evalution[madtrack][diseases][extra_list][]" value="<?= $value ?>" />
 	<?php	
 	}
 }		
 ?>
 
-
-
+</ul>
 </div>
 
 </div>     
@@ -617,4 +519,3 @@ if(isset($evalution[madtrack][diseases][extra_list]))
 
 
 </form>  
-</div>

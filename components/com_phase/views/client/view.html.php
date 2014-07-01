@@ -3559,6 +3559,47 @@ class PhaseViewClient extends JView
         $trackingStart = $model->getProgressTrackingDetails($uid, $pid, $numbers);
         $this->assignRef('trackingStart', $trackingStart);
         //графики
+    
+        
+        
+        $var = explode(",", $trackingStart->cats);
+    foreach ($var as $value) {
+        if($value == ""){$value = "VAR";}
+        $cat[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
+    }
+    
+    $var2 = explode(",", $trackingStart->opp_vals);
+    foreach ($var2 as $value) {
+        if($value == "" || $value == "0"){$value = 1;}
+        $cat2[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
+    }
+    
+    foreach ($cat2 as $value){
+        if($value > 75){
+                $color[] = "green";
+            }
+            elseif ($value <=75 && $value > 50) {
+                $color[] = "blue";
+            }
+            elseif($value <=50 && $value > 25){
+                $color[] = "orange";
+            }
+            elseif($value <=25 && $value >= 0){
+                $color[] = "red";
+            }
+            else{$color[] = "blue";}
+    }
+    
+            $a = "[['Element', 'results', { role: 'style' }]";
+            for($i=0; $i<count($color); $i++){
+                $b = $b.", ['".$cat[$i]."', ".$cat2[$i].", '".$color[$i]."']";
+            }
+            $c = "]";    
+            $d = $a."".$b."".$c;
+            $this->assignRef('d', $d);
+            
+            
+            
         
 	//Взять список алергий
 	$allergiesList = $model->getAllergiesList();
@@ -3661,6 +3702,47 @@ class PhaseViewClient extends JView
 
         $this->assignRef('list', $list);
 
+        $var = explode(",", $trackingStart->cats);
+        foreach ($var as $value) {
+            if($value == ""){$value = "VAR";}
+            $cat[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
+        }
+    
+        $var2 = explode(",", $trackingStart->opp_vals);
+        foreach ($var2 as $value) {
+            if($value == "" || $value == "0"){$value = 1;}
+            $cat2[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
+        }
+
+    foreach ($cat2 as $value){
+        if($value > 75){
+                $color[] = "green";
+            }
+            elseif ($value <=75 && $value > 50) {
+                $color[] = "blue";
+            }
+            elseif($value <=50 && $value > 25){
+                $color[] = "orange";
+            }
+            elseif($value <=25 && $value >= 0){
+                $color[] = "red";
+            }
+            else{$color[] = "blue";}
+    }
+    
+            $a = "[['Element', 'results', { role: 'style' }]";
+            for($i=0; $i<count($color); $i++){
+                $b = $b.", ['".$cat[$i]."', ".$cat2[$i].", '".$color[$i]."']";
+            }
+            $c = "]";    
+            $d = $a."".$b."".$c;
+            if(count($var) !== 9 || count($var2) !== 9){
+                $d="[['Element', 'results', { role: 'style' }], ['Digestive', 100, 'green'], ['Intestinal', 100, 'green'], ['Circulatory', 100, 'green'], ['Nervous', 100, 'green'], ['Immune', 100, 'green'], ['Respiratory', 100, 'green'], ['Urinary', 100, 'green'], ['Glandular', 100, 'green'], ['Structural', 100, 'green']]";
+            }
+            $this->assignRef('d', $d);
+            
+            
+            
         
         parent::display($tpl);
     }
@@ -3900,13 +3982,12 @@ class PhaseViewClient extends JView
                 $date = $value[date];
                 $data[dirty_content] = $model->getC($date, $pid);
 
-
+               
 
 
                 // розбор данных из базы
                 if(isset($data[dirty_content]))
                 {
-                    
                     if (isset($data[dirty_content][0]) && $data[dirty_content][0][name] == 'life_style')
                     {
                         $data[content][life_style][val] = explode(",", $data[dirty_content][0][val]);
@@ -3948,14 +4029,18 @@ class PhaseViewClient extends JView
 
                     unset($data[dirty_content]);
                }
+               
                $content[] = $data[content];
                
                        }    
         }
-        
-        
+       
 
-        
+
+
+
+
+
         //Взять список симпомов
         $list[symptomList] = $model->getSymptomList();
 
@@ -3970,67 +4055,26 @@ class PhaseViewClient extends JView
 
 
         $this->assignRef('content', $content);
-     
+        global $mainframe;
+        
+        if($content == null){
+            $mainframe->redirect("index.php?option=com_phase&controller=client&action=show_repo&c=$uid", "impossible show this phase");
+        }
+
+
         parent::display($tpl);
     }
     
     function show_total_repo($tpl = null)
     {
+        
         $model = $this->getModel();
         $uid = JRequest::getvar('c');
-       
-        $result = $model->getAllData($uid);
-                 
-        if($result && $result !== null && $result[0] !== "")
-        {
-            foreach ($result as $value){
-              
-                if($value[name] == 'goals_body'){
-                    $content[goals_body][val][] = explode(",", $value[val]);
-                    $content[goals_body][val][0][] = "7";
-                }
-                
-                if ($value[name] == 'life_style'){
-                    $content[life_style][val][] = explode(",", $value[val]);
-                }    
-                
-                if ($value[name] == 'body'){
-                    $content[body][val][] = explode(",", $value[val]);
-                    $content[date][val][] = $value[date];
-                }    
-                
-                if ($value[name] == 'photo'){
-                    $content[photo][val][] = explode(",", $value[val]);
-                }    
-                
-                if ($value[name] == 'symptoms'){
-                    $content[symptoms][val] = explode(",", $value[val]);
-                    $content[symptoms][status] = explode(",", $value[status]);
-                    $content[symptoms][note] = explode(",", $value[note]);
-                }    
-                
-                if ($value[name] == 'drug'){
-                    $content[drug][val] = explode(",", $value[val]);
-                    $content[drug][status] = explode(",", $value[status]);
-                    $content[drug][note] = explode(",", $value[note]);
-                }    
-                
-                if ($value[name] == 'diseases'){
-                    $content[diseases][val] = explode(",", $value[val]);
-                    $content[diseases][status] = explode(",", $value[status]);
-                    $content[diseases][note] = explode(",", $value[note]);
-                }
-            }
-        
-        $this->assignRef('content', $content);    
-        }
-  
+    
 
+        
         //первичная инфа(goals & pid=0)
         $inteke = $model->getFirstContent($uid);
-
-
-
 
         if(count($inteke) !== 0 && $inteke !== null && $inteke)
             {
@@ -4073,101 +4117,81 @@ class PhaseViewClient extends JView
             global $mainframe;
             $mainframe->redirect('index.php?option=com_phase&controller=client&action=lastintake',"Enter intake data");
         }
-         
+        
+        
         // id фаз
         $phases_id = $model->getPhasesId($uid);
         
-        //данные по каждой
+
+        
         if($phases_id && count($phases_id) !== 0 && $phases_id !== null){
-            
+
+
+
             foreach($phases_id as $value){
                 $pid =  $value[id];
-                $data[dirty_content][] = $model->getShowTotal($pid);
+                $pn = $model->getPhaseName($pid);
+
+                $data[$pn] = $model->testPhaseData($uid, $pid);
                 }
-                    }
         
-        if($data[dirty_content][0] && $data[dirty_content][0] !== null && $data[dirty_content][0] !== ""){
         
-            foreach ($data[dirty_content] as $value){
+
+
+
+        foreach ($data as $key => $value) {
+            foreach ($value as $value) {
+                if($value[name] == "life_style"){
+                $content[$key][life_style][val] = explode(",", $value[val]);
+                }
                 
-                if($value !== null){
-                    foreach($value as $data[dirty_content]){
-        
-                        // розбор данных из базы
-                        if($data[dirty_content]){
+                if($value[name] == "body"){
+                    $content[$key][body][val] = explode(",", $value[val]);
+                }
+                
+                if($value[name] == "photo"){
+                    $content[$key][photo][val] = explode(",", $value[val]);
+                }
+                
+                if($value[name] == "symptoms"){
+                    $content[$key][symptoms][val][name] = explode(",", $value[val]);
+                    $content[$key][symptoms][val][status] = explode(",", $value[status]);
+                    $content[$key][symptoms][val][note] = explode(",", $value[note]);    
+                }
+                
+                if($value[name] == "drug"){
+                    $content[$key][drug][val][name] = explode(",", $value[val]);
+                    $content[$key][drug][val][status] = explode(",", $value[status]);
+                    $content[$key][drug][val][note] = explode(",", $value[note]);  
+                }
 
-                            if (isset($data[dirty_content][0]) && $data[dirty_content][0][name] == 'life_style'){
-                                $data[content][life_style][val] = explode(",", $data[dirty_content][0][val]);
-                            }    
-
-
-                            if (isset($data[dirty_content][1]) && $data[dirty_content][1][name] == 'body'){
-                                $data[content][date][val] = $data[dirty_content][1][date];
-                                $data[content][body][val] = explode(",", $data[dirty_content][1][val]);
-                            }    
-
-                            if (isset($data[dirty_content][2]) && $data[dirty_content][2][name] == 'photo'){
-                                $data[content][photo] = explode(",", $data[dirty_content][2][val]);
-                            }    
-
-                            if (isset($data[dirty_content][3]) && $data[dirty_content][3][name] == 'symptoms'){
-                                $data[content][symptoms][name] = explode(",", $data[dirty_content][3][val]);
-                                $data[content][symptoms][status] = explode(",", $data[dirty_content][3][status]);
-                                $data[content][symptoms][note] = explode(",", $data[dirty_content][3][note]);
-                            }    
-
-                            if (isset($data[dirty_content][4]) && $data[dirty_content][4][name] == 'drug'){
-                                $data[content][drug][name] = explode(",", $data[dirty_content][4][val]);
-                                $data[content][drug][status] = explode(",", $data[dirty_content][4][status]);
-                                $data[content][drug][note] = explode(",", $data[dirty_content][4][note]);
-                            }    
-
-                            if (isset($data[dirty_content][5]) && $data[dirty_content][5][name] == 'diseases'){
-                                $data[content][diseases][name] = explode(",", $data[dirty_content][5][val]);
-                                $data[content][diseases][status] = explode(",", $data[dirty_content][5][status]);
-                                $data[content][diseases][note] = explode(",", $data[dirty_content][5][note]);
-                            }
-
-
-                            unset($data[dirty_content]);
-                       }
-                   $content[] = $data[content];  
-                    }
+                if($value[name] == "diseases"){
+                    $content[$key][diseases][val][name] = explode(",", $value[val]);
+                    $content[$key][diseases][val][status] = explode(",", $value[status]);
+                    $content[$key][diseases][val][note] = explode(",", $value[note]);  
                 }
             }
         }
         
         
-        // взять роследние данные
-        $last = $model->getIntakeData($uid);
-        
+            $this->assignRef('content', $content);
+        }    
+    
+ 
+            
 
-        if($last && $last !== null)
-                {
-                foreach($last as $value)
-                {
-                    if($value[name] == "symptoms")
-                    {
-                        $last_list[symptoms][name] = explode(",", $value[val]);
-                        $last_list[symptoms][status] = explode(",", $value[status]);
-                    }
-                    if($value[name] == "drug")
-                    {
-                        $last_list[drug][name] =  explode(",", $value[val]);
-                        $last_list[drug][status] =  explode(",", $value[status]);
-                    }
-                    if($value[name] == "diseases")
-                    {
-                        $last_list[diseases][name] =  explode(",", $value[val]);
-                        $last_list[diseases][status] =  explode(",", $value[status]);
-                    }
-                }
-                unset($last);
-                }
-                 
-                
-        $this->assignRef('last_list', $last_list);
 
+
+
+
+
+
+
+
+
+
+
+    
         //Взять список симпомов
         $list[symptomList] = $model->getSymptomList();
 
@@ -4180,17 +4204,26 @@ class PhaseViewClient extends JView
         $this->assignRef('list', $list);
 
         $this->assignRef('content', $content);
-        
+     
         parent::display($tpl);
     }
     
     function compare($tpl = null)
     {
+        $model = $this->getModel();
         $post = Jrequest::get(post);
         $uid = $post[uid];
+        $this->assignRef('uid', $uid);
         $pid_1 = $post[phaseId][0];
         $pid_2 = $post[phaseId][1];
-        $model = $this->getModel();
+        
+        $phases_id = $model->getPhasesId($uid);
+        $this->assignRef('phases', $phases_id);
+        global $mainframe;
+        if($pid_1 == $pid_2){
+            $mainframe->redirect("index.php?option=com_phase&controller=client&action=show_repo&c=$uid", "impossible to compare the same phase");
+        }
+        
         
         if($pid_1 == 0) {$evalution_1[name] = 'Phase 0 - Intake Survey';}
         else {$evalution_1[name] = $model->getPhaseName($pid_1);}
@@ -4228,7 +4261,10 @@ class PhaseViewClient extends JView
         $this->assignRef('evalution_1', $evalution_1);
         
         $dirty_content_2 = $model->testPhaseData($uid, $pid_2);
-        
+        if($dirty_content_1 == null || count($dirty_content_1) == 0 || $dirty_content_2 == null || count($dirty_content_2) == 0){
+            $mainframe->redirect("index.php?option=com_phase&controller=client&action=show_repo&c=$uid", "no data for one of the phases");
+        }
+
         $evalution_2[life_style] = explode(",", $dirty_content_2[0][val]);
         if($evalution_2[life_style] || count($evalution_2[life_style]) !== 0)
             {
@@ -4272,26 +4308,57 @@ class PhaseViewClient extends JView
             $d[] = $a3."".$b3."".$c3;
             
             $this->assignRef('charts', $d);
+            
         }
         
+
+
+
+
+
+
         
+
         
-        if($trackingStart1 && $trackingStart2){
             
-            $vari = explode(",", $trackingStart1->cats);
+            if($trackingStart1->cats !== null){
+                $vari = explode(",", $trackingStart1->cats);
+            }else{
+                $str = "Digestive,Intestinal,Circulatory,Nervous,Immune,Respiratory,Urinary,Glandular,Structural";
+                $vari = explode(",", $str);
+            }
+            
+
             foreach ($vari as $value) {
                 $resi[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
             }
             
-            
+
             $vari2 = explode(",", $trackingStart1->opp_vals);
             foreach ($vari2 as $value) {
                $resi2[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
             }
+            
+            if($resi2[0] == "")
+            {
+                unset ($resi2);
+                for($i = 0; $i<9; $i ++){$resi2[] = 100;}
+            }
+            
+            
             $vari3 = explode(",", $trackingStart2->opp_vals);
             foreach ($vari3 as $value) {
                $resi3[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
             }
+            
+            
+            if($resi3[0] == "")
+            {
+                unset ($resi3);
+                for($i = 0; $i<9; $i ++){$resi3[] = 100;}
+            }
+
+
             for($i = 0; $i < count($resi); $i++){
                 $ti = ",['".$resi[$i]."', ".$resi2[$i].", ".$resi3[$i]."]";
                 $bi = $bi."".$ti;
@@ -4300,10 +4367,15 @@ class PhaseViewClient extends JView
             $ci = "]";    
             $di = $ai."".$bi."".$ci;
             $this->assignRef('charts_life', $di);
-        }
-		
-		
-		if(count($evalution_1[symptoms][status] > 0) && $evalution_1[symptoms][status][0] !== "" ){
+       
+
+            
+
+
+
+
+
+        if(count($evalution_1[symptoms][status] > 0) && $evalution_1[symptoms][status][0] !== "" ){
 			$cnt_s1_new = 0;
 			$cnt_s1_progres = 0;
 			$cnt_s1_fin = 0;

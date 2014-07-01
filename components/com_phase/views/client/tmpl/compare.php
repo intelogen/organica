@@ -47,12 +47,35 @@ if($this->list)
     $list = $this->list; 
 }
  
+$uid = $this->uid;
+$pid = $this->pid;
+$phases = $this->phases;
+
+
 ?>
 
 
 
 
+<div class='contentheading phase-navigation-header'>Phases Navigation</div>
+<div class='tabContainer2 phase-navigation' style="background-color:#E1FFE3">
+    <ul>
+        <li><a href="index.php?option=com_phase&controller=client&action=show_repo&c=<?=$uid?>">Intake Survey</a></li>
 
+        <?php
+        if ($phases && $phases[0][id] !== null && $phases[0][name] !== null )
+        {
+            foreach ($phases as $value)
+            {
+                ?>
+                <li><a href="index.php?option=com_phase&controller=client&action=show_repoz&c=<?=$uid?>&pid=<?=$value[id]?>"><?=$value[name]?></a></a></li>
+            <?php
+            }
+        }
+        ?>
+        <li><a href="index.php?option=com_phase&controller=client&action=show_total_repo&c=<?=$uid?>">Total Progress</a></li>
+    </ul>
+</div>
 
 
 
@@ -137,12 +160,11 @@ if($this->list)
         <td>
              <ul>               <?php
 
-
-               if($this->qAnswers1){
+     if($this->qAnswers1 && $this->qAnswers1 !== null){
                    foreach ($this->qAnswers1 as $value) {
                        echo "<li>".$value['answer']."</li>";
                    }
-               }
+               }else{echo"CONGRATULATIONS, YOU'VE ACHIEVED THE GOAL";}
             
                    ?>
 		</ul>
@@ -152,108 +174,17 @@ if($this->list)
                             <?php
 
 
-               if($this->qAnswers2){
+               if($this->qAnswers2 && $this->qAnswers2 !== null){
                    foreach ($this->qAnswers2 as $value) {
                        echo "<li>".$value['answer']."</li>";
                    }
-               }
+               }else{echo"CONGRATULATIONS, YOU'VE ACHIEVED THE GOAL";}
             
                    ?>
         </ul>
 		</td>
     </tr>
-    <tr><td colspan="2"><div class='contentheading'>Result</div></td></tr>
-    <tr>
-        <td>
-            <?php   
-            
-                       $var = explode(",", $this->trackingStart1->cats);
-
-                       foreach ($var as $value) {
-                           $res[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
-                       }
-
-                       $var2 = explode(",", $this->trackingStart1->opp_vals);
-                       foreach ($var2 as $value) {
-                           $res2[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
-                       }
-
-                       if(count($res) == count($res2))
-                           {
-                               $cnt = array_combine( $res, $res2);
-
-                           }
-
-
-
-                       
-                       foreach ($cnt as $key => $value) {
-                           echo "<li>".$key;
-
-                           if($value > 75)
-                           {
-                               echo " - NICE";
-                           }
-                           elseif ($value <=75 && $value > 50) {
-                               echo " - ALMOST NICE</li>";
-                           }
-                           elseif($value <=50 && $value > 25){
-                               echo " - ALMOST BAD</li>";
-                           }
-                           elseif($value <=25 && $value >= 0){
-                               echo " - BAD</li>";
-                           }
-
-                       }
-                        echo "</ul>";
-            
-            ?>
-        </td>
-        <td>
-            <?php
-
-                       $var = explode(",", $this->trackingStart2->cats);
-
-                       foreach ($var as $value) {
-                           $res[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
-                       }
-
-                       $var2 = explode(",", $this->trackingStart2->opp_vals);
-                       foreach ($var2 as $value) {
-                           $res2[] = preg_replace ("/[^a-zA-ZА-Яа-я0-9\s]/","",$value);
-                       }
-
-                       if(count($res) == count($res2))
-                           {
-                               $cnt = array_combine( $res, $res2);
-
-                           }
-
-
-
-                       
-                       foreach ($cnt as $key => $value) {
-                           echo "<li>".$key;
-
-                           if($value > 75)
-                           {
-                               echo " - NICE";
-                           }
-                           elseif ($value <=75 && $value > 50) {
-                               echo " - ALMOST NICE</li>";
-                           }
-                           elseif($value <=50 && $value > 25){
-                               echo " - ALMOST BAD</li>";
-                           }
-                           elseif($value <=25 && $value >= 0){
-                               echo " - BAD</li>";
-                           }
-
-                       }
-                        echo "</ul>";
-            ?>
-        </td>
-    </tr>        
+          
     <tr><td colspan="2"><div id="chart_div" style="width: 750px; height: 300px;"></div></td></tr>
     <tr>
         <td colspan="2"><div class='contentheading'>Current Photo</div></td>
@@ -347,14 +278,13 @@ if($this->list)
         <td>
  
 <ul>
-    <li><div><span>Name</span><span>Status</span><span>Note</span></div></li>
 <?php
 if (isset($evalution[symptoms]))
 {
     for ($i = 0; $i < count($evalution[symptoms][val]); $i++)
     {
     ?>
-    <li><div>
+    <li>
         <span>
             <?php
             foreach($list[symptomList] as $value)
@@ -365,14 +295,8 @@ if (isset($evalution[symptoms]))
                 }
             }
             ?>
-        </span>
-        <span>
-            <?=$evalution[symptoms][status][$i];?>
-        </span>
-        <span
-            <?=$evalution[symptoms][note][$i];?>
-        </span>
-        </div></li>
+        </span><span><?=$evalution[symptoms][status][$i]?></span>
+        </li>
     <?php    
     }
     ?>
@@ -393,7 +317,7 @@ else
             
             
 <ul>
-    <li><div><span>Name</span><span>Status</span><span>Note</span></div></li>
+
 <?php
 if (isset($evalution_2[symptoms]))
 {
@@ -401,26 +325,17 @@ if (isset($evalution_2[symptoms]))
     for ($i = 0; $i < count($evalution_2[symptoms][val]); $i++)
     {
     ?>
-    <li><div>
+    <li>
         <span>
             <?php
-			foreach($list[symptomList] as $value)
-            {
-                if($value[id] == $evalution_2[symptoms][val][$i])
-                {
-                    echo $value[name];
+                foreach($list[symptomList] as $value){
+                    if($value[id] == $evalution_2[symptoms][val][$i]){
+                        echo $value[name];
+                    }
                 }
-            }
-			
             ?>
-        </span>
-        <span>
-            <?=$evalution_2[symptoms][status][$i];?>
-        </span>
-        <span>
-            <?=$evalution_2[symptoms][note][$i];?>
-        </span>
-        </div></li>
+        </span><span><?=$evalution_2[symptoms][status][$i]?></span>
+        </li>
     <?php    
     }
 	?>
@@ -451,14 +366,14 @@ else
         <td>
 
 <ul>
-    <li><div><span>Name</span><span>Status</span><span>Note</span></div></li>
+
 <?php
 if (isset($evalution[drug]))
 {
     for ($i = 0; $i < count($evalution[drug][val]); $i++)
     {
     ?>
-    <li><div>
+    <li>
         <span>
             <?php
             foreach($list[medtrackList] as $value)
@@ -469,14 +384,8 @@ if (isset($evalution[drug]))
                 }
             }
             ?>
-        </span>
-        <span>
-            <?=$evalution[drug][status][$i];?>
-        </span>
-        <span>
-            <?=$evalution[drug][note][$i];?>
-        </span>
-        </div></li>
+        </span><span><?=$evalution[drug][status][$i]?></span>
+        </li>
     <?php    
     }
     ?>
@@ -494,14 +403,14 @@ else
         <td>
             
 <ul>
-    <li><div><span>Name</span><span>Status</span><span>Note</span></div></li>
+
 <?php
 if (isset($evalution_2[drug]))
 {
     for ($i = 0; $i < count($evalution_2[drug][val]); $i++)
     {
     ?>
-        <li><div>
+        <li>
         <span>
             <?php
             foreach($list[medtrackList] as $value)
@@ -512,14 +421,8 @@ if (isset($evalution_2[drug]))
                 }
             }
             ?>            
-        </span>
-        <span>
-            <?=$evalution_2[drug][status][$i];?>
-        </span>
-        <span>
-            <?=$evalution_2[drug][note][$i];?>
-        </span>
-        </div></li>
+        </span><span><?=$evalution_2[drug][status][$i]?></span>
+        </li>
     <?php    
     }
     ?>
@@ -546,14 +449,13 @@ else
         <td>
 
 <ul>
-    <li><div><span>Name</span><span>Status</span><span>Note</span></div></li>
 <?php
 if (isset($evalution[diseases]))
 {
     for ($i = 0; $i < count($evalution[diseases][val]); $i++)
     {
     ?>
-       <li><div>
+       <li>
         <span>
             <?php
             foreach($list[diseasesList] as $value)
@@ -564,14 +466,8 @@ if (isset($evalution[diseases]))
                 }
             }
             ?>
-        </span>
-        <span>
-            <?=$evalution[diseases][status][$i];?>
-        </span>
-        <span>
-            <?=$evalution[diseases][note][$i];?>
-        </span>
-        </div></li>
+        </span><span><?=$evalution[diseases][status][$i]?></span>
+        </li>
     <?php    
     }
     ?>
@@ -590,14 +486,14 @@ else
         <td>
 
 <ul>
-    <li><div><span>Name</span><span>Status</span><span>Note</span></div></li>
+
 <?php
 if (isset($evalution_2[diseases]))
 {
     for ($i = 0; $i < count($evalution_2[diseases][val]); $i++)
     {
     ?>
-        <li><div>
+        <li>
         <span>
             <?php
             foreach($list[diseasesList] as $value)
@@ -608,14 +504,8 @@ if (isset($evalution_2[diseases]))
                 }
             }
             ?>
-        </span>
-        <span>
-            <?=$evalution_2[diseases][status][$i];?>
-        </span>
-        <span>
-            <?=$evalution_2[diseases][note][$i];?>
-        </span>
-        </div></li>
+        </span><span><?=$evalution_2[diseases][status][$i]?></span>
+        </li>
     <?php    
     }
     ?>
@@ -632,7 +522,7 @@ else
         </td>
     </tr>
 </table>
-    
+
     
         <script type="text/javascript">
      
@@ -644,6 +534,7 @@ else
         
         
         var options = {
+            vAxis: {minValue: 0, maxValue: 100}
           //title: 'Lifestyle analysis',
           //hAxis: {title: 'Year', titleTextStyle: {color: 'red'}}
         };
@@ -664,6 +555,7 @@ else
 
         var options = {
           title: 'Weight Compair',
+          vAxis: {minValue: 0}
           //hAxis: {title: 'Year', titleTextStyle: {color: 'red'}}
         };
 
@@ -679,7 +571,8 @@ else
         var data = google.visualization.arrayToDataTable(<?=$this->charts[1]?>);
 
         var options = {
-          title: 'Weight Compair',
+          title: 'Fat Compair',
+          vAxis: {minValue: 0}
           //hAxis: {title: 'Year', titleTextStyle: {color: 'red'}}
         };
 
@@ -696,6 +589,7 @@ else
 
         var options = {
           title: 'Ph Compair',
+          vAxis: {minValue: 0}
           //hAxis: {title: 'Year', titleTextStyle: {color: 'red'}}
         };
 

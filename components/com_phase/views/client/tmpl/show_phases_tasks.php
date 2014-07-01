@@ -23,7 +23,6 @@ if($this->phaseDesc)
     <?= $phaseDesc[name]."<br>"?>
     </div>
 <div class='tabContainer2' style="background-color:#E1FFE3">
-    Short description of phase: <?="<br>"?>
 <?php
     echo $phaseDesc[description];
 }
@@ -39,7 +38,12 @@ if($this->phaseDesc)
 
 
 <?php
-foreach ($this->phasesTasks as $phasesTasks)
+
+
+if($this->phasesTasks !== null && $this->phasesTasks[0] !== null){
+    
+
+    foreach ($this->phasesTasks as $phasesTasks)
 :
 ?>
   <div class='tabContainer2' style="background-color:#E1FFE3">
@@ -57,11 +61,7 @@ if($phasesTasks->completed == 1)
 }
 ?>
 
-      
-      
-      
-      
-  </div>
+</div>
 <?php
 echo '<br>';
 endforeach;
@@ -79,6 +79,7 @@ if(isset($pid))
 <a href="index.php?option=com_phase&controller=client&action=phasechek&pid=<?=$pid?>">Progress report </a> 
 <?php
 }
+}else{echo "<div class='contentheading'>No tasks to this phase</div>";}
 ?>
 </div>
     

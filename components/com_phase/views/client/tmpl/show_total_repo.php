@@ -84,7 +84,7 @@ if ($this->list){
 <div class='contentheading'>Symptoms Tracking</div>  
 <div class='tabContainer2' style="background-color:#E1FFE3">
         <?php
-
+        if($this->content !== null){
         foreach ($this->content as $key => $value) {
             $phases[] = $key; 
             $symptoms = $value[symptoms][val][name];
@@ -125,12 +125,13 @@ if ($this->list){
                     }
                     ?>
     </div>
+        <?php }else{echo "No data to display";} ?>
 </div>
 
 <div class='contentheading'>Medical preparations Tracking</div>  
 <div class='tabContainer2' style="background-color:#E1FFE3">
         <?php
-        
+        if($this->content !== null){
         foreach ($this->content as $key => $value) {
             $phases_d[] = $key; 
             $drug = $value[drug][val][name];
@@ -171,12 +172,13 @@ if ($this->list){
                     }
                     ?>
     </div>
+    <?php }else{echo "No data to display";} ?>
 </div>
 
 <div class='contentheading'>Diseases Tracking</div>  
 <div class='tabContainer2' style="background-color:#E1FFE3">
         <?php
-        
+        if($this->content !== null){       
         foreach ($this->content as $key => $value) {
             
             $phases_di[] = $key; 
@@ -220,6 +222,7 @@ if ($this->list){
                     }
                     ?>
     </div>
+    <?php }else{echo "No data to display";} ?>
 </div>
 
 <div class='contentheading'>Photo History</div>

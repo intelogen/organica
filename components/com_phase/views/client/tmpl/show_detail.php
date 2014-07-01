@@ -229,7 +229,7 @@ if($medtrack_finish > 0){
     }
     else
     {
-        echo "<div class='contentheading'>CONGRATULATIONS ".$finish." OUT OF ".$all." MEDICINE FINISHED !</div>";
+        echo "<div class='contentheading'>CONGRATULATIONS ".$medtrack_finish." OUT OF ".$medtrack_all." MEDICINE FINISHED !</div>";
     }
     ?>
     <table>
@@ -320,8 +320,7 @@ foreach ($this->list[diseasesList] as $value)
     ?>
 </div>
 
-
-Symptoms Tracking
+<div class='contentheading'>Photo History</div>
 <?php
 
     if($this->content[0][date][val] !== "" && $this->content[0][date][val] !== null && $this->content[0][body][val][0] !== "" && $this->content[0][body][val][0] !== null && $this->content[0][photo][0] !== "" && $this->content[0][photo][0] !== null){

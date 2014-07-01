@@ -46,9 +46,11 @@ $editor = & JFactory::getEditor();
                 <div class='objectTitle'>
                     <a href="index.php?option=com_phase&controller=coach&action=show_user_phases&userId=<?=$value->id?>">Client Phases and tasks</a>
                 </div>
-                <div class='objectTitle'>
+<!--
+    <div class='objectTitle'>
                     <a href="index.php?option=com_phase&controller=coach&action=edit_client_info&c=<?=$value->id?>">Edit intake data(not working - in progress)</a>
                 </div>
+-->
                 <div class='objectTitle'>
                     <a href="index.php?option=com_phase&controller=client&action=show_repo&c=<?=$value->id?>">User Progress</a>
                 </div>

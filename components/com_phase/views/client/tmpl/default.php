@@ -38,12 +38,7 @@
     Furhter, you will be responsible for signing off the phases and assigning new phases according to the client progress. Also, you will be providing guidances, will be communicating with the clients and will also be recommending products to the clients as per their phase tracking. Being the ADMINISTRATOR of Maxim Health System, you will be responsible for allocating Coach to Clients and vice versa.
 </div>
 
-<div class='contentheading'>
-<?="<br><br>My Alerts<br>"?>
-</div>
-<div class='tabContainer2' style="background-color:#E1FFE3">
-<?="<br>There are no alerts for you this time."?>
-</div>
+
 
 
 

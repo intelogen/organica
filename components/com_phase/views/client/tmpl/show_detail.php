@@ -82,42 +82,42 @@ if($this->content){
 <div class='contentheading'>Body History</div>
 <div class='tabContainer2' style="background-color:#E1FFE3">
     
-<div>
-<div>
-    <span>DATE</span>
-    <span>WEIGHT</span>
-    <span>FAT</span>
-    <span>PH</span>
-</div>
-<div>
-    <span>Intake data</span>
-    <span><?=$gols[body][val][0]?></span>
-    <span><?=$gols[body][val][1]?></span>
-    <span><?=$gols[body][val][2]?></span>
-</div>
+        <div class='tabContainer2 horizontal-shadow' style="background-color:#E1FFE3">
+        <table id="medical" border="1">
+            <tr>
+                <td>DATE</td>
+                <td>WEIGHT</td>
+                <td>FAT</td>
+                <td>PH</td>
+            </tr>
+                <?php
+                foreach ($this->content as $value) 
+                {   
+                 ?> 
+                    <tr>
+                        <td><?=$value[date][val]?></td>
+                        <td><?=$value[body][val][0]?></td>
+                        <td><?=$value[body][val][1]?></td>
+                        <td><?=$value[body][val][2]?></td>
+                    </tr>
+                <?php
+                }
+                ?>
+            <tr>
+                <td>Intake data</td>
+                <td><?=$gols[body][val][0]?></td>
+                <td><?=$gols[body][val][1]?></td>
+                <td><?=$gols[body][val][2]?></td>
+            </tr>
+            <tr>
+                <td>Goal</td>
+                <td><?=$gols[goal_body][val][0]?></td>
+                <td><?=$gols[goal_body][val][1]?></td>
+                <td>7</td>
+            </tr>
+        </table>
+        </div>
 
-<?php
-
-foreach ($this->content as $value) 
-{   
- ?> 
-    <div>
-        <span><?=$value[date][val]?></span>
-        <span><?=$value[body][val][0]?></span>
-        <span><?=$value[body][val][1]?></span>
-        <span><?=$value[body][val][2]?></span>
-    </div>
-<?php
-}
-
-?>
-    <div>
-        <span>Goal</span>
-        <span><?=$gols[goal_body][val][0]?></span>
-        <span><?=$gols[goal_body][val][1]?></span>
-        <span>7</span>
-    </div>
-</div>
     <div id="chart_div" style="width: 650px; height: 200px;"></div>
     <div id="chart_div_2" style="width: 650px; height: 200px;"></div>
     <div id="chart_div_3" style="width: 650px; height: 200px;"></div>
@@ -164,24 +164,28 @@ if($finish > 0){
         echo "<div class='contentheading'>CONGRATULATIONS ".$finish." OUT OF ".$all." SYMPTOMS FINISHED !</div>";
     }
 ?>
-    <table>
-    <?php
-        if($result[0] !== ""){
+    <div class='tabContainer2 horizontal-shadow' style="background-color:#E1FFE3">
+        <table id="medical" border="1">
+            <tr>
+                <td>Name</td>
+                <td>Status</td>
+            </tr>
+            <?php
+            if($result[0] !== ""){
 
-                foreach ($this->list[symptomList] as $value)
-            {
+                foreach ($this->list[symptomList] as $value){
 
-
-                if(in_array($value[id], $result))
-                {
+                if(in_array($value[id], $result)){
                 ?>
-                    <tr><?="<td>".$value[name]."</td><td> FINISHED ! </td>"?></tr>
+                        <tr><?="<td>".$value[name]."</td><td><b>FINISHED ! </b></td>"?></tr>
                 <?php
                 }
+                }
             }
-                       }
             ?>
-    </table>
+        </table>
+    </div>
+    
             <?php
     }else{
     echo "<div class='contentheading'>ALL SYMPTOMS IN PROGRESS !</div>";
@@ -232,7 +236,13 @@ if($medtrack_finish > 0){
         echo "<div class='contentheading'>CONGRATULATIONS ".$medtrack_finish." OUT OF ".$medtrack_all." MEDICINE FINISHED !</div>";
     }
     ?>
-    <table>
+
+    <div class='tabContainer2 horizontal-shadow' style="background-color:#E1FFE3">    
+    <table id="medical" border="1">
+            <tr>
+                <td>Name</td>
+                <td>Status</td>
+            </tr>
     <?php
     if($medtrack_result){
         foreach ($this->list[medtrackList] as $value)
@@ -247,6 +257,7 @@ if($medtrack_finish > 0){
     }
     ?>
     </table>
+    </div>
    <?php
      }else{
     echo "<div class='contentheading'>ALL MEDICINE IN PROGRESS !</div>";
@@ -295,7 +306,12 @@ else
 }
 
 ?>
-<table>
+    <div class='tabContainer2 horizontal-shadow' style="background-color:#E1FFE3">    
+    <table id="medical" border="1">
+            <tr>
+                <td>Name</td>
+                <td>Status</td>
+            </tr>
 <?php
 if($diseases_result){
 foreach ($this->list[diseasesList] as $value)
@@ -310,6 +326,7 @@ foreach ($this->list[diseasesList] as $value)
 }
 ?>
 </table>
+    </div>
     <?php
          }else{
     echo "<div class='contentheading'>ALL DISEASES IN PROGRESS !</div>";
@@ -321,6 +338,7 @@ foreach ($this->list[diseasesList] as $value)
 </div>
 
 <div class='contentheading'>Photo History</div>
+
 <?php
 
     if($this->content[0][date][val] !== "" && $this->content[0][date][val] !== null && $this->content[0][body][val][0] !== "" && $this->content[0][body][val][0] !== null && $this->content[0][photo][0] !== "" && $this->content[0][photo][0] !== null){
@@ -332,7 +350,7 @@ foreach ($this->list[diseasesList] as $value)
                 <div class='contentheading'><?="Weight - ".$value[body][val][0] ?></div>
                 <div class='contentheading'><?="Fat - ".$value[body][val][1]." %" ?></div>
                 <div class='contentheading'><?="PH - ".$value[body][val][2] ?></div>
-                <div class='current-photo'>
+                <div class='current-photo horizontal-shadow'>
                 <?= "  <div class='photo-one'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$value[photo][0]."\" width=\"170\" height=\"320\"></div>";?>
                 <?= "  <div class='photo-two'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$value[photo][1]."\" width=\"170\" height=\"320\"></div>";?>
                 </div>

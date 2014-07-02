@@ -131,8 +131,7 @@ if ($phases && $phases[0][id] !== null && $phases[0][name] !== null )
 
 
 
-<div class='contentheading'>Intake Survey</div>   
-<div class='tabContainer2' style="background-color:#E1FFE3">
+
 
 
 
@@ -378,7 +377,6 @@ else
 
 </div>
 
-</div>
 
 
 

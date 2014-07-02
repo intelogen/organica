@@ -22,7 +22,7 @@ foreach ($this->coachInfo as $coachInfo)
     <div class='user-data'>
 <?= "<span class='response-name'>Homepage - </span>"."<span class='response-data'>"."<a href='$coachInfo->homepage'>".$coachInfo->homepage."</a></span>";?>
     </div>
-
+ 
     </div>
     <div class='user-img'>
     <?php

@@ -102,7 +102,9 @@ $phases = $this->phases;
         <td><div id="name1" class='contentheading'><?=$this->evalution_1[name]?></div></td>
         <td><div id="name2" class='contentheading'><?=$this->evalution_2[name]?></div></td>
     </tr>
-    <tr><td colspan="2"><div class='contentheading'>Body Tracking</div></td></tr>
+    <tr>
+        <td colspan="2"><div class='contentheading'>Body Tracking</div></td>
+    </tr>
     <tr>
         <td>
                <div class='tabContainer2' style="background-color:#E1FFE3">
@@ -155,7 +157,9 @@ $phases = $this->phases;
         </td>
     </tr>
     <tr>
-        <tr><td colspan="2"><div class='contentheading'>Lifestyle analysis:</div></td></tr>
+        <td colspan="2"><div class='contentheading'>Lifestyle analysis:</div></td>
+    </tr>
+    <tr>
         <td>
              <ul>               <?php
 
@@ -182,9 +186,10 @@ $phases = $this->phases;
                    ?>
         </ul>
 		</td>
+    </tr>     
+    <tr>
+        <td colspan="2"><div id="chart_div" style="width: 750px; height: 300px;"></div></td>
     </tr>
-          
-    <tr><td colspan="2"><div id="chart_div" style="width: 750px; height: 300px;"></div></td></tr>
     <tr>
         <td colspan="2"><div class='contentheading'>Current Photo</div></td>
     </tr>
@@ -399,7 +404,7 @@ $phases = $this->phases;
             <?php } ?>
         </td>
     </tr>
-    
+    <tr>
         <td>
 
             
@@ -494,7 +499,6 @@ else
     <tr>
         <td colspan="2"><div class='contentheading'>Diseases Tracking</div></td>
     </tr>
-    
     <tr>
         <td>
             <?php
@@ -513,7 +517,6 @@ else
             <?php } ?>
         </td>
     </tr>
-    
     <tr>
         <td>
 
@@ -564,7 +567,7 @@ else
         </td>
         <td>
 
-<ul>
+
 
 <?php
 if ($evalution2[diseases][val][0] !== "")

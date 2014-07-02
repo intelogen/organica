@@ -70,10 +70,10 @@ if(count($this->phases) == 0)
     <?='Name:<br>'?>
     <input type="text" size="83%" name="newName" value="New phase name" />
     <?='<br>Description:<br>'?>
-    <?php echo $editor->display('newDescription', '<p><b style="color: rgb(102, 102, 102); font-family: Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.3em;" mce_style="color: #666666; font-family: Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.3em;">Description</b><span style="color: rgb(102, 102, 102); font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: bold; line-height: 1.3em;" mce_style="color: #666666; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: bold; line-height: 1.3em;">:</span></p><p><br></p><h1><b><hr>Goals:</b></h1><p><br></p><h1><b><hr>Duration:</b></h1><p><br></p><h1><b><hr>Supplements:</b></h1><p><br></p><p></p><hr><p><br></p><p></p>', '90%', '500', '60', '20');   ?>
+    <?php echo $editor->display('newDescription', '<p><b style="color: rgb(102, 102, 102); font-family: Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.3em;" mce_style="color: #666666; font-family: Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.3em;">Description</b><span style="color: rgb(102, 102, 102); font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: bold; line-height: 1.3em;" mce_style="color: #666666; font-family: Helvetica, Arial, sans-serif; font-size: 16px; font-weight: bold; line-height: 1.3em;">:</span></p><h1><b><hr>Goals:</b></h1><h1><b><hr>Duration:</b></h1><h1><b><hr>Supplements:</b></h1><hr>', '90%', '500', '60', '20');   ?>
     <input type="hidden" name="coachId" value="<?= $coachId ?>"/>
     <input type="hidden" name="userId" value="<?= $clientId ?>"/>
-    <?="<br>"?><?="<br>"?>
+    <?="<br><br>"?>
     <input type="submit" value="Create" name="action"/>
     </form>
 </div>

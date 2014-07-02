@@ -17,40 +17,53 @@ if ($this->list){
 
 <div class='contentheading'>Body History</div>  
 
+
+
+    
+
+
     <div class='tabContainer2' style="background-color:#E1FFE3">
-    <div class="tabContainer2' style="background-color:#E1FFE3">
-        <div><span>PHASE</span> - <span>WEIGHT</span> - <span>FAT</span> - <span>PH</span></div>
-        <?php
-        if($this->gols[body][val][0] !== "" && $this->gols[body][val][1] !== "" && $this->gols[body][val][2] !== ""){
-            $date[] = "PRIMARY DATA";
-            $weight[] = $this->gols[body][val][0];
-            $fat[] = $this->gols[body][val][1];
-            $ph[] = $this->gols[body][val][2];
-            echo "<div><span>PRIMARY DATA</span> - <span>".$this->gols[body][val][0]."</span> - <span>".$this->gols[body][val][1]."</span> - <span>".$this->gols[body][val][2]."</span></div>";
-        }
-        ?>
         
-        <?php
-        if($this->content !== null && $this->content != ""){
-            foreach ($this->content as $key => $value) {
-                $date[] = "$key";
-                $weight[] = $value[body][val][0];
-                $fat[] = $value[body][val][1];
-                $ph[] = $value[body][val][2];
-                echo "<div><span>".$key."</span> - <span>".$value[body][val][0]."</span> - <span>".$value[body][val][1]."</span> - <span>".$value[body][val][2]."</span></div>";
+        <div class='tabContainer2 horizontal-shadow' style="background-color:#E1FFE3">
+        <table id="medical" border="1">
+            <tr>
+                <td>PHASE</td>
+                <td>WEIGHT</td>
+                <td>FAT</td>
+                <td>PH</td>
+            </tr>
+            <?php
+            if($this->gols[body][val][0] !== "" && $this->gols[body][val][1] !== "" && $this->gols[body][val][2] !== ""){
+                $date[] = "PRIMARY DATA";
+                $weight[] = $this->gols[body][val][0];
+                $fat[] = $this->gols[body][val][1];
+                $ph[] = $this->gols[body][val][2];
+                echo "<tr><td>PRIMARY DATA</td><td>".$this->gols[body][val][0]."</td><td>".$this->gols[body][val][1]."</td><td>".$this->gols[body][val][2]."</td></tr>";
             }
-        }
-        ?>
-        <?php
-        if($this->gols[goal_body][val][0] !== "" && $this->gols[goal_body][val][1] !== ""){
-            $g_weight = $this->gols[goal_body][val][0];
-            $g_fat =  $this->gols[goal_body][val][1];
-            $g_ph =  7;
-            echo "<div><span>CLIENT GOAL</span> - <span>".$this->gols[goal_body][val][0]."</span> - <span>".$this->gols[goal_body][val][1]."</span> - <span>7</span></div>";
-        }
+            ?>
+            <?php
+            if($this->content !== null && $this->content != ""){
+                foreach ($this->content as $key => $value) {
+                    $date[] = "$key";
+                    $weight[] = $value[body][val][0];
+                    $fat[] = $value[body][val][1];
+                    $ph[] = $value[body][val][2];
+                    echo "<tr><td>".$key."</td><td>".$value[body][val][0]."</td><td>".$value[body][val][1]."</td><td>".$value[body][val][2]."</td></tr>";
+                }
+            }
+            ?>
+            <?php
+            if($this->gols[goal_body][val][0] !== "" && $this->gols[goal_body][val][1] !== ""){
+                $g_weight = $this->gols[goal_body][val][0];
+                $g_fat =  $this->gols[goal_body][val][1];
+                $g_ph =  7;
+                echo "<tr><td>CLIENT GOAL</td><td>".$this->gols[goal_body][val][0]."</td><td>".$this->gols[goal_body][val][1]."</td><td>7</td></tr>";
+            }
+            ?>
+        </table>
+        </div>
         
-        ?>
-    </div>
+        
             <div id="chart_div" style="width: 650px; height: 200px;"></div>
             <div id="chart_div_2" style="width: 650px; height: 200px;"></div>
             <div id="chart_div_3" style="width: 650px; height: 200px;"></div>
@@ -82,147 +95,156 @@ if ($this->list){
 ?>
 
 <div class='contentheading'>Symptoms Tracking</div>  
-<div class='tabContainer2 horizontal-shadow' style="background-color:#E1FFE3">
-        <?php
-        if($this->content !== null){
-        foreach ($this->content as $key => $value) {
-            $phases[] = $key; 
-            $symptoms = $value[symptoms][val][name];
-            $status[] = $value[symptoms][val][status];
-        }
 
-        ?>
-        <div>
-            <div><span>Symptoms/Phases</span>
-                <?php
-                    for($i = 0; count($phases)>$i; $i++){
-                        $s = $i;
-                        echo "-<span>Phase ".++$s."</span>";
+<div class='tabContainer2' style="background-color:#E1FFE3">
+        <table id="symptoms" border="1">
+            
+                  <?php
+                    if($this->content !== null){
+                    foreach ($this->content as $key => $value) {
+                        $phases[] = $key; 
+                        $symptoms = $value[symptoms][val][name];
+                        $status[] = $value[symptoms][val][status];
                     }
+                    ?>
+                    
+            <tr><td><b>Name</b></td>
+                <?php
+                for($i = 0; count($phases)>$i; $i++){
+                    $s = $i;
+                    echo "<td><b>Phase ".++$s."</b></td>";
+                }
                 ?>
-            </div>
+            </tr>           
                 <?php
                 for($i = 0; count($symptoms)>$i; $i++){
-                    ?>
-                <div>
-                        <?php
-                        foreach($list[symptomList] as $value){
-                            if($value[id] == $symptoms[$i]){
-                            echo "<span>".$value[name]."</span>";
-                            }
-                        }
-
-                        foreach ($status as $value) {
-                            if($value[$i] == ""){
-                                echo "-<span>no status</span>";
-                            }else{
-                                echo "-<span>".$value[$i]."</span>";
-                            }
-                        }
-                        ?>
-                </div>    
-                    <?php
+                ?>
+            <tr>
+                <?php
+                foreach($list[symptomList] as $value){
+                    if($value[id] == $symptoms[$i]){
+                    echo "<td>".$value[name]."</td>";
                     }
-                    ?>
-    </div>
-        <?php }else{echo "No data to display";} ?>
+                }
+
+                foreach ($status as $value) {
+                    if($value[$i] == ""){
+                        echo "<td>no status</td>";
+                    }else{
+                        if($value[$i] == 'finished'){echo "<td><b>".$value[$i]."</b></td>";}else{echo "<td>".$value[$i]."</td>";}
+                    }
+                }
+                ?>
+            </tr>    
+                <?php
+                }
+                ?>
+                <?php }else{echo "No data to display";} ?>
+        </table>
 </div>
 
+
+
 <div class='contentheading'>Medical preparations Tracking</div>  
-<div class='tabContainer2 horizontal-shadow' style="background-color:#E1FFE3">
-        <?php
-        if($this->content !== null){
-        foreach ($this->content as $key => $value) {
-            $phases_d[] = $key; 
-            $drug = $value[drug][val][name];
-            $status_d[] = $value[drug][val][status];
-        }
-        ?>
-        <div>
-            <div><span>Drugs/Phases</span>
+<div class='tabContainer2' style="background-color:#E1FFE3">
+        <table id="symptoms" border="1">
+                <?php
+                if($this->content !== null){
+                foreach ($this->content as $key => $value) {
+                    $phases_d[] = $key; 
+                    $drug = $value[drug][val][name];
+                    $status_d[] = $value[drug][val][status];
+                }
+                ?>
+            <tr><td><b>Name</b></td>
                 <?php
                     for($i = 0; count($phases_d)>$i; $i++){
                         $dr = $i;
-                        echo "-<span>Phase ".++$dr."</span>";
+                        echo "<td>Phase ".++$dr."</td>";
                     }
                 ?>
-            </div>
+            </tr>
                 <?php
                 for($i = 0; count($drug)>$i; $i++){
                     ?>
-                <div>
-                        <?php
-                        foreach($list[medtrackList] as $value)
-                        {
-                            if($value[id] == $drug[$i])
-                            {
-                                echo "<span>".$value[name]."</span>";
-                            }
-                        }
-                        foreach ($status_d as $value) {
-                            if($value[$i] == ""){
-                                echo "-<span>no status</span>";
-                            }else{
-                                echo "-<span>".$value[$i]."</span>";
-                            }
-                        }
-                        ?>
-                </div>    
+            <tr>
                     <?php
+                    foreach($list[medtrackList] as $value)
+                    {
+                        if($value[id] == $drug[$i])
+                        {
+                            echo "<td>".$value[name]."</td>";
+                        }
+                    }
+                    foreach ($status_d as $value) {
+                        if($value[$i] == ""){
+                            echo "<td>no status</td>";
+                        }else{
+                            if($value[$i] == 'finished'){echo "<td><b>".$value[$i]."</b></td>";}else{echo "<td>".$value[$i]."</td>";}
+                        }
                     }
                     ?>
-    </div>
-    <?php }else{echo "No data to display";} ?>
+            </tr>    
+                <?php
+                }
+                ?>
+              <?php }else{echo "No data to display";} ?>
+        </table>
 </div>
 
+
+
+
 <div class='contentheading'>Diseases Tracking</div>  
-<div class='tabContainer2 horizontal-shadow' style="background-color:#E1FFE3">
-        <?php
-        if($this->content !== null){       
-        foreach ($this->content as $key => $value) {
-            
-            $phases_di[] = $key; 
-            $diseases = $value[diseases][val][name];
-            $status_di[] = $value[diseases][val][status];
-        }
-        ?>
-        <div>
-            <div><span>Diseases/Phases</span>
-                <?php
-                    for($i = 0; count($phases_di)>$i; $i++){
-                        $di = $i;
-                        echo "-<span>Phase ".++$di."</span>";
-                    }
-                ?>
-            </div>
-                <?php
-                for($i = 0; count($diseases)>$i; $i++){
-                    ?>
-                <div>
-                        <?php
-                        foreach($list[diseasesList] as $value)
-                        {
-                            if($value[id] == $diseases[$i])
-                            {
-                                echo "<span>".$value[name]."</span>";
-                            }
+<div class='tabContainer2' style="background-color:#E1FFE3">
+<table id="symptoms" border="1">
+            <?php
+            if($this->content !== null){       
+            foreach ($this->content as $key => $value) {
+
+                $phases_di[] = $key; 
+                $diseases = $value[diseases][val][name];
+                $status_di[] = $value[diseases][val][status];
+            }
+            ?>
+
+        <tr><td><b>Name</b></td>
+                    <?php
+                        for($i = 0; count($phases_di)>$i; $i++){
+                            $di = $i;
+                            echo "<td>Phase ".++$di."</td>";
                         }
-
-
-                        foreach ($status_di as $value) {
-                            if($value[$i] == ""){
-                                echo "-<span>no status</span>";
-                            }else{
-                                echo "-<span>".$value[$i]."</span>";
+                    ?>
+            </tr>
+                    <?php
+                    for($i = 0; count($diseases)>$i; $i++){
+                        ?>
+                    <tr>
+                            <?php
+                            foreach($list[diseasesList] as $value)
+                            {
+                                if($value[id] == $diseases[$i])
+                                {
+                                    echo "<td>".$value[name]."</td>";
+                                }
                             }
+
+
+                            foreach ($status_di as $value) {
+                                if($value[$i] == ""){
+                                    echo "<td>no status</td>";
+                                }else{
+                                    if($value[$i] == 'finished'){echo "<td><b>".$value[$i]."</b></td>";}else{echo "<td>".$value[$i]."</td>";}
+                                }
+                            }
+                            ?>
+                    </tr>    
+                        <?php
                         }
                         ?>
-                </div>    
-                    <?php
-                    }
-                    ?>
-    </div>
-    <?php }else{echo "No data to display";} ?>
+
+        <?php }else{echo "No data to display";} ?>
+    </table>
 </div>
 
 <div class='contentheading'>Photo History</div>

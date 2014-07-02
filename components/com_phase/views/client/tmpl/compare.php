@@ -105,7 +105,7 @@ $phases = $this->phases;
     <tr><td colspan="2"><div class='contentheading'>Body Tracking</div></td></tr>
     <tr>
         <td>
-                        <div class='tabContainer2' style="background-color:#E1FFE3">
+               <div class='tabContainer2' style="background-color:#E1FFE3">
                <table width="50%">
                 <tr>
                     <td><?="Weight"?></td>
@@ -120,8 +120,7 @@ $phases = $this->phases;
                     <td><?php if(isset($evalution[body][2])){ echo $evalution[body][2];} ?><?="%"?></td>
                 </tr>
 
-            </table> 
-                            
+            </table>                
             </div>
         </td>
         <td>
@@ -272,96 +271,135 @@ $phases = $this->phases;
     </tr>
     <tr>
         <td>
- 
-
-<?php
-if ($evalution[symptoms][val][0] !== "")
-{
-    ?>
-            <div id="symptom-1" style="width: 350px; height: 350px;"></div>
-            <ul>
-            <?php
-    for ($i = 0; $i < count($evalution[symptoms][val]); $i++)
-    {
-    ?>
-    <li>
-        <span>
-            <?php
-            foreach($list[symptomList] as $value)
+             <?php
+            if ($evalution[symptoms][val][0] !== "")
             {
-                if($value[id] == $evalution[symptoms][val][$i])
-                {
-                    echo $value[name];
-                }
+            ?>
+            
+                <div id="symptom-1" style="width: 350px; height: 350px;"></div>
+            <?php
             }
             ?>
-        </span><span><?=$evalution[symptoms][status][$i]?></span>
-        </li>
-    <?php    
-    }
-    ?>
-            </ul>
-<?php
-}
-else
-{
-?>
-        <div class='contentheading'>You dont have any symptoms in this phase</div>
-<?php
-}
-?>
         </td>
         <td>
-
-            
-            
-            
-
-
-<?php
-if ($evalution2[symptoms][val][0] !== "")
-{
-?>
-    <div id="symptom-2" style="width: 350px; height: 350px;"></div>
-            <ul>
             <?php
-    for ($i = 0; $i < count($evalution_2[symptoms][val]); $i++)
-    {
-    ?>
-    <li>
-        <span>
-            <?php
-                foreach($list[symptomList] as $value){
-                    if($value[id] == $evalution_2[symptoms][val][$i]){
-                        echo $value[name];
-                    }
-                }
+            if ($evalution2[symptoms][val][0] !== "")
+            {
             ?>
-        </span><span><?=$evalution_2[symptoms][status][$i]?></span>
-        </li>
-    <?php    
-    }
-	?>
-</ul>
-            <?php
-}
-else
-{
-?>
-        <div class='contentheading'>You dont have any symptoms in this phase</div>
-<?php
-}
-?>
-
-            
-            
-            
-            
+            <div id="symptom-2" style="width: 350px; height: 350px;"></div>
+            <?php } ?>
         </td>
+    </tr>
+    <tr>
+        <td>
+              
+             <?php
+            if ($evalution[symptoms][val][0] !== "")
+            {
+                ?>
+            
+                        
+                    <div class='tabContainer2' style="background-color:#E1FFE3">
+                    <table width="50%">
+                              <?php
+                      for ($i = 0; $i < count($evalution[symptoms][val]); $i++)
+                      {
+                      ?>
+                      <tr>
+                          <td>
+                              <?php
+                              foreach($list[symptomList] as $value)
+                              {
+                                  if($value[id] == $evalution[symptoms][val][$i])
+                                  {
+                                      echo $value[name];
+                                  }
+                              }
+                              ?>
+                          </td>
+                          <td><?php if($evalution[symptoms][status][$i] == 'finished'){echo "<b>".$evalution[symptoms][status][$i]."</b>";}else{echo $evalution[symptoms][status][$i];} ?></td>
+                          </tr>
+                      <?php    
+                      }
+                      ?>
+                    </table>
+                    </div>
+                        
+            <?php
+            }
+            else
+            {
+            ?>
+                    <div class='contentheading'>You dont have any symptoms in this phase</div>
+            <?php
+            }
+            ?> 
+     
+        </td>
+        
+        
+        <td>
+
+            <?php
+            if ($evalution2[symptoms][val][0] !== "")
+            {
+            ?>
+                <div class='tabContainer2' style="background-color:#E1FFE3">
+                    <table width="50%">
+                        <?php
+                        for ($i = 0; $i < count($evalution_2[symptoms][val]); $i++)
+                        {
+                        ?>
+                        <tr>
+                            <td>
+                                <?php
+                                    foreach($list[symptomList] as $value){
+                                        if($value[id] == $evalution_2[symptoms][val][$i]){
+                                            echo $value[name];
+                                        }
+                                    }
+                                ?>
+                            </td>
+                            <td><?php if($evalution_2[symptoms][status][$i] == 'finished'){echo "<b>".$evalution_2[symptoms][status][$i]."</b>";}else{echo $evalution_2[symptoms][status][$i];} ?></td>
+                        </tr>
+                        <?php    
+                        }
+                            ?>
+                    </table>
+                </div>
+                 <?php
+                    }
+                    else
+                    {
+                    ?>
+                            <div class='contentheading'>You dont have any symptoms in this phase</div>
+                    <?php
+                    }
+            ?>            
+    </td>
     </tr>
     <tr>
         <td colspan="2"><div class='contentheading'>Medical preparations Tracking</div></td>
     </tr>
+    <tr>
+        <td>
+            <?php
+            if ($evalution[drug][val][0] !== "")
+            {
+            ?>
+                <div id="drug-1" style="width: 350px; height: 350px;"></div> 
+            <?php } ?>
+        </td>
+        <td>
+            <?php
+            if ($evalution_2[drug][val][0] !== "")
+            {
+            ?>
+                <div id="drug-2" style="width: 350px; height: 350px;"></div> 
+            <?php } ?>
+        </td>
+    </tr>
+    
         <td>
 
             
@@ -369,29 +407,33 @@ else
 if ($evalution[drug][val][0] !== "")
 {
 ?>
-    <div id="drug-1" style="width: 350px; height: 350px;"></div>        
-    <ul>
-    <?php
-    for ($i = 0; $i < count($evalution[drug][val]); $i++)
-    {
-    ?>
-    <li>
-        <span>
-            <?php
-            foreach($list[medtrackList] as $value)
-            {
-                if($value[id] == $evalution[drug][val][$i])
+
+        <div class='tabContainer2' style="background-color:#E1FFE3">
+            <table width="50%">
+                <?php
+                for ($i = 0; $i < count($evalution[drug][val]); $i++)
                 {
-                    echo $value[name];
+                ?>
+                <tr>
+                    <td>
+                        <?php
+                        foreach($list[medtrackList] as $value)
+                        {
+                            if($value[id] == $evalution[drug][val][$i])
+                            {
+                                echo $value[name];
+                            }
+                        }
+                        ?>
+                    </td>
+                    <td><?php if($evalution[drug][status][$i] == 'finished'){echo "<b>".$evalution[drug][status][$i]."</b>";}else{echo $evalution[drug][status][$i];} ?></td>
+                </tr>
+                <?php    
                 }
-            }
-            ?>
-        </span><span><?=$evalution[drug][status][$i]?></span>
-        </li>
-    <?php    
-    }
-    ?>
-    </ul>
+                ?>
+            </table>
+        </div>
+
 <?php
 }
 else
@@ -410,29 +452,33 @@ else
 if ($evalution2[drug][val][0] !== "")
 {
     ?>
-        <div id="drug-2" style="width: 350px; height: 350px;"></div>
-        <ul>
-    <?php
-    for ($i = 0; $i < count($evalution_2[drug][val]); $i++)
-    {
-    ?>
-        <li>
-        <span>
-            <?php
-            foreach($list[medtrackList] as $value)
-            {
-                if($value[id] == $evalution_2[drug][val][$i])
-                {
-                    echo $value[name];
-                }
-            }
-            ?>            
-        </span><span><?=$evalution_2[drug][status][$i]?></span>
-        </li>
-    <?php    
-    }
-    ?>
-        </ul>
+
+                <div class='tabContainer2' style="background-color:#E1FFE3">
+                    <table width="50%">
+                                            <?php
+                        for ($i = 0; $i < count($evalution_2[drug][val]); $i++)
+                        {
+                        ?>
+                            <tr>
+                            <td>
+                                <?php
+                                foreach($list[medtrackList] as $value)
+                                {
+                                    if($value[id] == $evalution_2[drug][val][$i])
+                                    {
+                                        echo $value[name];
+                                    }
+                                }
+                                ?>            
+                            </td>
+                            <td><?php if($evalution_2[drug][status][$i] == 'finished'){echo "<b>".$evalution_2[drug][status][$i]."</b>";}else{echo $evalution_2[drug][status][$i];} ?></td>
+                            </tr>
+                        <?php    
+                        }
+                        ?>
+                     </table>
+                </div>
+
 <?php
 }
 else
@@ -451,34 +497,59 @@ else
     
     <tr>
         <td>
+            <?php
+            if ($evalution[diseases][val][0] !== "")
+            {
+            ?>
+                    <div id="dis-1" style="width: 350px; height: 350px;"></div>
+            <?php } ?>
+        </td>
+        <td>
+            <?php
+            if ($evalution_2[diseases][val][0] !== "")
+            {
+            ?>
+                <div id="dis-2" style="width: 350px; height: 350px;"></div>
+            <?php } ?>
+        </td>
+    </tr>
+    
+    <tr>
+        <td>
 
 <?php
 if ($evalution[diseases][val][0] !== "")
 {
 ?>
-    <div id="dis-1" style="width: 350px; height: 350px;"></div>
-    <ul>
-    <?php
-    for ($i = 0; $i < count($evalution[diseases][val]); $i++)
-    {
-    ?>
-       <li>
-        <span>
-            <?php
-            foreach($list[diseasesList] as $value)
-            {
-                if($value[id] == $evalution[diseases][val][$i])
+
+        <div class='tabContainer2' style="background-color:#E1FFE3">
+            <table width="50%">
+
+                                        <?php
+                for ($i = 0; $i < count($evalution[diseases][val]); $i++)
                 {
-                    echo $value[name];
+                ?>
+                   <tr>
+                    <td>
+                        <?php
+                        foreach($list[diseasesList] as $value)
+                        {
+                            if($value[id] == $evalution[diseases][val][$i])
+                            {
+                                echo $value[name];
+                            }
+                        }
+                        ?>
+                    </td>
+                    <td><?php if($evalution[diseases][status][$i] == 'finished'){echo "<b>".$evalution[diseases][status][$i]."</b>";}else{echo $evalution[diseases][status][$i];} ?></td>
+                    </tr>
+                <?php    
                 }
-            }
-            ?>
-        </span><span><?=$evalution[diseases][status][$i]?></span>
-        </li>
-    <?php    
-    }
-    ?>
-        </ul>
+                ?>
+
+            </table>
+        </div>
+
 <?php
 }
 else
@@ -499,38 +570,43 @@ else
 if ($evalution2[diseases][val][0] !== "")
 {
     ?>
-        <div id="dis-2" style="width: 350px; height: 350px;"></div>
-    <ul>
-    <?php
-    for ($i = 0; $i < count($evalution_2[diseases][val]); $i++)
-    {
-    ?>
-        <li>
-        <span>
-            <?php
-            foreach($list[diseasesList] as $value)
-            {
-                if($value[id] == $evalution_2[diseases][val][$i])
-                {
-                    echo $value[name];
+        <div class='tabContainer2' style="background-color:#E1FFE3">
+            <table width="50%">
+                
+                                <?php
+                    for ($i = 0; $i < count($evalution_2[diseases][val]); $i++)
+                    {
+                    ?>
+                        <tr>
+                        <td>
+                            <?php
+                            foreach($list[diseasesList] as $value)
+                            {
+                                if($value[id] == $evalution_2[diseases][val][$i])
+                                {
+                                    echo $value[name];
+                                }
+                            }
+                            ?>
+                        </td>
+                        <td><?php if($evalution_2[diseases][status][$i] == 'finished'){echo "<b>".$evalution_2[diseases][status][$i]."</b>";}else{echo $evalution_2[diseases][status][$i];} ?></td>
+                        </tr>
+                    <?php    
+                    }
+                    ?>
+                </ul>
+                <?php
                 }
-            }
-            ?>
-        </span><span><?=$evalution_2[diseases][status][$i]?></span>
-        </li>
-    <?php    
-    }
-    ?>
-</ul>
-<?php
-}
-else
-{
-?>
-        <div class='contentheading'>You dont have any disease in this phase</div>
-<?php
-}
-?>
+                else
+                {
+                ?>
+                        <div class='contentheading'>You dont have any disease in this phase</div>
+                <?php
+                }
+                ?>
+                
+            </table>
+        </div>
 
         </td>
     </tr>

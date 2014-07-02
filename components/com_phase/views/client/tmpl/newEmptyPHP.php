@@ -581,3 +581,107 @@ foreach ($content as $value)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+<tr>
+        <td>
+              
+             <?php
+            if ($evalution[symptoms][val][0] !== "")
+            {
+                ?>
+            
+                <div id="symptom-1" style="width: 350px; height: 350px;"></div>
+                        
+                    <div class='tabContainer2' style="background-color:#E1FFE3">
+                    <table width="50%">
+                              <?php
+                      for ($i = 0; $i < count($evalution[symptoms][val]); $i++)
+                      {
+                      ?>
+                      <tr>
+                          <td>
+                              <?php
+                              foreach($list[symptomList] as $value)
+                              {
+                                  if($value[id] == $evalution[symptoms][val][$i])
+                                  {
+                                      echo $value[name];
+                                  }
+                              }
+                              ?>
+                          </td>
+                          <td><?php if($evalution[symptoms][status][$i] == 'finished'){echo "<b>".$evalution[symptoms][status][$i]."</b>";}else{echo $evalution[symptoms][status][$i];} ?></td>
+                          </tr>
+                      <?php    
+                      }
+                      ?>
+                    </table>
+                    </div>
+                        
+            <?php
+            }
+            else
+            {
+            ?>
+                    <div class='contentheading'>You dont have any symptoms in this phase</div>
+            <?php
+            }
+            ?> 
+     
+        </td>
+        <td>
+
+            
+            
+            
+
+
+<?php
+if ($evalution2[symptoms][val][0] !== "")
+{
+?>
+    <div id="symptom-2" style="width: 350px; height: 350px;"></div>
+    <div class='tabContainer2' style="background-color:#E1FFE3">
+        <table width="50%">
+            <?php
+            for ($i = 0; $i < count($evalution_2[symptoms][val]); $i++)
+            {
+            ?>
+            <tr>
+                <td>
+                    <?php
+                        foreach($list[symptomList] as $value){
+                            if($value[id] == $evalution_2[symptoms][val][$i]){
+                                echo $value[name];
+                            }
+                        }
+                    ?>
+                </td>
+                <td><?php if($evalution_2[symptoms][status][$i] == 'finished'){echo "<b>".$evalution_2[symptoms][status][$i]."</b>";}else{echo $evalution_2[symptoms][status][$i];} ?></td>
+            </tr>
+            <?php    
+            }
+                ?>
+        </table>
+    </div>
+     <?php
+        }
+        else
+        {
+        ?>
+                <div class='contentheading'>You dont have any symptoms in this phase</div>
+        <?php
+        }
+?>            
+    </td>
+    </tr>

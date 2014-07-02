@@ -4118,7 +4118,7 @@ class PhaseViewClient extends JView
         
         //первичная инфа(goals & pid=0)
         $inteke = $model->getFirstContent($uid);
-
+                
         if(count($inteke) !== 0 && $inteke !== null && $inteke)
             {
                 

@@ -362,18 +362,14 @@ else
     <tr>
         <td colspan="2"><div class='contentheading'>Medical preparations Tracking</div></td>
     </tr>
-    <tr>
-        <td>   <div id="drug-1" style="width: 350px; height: 350px;"></div></td>
-        <td>   <div id="drug-2" style="width: 350px; height: 350px;"></div> </td>
-    </tr>
-
         <td>
 
             
 <?php
 if ($evalution[drug][val][0] !== "")
 {
-    ?>
+?>
+    <div id="drug-1" style="width: 350px; height: 350px;"></div>        
     <ul>
     <?php
     for ($i = 0; $i < count($evalution[drug][val]); $i++)
@@ -401,7 +397,7 @@ if ($evalution[drug][val][0] !== "")
 else
 {
 ?>
-        <tr><td colspan="3">You dont have any drug</td></tr>
+        <div class='contentheading'>You dont have any drug in this phase</div>
 <?php
 }
 ?>
@@ -409,11 +405,14 @@ else
         </td>
         <td>
             
-<ul>
 
 <?php
-if (isset($evalution_2[drug]))
+if ($evalution2[drug][val][0] !== "")
 {
+    ?>
+        <div id="drug-2" style="width: 350px; height: 350px;"></div>
+        <ul>
+    <?php
     for ($i = 0; $i < count($evalution_2[drug][val]); $i++)
     {
     ?>
@@ -433,32 +432,33 @@ if (isset($evalution_2[drug]))
     <?php    
     }
     ?>
+        </ul>
 <?php
 }
 else
 {
 ?>
-        <tr><td colspan="3">You dont have any drug</td></tr>
+        <div class='contentheading'>You dont have any drug in this phase</div>
 <?php
 }
 ?>
-</ul>
+
         </td>
     </tr>
     <tr>
         <td colspan="2"><div class='contentheading'>Diseases Tracking</div></td>
     </tr>
-        <tr>
-        <td>   <div id="dis-1" style="width: 350px; height: 350px;"></div></td>
-        <td>   <div id="dis-2" style="width: 350px; height: 350px;"></div> </td>
-    </tr>
+    
     <tr>
         <td>
 
-<ul>
 <?php
-if (isset($evalution[diseases]))
+if ($evalution[diseases][val][0] !== "")
 {
+?>
+    <div id="dis-1" style="width: 350px; height: 350px;"></div>
+    <ul>
+    <?php
     for ($i = 0; $i < count($evalution[diseases][val]); $i++)
     {
     ?>
@@ -478,16 +478,17 @@ if (isset($evalution[diseases]))
     <?php    
     }
     ?>
+        </ul>
 <?php
 }
 else
 {
 ?>
-        <tr><td colspan="3">You dont have any drug</td></tr>
+        <div class='contentheading'>You dont have any disease in this phase</div>
 <?php
 }
 ?>
-</ul>
+
 
         </td>
         <td>
@@ -495,8 +496,12 @@ else
 <ul>
 
 <?php
-if (isset($evalution_2[diseases]))
+if ($evalution2[diseases][val][0] !== "")
 {
+    ?>
+        <div id="dis-2" style="width: 350px; height: 350px;"></div>
+    <ul>
+    <?php
     for ($i = 0; $i < count($evalution_2[diseases][val]); $i++)
     {
     ?>
@@ -516,16 +521,17 @@ if (isset($evalution_2[diseases]))
     <?php    
     }
     ?>
+</ul>
 <?php
 }
 else
 {
 ?>
-        <tr><td colspan="3">You dont have any drug</td></tr>
+        <div class='contentheading'>You dont have any disease in this phase</div>
 <?php
 }
 ?>
-</ul>
+
         </td>
     </tr>
 </table>

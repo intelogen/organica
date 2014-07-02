@@ -238,14 +238,14 @@ $count = count($phases);
             
     <?php if($this->evalution[madtrack][exem] && $this->evalution[madtrack][exem] !== null && $this->evalution[madtrack][exem] !== ""){?>
         <div class="data-result">
-        <span class='value-name'><?="1. Your last physical exam was - "?></span>
+        <span class='value-name'><?="1. Your last physical exam was"?></span>
         <span class='value'><?=$this->evalution[madtrack][exem]?></span>
         </div>
     <?php }
     
     if($this->evalution[madtrack][treatment][status] && $this->evalution[madtrack][treatment][status] !== null &&$this->evalution[madtrack][treatment][status] !== ""){ ?>
         <div class="data-result">
-        <span class='value-name'><?="2. Undermedical treatment - "?></span>
+        <span class='value-name'><?="2. Undermedical treatment"?></span>
         <span class='value'><?=$this->evalution[madtrack][treatment][status]?></span>
         </div>
         Note: <span class='value'><?=$this->evalution[madtrack][treatment][note]?></span>
@@ -276,13 +276,15 @@ $count = count($phases);
         Note: <span class='value'><?=$this->evalution[madtrack][alcohol][note]?></span>
     <?php }
     
-    if($this->evalution[madtrack][drugs][status] && $this->evalution[madtrack][drugs][status] !== null && $this->evalution[madtrack][drugs][status] = ""){?>
+
+    if($this->evalution[madtrack][drugs][status] && $this->evalution[madtrack][drugs][status] !== null && $this->evalution[madtrack][drugs][status] !== ""){?>
         <div class="data-result">
             <span class='value-name'><?="6. Do you use cocaine or drugs ?"?></span>
         <span class='value'><?=$this->evalution[madtrack][drugs][status]?></span>
         </div>
         Note: <span class='value'><?=$this->evalution[madtrack][drugs][note]?></span>
     <?php } ?>
+        
     </div>
             
             

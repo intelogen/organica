@@ -90,6 +90,12 @@ if($this->content){
                 <td>FAT</td>
                 <td>PH</td>
             </tr>
+            <tr>
+                <td>Intake data</td>
+                <td><?=$gols[body][val][0]?></td>
+                <td><?=$gols[body][val][1]?></td>
+                <td><?=$gols[body][val][2]?></td>
+            </tr>
                 <?php
                 foreach ($this->content as $value) 
                 {   
@@ -103,12 +109,7 @@ if($this->content){
                 <?php
                 }
                 ?>
-            <tr>
-                <td>Intake data</td>
-                <td><?=$gols[body][val][0]?></td>
-                <td><?=$gols[body][val][1]?></td>
-                <td><?=$gols[body][val][2]?></td>
-            </tr>
+            
             <tr>
                 <td>Goal</td>
                 <td><?=$gols[goal_body][val][0]?></td>

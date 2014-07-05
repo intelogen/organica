@@ -1,57 +1,20 @@
-
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<?php defined( '_JEXEC' ) or die( 'Restricted access' ); ?>
 
-
-
-
-    
-    
-    
-<?php
-
-
-
-defined( '_JEXEC' ) or die( 'Restricted access' );
-?>
 <?php
 $uid = $this->uid;
 $pid = $this->pid;
 $phases = $this->phases;
 
-if(JRequest::getVar('c') && JRequest::getVar('c') != "")
-        {
-            $uid = JRequest::getVar('c');
-        }
-?>
+if(JRequest::getVar('c') && JRequest::getVar('c') != ""){
+    $uid = JRequest::getVar('c');
+} ?>
 
 
 <?php
-
-if($this->evalution_1)
-{
-    $evalution = $this->evalution_1; 
-
-
-}
-
-if($this->evalution_2)
-{
-    $evalution_2 = $this->evalution_2; 
-
-
-}
-
-
-if($this->list)
-{
-    $list = $this->list; 
-}
- 
 $uid = $this->uid;
 $pid = $this->pid;
 $phases = $this->phases;
-
-
 ?>
 
 
@@ -77,25 +40,6 @@ $phases = $this->phases;
     </ul>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     
 <table>
     <tr>
@@ -111,15 +55,15 @@ $phases = $this->phases;
                <table width="50%">
                 <tr>
                     <td><?="Weight"?></td>
-                    <td><?php if(isset($evalution[body][0])){ echo $evalution[body][0];} ?><?="lbs"?></td>
+                    <td><?=$this->evalution_1[body][val][0]?> lbs</td>
                 </tr>
                 <tr>
                     <td><?="Body Fat"?></td>
-                    <td><?php if(isset($evalution[body][1])){ echo $evalution[body][1];} ?><?="%"?></td>
+                    <td><?=$this->evalution_1[body][val][1]?> % </td>
                 </tr>
                 <tr>
                     <td><?="PH"?></td>
-                    <td><?php if(isset($evalution[body][2])){ echo $evalution[body][2];} ?><?="%"?></td>
+                    <td><?=$this->evalution_1[body][val][2]?></td>
                 </tr>
 
             </table>                
@@ -130,20 +74,18 @@ $phases = $this->phases;
                <table width="50%">
                 <tr>
                     <td><?="Weight"?></td>
-                    <td><?php if(isset($evalution_2[body][0])){ echo $evalution_2[body][0];} ?><?="lbs"?></td>
+                    <td><?=$this->evalution_2[body][val][0]?> lbs </td>
                 </tr>
                 <tr>
                     <td><?="Body Fat"?></td>
-                    <td><?php if(isset($evalution_2[body][1])){ echo $evalution_2[body][1];} ?><?="%"?></td>
+                    <td><?=$this->evalution_2[body][val][1]?> %</td>
                 </tr>
                 <tr>
                     <td><?="PH"?></td>
-                    <td><?php if(isset($evalution_2[body][2])){ echo $evalution_2[body][2];} ?><?="%"?></td>
+                    <td><?=$this->evalution_2[body][val][2]?></td>
                 </tr>
 
             </table> 
-
-
             </div>
         </td>
     </tr>
@@ -195,80 +137,45 @@ $phases = $this->phases;
     </tr>
     <tr>
         <td>
-                        <div class='tabContainer2' style="background-color:#E1FFE3"> 
+                    <div class='tabContainer2' style="background-color:#E1FFE3"> 
                     <?php
-                    if($evalution[photo][0])
-                    {
-                        ?>
-
-                        <?php
-                        echo "<img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$evalution[photo][0]."\" width=\"200\" height=\"350\">";
-                    }
-                    else
-                    {
+                    if($this->evalution_1[photo][val][0] !== ""){
+                        echo "<img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$this->evalution_1[photo][val][0]."\" width=\"200\" height=\"350\">";
+                    } else {
                         echo "  <div style='font-size:15px;color:#008;'>
                                 <img src=\"".JURI::root().'uploads_jtpl/phase_img/'."no1.png"."\" width=\"200\" height=\"350\">
                                 </div>";        
                     }
-                    ?>
-
-                    <?php
-                    if($evalution[photo][1])
-                    {
-                        ?>
-
-                        <?php
-                        echo "<img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$evalution[photo][1]."\" width=\"200\" height=\"350\">";
-                    }
-                    else
-                    {
+                    
+                    if($this->evalution_1[photo][val][1] !== ""){
+                        echo "<img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$this->evalution_1[photo][val][1]."\" width=\"200\" height=\"350\">";
+                    }else{
                         echo "  <div style='font-size:15px;color:#008;'>
                                 <img src=\"".JURI::root().'uploads_jtpl/phase_img/'."no2.png"."\" width=\"200\" height=\"350\">
                                 </div>";        
-                    }
-                    ?>
-
-            </div>
+                    } ?>
+                    </div>
         </td>
         <td>
-                        <div class='tabContainer2' style="background-color:#E1FFE3"> 
-                
+                    <div class='tabContainer2' style="background-color:#E1FFE3"> 
                     <?php
-                    if($evalution_2[photo][0])
-                    {
-                        ?>
-
-                        <?php
-                        echo "<img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$evalution_2[photo][0]."\" width=\"200\" height=\"350\">";
-                    }
-                    else
-                    {
+                    if($this->evalution_2[photo][val][0] !== ""){
+                        echo "<img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$this->evalution_2[photo][val][0]."\" width=\"200\" height=\"350\">";
+                    } else {
                         echo "  <div style='font-size:15px;color:#008;'>
                                 <img src=\"".JURI::root().'uploads_jtpl/phase_img/'."no1.png"."\" width=\"200\" height=\"350\">
                                 </div>";        
                     }
-                    ?>
-
-                
-                
-                    <?php
-                    if($evalution_2[photo][1])
-                    {
-                        ?>
-
-                        <?php
-                        echo "<img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$evalution_2[photo][1]."\" width=\"200\" height=\"350\">";
-                    }
-                    else
-                    {
+                    
+                    if($this->evalution_2[photo][val][1] !== "") {
+                        echo "<img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$this->evalution_2[photo][val][1]."\" width=\"200\" height=\"350\">";
+                    } else {
                         echo "  <div style='font-size:15px;color:#008;'>
                                 <img src=\"".JURI::root().'uploads_jtpl/phase_img/'."no2.png"."\" width=\"200\" height=\"350\">
                                 </div>";        
                     }
                     ?>
-
-            
-            </div>
+                    </div>
         </td>
     </tr>
     <tr>
@@ -276,21 +183,14 @@ $phases = $this->phases;
     </tr>
     <tr>
         <td>
-             <?php
-            if ($evalution[symptoms][val][0] !== "")
-            {
-            ?>
-            
-                <div id="symptom-1" style="width: 350px; height: 350px;"></div>
+             <?php if ($this->evalution_1[symptoms][val][0] !== ""){?>
+                    <div id="symptom-1" style="width: 350px; height: 350px;"></div>
             <?php
-            }
-            ?>
+            } ?>
         </td>
         <td>
             <?php
-            if ($evalution2[symptoms][val][0] !== "")
-            {
-            ?>
+            if ($this->evalution_2[symptoms][val][0] !== ""){ ?>
             <div id="symptom-2" style="width: 350px; height: 350px;"></div>
             <?php } ?>
         </td>
@@ -299,30 +199,26 @@ $phases = $this->phases;
         <td>
               
              <?php
-            if ($evalution[symptoms][val][0] !== "")
-            {
-                ?>
-            
-                        
-                    <div class='tabContainer2' style="background-color:#E1FFE3">
+            if ($this->evalution_1[symptoms][val][0] !== ""){?>
+                <div class='tabContainer2' style="background-color:#E1FFE3">
                     <table width="50%">
                               <?php
-                      for ($i = 0; $i < count($evalution[symptoms][val]); $i++)
+                      for ($i = 0; $i < count($this->evalution_1[symptoms][val]); $i++)
                       {
                       ?>
                       <tr>
                           <td>
                               <?php
-                              foreach($list[symptomList] as $value)
+                              foreach($this->list[symptomList] as $value)
                               {
-                                  if($value[id] == $evalution[symptoms][val][$i])
+                                  if($value[id] == $this->evalution_1[symptoms][val][$i])
                                   {
                                       echo $value[name];
                                   }
                               }
                               ?>
                           </td>
-                          <td><?php if($evalution[symptoms][status][$i] == 'finished'){echo "<b>".$evalution[symptoms][status][$i]."</b>";}else{echo $evalution[symptoms][status][$i];} ?></td>
+                          <td><?php if($this->evalution_1[symptoms][status][$i] == 'finished'){echo "<b>".$this->evalution_1[symptoms][status][$i]."</b>";}else{echo $this->evalution_1[symptoms][status][$i];} ?></td>
                           </tr>
                       <?php    
                       }
@@ -346,26 +242,26 @@ $phases = $this->phases;
         <td>
 
             <?php
-            if ($evalution2[symptoms][val][0] !== "")
+            if ($this->evalution_2[symptoms][val][0] !== "")
             {
             ?>
                 <div class='tabContainer2' style="background-color:#E1FFE3">
                     <table width="50%">
                         <?php
-                        for ($i = 0; $i < count($evalution_2[symptoms][val]); $i++)
+                        for ($i = 0; $i < count($this->evalution_2[symptoms][val]); $i++)
                         {
                         ?>
                         <tr>
                             <td>
                                 <?php
-                                    foreach($list[symptomList] as $value){
-                                        if($value[id] == $evalution_2[symptoms][val][$i]){
+                                    foreach($this->list[symptomList] as $value){
+                                        if($value[id] == $this->evalution_2[symptoms][val][$i]){
                                             echo $value[name];
                                         }
                                     }
                                 ?>
                             </td>
-                            <td><?php if($evalution_2[symptoms][status][$i] == 'finished'){echo "<b>".$evalution_2[symptoms][status][$i]."</b>";}else{echo $evalution_2[symptoms][status][$i];} ?></td>
+                            <td><?php if($this->evalution_2[symptoms][status][$i] == 'finished'){echo "<b>".$this->evalution_2[symptoms][status][$i]."</b>";}else{echo $this->evalution_2[symptoms][status][$i];} ?></td>
                         </tr>
                         <?php    
                         }
@@ -389,7 +285,7 @@ $phases = $this->phases;
     <tr>
         <td>
             <?php
-            if ($evalution[drug][val][0] !== "")
+            if ($this->evalution_1[drug][val][0] !== "")
             {
             ?>
                 <div id="drug-1" style="width: 350px; height: 350px;"></div> 
@@ -397,7 +293,7 @@ $phases = $this->phases;
         </td>
         <td>
             <?php
-            if ($evalution_2[drug][val][0] !== "")
+            if ($this->evalution_2[drug][val][0] !== "")
             {
             ?>
                 <div id="drug-2" style="width: 350px; height: 350px;"></div> 
@@ -409,29 +305,29 @@ $phases = $this->phases;
 
             
 <?php
-if ($evalution[drug][val][0] !== "")
+if ($this->evalution_1[drug][val][0] !== "")
 {
 ?>
 
         <div class='tabContainer2' style="background-color:#E1FFE3">
             <table width="50%">
                 <?php
-                for ($i = 0; $i < count($evalution[drug][val]); $i++)
+                for ($i = 0; $i < count($this->evalution_1[drug][val]); $i++)
                 {
                 ?>
                 <tr>
                     <td>
                         <?php
-                        foreach($list[medtrackList] as $value)
+                        foreach($this->list[medtrackList] as $value)
                         {
-                            if($value[id] == $evalution[drug][val][$i])
+                            if($value[id] == $this->evalution_1[drug][val][$i])
                             {
                                 echo $value[name];
                             }
                         }
                         ?>
                     </td>
-                    <td><?php if($evalution[drug][status][$i] == 'finished'){echo "<b>".$evalution[drug][status][$i]."</b>";}else{echo $evalution[drug][status][$i];} ?></td>
+                    <td><?php if($this->evalution_1[drug][status][$i] == 'finished'){echo "<b>".$this->evalution_1[drug][status][$i]."</b>";}else{echo $this->evalution_1[drug][status][$i];} ?></td>
                 </tr>
                 <?php    
                 }
@@ -454,29 +350,29 @@ else
             
 
 <?php
-if ($evalution2[drug][val][0] !== "")
+if ($this->evalution2[drug][val][0] !== "")
 {
     ?>
 
                 <div class='tabContainer2' style="background-color:#E1FFE3">
                     <table width="50%">
                                             <?php
-                        for ($i = 0; $i < count($evalution_2[drug][val]); $i++)
+                        for ($i = 0; $i < count($this->evalution_2[drug][val]); $i++)
                         {
                         ?>
                             <tr>
                             <td>
                                 <?php
-                                foreach($list[medtrackList] as $value)
+                                foreach($this->list[medtrackList] as $value)
                                 {
-                                    if($value[id] == $evalution_2[drug][val][$i])
+                                    if($value[id] == $this->evalution_2[drug][val][$i])
                                     {
                                         echo $value[name];
                                     }
                                 }
                                 ?>            
                             </td>
-                            <td><?php if($evalution_2[drug][status][$i] == 'finished'){echo "<b>".$evalution_2[drug][status][$i]."</b>";}else{echo $evalution_2[drug][status][$i];} ?></td>
+                            <td><?php if($this->evalution_2[drug][status][$i] == 'finished'){echo "<b>".$this->evalution_2[drug][status][$i]."</b>";}else{echo $this->evalution_2[drug][status][$i];} ?></td>
                             </tr>
                         <?php    
                         }
@@ -502,7 +398,7 @@ else
     <tr>
         <td>
             <?php
-            if ($evalution[diseases][val][0] !== "")
+            if ($this->evalution_1[diseases][val][0] !== "")
             {
             ?>
                     <div id="dis-1" style="width: 350px; height: 350px;"></div>
@@ -510,7 +406,7 @@ else
         </td>
         <td>
             <?php
-            if ($evalution_2[diseases][val][0] !== "")
+            if ($this->evalution_2[diseases][val][0] !== "")
             {
             ?>
                 <div id="dis-2" style="width: 350px; height: 350px;"></div>
@@ -521,7 +417,7 @@ else
         <td>
 
 <?php
-if ($evalution[diseases][val][0] !== "")
+if ($this->evalution_1[diseases][val][0] !== "")
 {
 ?>
 
@@ -529,22 +425,22 @@ if ($evalution[diseases][val][0] !== "")
             <table width="50%">
 
                                         <?php
-                for ($i = 0; $i < count($evalution[diseases][val]); $i++)
+                for ($i = 0; $i < count($this->evalution_1[diseases][val]); $i++)
                 {
                 ?>
                    <tr>
                     <td>
                         <?php
-                        foreach($list[diseasesList] as $value)
+                        foreach($this->list[diseasesList] as $value)
                         {
-                            if($value[id] == $evalution[diseases][val][$i])
+                            if($value[id] == $this->evalution_1[diseases][val][$i])
                             {
                                 echo $value[name];
                             }
                         }
                         ?>
                     </td>
-                    <td><?php if($evalution[diseases][status][$i] == 'finished'){echo "<b>".$evalution[diseases][status][$i]."</b>";}else{echo $evalution[diseases][status][$i];} ?></td>
+                    <td><?php if($this->evalution_1[diseases][status][$i] == 'finished'){echo "<b>".$this->evalution_1[diseases][status][$i]."</b>";}else{echo $this->evalution_1[diseases][status][$i];} ?></td>
                     </tr>
                 <?php    
                 }
@@ -570,29 +466,29 @@ else
 
 
 <?php
-if ($evalution2[diseases][val][0] !== "")
+if ($this->evalution_2[diseases][val][0] !== "")
 {
     ?>
         <div class='tabContainer2' style="background-color:#E1FFE3">
             <table width="50%">
                 
                                 <?php
-                    for ($i = 0; $i < count($evalution_2[diseases][val]); $i++)
+                    for ($i = 0; $i < count($this->evalution_2[diseases][val]); $i++)
                     {
                     ?>
                         <tr>
                         <td>
                             <?php
-                            foreach($list[diseasesList] as $value)
+                            foreach($this->list[diseasesList] as $value)
                             {
-                                if($value[id] == $evalution_2[diseases][val][$i])
+                                if($value[id] == $this->evalution_2[diseases][val][$i])
                                 {
                                     echo $value[name];
                                 }
                             }
                             ?>
                         </td>
-                        <td><?php if($evalution_2[diseases][status][$i] == 'finished'){echo "<b>".$evalution_2[diseases][status][$i]."</b>";}else{echo $evalution_2[diseases][status][$i];} ?></td>
+                        <td><?php if($this->evalution_2[diseases][status][$i] == 'finished'){echo "<b>".$this->evalution_2[diseases][status][$i]."</b>";}else{echo $this->evalution_2[diseases][status][$i];} ?></td>
                         </tr>
                     <?php    
                     }

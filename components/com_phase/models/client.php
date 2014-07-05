@@ -5,58 +5,101 @@
 class PhaseModelClient extends JModel
 {
          
-    function __construct()
-     {
-         parent::__construct();
-     }
+    function __construct(){
+        parent::__construct();
+    }
+    
+    //use depricated
+    function getCompanyId($userId){
+        $query = "SELECT company FROM #__jf_persons WHERE uid = $userId";
+        return $this->_getList($query);
+    }
+    
+    //use depricated
+    function getCoachInfo($companyId){
+        $query = "SELECT * FROM #__jf_companies WHERE id = $companyId";
+        return $this->_getList($query);
+
+    }
+    
+    // new = getCompanyId + getCoachInfo
+    function coachId($userId){
+        $query = "SELECT * FROM #__jf_companies WHERE id = (SELECT company FROM #__jf_persons WHERE uid = $userId)";
+        return $this->_getList($query);
+    }
+    
+    //use
+    function getMyInfo($userId){
+        $row = & JTable::getInstance('Users');
+        $row->load($userId);
+        return $row;
+    }
+    
+    //use - depricated
+    function edit_my_info($var){
+        $row = & JTable::getInstance('Users');
+        $row->load($var[id]);
+        
+        $data = $var;
+        
+        
+        if (!$row->bind($data))
+        {
+        $this->setError($this->_db->getErrorMsg());
+        return false;
+        }
+
+    if (!$row->check())
+        {
+        $this->setError($this->_db->getErrorMsg());
+        return false;
+        }
+
+    if (!$row->store()) 
+        {
+        $this->setError($this->_db->getErrorMsg());
+        return false;
+        }
+        
+        return true;
+    }
+    
+    // new = edit_my_info
+    function edit_user_info(){
+        $row = & JTable::getInstance('Users');
+        $row->load(JRequest::get('post')->id);
+        
+        if (!$row->bind(JRequest::get('post'))){
+            $this->setError($this->_db->getErrorMsg());
+            return false;
+        }
+        if (!$row->check()){
+            $this->setError($this->_db->getErrorMsg());
+            return false;
+        }
+        if (!$row->store()){
+            $this->setError($this->_db->getErrorMsg());
+            return false;
+        }
+        return true;
+    }
      
-    function getUserPhases($userId)
-     {
+    //use - dipricated
+    function getUserPhases($userId){
          $query = "SELECT * FROM #__jf_projects WHERE leader = $userId AND published =1 ORDER BY id";
          return $this->_getList($query);
-     }
-     
-    function getPhasesTasks($phaseId)
-     {
-         $query = "SELECT * FROM #__jf_checklists WHERE pid = $phaseId ORDER BY id";
-         return $this->_getList($query);
-     }
-     
-    function getTaskData($taskId)
-     {
-         $query = "SELECT * FROM #__jf_checklists WHERE id = $taskId";
-         return $this->_getList($query);
-     }
-     
-    function getCompanyId($userId)
-     {
-         $query = "SELECT company FROM #__jf_persons WHERE uid = $userId";
-         return $this->_getList($query);
-     }
-     
-    function getCoachInfo($companyId)
-     {
-         $query = "SELECT * FROM #__jf_companies WHERE id = $companyId";
-         return $this->_getList($query);
-         
-     }
-     
-    function finishTask($taskId)
-     {
-        $row = & JTable::getInstance('Checklist');
-        $row->load($taskId);
-        $row->set('completed', 1);
-        if(!$row->store())
-        {
-            $this->setError($this->_db->getErrorMsg());
-            return false;  
+    }
+    
+    // new = getUserPhases
+    function getPhases($var){
+        $query = "SELECT id, name FROM #__jf_projects WHERE leader = $var AND published =1 ORDER BY id";
+        $db =& JFactory::getDBO();
+        $db->setQuery($query);
+        return $db->loadAssocList();
         }
-  
-        return true;
-     }
-     
-    function getCount($pid)
-    {
+        
+    // use - depricated
+    function getCount($pid){
         for ($i = 1; $i<=count($pid); $i++)
         {
             $c = (int)$pid[$i];
@@ -65,14 +108,25 @@ class PhaseModelClient extends JModel
         return $countTask;
      }
     
-    function cnt($idp)
-    {
+    //use - depricated
+    function cnt($idp){
         $query = "SELECT COUNT('id') as allCount FROM #__jf_checklists WHERE pid = $idp";
         return $this->_getList($query);
     }
     
-    function getFinishCount($pid)
-    {
+    // new = getCount + cnt
+    function taskCnt($var){
+        $db =& JFactory::getDBO();
+            foreach ($var as $value){
+                $query = "SELECT COUNT('id') AS taskCnt FROM #__jf_checklists WHERE pid = $value";
+                $db->setQuery($query);
+                $taskCnt[] = $db->loadResult();
+            }
+        return $taskCnt;
+    }
+    
+    //use - depricated
+    function getFinishCount($pid){
         for ($i = 1; $i<=count($pid); $i++)
         {
             $c = (int)$pid[$i];
@@ -81,11 +135,77 @@ class PhaseModelClient extends JModel
         return $countTask;
      }
     
-    function fcnt($idp)
-    {
+     //use - depricated
+    function fcnt($idp){
         $query = "SELECT COUNT('id') as allCount FROM #__jf_checklists WHERE pid = $idp AND completed = 1";
         return $this->_getList($query);
     }
+    
+    // new = getFinishCount + fcnt
+    function allFinCnt($var){
+        $db =& JFactory::getDBO();
+            foreach ($var as $value){
+                $query = "SELECT COUNT('id') as allCount FROM #__jf_checklists WHERE pid = $value AND completed = 1";
+                $db->setQuery($query);
+                $taskCnt[] = $db->loadResult();
+            }
+        return $taskCnt;
+    }
+    
+    // use
+    function getPhasesTasks($phaseId)
+     {
+         $query = "SELECT * FROM #__jf_checklists WHERE pid = $phaseId ORDER BY id";
+         return $this->_getList($query);
+     }
+     
+    //use - dipricated
+    function getPhasesDesc($phaseId){
+        $db =& $this->_db;
+        $query = "SELECT * FROM  #__jf_projects WHERE id = $phaseId";
+        $ids = $this->_getList($query);
+        $db->setQuery($query);
+        return  $db->loadAssocList();
+    }
+    
+    //new = getPhasesDesc
+    function getPhDesc($var){
+        $db =& $this->_db;
+        $query = "SELECT name, description FROM  #__jf_projects WHERE id = $var";
+        $ids = $this->_getList($query);
+        $db->setQuery($query);
+        return  $db->loadAssocList();
+    }
+     
+    // use
+    function getTaskData($taskId){
+         $query = "SELECT * FROM #__jf_checklists WHERE id = $taskId";
+         return $this->_getList($query);
+    }
+     
+    // use
+    function finishTask($taskId){
+        $row = & JTable::getInstance('Checklist');
+        $row->load($taskId);
+        $row->set('completed', 1);
+        if(!$row->store()){
+            $this->setError($this->_db->getErrorMsg());
+            return false;  
+        }
+  
+        return true;
+     }
+    
+     
+     
+    
+    
+    
+    
+    
+    
+    
+    
     
     function getQuestions()
     {
@@ -903,41 +1023,7 @@ class PhaseModelClient extends JModel
         return $this->_getList($query);
     }
     
-    function getMyInfo($userId)
-    {
-        $row = & JTable::getInstance('Users');
-        $row->load($userId);
-        return $row;
-    }
     
-    function edit_my_info($var)
-    {
-        $row = & JTable::getInstance('Users');
-        $row->load($var[id]);
-        
-        $data = $var;
-        
-        
-        if (!$row->bind($data))
-        {
-        $this->setError($this->_db->getErrorMsg());
-        return false;
-        }
-
-    if (!$row->check())
-        {
-        $this->setError($this->_db->getErrorMsg());
-        return false;
-        }
-
-    if (!$row->store()) 
-        {
-        $this->setError($this->_db->getErrorMsg());
-        return false;
-        }
-        
-        return true;
-    }
     
     function getProgressTrackingDetails($user_id, $phase_id, $numbers) {
 
@@ -1774,20 +1860,18 @@ class PhaseModelClient extends JModel
         return $db->loadResult();
     }
     
-    function testPhaseData($uid, $pid)
-    {
-        
+    //use
+    function testPhaseData($uid, $pid){
         $db =& $this->_db;
         $query = "SELECT * FROM  #__jf_my_lastintake WHERE uid = $uid AND pid = $pid AND step IN (1,2,3,4,5,6) AND date = (SELECT DISTINCT date FROM  #__jf_my_lastintake WHERE uid = $uid AND pid = $pid ORDER BY date DESC LIMIT 1)  ORDER BY step" ;
         $ids = $this->_getList($query);
         $db->setQuery($query);
         return  $db->loadAssocList();
-        
-        
     }
     
-    function getFirstData($uid)
-    {
+    
+    //use
+    function getFirstData($uid){
         $db =& $this->_db;
         $query = "SELECT * FROM  #__jf_my_lastintake WHERE uid = $uid AND step IN (1,2,3,4,5,6) AND pid = 0 ORDER BY step";
         $ids = $this->_getList($query);
@@ -1805,8 +1889,8 @@ class PhaseModelClient extends JModel
         
     }
     
-    function getIntakeData($uid)
-    {
+    //use
+    function getIntakeData($uid){
         $db =& $this->_db;
         $query = "SELECT * FROM  #__jf_my_lastintake WHERE uid = $uid AND step IN (1,2,3,4,5,6) AND date = (SELECT DISTINCT date FROM  #__jf_my_lastintake WHERE uid = $uid ORDER BY date DESC LIMIT 1) ORDER BY step";
         $ids = $this->_getList($query);
@@ -1878,16 +1962,7 @@ class PhaseModelClient extends JModel
         $db->setQuery($query);
         return  $db->loadAssocList();
     }
-    
-    function getPhasesDesc($phaseId)
-    {
-        $db =& $this->_db;
-        $query = "SELECT * FROM  #__jf_projects WHERE id = $phaseId";
-        $ids = $this->_getList($query);
-        $db->setQuery($query);
-        return  $db->loadAssocList();
-    }
-    
+
     
     function getTargets($uid)
     {

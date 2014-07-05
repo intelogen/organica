@@ -10,6 +10,7 @@ class PhaseViewPhase extends JView
     {
         $user =& JFactory:: getUser();
         $userId = $user->id;
+        
         global $mainframe;
         $model = $this->getModel();
        
@@ -18,24 +19,20 @@ class PhaseViewPhase extends JView
         
         
         
-        if ($redirect == '1')
-        {
+        if ($redirect == '1'){
         $url = "index.php?option=com_phase&controller=admin";
-        }
-        elseif ($redirect == '2')
-        {
+        $msg = "Welcome";
+        }elseif ($redirect == '2'){
         $url = "index.php?option=com_phase&controller=coach";
-        }
-        elseif ($redirect == '4')
-        {
+        $msg = "Welcome";
+        }elseif ($redirect == '4'){
         $url = "index.php?option=com_phase&controller=client";
-        }
-	
-        else
-	{
+        $msg = "Welcome";
+        } else{
             $url = "index.php";
+            $msg = "you tried to get access to the closed part of the system, please register first";
 	}
-        $mainframe->redirect($url);
+        $mainframe->redirect($url, $msg);
         
 
 

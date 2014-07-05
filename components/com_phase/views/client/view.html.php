@@ -3604,7 +3604,7 @@ class PhaseViewClient extends JView
         $data[stats][weight] = $temp[0];
         $data[stats][fat] = $temp[1];
         $data[stats][ph] = $temp[2];
-        
+         
         
         $data[stats][blood_p] = explode(",", $content[5][val]);
         $data[stats][blood_t] = $content[6][val];

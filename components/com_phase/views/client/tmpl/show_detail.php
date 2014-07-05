@@ -85,16 +85,16 @@ if($this->content){
         <div class='tabContainer2 horizontal-shadow' style="background-color:#E1FFE3">
         <table id="medical" border="1">
             <tr>
-                <td>DATE</td>
-                <td>WEIGHT</td>
-                <td>FAT</td>
-                <td>PH</td>
+                <td><b>DATE</b></td>
+                <td><b>WEIGHT</b></td>
+                <td><b>FAT</b></td>
+                <td><b>PH</b></td>
             </tr>
             <tr>
-                <td>Intake data</td>
-                <td><?=$gols[body][val][0]?></td>
-                <td><?=$gols[body][val][1]?></td>
-                <td><?=$gols[body][val][2]?></td>
+                <td><b>Intake data</b></td>
+                <td><b><?=$gols[body][val][0]?></b></td>
+                <td><b><?=$gols[body][val][1]?></b></td>
+                <td><b><?=$gols[body][val][2]?></b></td>
             </tr>
                 <?php
                 foreach ($this->content as $value) 
@@ -111,10 +111,10 @@ if($this->content){
                 ?>
             
             <tr>
-                <td>Goal</td>
-                <td><?=$gols[goal_body][val][0]?></td>
-                <td><?=$gols[goal_body][val][1]?></td>
-                <td>7</td>
+                <td><b>Goal</b></td>
+                <td><b><?=$gols[goal_body][val][0]?></b></td>
+                <td><b><?=$gols[goal_body][val][1]?></b></td>
+                <td><b>7</b></td>
             </tr>
         </table>
         </div>
@@ -168,8 +168,8 @@ if($finish > 0){
     <div class='tabContainer2 horizontal-shadow' style="background-color:#E1FFE3">
         <table id="medical" border="1">
             <tr>
-                <td>Name</td>
-                <td>Status</td>
+                <td><b>Name</b></td>
+                <td><b>Status</b></td>
             </tr>
             <?php
             if($result[0] !== ""){
@@ -241,8 +241,8 @@ if($medtrack_finish > 0){
     <div class='tabContainer2 horizontal-shadow' style="background-color:#E1FFE3">    
     <table id="medical" border="1">
             <tr>
-                <td>Name</td>
-                <td>Status</td>
+                <td><b>Name</b></td>
+                <td><b>Status</b></td>
             </tr>
     <?php
     if($medtrack_result){
@@ -251,7 +251,7 @@ if($medtrack_finish > 0){
             if(in_array($value[id], $medtrack_result))
             {
             ?>
-                <tr><?="<td>".$value[name]."</td><td> FINISHED ! </td>"?></tr>
+                <tr><?="<td>".$value[name]."</td><td> <b>FINISHED ! </b></td>"?></tr>
             <?php
             }
         }
@@ -310,8 +310,8 @@ else
     <div class='tabContainer2 horizontal-shadow' style="background-color:#E1FFE3">    
     <table id="medical" border="1">
             <tr>
-                <td>Name</td>
-                <td>Status</td>
+                <td><b>Name</b></td>
+                <td><b>Status</b></td>
             </tr>
 <?php
 if($diseases_result){
@@ -320,7 +320,7 @@ foreach ($this->list[diseasesList] as $value)
     if(in_array($value[id], $diseases_result))
     {
     ?>
-        <tr><?="<td>".$value[name]."</td><td> FINISHED ! </td>"?></tr>
+        <tr><?="<td>".$value[name]."</td><td> <b>FINISHED ! </b></td>"?></tr>
     <?php
     }
 }

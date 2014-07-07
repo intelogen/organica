@@ -92,19 +92,35 @@ class PhaseViewClient extends JView
         parent::display($tpl);
     }
     
-    
-    
-    
-    
-    function first_survey($tpl)
-    {
+    //use
+    function show_my_profile($tpl =null){
+        $userId = JFactory:: getUser()->id;
+        $model = $this->getModel();
+        $myInfo = $model->getMyInfo($userId);
+        $this->assignRef('myInfo', $myInfo);
         
         parent::display($tpl);
     }
     
+    //use
+    function edit_my_info(){
+        $model = $this->getModel();
+        $result = $model->edit_user_info();
+        if ($result){
+            $msg = JText::_('Information has been saved');
+        }   else{
+                $msg = JText::_('Information has not been saved');
+            }
+        global $mainframe;
+        $mainframe->redirect("index.php?option=com_phase&controller=client", $msg);
+    }
     
-    function your_aim($tpl)
-    {
+    function first_survey($tpl){
+        
+        parent::display($tpl);
+    }
+    
+    function your_aim($tpl){
         $model = $this->getModel();
         $aim = $model->getAim();
         $this->assignRef('aim', $aim);
@@ -112,8 +128,7 @@ class PhaseViewClient extends JView
     }
             
     //опросс в начале фазы
-    function start_survey($tpl = null)
-    {
+    function start_survey($tpl = null){
         //графики
         $document =& JFactory::getDocument();
         $document->addStyleSheet(JURI::root().'components/com_hreport/css/autocompleter.css');
@@ -267,11 +282,7 @@ class PhaseViewClient extends JView
         parent::display($tpl);
     }
        
-    
-    
-    
-    function body_score_survey($tpl)
-    {
+    function body_score_survey($tpl){
         $model = $this->getModel();
         
         $pid = JRequest::getVar('pid');
@@ -1260,7 +1271,6 @@ class PhaseViewClient extends JView
        
     }
     
-    
     function pDrug()
     {
         $post = JRequest::get('post');
@@ -1327,7 +1337,6 @@ class PhaseViewClient extends JView
         return $result;
   
     }
-    
     
     function pDiseases()
     {
@@ -1401,8 +1410,6 @@ class PhaseViewClient extends JView
         
     }
     
-    
-    
     function preparePhaseData()
     {
         $post = JRequest::get('post');
@@ -1432,11 +1439,6 @@ class PhaseViewClient extends JView
         
     }
     
-    
-    
-    
-    
-    
     function body_score($tpl = null)
     {
         parent::display($tpl);
@@ -1456,11 +1458,6 @@ class PhaseViewClient extends JView
         parent::display($tpl);
     }
     
-
-    
-    
-    
-
     function medtrack($tpl = null)
     {
         $model = $this->getModel();
@@ -1468,7 +1465,6 @@ class PhaseViewClient extends JView
         $this->assignRef('medtrack', $medtrack);
         parent::display($tpl);
     }
-    
     
     function diseases($tpl = null)
     {
@@ -1488,7 +1484,6 @@ class PhaseViewClient extends JView
         parent::display($tpl);
     }
  
-    
     function edit_body_score($tpl = null)
     {
         $model = $this->getModel();
@@ -1536,8 +1531,6 @@ class PhaseViewClient extends JView
         parent::display($tpl);
     }
 
-    
-    
     function add($tpl = null)
     {
         // добавление симптомов в лист юзера
@@ -2475,7 +2468,6 @@ class PhaseViewClient extends JView
         parent::display($tpl);
     }
     
-    
     function end_diseases($tpl = null)
     {
         $model = $this->getModel();
@@ -2837,29 +2829,6 @@ class PhaseViewClient extends JView
         parent::display($tpl);
     }
     
-    //use
-    function show_my_profile($tpl =null){
-        $userId = JFactory:: getUser()->id;
-        $model = $this->getModel();
-        $myInfo = $model->getMyInfo($userId);
-        $this->assignRef('myInfo', $myInfo);
-        
-        parent::display($tpl);
-    }
-    
-    //use
-    function edit_my_info(){
-        $model = $this->getModel();
-        $result = $model->edit_user_info();
-        if ($result){
-            $msg = JText::_('Information has been saved');
-        }   else{
-                $msg = JText::_('Information has not been saved');
-            }
-        global $mainframe;
-        $mainframe->redirect("index.php?option=com_phase&controller=client", $msg);
-    }
-    
     function survey($tpl = null)
     {
         $model = $this->getModel();
@@ -3134,16 +3103,6 @@ class PhaseViewClient extends JView
         parent::display($tpl);
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     function progress($tpl = null)
     {
         $user =& JFactory::getUser();
@@ -3165,14 +3124,6 @@ class PhaseViewClient extends JView
         
         parent::display($tpl);
     }
-    
-    
-    
-    
-    
-    
-    
-    
     
     function score($tpl = null)
     {
@@ -3248,7 +3199,6 @@ class PhaseViewClient extends JView
         
     }
     
-    
     function parse($data)
     {
         $data['val'] = explode(",", $data['val']);
@@ -3257,12 +3207,6 @@ class PhaseViewClient extends JView
         return $data;
     }
     
-    
-    
-    
-    
-    
-    //fuck
     function lastintake($tpl = null)
     {
         session_start();
@@ -3368,19 +3312,6 @@ class PhaseViewClient extends JView
 		
         parent::display($tpl);
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     //new
     function medtrackList(){
@@ -3587,9 +3518,6 @@ class PhaseViewClient extends JView
         parent::display($tpl);
     }
     
-    
-    
-    
     function prepoContent($content)
     {
         $temp = explode(",", $content[0][val]);
@@ -3706,11 +3634,6 @@ class PhaseViewClient extends JView
 		return $data;
     }
     
-	
-	
-    
-    
-    
     function show_repo_total($tpl = null)
     {
         $model = $this->getModel();
@@ -3761,150 +3684,84 @@ class PhaseViewClient extends JView
         $phaseDates = $model->getPhaseDates($pid);
 
         // если что-то есть - формируем контент
-        if(count($phaseDates) !== 0)
-        {
-                                                                    //первичная инфа(goals & pid=0)
-                                                                    $inteke = $model->getFirstContent($uid);
-
-
-                                                                    if(count($inteke) !== 0)
-                                                                    {
-
-                                                                        foreach ($inteke as $value)
-                                                                        {
-                                                                            if($value[name] == "goals_body")
-                                                                            {
-                                                                                $res[goal_body] = explode(",", $value[val]);
-                                                                                $res[date] = $value[date];
-                                                                            }
-
-                                                                            if($value[name] == "photo")
-                                                                            {
-                                                                                $res[photo] = explode(",", $value[val]);
-                                                                            }
-
-                                                                            if($value[name] == "body")
-                                                                            {
-                                                                                $res[body] = explode(",", $value[val]);
-                                                                            }
-
-                                                                        }
-
-                                                                        if (isset($res[goal_body]))
-                                                                            {
-                                                                                $gols[goal_body][date] = $res[date];
-                                                                                $gols[goal_body][val] = $res[goal_body];
-                                                                            }
-
-                                                                        if (isset($res[photo]))
-                                                                            {
-                                                                                $gols[photo][date] = $res[date];
-                                                                                $gols[photo][val] = $res[photo];
-                                                                            }
-
-                                                                        if (isset($res[body]))
-                                                                            {
-                                                                                $gols[body][date] = $res[date];
-                                                                                $gols[body][val] = $res[body];
-                                                                            }
-
-
-                                                                            $this->assignRef('gols', $gols);
-
-                                                                    }
-
-
-
-
-
-                                                                    //Берём данные по датам
-                                                                    foreach ($phaseDates as $value)
-                                                                    {
-                                                                        $date = $value[date];
-                                                                        $data[dirty_content] = $model->getC($date, $pid);
-
-
-
-
-                                                                        // розбор данных из базы
-                                                                        if(isset($data[dirty_content]))
-                                                                        {
-                                                                            if (isset($data[dirty_content][0]) && $data[dirty_content][0][name] == 'life_style')
-                                                                            {
-                                                                                $data[content][life_style][val] = explode(",", $data[dirty_content][0][val]);
-                                                                            }    
-
-
-                                                                            if (isset($data[dirty_content][1]) && $data[dirty_content][1][name] == 'body')
-                                                                            {
-                                                                                $data[content][date][val] = $data[dirty_content][1][date];
-                                                                                $data[content][body][val] = explode(",", $data[dirty_content][1][val]);
-                                                                            }    
-
-                                                                            if (isset($data[dirty_content][2]) && $data[dirty_content][2][name] == 'photo')
-                                                                            {
-                                                                                $data[content][photo] = explode(",", $data[dirty_content][2][val]);
-                                                                            }    
-
-                                                                            if (isset($data[dirty_content][3]) && $data[dirty_content][3][name] == 'symptoms')
-                                                                            {
-                                                                                $data[content][symptoms][name] = explode(",", $data[dirty_content][3][val]);
-                                                                                $data[content][symptoms][status] = explode(",", $data[dirty_content][3][status]);
-                                                                                $data[content][symptoms][note] = explode(",", $data[dirty_content][3][note]);
-                                                                            }    
-
-                                                                            if (isset($data[dirty_content][4]) && $data[dirty_content][4][name] == 'drug')
-                                                                            {
-                                                                                $data[content][drug][name] = explode(",", $data[dirty_content][4][val]);
-                                                                                $data[content][drug][status] = explode(",", $data[dirty_content][4][status]);
-                                                                                $data[content][drug][note] = explode(",", $data[dirty_content][4][note]);
-                                                                            }    
-
-                                                                            if (isset($data[dirty_content][5]) && $data[dirty_content][5][name] == 'diseases')
-                                                                            {
-                                                                                $data[content][diseases][name] = explode(",", $data[dirty_content][5][val]);
-                                                                                $data[content][diseases][status] = explode(",", $data[dirty_content][5][status]);
-                                                                                $data[content][diseases][note] = explode(",", $data[dirty_content][5][note]);
-                                                                            }
-
-
-                                                                            unset($data[dirty_content]);
-                                                                       }
-
-                                                                       $content[] = $data[content];
-
-                                                                               }    
-        }
-       
-
-
-
-
-
-
-        //Взять список симпомов
-        $list[symptomList] = $model->getSymptomList();
-
-        
-        //Взять список препараты
-        $list[medtrackList] = $model->getMedtrackList();
-       
-        //Взять список заболеваний
-        $list[diseasesList] = $model->getDiseasesList();
-        $this->assignRef('list', $list);
-
-
-
-        $this->assignRef('content', $content);
-        global $mainframe;
-        
-        if($content == null){
+        if(count($phaseDates) !== 0){
+            //первичная инфа(goals & pid=0)
+            $inteke = $model->getFirstContent($uid);
+            
+            
+            $inteke2 = $model->getDefaultContent($uid);
+            $content2[goal] = $this->parse_dirty_content($inteke2);
+            
+            
+            for($i=0;  count($phaseDates)>$i; $i++){
+                $date = $phaseDates[$i][date];
+                $data = $model->getC($date, $pid);
+                $content2[content][$i] = $this->parse_dirty_content($data);
+                $content2[content][$i][body][val][] = $date;
+            }
+            
+            if($content2 == null){
+                global $mainframe;
+                $mainframe->redirect("index.php?option=com_phase&controller=client&action=show_repo&c=$uid", "impossible show this phase");
+            }
+            
+            $list = $this->medtrackList();
+            
+            $this->assignRef('content2', $content2);
+            $this->assignRef('list', $list);
+        }else {
+            global $mainframe;
             $mainframe->redirect("index.php?option=com_phase&controller=client&action=show_repo&c=$uid", "impossible show this phase");
         }
 
+        $dates[] = "Intake data";
+        $weight[] = $content2[goal][body][val][0]; 
+        $fat[] =  $content2[goal][body][val][1];
+        $ph[] =  $content2[goal][body][val][2];
+    
+        if($content2 !== null){
+            foreach ($content2[content] as $value){
+                $dates[] = $value[body][val][3];
+                $weight[] = $value[body][val][0];
+                $fat[] = $value[body][val][1];
+                $ph[] = $value[body][val][2];
+            }
+        }
 
+
+        $g_name = "goal";
+        $g_weight = $content2[goal][goals_body][val][0]; 
+        $g_fat =  $content2[goal][goals_body][val][1];
+        $g_ph =  "7";
+
+        $d = $this->buidCharFortDeteil($dates, $weight, $g_weight, 'Weight');
+        $this->assignRef('d', $d);
+
+        $d1 = $this->buidCharFortDeteil($dates, $fat, $g_fat, 'Fat');
+        $this->assignRef('d1', $d1);
+
+        $d2 = $this->buidCharFortDeteil($dates, $ph, $g_ph, 'Fat');
+        $this->assignRef('d2', $d2);
+    
+    
         parent::display($tpl);
     }
+    
+    //new
+    function buidCharFortDeteil($dates, $weight, $g_weight, $name){
+        
+        for($i = 0; $i < count($dates); $i++){
+            $t = ",['".$dates[$i]."', ".$weight[$i].", ".$g_weight."]";
+            $b = $b."".$t;
+        }
+        $a = "[['Date', '".$name."', 'Goal']";
+        $c = "]";    
+        $d = $a."".$b."".$c;
+        
+        return $d;
+    }
+    
+    
     
     function show_total_repo($tpl = null)
     {
@@ -4037,8 +3894,7 @@ class PhaseViewClient extends JView
     }
     
     //use
-    function compare($tpl = null)
-    {
+    function compare($tpl = null){
         $model = $this->getModel();
         $post = Jrequest::get(post);
         $uid = $post[uid];

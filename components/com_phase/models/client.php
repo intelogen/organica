@@ -1945,10 +1945,18 @@ class PhaseModelClient extends JModel
         return $data;
     }
     
-    function getFirstContent($uid)
-    {
+    //use
+    function getFirstContent($uid){
         $db =& $this->_db;
         $query = "SELECT * FROM  #__jf_my_lastintake WHERE uid = $uid AND pid = 0 AND date = (SELECT DISTINCT date FROM  #__jf_my_lastintake WHERE uid = $uid AND pid = 0 ORDER BY date DESC LIMIT 1)";
+        $ids = $this->_getList($query);
+        $db->setQuery($query);
+        return  $db->loadAssocList();
+    }
+    
+    function getDefaultContent($uid){
+        $db =& $this->_db;
+        $query = "SELECT * FROM  #__jf_my_lastintake WHERE uid = $uid AND pid = 0 AND name IN ('goals_body', 'body') AND date = (SELECT DISTINCT date FROM  #__jf_my_lastintake WHERE uid = $uid AND pid = 0 ORDER BY date DESC LIMIT 1)";
         $ids = $this->_getList($query);
         $db->setQuery($query);
         return  $db->loadAssocList();

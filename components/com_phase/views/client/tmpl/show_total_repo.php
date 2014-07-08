@@ -21,16 +21,16 @@ if ($this->gols){
         <div class='tabContainer2 horizontal-shadow' style="background-color:#E1FFE3">
         <table id="medical" border="1">
             <tr>
-                <td>PHASE</td>
-                <td>WEIGHT</td>
-                <td>FAT</td>
-                <td>PH</td>
+                <td><b>PHASE</b></td>
+                <td><b>WEIGHT</b></td>
+                <td><b>FAT</b></td>
+                <td><b>PH</b></td>
             </tr>
             <tr>
-                <td>Intake data</td>
-                <td><?=$this->content2[inteke][body][val][0]?></td>
-                <td><?=$this->content2[inteke][body][val][1]?></td>
-                <td><?=$this->content2[inteke][body][val][2]?></td>
+                <td><b>Intake data</b></td>
+                <td><b><?=$this->content2[inteke][body][val][0]?></b></td>
+                <td><b><?=$this->content2[inteke][body][val][1]?></b></td>
+                <td><b><?=$this->content2[inteke][body][val][2]?></b></td>
             </tr>
             <?php if($this->content2[content] !== null && $this->content2[content] != ""){
                         foreach ($this->content2[content] as $key => $value) {
@@ -38,10 +38,10 @@ if ($this->gols){
                         }
                     } ?>
             <tr>
-                <td>Goal</td>
-                <td><?=$this->content2[inteke][goals_body][val][0]?></td>
-                <td><?=$this->content2[inteke][goals_body][val][1]?></td>
-                <td>7</td>
+                <td><b>Goal</b></td>
+                <td><b><?=$this->content2[inteke][goals_body][val][0]?></b></td>
+                <td><b><?=$this->content2[inteke][goals_body][val][1]?></b></td>
+                <td><b>7</b></td>
             </tr>
             
         </table>

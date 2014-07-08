@@ -59,7 +59,7 @@
 <div class='tabContainer2' style="background-color:#E1FFE3">
     
 <?php
-if(count($this->content2) > 0){
+if($this->content2[content][0][symptoms][val][0] !== "" && $this->content2[content][0][symptoms][val][0] !== null){
     foreach ($this->content2[content] as $value) {
        $symptoms = $value[symptoms][val];
        $status =  $value[symptoms][status];
@@ -75,6 +75,8 @@ if(count($this->content2) > 0){
 
 $all = count($symptoms);
 $finish = count($result);
+
+
 
 if($finish > 0){
     
@@ -124,8 +126,7 @@ else{
 <div class='tabContainer2' style="background-color:#E1FFE3">
     
 <?php
-
-if(count($this->content2) > 0){
+if($this->content2[content][0][drug][val][0] !== "" && $this->content2[content][0][drug][val][0] !== null){
    
         foreach ($this->content2[content] as $value) {
             $medtrack_symptoms = $value[drug][val];
@@ -190,7 +191,7 @@ if($medtrack_finish > 0){
 <div class='tabContainer2' style="background-color:#E1FFE3">
     
 <?php
-if(count($this->content2) > 0){
+if($this->content2[content][0][diseases][val][0] !== "" && $this->content2[content][0][diseases][val][0] !== null){
     
     foreach ($this->content2[content] as $value) {
             $diseases_symptoms = $value[diseases][val];

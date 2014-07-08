@@ -186,22 +186,26 @@ $phases = $this->phases;
              <?php if ($this->evalution_1[symptoms][val][0] !== ""){?>
                     <div id="symptom-1" style="width: 350px; height: 350px;"></div>
             <?php
-            } ?>
+            }else { echo "<div class='contentheading'>NO DATA TO DISPLAY</div>";} ?>
         </td>
         <td>
             <?php
             if ($this->evalution_2[symptoms][val][0] !== ""){ ?>
             <div id="symptom-2" style="width: 350px; height: 350px;"></div>
-            <?php } ?>
+            <?php }else { echo "<div class='contentheading'>NO DATA TO DISPLAY</div>";} ?>
         </td>
     </tr>
     <tr>
         <td>
               
              <?php
-            if ($this->evalution_1[symptoms][val][0] !== ""){?>
+            if ($this->evalution_1[symptoms][val][0] !== "" && $this->evalution_1[symptoms][val][0] !== null){?>
                 <div class='tabContainer2' style="background-color:#E1FFE3">
                     <table width="50%">
+                        <tr>
+                            <td><b>Name</b></td>
+                            <td><b>Status</b></td>
+                        </tr>
                               <?php
                       for ($i = 0; $i < count($this->evalution_1[symptoms][val]); $i++)
                       {
@@ -228,25 +232,20 @@ $phases = $this->phases;
                         
             <?php
             }
-            else
-            {
-            ?>
-                    <div class='contentheading'>You dont have any symptoms in this phase</div>
-            <?php
-            }
-            ?> 
-     
+            else { echo "<div class='contentheading'>NO DATA TO DISPLAY</div>";} ?> 
         </td>
-        
-        
         <td>
 
             <?php
-            if ($this->evalution_2[symptoms][val][0] !== "")
+            if ($this->evalution_2[symptoms][val][0] !== "" && $this->evalution_2[symptoms][val][0] !== null)
             {
             ?>
                 <div class='tabContainer2' style="background-color:#E1FFE3">
                     <table width="50%">
+                        <tr>
+                            <td><b>Name</b></td>
+                            <td><b>Status</b></td>
+                        </tr>
                         <?php
                         for ($i = 0; $i < count($this->evalution_2[symptoms][val]); $i++)
                         {
@@ -269,13 +268,7 @@ $phases = $this->phases;
                     </table>
                 </div>
                  <?php
-                    }
-                    else
-                    {
-                    ?>
-                            <div class='contentheading'>You dont have any symptoms in this phase</div>
-                    <?php
-                    }
+                    }else { echo "<div class='contentheading'>NO DATA TO DISPLAY</div>";}
             ?>            
     </td>
     </tr>
@@ -289,7 +282,7 @@ $phases = $this->phases;
             {
             ?>
                 <div id="drug-1" style="width: 350px; height: 350px;"></div> 
-            <?php } ?>
+            <?php }else { echo "<div class='contentheading'>NO DATA TO DISPLAY</div>";} ?>
         </td>
         <td>
             <?php
@@ -297,7 +290,7 @@ $phases = $this->phases;
             {
             ?>
                 <div id="drug-2" style="width: 350px; height: 350px;"></div> 
-            <?php } ?>
+            <?php }else { echo "<div class='contentheading'>NO DATA TO DISPLAY</div>";} ?>
         </td>
     </tr>
     <tr>
@@ -305,12 +298,16 @@ $phases = $this->phases;
 
             
 <?php
-if ($this->evalution_1[drug][val][0] !== "")
+if ($this->evalution_1[drug][val][0] !== "" && $this->evalution_1[drug][val][0] !== null)
 {
 ?>
 
         <div class='tabContainer2' style="background-color:#E1FFE3">
             <table width="50%">
+                <tr>
+                            <td><b>Name</b></td>
+                            <td><b>Status</b></td>
+                        </tr>
                 <?php
                 for ($i = 0; $i < count($this->evalution_1[drug][val]); $i++)
                 {
@@ -336,13 +333,7 @@ if ($this->evalution_1[drug][val][0] !== "")
         </div>
 
 <?php
-}
-else
-{
-?>
-        <div class='contentheading'>You dont have any drug in this phase</div>
-<?php
-}
+}else { echo "<div class='contentheading'>NO DATA TO DISPLAY</div>";}
 ?>
 
         </td>
@@ -350,44 +341,36 @@ else
             
 
 <?php
-if ($this->evalution2[drug][val][0] !== "")
-{
-    ?>
-
-                <div class='tabContainer2' style="background-color:#E1FFE3">
-                    <table width="50%">
-                                            <?php
-                        for ($i = 0; $i < count($this->evalution_2[drug][val]); $i++)
+if ($this->evalution_2[drug][val][0] !== "" && $this->evalution_2[drug][val][0] !== null)
+{?>
+    <div class='tabContainer2' style="background-color:#E1FFE3">
+         <table width="50%">
+             <tr>
+                            <td><b>Name</b></td>
+                            <td><b>Status</b></td>
+                        </tr>
+            <?php
+            for ($i = 0; $i < count($this->evalution_2[drug][val]); $i++){?>
+                <tr>
+                <td>
+                    <?php
+                    foreach($this->list[medtrackList] as $value)
+                    {
+                        if($value[id] == $this->evalution_2[drug][val][$i])
                         {
-                        ?>
-                            <tr>
-                            <td>
-                                <?php
-                                foreach($this->list[medtrackList] as $value)
-                                {
-                                    if($value[id] == $this->evalution_2[drug][val][$i])
-                                    {
-                                        echo $value[name];
-                                    }
-                                }
-                                ?>            
-                            </td>
-                            <td><?php if($this->evalution_2[drug][status][$i] == 'finished'){echo "<b>".$this->evalution_2[drug][status][$i]."</b>";}else{echo $this->evalution_2[drug][status][$i];} ?></td>
-                            </tr>
-                        <?php    
+                            echo $value[name];
                         }
-                        ?>
-                     </table>
-                </div>
-
+                    }
+                    ?>            
+                </td>
+                <td><?php if($this->evalution_2[drug][status][$i] == 'finished'){echo "<b>".$this->evalution_2[drug][status][$i]."</b>";}else{echo $this->evalution_2[drug][status][$i];} ?></td>
+                </tr>
+            <?php    
+            } ?>
+          </table>
+     </div>
 <?php
-}
-else
-{
-?>
-        <div class='contentheading'>You dont have any drug in this phase</div>
-<?php
-}
+}else { echo "<div class='contentheading'>NO DATA TO DISPLAY</div>";}
 ?>
 
         </td>
@@ -402,7 +385,7 @@ else
             {
             ?>
                     <div id="dis-1" style="width: 350px; height: 350px;"></div>
-            <?php } ?>
+            <?php }else { echo "<div class='contentheading'>NO DATA TO DISPLAY</div>";} ?>
         </td>
         <td>
             <?php
@@ -410,19 +393,23 @@ else
             {
             ?>
                 <div id="dis-2" style="width: 350px; height: 350px;"></div>
-            <?php } ?>
+            <?php }else { echo "<div class='contentheading'>NO DATA TO DISPLAY</div>";} ?>
         </td>
     </tr>
     <tr>
         <td>
 
 <?php
-if ($this->evalution_1[diseases][val][0] !== "")
+if ($this->evalution_1[diseases][val][0] !== "" && $this->evalution_1[diseases][val][0] !== null)
 {
 ?>
 
         <div class='tabContainer2' style="background-color:#E1FFE3">
             <table width="50%">
+                <tr>
+                            <td><b>Name</b></td>
+                            <td><b>Status</b></td>
+                        </tr>
 
                                         <?php
                 for ($i = 0; $i < count($this->evalution_1[diseases][val]); $i++)
@@ -450,13 +437,7 @@ if ($this->evalution_1[diseases][val][0] !== "")
         </div>
 
 <?php
-}
-else
-{
-?>
-        <div class='contentheading'>You dont have any disease in this phase</div>
-<?php
-}
+}else { echo "<div class='contentheading'>NO DATA TO DISPLAY</div>";}
 ?>
 
 
@@ -466,11 +447,15 @@ else
 
 
 <?php
-if ($this->evalution_2[diseases][val][0] !== "")
+if ($this->evalution_2[diseases][val][0] !== "" && $this->evalution_2[diseases][val][0] !== null)
 {
     ?>
         <div class='tabContainer2' style="background-color:#E1FFE3">
             <table width="50%">
+                <tr>
+                            <td><b>Name</b></td>
+                            <td><b>Status</b></td>
+                        </tr>
                 
                                 <?php
                     for ($i = 0; $i < count($this->evalution_2[diseases][val]); $i++)
@@ -495,13 +480,7 @@ if ($this->evalution_2[diseases][val][0] !== "")
                     ?>
                 </ul>
                 <?php
-                }
-                else
-                {
-                ?>
-                        <div class='contentheading'>You dont have any disease in this phase</div>
-                <?php
-                }
+                }else { echo "<div class='contentheading'>NO DATA TO DISPLAY</div>";}
                 ?>
                 
             </table>

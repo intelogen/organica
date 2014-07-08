@@ -8,7 +8,7 @@ $phases = $this->phases;
 if(JRequest::getVar('c') && JRequest::getVar('c') != "")
         {
             $uid = JRequest::getVar('c');
-        }
+        }                                
 ?>
 
 
@@ -146,40 +146,41 @@ if(JRequest::getVar('c') && JRequest::getVar('c') != "")
 <div class='contentheading'>Symptoms Tracking</div>    
 <div class='tabContainer2 horizontal-shadow' style="background-color:#E1FFE3">
     <table id="medical" border="1">
-        <tr>
-            <td>№</td>
-            <td>Name</td>
-            <td>Status</td>
-            <td>Note</td>
-        </tr>
         <?php if ($this->evalution[symptoms][val][0] !== "" && $this->evalution[symptoms][status][0] !== "")
-{
-    $cnt = 1;
-    for ($i = 0; $i < count($this->evalution[symptoms][val]); $i++)
-    {
-    ?>
-        <tr>
-        <td><?=$cnt++?></td>
-        <td>
+            {?>
+                <tr>
+                    <td><b>№</b></td>
+                    <td><b>Name</b></td>
+                    <td><b>Status</b></td>
+                    <td><b>Note</b></td>
+                </tr>
             <?php
-            foreach($this->evalution[medtrack][symptomList] as $value)
+            $cnt = 1;
+            for ($i = 0; $i < count($this->evalution[symptoms][val]); $i++)
             {
-                if($value[id] == $this->evalution[symptoms][val][$i])
-                {
-                    echo $value[name];
-                }
-            }
             ?>
-        </td>
-        <td>
-            <?=$this->evalution[symptoms][status][$i];?>
-        </td>
-        <td>
-            <?=$this->evalution[symptoms][note][$i];?>
-        </td>
-        </div></li></tr>
-    <?php    
-    }
+                <tr>
+                <td><?=$cnt++?></td>
+                <td>
+                    <?php
+                    foreach($this->evalution[medtrack][symptomList] as $value)
+                    {
+                        if($value[id] == $this->evalution[symptoms][val][$i])
+                        {
+                            echo $value[name];
+                        }
+                    }
+                    ?>
+                </td>
+                <td>
+                    <?=$this->evalution[symptoms][status][$i];?>
+                </td>
+                <td>
+                    <?=$this->evalution[symptoms][note][$i];?>
+                </td>
+                </div></li></tr>
+            <?php    
+            }
     }else{ echo "NO DATA TO DISPLAY"; }?>
     </table>
   
@@ -191,13 +192,14 @@ if(JRequest::getVar('c') && JRequest::getVar('c') != "")
 <div class='contentheading'>Medical preparations Tracking</div>
 <div class='tabContainer2 horizontal-shadow' style="background-color:#E1FFE3">
     <table id="medical" border="1">
-        <tr>
-            <td>№</td>
-            <td>Name</td>
-            <td>Status</td>
-            <td>Note</td>
-        </tr>
-<?php if ($this->evalution[drug][val][0] !== "" && $this->evalution[drug][status][0] !== ""){
+<?php if ($this->evalution[drug][val][0] !== "" && $this->evalution[drug][status][0] !== ""){?>
+                <tr>
+                    <td><b>№</b></td>
+                    <td><b>Name</b></td>
+                    <td><b>Status</b></td>
+                    <td><b>Note</b></td>
+                </tr>
+            <?php
     $cnt = 1;
     for ($i = 0; $i < count($this->evalution[drug][val]); $i++){?>
         <tr>
@@ -226,13 +228,14 @@ if(JRequest::getVar('c') && JRequest::getVar('c') != "")
 <div class='contentheading'>Diseases Tracking</div>
 <div class='tabContainer2 horizontal-shadow' style="background-color:#E1FFE3">
     <table id="medical" border="1">
-        <tr>
-            <td>№</td>
-            <td>Name</td>
-            <td>Status</td>
-            <td>Note</td>
-        </tr>
-<?php if ($this->evalution[diseases][val][0] !== "" && $this->evalution[diseases][status][0] !== ""){
+<?php if ($this->evalution[diseases][val][0] !== "" && $this->evalution[diseases][status][0] !== ""){?>
+                <tr>
+                    <td><b>№</b></td>
+                    <td><b>Name</b></td>
+                    <td><b>Status</b></td>
+                    <td><b>Note</b></td>
+                </tr>
+            <?php
         $cnt = 1;
         for ($i = 0; $i < count($this->evalution[diseases][val]); $i++){ ?>
             <tr>

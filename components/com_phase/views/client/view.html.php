@@ -3704,7 +3704,7 @@ class PhaseViewClient extends JView{
         $dirty_content_2 = $model->testPhaseData($uid, $pid_2);
         if($dirty_content_1 == null || $dirty_content_2 == null){
             global $mainframe;
-            $mainframe->redirect('index.php?option=com_phase&controller=client',"System error");
+            $mainframe->redirect("index.php?option=com_phase&controller=client&action=show_repo&c=$uid", "impossible to compare the same phase");
         }
         else{
             $evalution_1 = $this->parse_dirty_content($dirty_content_1);
@@ -3815,17 +3815,17 @@ class PhaseViewClient extends JView{
             $m1 = $this->data_for_medtrack_charts($evalution_1[drug][status]);
             $this->assignRef('m1', $m1);
         }
-		
+	
         if(count($evalution_2[drug][status] > 0) && $evalution_2[drug][status][0] !== "" ){
             $m2 = $this->data_for_medtrack_charts($evalution_2[drug][status]);
             $this->assignRef('m2', $m2);
         }
-
+        
         if(count($evalution_1[diseases][status] > 0) && $evalution_1[diseases][status][0] !== "" ){
             $d1 = $this->data_for_medtrack_charts($evalution_1[diseases][status]);
             $this->assignRef('d1', $d1);
         }
-		
+        
         if(count($evalution_2[diseases][status] > 0) && $evalution_2[diseases][status][0] !== "" ){
             $d2 = $this->data_for_medtrack_charts($evalution_2[diseases][status]);
             $this->assignRef('d2', $d2);

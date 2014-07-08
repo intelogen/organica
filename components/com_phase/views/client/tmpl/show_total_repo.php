@@ -63,7 +63,7 @@ if ($this->gols){
                 if($this->content2 !== null){
                 foreach ($this->content2[content] as $key =>  $value) {
                     $phases[] = $key; 
-                    $symptoms = $value[symptoms][val];
+                    if($value[symptoms][val][0] !== "" && $value[symptoms][val][0] !==null){$symptoms = $value[symptoms][val];}
                     $status[] = $value[symptoms][status];
                 }?>
                     
@@ -112,7 +112,7 @@ if ($this->gols){
                 if($this->content2 !== null){
                 foreach ($this->content2[content] as $key => $value) {
                     $phases_d[] = $key; 
-                    $drug = $value[drug][val];
+                    if($value[drug][val][0] !== "" && $value[drug][val][0] !==null){$drug = $value[drug][val];}
                     $status_d[] = $value[drug][status];
                 }
                 ?>
@@ -120,7 +120,7 @@ if ($this->gols){
                 <?php
                     for($i = 0; count($phases_d)>$i; $i++){
                         $dr = $i;
-                        echo "<td>Phase ".++$dr."</td>";
+                        echo "<td><b>Phase ".++$dr."</b></td>";
                     }
                 ?>
             </tr>
@@ -160,7 +160,7 @@ if ($this->gols){
             foreach ($this->content2[content] as $key => $value) {
 
                 $phases_di[] = $key; 
-                $diseases = $value[diseases][val];
+                if($value[diseases][val][0] !== "" && $value[diseases][val][0] !==null){$diseases = $value[diseases][val];}
                 $status_di[] = $value[diseases][status];
             }
             ?>
@@ -169,7 +169,7 @@ if ($this->gols){
                     <?php
                         for($i = 0; count($phases_di)>$i; $i++){
                             $di = $i;
-                            echo "<td>Phase ".++$di."</td>";
+                            echo "<td><b>Phase ".++$di."</b></td>";
                         }
                     ?>
             </tr>
@@ -208,8 +208,21 @@ if ($this->gols){
 <div class='tabContainer2' style="background-color:#E1FFE3">
     <div class='contentheading'><?="Intake photo"?></div>
     <div class='current-photo horizontal-shadow'>
-        <?= "<div class='photo-one'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$this->content2[inteke][photo][val][0]."\" width=\"200\" height=\"350\"></div>";?>
-        <?= "  <div class='photo-two'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$this->content2[inteke][photo][val][1]."\" width=\"200\" height=\"350\"></div>";?>
+        <?php   if($this->content2[inteke][photo][val][0] !== "" && $this->content2[inteke][photo][val][0] !== null){
+                    echo "<div class='photo-one'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$this->content2[inteke][photo][val][0]."\" width=\"200\" height=\"350\"></div>";
+                } else {
+                    echo "  <div style='font-size:15px;color:#008;'>
+                            <img src=\"".JURI::root().'uploads_jtpl/phase_img/'."no1.png"."\" width=\"200\" height=\"350\">
+                            </div>";        
+                }
+                    
+                if($this->content2[inteke][photo][val][1] !== "" && $this->content2[inteke][photo][val][1] !== null){
+                    echo "<div class='photo-two'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$this->content2[inteke][photo][val][1]."\" width=\"200\" height=\"350\"></div>";
+                }else{
+                    echo "  <div style='font-size:15px;color:#008;'>
+                            <img src=\"".JURI::root().'uploads_jtpl/phase_img/'."no2.png"."\" width=\"200\" height=\"350\">
+                            </div>";        
+                } ?>
     </div>
     
     <?php
@@ -217,8 +230,22 @@ if ($this->gols){
                 foreach ($this->content2[content] as $key => $value) {?>
                     <div class='contentheading'><?=$key?></div>
                     <div class='current-photo horizontal-shadow'>
-                    <?= "<div class='photo-one'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$value[photo][val][0]."\" width=\"200\" height=\"350\"></div>";?>
-                    <?= "  <div class='photo-two'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$value[photo][val][1]."\" width=\"200\" height=\"350\"></div>";?>
+                        
+                        <?php   if($value[photo][val][0] !== "" && $value[photo][val][0] !== null){
+                                    echo "<div class='photo-one'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$value[photo][val][0]."\" width=\"200\" height=\"350\"></div>";
+                                } else {
+                                    echo "  <div class='photo-one'>
+                                            <img src=\"".JURI::root().'uploads_jtpl/phase_img/'."no1.png"."\" width=\"200\" height=\"350\">
+                                            </div>";        
+                                }
+
+                                if($value[photo][val][1] !== "" && $value[photo][val][1] !== null){
+                                    echo "<div class='photo-two'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$value[photo][val][1]."\" width=\"200\" height=\"350\"></div>";
+                                }else{
+                                    echo "  <div class='photo-two'>
+                                            <img src=\"".JURI::root().'uploads_jtpl/phase_img/'."no2.png"."\" width=\"200\" height=\"350\">
+                                            </div>";        
+                                } ?>
                     </div>
                     <?php
                 }

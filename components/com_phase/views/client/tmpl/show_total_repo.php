@@ -5,12 +5,6 @@ if ($this->content){
 if ($this->gols){
     $gols = $this->gols;
 }
-if ($this->last_list){
-    $last_list = $this->last_list;
-}
-if ($this->list){
-    $list = $this->list;
-}
 ?>
 
 
@@ -32,34 +26,24 @@ if ($this->list){
                 <td>FAT</td>
                 <td>PH</td>
             </tr>
-            <?php
-            if($this->gols[body][val][0] !== "" && $this->gols[body][val][1] !== "" && $this->gols[body][val][2] !== ""){
-                $date[] = "PRIMARY DATA";
-                $weight[] = $this->gols[body][val][0];
-                $fat[] = $this->gols[body][val][1];
-                $ph[] = $this->gols[body][val][2];
-                echo "<tr><td>PRIMARY DATA</td><td>".$this->gols[body][val][0]."</td><td>".$this->gols[body][val][1]."</td><td>".$this->gols[body][val][2]."</td></tr>";
-            }
-            ?>
-            <?php
-            if($this->content !== null && $this->content != ""){
-                foreach ($this->content as $key => $value) {
-                    $date[] = "$key";
-                    $weight[] = $value[body][val][0];
-                    $fat[] = $value[body][val][1];
-                    $ph[] = $value[body][val][2];
-                    echo "<tr><td>".$key."</td><td>".$value[body][val][0]."</td><td>".$value[body][val][1]."</td><td>".$value[body][val][2]."</td></tr>";
-                }
-            }
-            ?>
-            <?php
-            if($this->gols[goal_body][val][0] !== "" && $this->gols[goal_body][val][1] !== ""){
-                $g_weight = $this->gols[goal_body][val][0];
-                $g_fat =  $this->gols[goal_body][val][1];
-                $g_ph =  7;
-                echo "<tr><td>CLIENT GOAL</td><td>".$this->gols[goal_body][val][0]."</td><td>".$this->gols[goal_body][val][1]."</td><td>7</td></tr>";
-            }
-            ?>
+            <tr>
+                <td>Intake data</td>
+                <td><?=$this->content2[inteke][body][val][0]?></td>
+                <td><?=$this->content2[inteke][body][val][1]?></td>
+                <td><?=$this->content2[inteke][body][val][2]?></td>
+            </tr>
+            <?php if($this->content2[content] !== null && $this->content2[content] != ""){
+                        foreach ($this->content2[content] as $key => $value) {
+                            echo "<tr><td>".$key."</td><td>".$value[body][val][0]."</td><td>".$value[body][val][1]."</td><td>".$value[body][val][2]."</td></tr>";
+                        }
+                    } ?>
+            <tr>
+                <td>Goal</td>
+                <td><?=$this->content2[inteke][goals_body][val][0]?></td>
+                <td><?=$this->content2[inteke][goals_body][val][1]?></td>
+                <td>7</td>
+            </tr>
+            
         </table>
         </div>
         
@@ -68,45 +52,20 @@ if ($this->list){
             <div id="chart_div_2" style="width: 650px; height: 200px;"></div>
             <div id="chart_div_3" style="width: 650px; height: 200px;"></div>
     </div>
-    <?php
-        for($i = 0; $i < count($date); $i++){
-            $t = ",['".$date[$i]."', ".$weight[$i].", ".$g_weight."]";
-            $b = $b."".$t;
-        }
-        $a = "[['Phase', 'Weight', 'Goal']";
-        $c = "]";    
-        $d = $a."".$b."".$c;
-        
-        for($i = 0; $i < count($date); $i++){
-            $t1 = ",['".$date[$i]."', ".$fat[$i].", ".$g_fat."]";
-            $b1 = $b1."".$t1;
-        }
-        $a1 = "[['Date', 'Fat', 'Goal']";
-        $c1 = "]";    
-        $d1 = $a1."".$b1."".$c1;
-    
-        for($i = 0; $i < count($date); $i++){
-            $t2 = ",['".$date[$i]."', ".$ph[$i].", ".$g_ph."]";
-            $b2 = $b2."".$t2;
-        }
-        $a2 = "[['Date', 'PH', 'Goal']";
-        $c2 = "]";    
-        $d2 = $a2."".$b2."".$c2;
-?>
+
+
 
 <div class='contentheading'>Symptoms Tracking</div>  
-
 <div class='tabContainer2' style="background-color:#E1FFE3">
         <table id="symptoms" border="1">
             
-                  <?php
-                    if($this->content !== null){
-                    foreach ($this->content as $key => $value) {
-                        $phases[] = $key; 
-                        $symptoms = $value[symptoms][val][name];
-                        $status[] = $value[symptoms][val][status];
-                    }
-                    ?>
+                <?php
+                if($this->content2 !== null){
+                foreach ($this->content2[content] as $key =>  $value) {
+                    $phases[] = $key; 
+                    $symptoms = $value[symptoms][val];
+                    $status[] = $value[symptoms][status];
+                }?>
                     
             <tr><td><b>Name</b></td>
                 <?php
@@ -117,11 +76,14 @@ if ($this->list){
                 ?>
             </tr>           
                 <?php
+
                 for($i = 0; count($symptoms)>$i; $i++){
                 ?>
             <tr>
                 <?php
-                foreach($list[symptomList] as $value){
+
+                    foreach($this->list[symptomList] as $value){
+                    $value[id];
                     if($value[id] == $symptoms[$i]){
                     echo "<td>".$value[name]."</td>";
                     }
@@ -143,17 +105,15 @@ if ($this->list){
         </table>
 </div>
 
-
-
 <div class='contentheading'>Medical preparations Tracking</div>  
 <div class='tabContainer2' style="background-color:#E1FFE3">
         <table id="symptoms" border="1">
                 <?php
-                if($this->content !== null){
-                foreach ($this->content as $key => $value) {
+                if($this->content2 !== null){
+                foreach ($this->content2[content] as $key => $value) {
                     $phases_d[] = $key; 
-                    $drug = $value[drug][val][name];
-                    $status_d[] = $value[drug][val][status];
+                    $drug = $value[drug][val];
+                    $status_d[] = $value[drug][status];
                 }
                 ?>
             <tr><td><b>Name</b></td>
@@ -169,7 +129,7 @@ if ($this->list){
                     ?>
             <tr>
                     <?php
-                    foreach($list[medtrackList] as $value)
+                    foreach($this->list[medtrackList] as $value)
                     {
                         if($value[id] == $drug[$i])
                         {
@@ -192,19 +152,16 @@ if ($this->list){
         </table>
 </div>
 
-
-
-
 <div class='contentheading'>Diseases Tracking</div>  
 <div class='tabContainer2' style="background-color:#E1FFE3">
 <table id="symptoms" border="1">
             <?php
-            if($this->content !== null){       
-            foreach ($this->content as $key => $value) {
+            if($this->content2 !== null){       
+            foreach ($this->content2[content] as $key => $value) {
 
                 $phases_di[] = $key; 
-                $diseases = $value[diseases][val][name];
-                $status_di[] = $value[diseases][val][status];
+                $diseases = $value[diseases][val];
+                $status_di[] = $value[diseases][status];
             }
             ?>
 
@@ -221,7 +178,7 @@ if ($this->list){
                         ?>
                     <tr>
                             <?php
-                            foreach($list[diseasesList] as $value)
+                            foreach($this->list[diseasesList] as $value)
                             {
                                 if($value[id] == $diseases[$i])
                                 {
@@ -249,16 +206,15 @@ if ($this->list){
 
 <div class='contentheading'>Photo History</div>
 <div class='tabContainer2' style="background-color:#E1FFE3">
-    
     <div class='contentheading'><?="Intake photo"?></div>
     <div class='current-photo horizontal-shadow'>
-        <?= "<div class='photo-one'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$gols[photo][val][0]."\" width=\"200\" height=\"350\"></div>";?>
-        <?= "  <div class='photo-two'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$gols[photo][val][1]."\" width=\"200\" height=\"350\"></div>";?>
+        <?= "<div class='photo-one'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$this->content2[inteke][photo][val][0]."\" width=\"200\" height=\"350\"></div>";?>
+        <?= "  <div class='photo-two'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$this->content2[inteke][photo][val][1]."\" width=\"200\" height=\"350\"></div>";?>
     </div>
+    
     <?php
-        if($this->content !== null && $this->content != ""){
-                foreach ($this->content as $key => $value) {
-                    ?>
+        if($this->content2 !== null && $this->content2 != ""){
+                foreach ($this->content2[content] as $key => $value) {?>
                     <div class='contentheading'><?=$key?></div>
                     <div class='current-photo horizontal-shadow'>
                     <?= "<div class='photo-one'><img src=\"".JURI::root().'uploads_jtpl/phase_details/'.$value[photo][val][0]."\" width=\"200\" height=\"350\"></div>";?>
@@ -271,12 +227,6 @@ if ($this->list){
 </div>
 
 
-<?php           
-                
-                
-                
-
-?>
 
 
 
@@ -298,7 +248,7 @@ if ($this->list){
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
-        var data = google.visualization.arrayToDataTable(<?=$d?>);
+        var data = google.visualization.arrayToDataTable(<?=$this->d?>);
 
         var options = {
           title: 'Weight History',
@@ -317,7 +267,7 @@ if ($this->list){
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
-        var data = google.visualization.arrayToDataTable(<?=$d1?>);
+        var data = google.visualization.arrayToDataTable(<?=$this->d1?>);
 
         var options = {
           title: 'Fat History',
@@ -335,7 +285,7 @@ if ($this->list){
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
-        var data = google.visualization.arrayToDataTable(<?=$d2?>);
+        var data = google.visualization.arrayToDataTable(<?=$this->d2?>);
 
         var options = {
           title: 'PH History',

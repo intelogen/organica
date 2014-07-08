@@ -213,9 +213,10 @@ select{
 }
 .quantity_box_button_down{
     border-bottom-right-radius: 0px;
-    bottom: 40px;
+    bottom: 44px;
     position: absolute;
     right: 50px;
+    border-top: 1px solid #ccc;
 }
 .inner{
     position: relative;
@@ -243,9 +244,12 @@ select{
     background-color: #009688 !important;
     margin: 10px 0 0 0;
 }
-.notify_button{
+form .notify_button{
     margin-top: 28px !important;
     background-color: #f57c00 !important;
+}
+form .notify_button:hover{
+    background-color: #e65100 !important;
 }
 .pagenav{
     color: #fff;
@@ -1133,6 +1137,7 @@ td .tabContainer2{
 #medical{
     max-width: 500px !important;
 }
-.tabContainer2{
-    max-width: ;
+.user-info{
+    display: inline-block;
+    width: 110px;
 }

@@ -1,4 +1,4 @@
-<?php 
+`<?php 
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
 jimport('joomla.application.component.view');
@@ -962,11 +962,8 @@ class PhaseViewClient extends JView{
             
         }
         
-        
-        
-        
-        
-        
+      
+        */
         
         
         // первичный опросс
@@ -1019,45 +1016,26 @@ class PhaseViewClient extends JView{
 			
 	}
         
-        if(JRequest::getVar('inc') == 1)
-        {
-			session_start();
-			global $mainframe;
-			
-			if(!empty($_SESSION[evalution]))
-			{
-			$evalution  = $_SESSION[evalution];
-			
-			$model = $this->getModel();
-			
-			$result = $model->recLastintake($evalution);
+        if(JRequest::getVar('inc') == 1){
+            session_start();
+            global $mainframe;
 
-
-
-
-			if(result)
-			{
-				unset($_SESSION['evalution']);
-				$mainframe->redirect("index.php?option=com_phase&controller=client", 'information has been saved');
-			}
-			else
-			{
-				$mainframe->redirect("index.php?option=com_phase&controller=client&action=lastintake");
-			}
-
-			  
-			  
-
-			}
-			else
-			{
-				$mainframe->redirect("index.php?option=com_phase&controller=client&action=lastintake");
-			}
-        
+            if(!empty($_SESSION[evalution])){
+            $evalution  = $_SESSION[evalution];
+            $model = $this->getModel();
+            $result = $model->recLastintake($evalution);
+                if(result) {
+                    unset($_SESSION['evalution']);
+                    $mainframe->redirect("index.php?option=com_phase&controller=client", 'information has been saved');
+                } else {
+                        $mainframe->redirect("index.php?option=com_phase&controller=client&action=lastintake");
+                    }
+            } else {
+                    $mainframe->redirect("index.php?option=com_phase&controller=client&action=lastintake");
+            }
         }
-        */
-		
-	 if(JRequest::getVar('ph') == 1){
+        
+        if(JRequest::getVar('ph') == 1){
             $model = $this->getModel();
             $result =  $this->preparePhasechekDataSave();
             
@@ -1748,7 +1726,7 @@ class PhaseViewClient extends JView{
         
         return $data[content]; 
     }
-    
+    */
     function prepareData()
     {
         $post = JRequest::get('post');
@@ -1863,7 +1841,7 @@ class PhaseViewClient extends JView{
         return $evalution;
         
     }
-    
+    /*
     function edit($tpl = null)
     {
         $model = $this->getModel();
@@ -3155,7 +3133,7 @@ class PhaseViewClient extends JView{
         parent::display($tpl);
     }
     
-    /*
+    
     function lastintake_confirm()
     {
         session_start();
@@ -3200,7 +3178,7 @@ class PhaseViewClient extends JView{
 		
         parent::display($tpl);
     }
-    */
+    
     
     //new
     function medtrackList(){

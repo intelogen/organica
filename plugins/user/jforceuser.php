@@ -173,6 +173,7 @@ class plgUserJforceuser extends JPlugin {
             $startdate = $created;
             
             $phases = array();
+            /*
             $phases[0] = "Phase 1 Intestinal / Digestive Cleanse";
             $phases[1] = "Phase 2 Yeast / Candida Cleanse";
             $phases[2] = "Phase 3 Parasite Cleanse";
@@ -183,9 +184,10 @@ class plgUserJforceuser extends JPlugin {
             $phases[7] = "Phase 8 Maintenance Protocols";
             $phases[8] = "Phase 9 Rebuilding & Support";
             $phases[9] = "Phase 10 Exercise Program";
-            
+            */
             $checklists = array();
             // survey, photoupload, direction, purchase, evaluation, signoff
+            /*
             $checklists[0] = array(
                                 "survey"=>"Phase 1 Start Surveys",
                                 "photoupload"=>"Update Your Photo",
@@ -260,7 +262,7 @@ class plgUserJforceuser extends JPlugin {
                             "purchase"=>"Purchase Phase 10 Kit",
                             "evaluation"=>"Phase 10 Evaluation",
                             "signoff"=>"Sign off by coach"  );
-
+            */
 
            
             $db = JFactory::getDBO();

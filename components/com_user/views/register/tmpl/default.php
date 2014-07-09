@@ -29,7 +29,7 @@ No team goes to the Super Bowl with a great coach. <br />
 	</div>
 </div>
 
-<table>
+<table class="registration-form">
     <tr>
         
     <td valign="top">
